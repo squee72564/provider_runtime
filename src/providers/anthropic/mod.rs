@@ -65,6 +65,15 @@ impl AnthropicAdapter {
     }
 
     fn resolve_api_key(&self, ctx: &AdapterContext) -> Option<String> {
+        let env_api_key = std::env::var(ANTHROPIC_API_KEY_ENV).ok();
+        self.resolve_api_key_with_env(ctx, env_api_key)
+    }
+
+    fn resolve_api_key_with_env(
+        &self,
+        ctx: &AdapterContext,
+        env_api_key: Option<String>,
+    ) -> Option<String> {
         if let Some(key) = self.api_key.as_ref().cloned() {
             return Some(key);
         }
@@ -75,9 +84,7 @@ impl AnthropicAdapter {
             return Some(key.clone());
         }
 
-        std::env::var(ANTHROPIC_API_KEY_ENV)
-            .ok()
-            .and_then(|value| sanitize_api_key(Some(value)))
+        env_api_key.and_then(|value| sanitize_api_key(Some(value)))
     }
 
     fn missing_api_key_error(model: Option<&str>) -> ProviderError {

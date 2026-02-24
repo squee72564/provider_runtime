@@ -232,6 +232,44 @@ async fn test_anthropic_adapter_uses_translator_boundary() {
 }
 
 #[tokio::test]
+async fn test_anthropic_adapter_uses_translator_boundary_before_transport_call() {
+    let mut server = MockServer::start(Vec::new());
+    let adapter = AnthropicAdapter::with_base_url(Some("test-key".to_string()), server.url())
+        .expect("adapter");
+
+    let mut req = base_request();
+    req.messages = vec![
+        Message {
+            role: MessageRole::User,
+            content: vec![ContentPart::Text {
+                text: "hello".to_string(),
+            }],
+        },
+        Message {
+            role: MessageRole::System,
+            content: vec![ContentPart::Text {
+                text: "late system".to_string(),
+            }],
+        },
+    ];
+
+    let err = adapter
+        .run(&req, &AdapterContext::default())
+        .await
+        .expect_err("translator should fail before transport");
+
+    match err {
+        ProviderError::Protocol { message, .. } => {
+            assert!(message.contains("system messages must form a contiguous prefix"));
+        }
+        other => panic!("expected protocol error, got {other:?}"),
+    }
+
+    server.shutdown();
+    assert_eq!(server.request_count(), 0);
+}
+
+#[tokio::test]
 async fn test_anthropic_adapter_sets_required_headers() {
     let mut server = MockServer::start(vec![MockResponse::new(
         200,
@@ -266,6 +304,44 @@ async fn test_anthropic_adapter_sets_required_headers() {
         Some(&"2023-06-01".to_string())
     );
     assert_eq!(headers[0].get("authorization"), None);
+}
+
+#[tokio::test]
+async fn test_anthropic_adapter_sets_required_headers_with_metadata_key() {
+    let mut server = MockServer::start(vec![MockResponse::new(
+        200,
+        vec![],
+        r#"{
+            "id":"msg_1",
+            "type":"message",
+            "role":"assistant",
+            "model":"claude-sonnet-4-5",
+            "stop_reason":"end_turn",
+            "content":[{"type":"text","text":"ok"}],
+            "usage":{"input_tokens":1,"output_tokens":1}
+        }"#,
+    )]);
+
+    let adapter = AnthropicAdapter::with_base_url(None, server.url()).expect("adapter");
+    let mut ctx = AdapterContext::default();
+    ctx.metadata
+        .insert("anthropic.api_key".to_string(), "ctx-key".to_string());
+
+    let response = adapter
+        .run(&base_request(), &ctx)
+        .await
+        .expect("run should succeed");
+
+    assert_eq!(response.provider, ProviderId::Anthropic);
+
+    server.shutdown();
+    assert_eq!(server.request_count(), 1);
+    let headers = server.captured_headers();
+    assert_eq!(headers[0].get("x-api-key"), Some(&"ctx-key".to_string()));
+    assert_eq!(
+        headers[0].get("anthropic-version"),
+        Some(&"2023-06-01".to_string())
+    );
 }
 
 #[tokio::test]
@@ -355,6 +431,81 @@ async fn test_anthropic_adapter_maps_non_auth_status_to_status_error() {
     }
 
     server.shutdown();
+}
+
+#[tokio::test]
+async fn test_anthropic_adapter_maps_status_request_id_from_body_when_header_missing() {
+    let mut server = MockServer::start(vec![MockResponse::new(
+        529,
+        vec![],
+        r#"{
+            "type":"error",
+            "error":{"type":"overloaded_error","message":"overloaded"},
+            "request_id":"req-overloaded-body"
+        }"#,
+    )]);
+
+    let transport = HttpTransport::new(
+        1_000,
+        RetryPolicy {
+            max_attempts: 1,
+            initial_backoff_ms: 0,
+            max_backoff_ms: 0,
+            retryable_status_codes: vec![429],
+        },
+    )
+    .expect("transport");
+
+    let adapter =
+        AnthropicAdapter::with_transport(Some("test-key".to_string()), server.url(), transport);
+
+    let err = adapter
+        .run(&base_request(), &AdapterContext::default())
+        .await
+        .expect_err("status error expected");
+
+    match err {
+        ProviderError::Status {
+            provider,
+            model,
+            status_code,
+            request_id,
+            message,
+        } => {
+            assert_eq!(provider, ProviderId::Anthropic);
+            assert_eq!(model, Some("claude-sonnet-4-5".to_string()));
+            assert_eq!(status_code, 529);
+            assert_eq!(request_id, Some("req-overloaded-body".to_string()));
+            assert!(message.contains("anthropic error"));
+            assert!(message.contains("overloaded_error"));
+        }
+        other => panic!("expected status error, got {other:?}"),
+    }
+
+    server.shutdown();
+}
+
+#[test]
+fn test_anthropic_adapter_api_key_resolution_precedence() {
+    let adapter =
+        AnthropicAdapter::with_base_url(Some("constructor-key".to_string()), "http://example.com")
+            .expect("adapter");
+
+    let mut ctx = AdapterContext::default();
+    ctx.metadata
+        .insert("anthropic.api_key".to_string(), "context-key".to_string());
+
+    let constructor = adapter.resolve_api_key_with_env(&ctx, Some("env-key".to_string()));
+    assert_eq!(constructor.as_deref(), Some("constructor-key"));
+
+    let metadata_adapter =
+        AnthropicAdapter::with_base_url(None, "http://example.com").expect("metadata adapter");
+    let metadata = metadata_adapter.resolve_api_key_with_env(&ctx, Some("env-key".to_string()));
+    assert_eq!(metadata.as_deref(), Some("context-key"));
+
+    let env = metadata_adapter
+        .resolve_api_key_with_env(&AdapterContext::default(), Some("env-key".to_string()));
+    assert_eq!(env.as_deref(), Some("env-key"));
 }
 
 #[tokio::test]
