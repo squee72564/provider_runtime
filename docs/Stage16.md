@@ -37,6 +37,12 @@ Internal Responsibilities:
   - equal provider payload decodes identically
 - Defer provider-specific field mapping tables to later implementation docs/tests.
 
+Anthropic Messages Surface Coverage Policy (Stage 16/17 strict):
+- `mapped`: model, max_tokens, messages/system, tools, tool_choice, output_config, stop sequences, sampling controls, metadata.user_id, stop_reason, content blocks, usage.
+- `warning_drop`: request-side thinking parts, unsupported metadata keys, redacted_thinking fidelity, unknown response block types, structured output parse failures.
+- `hard_error`: provider-hint mismatch, empty model, invalid max_output_tokens/sampling/stop values, invalid tool schemas/order linkage, non-object tool args, malformed payload shapes, non-prefix system prompts.
+- `known_out_of_scope_under_frozen_canonical`: strict tool flag, request-side thinking config, cache-creation usage breakout, richer server tool response typing.
+
 Unit Tests:
 - `test_encode_anthropic_translator_category_contract`
 - `test_decode_anthropic_translator_category_contract`

@@ -10,6 +10,19 @@ use crate::core::types::{
 };
 use crate::providers::translator_contract::ProviderTranslator;
 
+/*
+Anthropic Messages coverage policy (Stage 16/17 strict):
+- Mapped fields: model, max_tokens, messages/system, tools, tool_choice, output_config, stop,
+  temperature/top_p, metadata.user_id, content blocks, stop_reason, usage.
+- Warning-drop fields: request-side thinking parts, unsupported metadata keys, redacted_thinking,
+  unknown response content block types, parse failures for structured output.
+- Hard-error fields/states: provider_hint mismatch, empty/invalid model, invalid max_output_tokens,
+  invalid sampling/stop/tool schemas and tool ordering, non-object tool_use input, non-prefix
+  system messages, malformed payload types.
+- Known out-of-scope under frozen canonical model: tool strictness flag, request-side thinking
+  config, cache-creation token breakout, rich server-tool response block typing.
+*/
+
 const DEFAULT_MAX_TOKENS: u64 = 1024;
 
 const WARN_DROPPED_THINKING_ON_ENCODE: &str = "dropped_thinking_on_encode";
@@ -22,6 +35,7 @@ const WARN_UNKNOWN_STOP_REASON: &str = "unknown_stop_reason";
 const WARN_USAGE_MISSING: &str = "usage_missing";
 const WARN_USAGE_PARTIAL: &str = "usage_partial";
 const WARN_STRUCTURED_OUTPUT_PARSE_FAILED: &str = "structured_output_parse_failed";
+const WARN_EMPTY_OUTPUT: &str = "empty_output";
 
 #[derive(Debug, Clone, PartialEq)]
 pub(crate) struct AnthropicEncodedRequest {
@@ -66,6 +80,7 @@ pub(crate) fn encode_anthropic_request(
 ) -> Result<AnthropicEncodedRequest, ProviderError> {
     validate_provider_hint(req)?;
     validate_model_id(req)?;
+    validate_max_output_tokens(req)?;
     validate_sampling_controls(req)?;
     validate_stop_sequences(req)?;
 
@@ -280,6 +295,13 @@ pub(crate) fn decode_anthropic_response(
         }
     }
 
+    if content.is_empty() {
+        warnings.push(RuntimeWarning {
+            code: WARN_EMPTY_OUTPUT.to_string(),
+            message: "anthropic response contained no content blocks".to_string(),
+        });
+    }
+
     let finish_reason = map_finish_reason(stop_reason, &model, &mut warnings)?;
     let usage = decode_usage(root.get("usage"), &model, &mut warnings)?;
     let structured_output = decode_structured_output(
@@ -431,6 +453,17 @@ fn validate_provider_hint(req: &ProviderRequest) -> Result<(), ProviderError> {
 fn validate_model_id(req: &ProviderRequest) -> Result<(), ProviderError> {
     if req.model.model_id.trim().is_empty() {
         return Err(protocol_error(None, "missing model_id"));
+    }
+
+    Ok(())
+}
+
+fn validate_max_output_tokens(req: &ProviderRequest) -> Result<(), ProviderError> {
+    if req.max_output_tokens == Some(0) {
+        return Err(protocol_error(
+            Some(&req.model.model_id),
+            "max_output_tokens must be at least 1 for Anthropic",
+        ));
     }
 
     Ok(())
@@ -880,7 +913,7 @@ fn map_tool_choice(req: &ProviderRequest) -> Result<Value, ProviderError> {
                 ));
             }
 
-            json!({ "type": "tool", "name": name })
+            json!({ "type": "tool", "name": name, "disable_parallel_tool_use": true })
         }
     };
 

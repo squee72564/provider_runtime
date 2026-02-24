@@ -129,6 +129,12 @@ fn test_encode_anthropic_translator_category_contract() {
         Some(&json!("lookup_weather"))
     );
     assert_eq!(
+        encoded
+            .body
+            .pointer("/tool_choice/disable_parallel_tool_use"),
+        Some(&json!(true))
+    );
+    assert_eq!(
         encoded.body.pointer("/output_config/format/type"),
         Some(&json!("json_schema"))
     );
@@ -178,6 +184,132 @@ fn test_encode_anthropic_translator_category_contract() {
 }
 
 #[test]
+fn test_encode_minimal_text_request() {
+    let encoded = encode_anthropic_request(&base_request()).expect("encode should succeed");
+
+    assert_eq!(
+        encoded.body.pointer("/model"),
+        Some(&json!("claude-sonnet-4-5"))
+    );
+    assert_eq!(encoded.body.pointer("/max_tokens"), Some(&json!(1024)));
+    assert_eq!(
+        encoded.body.pointer("/messages/0/role"),
+        Some(&json!("user"))
+    );
+    assert_eq!(
+        encoded.body.pointer("/messages/0/content/0/type"),
+        Some(&json!("text"))
+    );
+    assert_eq!(
+        encoded.body.pointer("/tool_choice/type"),
+        Some(&json!("auto"))
+    );
+}
+
+#[test]
+fn test_encode_tool_choice_mode_matrix() {
+    let mut req = base_request();
+    req.tools = vec![ToolDefinition {
+        name: "lookup".to_string(),
+        description: Some("Lookup".to_string()),
+        parameters_schema: json!({"type":"object"}),
+    }];
+
+    req.tool_choice = ToolChoice::None;
+    let none_choice = encode_anthropic_request(&req).expect("none should encode");
+    assert_eq!(
+        none_choice.body.pointer("/tool_choice/type"),
+        Some(&json!("none"))
+    );
+
+    req.tool_choice = ToolChoice::Auto;
+    let auto_choice = encode_anthropic_request(&req).expect("auto should encode");
+    assert_eq!(
+        auto_choice.body.pointer("/tool_choice/type"),
+        Some(&json!("auto"))
+    );
+
+    req.tool_choice = ToolChoice::Required;
+    let required_choice = encode_anthropic_request(&req).expect("required should encode");
+    assert_eq!(
+        required_choice.body.pointer("/tool_choice/type"),
+        Some(&json!("any"))
+    );
+
+    req.tool_choice = ToolChoice::Specific {
+        name: "lookup".to_string(),
+    };
+    let specific_choice = encode_anthropic_request(&req).expect("specific should encode");
+    assert_eq!(
+        specific_choice.body.pointer("/tool_choice/type"),
+        Some(&json!("tool"))
+    );
+    assert_eq!(
+        specific_choice
+            .body
+            .pointer("/tool_choice/disable_parallel_tool_use"),
+        Some(&json!(true))
+    );
+}
+
+#[test]
+fn test_encode_tool_choice_requires_tools_for_required_and_specific() {
+    let mut req = base_request();
+    req.tools = Vec::new();
+
+    req.tool_choice = ToolChoice::Required;
+    let required_err = encode_anthropic_request(&req).expect_err("required should fail");
+    assert!(
+        required_err
+            .to_string()
+            .contains("requires at least one tool definition")
+    );
+
+    req.tool_choice = ToolChoice::Specific {
+        name: "lookup".to_string(),
+    };
+    let specific_err = encode_anthropic_request(&req).expect_err("specific should fail");
+    assert!(
+        specific_err
+            .to_string()
+            .contains("requires at least one tool definition")
+    );
+}
+
+#[test]
+fn test_encode_response_format_matrix() {
+    let mut req = base_request();
+    req.response_format = ResponseFormat::JsonObject;
+    let json_object = encode_anthropic_request(&req).expect("json object encode");
+    assert_eq!(
+        json_object.body.pointer("/output_config/format/type"),
+        Some(&json!("json_schema"))
+    );
+    assert_eq!(
+        json_object
+            .body
+            .pointer("/output_config/format/schema/type"),
+        Some(&json!("object"))
+    );
+
+    req.response_format = ResponseFormat::JsonSchema {
+        name: "shape".to_string(),
+        schema: json!({"type":"object","properties":{"value":{"type":"number"}}}),
+    };
+    let json_schema = encode_anthropic_request(&req).expect("json schema encode");
+    assert_eq!(
+        json_schema.body.pointer("/output_config/format/type"),
+        Some(&json!("json_schema"))
+    );
+    assert_eq!(
+        json_schema
+            .body
+            .pointer("/output_config/format/schema/properties/value/type"),
+        Some(&json!("number"))
+    );
+}
+
+#[test]
 fn test_encode_json_prefill_is_rejected() {
     let mut req = base_request();
     req.messages = vec![
@@ -224,6 +356,192 @@ fn test_encode_non_prefix_system_is_rejected() {
 
     let err = encode_anthropic_request(&req).expect_err("late system should fail");
     assert!(matches!(err, ProviderError::Protocol { .. }));
+}
+
+#[test]
+fn test_encode_max_output_tokens_zero_is_rejected() {
+    let mut req = base_request();
+    req.max_output_tokens = Some(0);
+
+    let err = encode_anthropic_request(&req).expect_err("max_output_tokens=0 should fail");
+    assert!(matches!(err, ProviderError::Protocol { .. }));
+    assert!(
+        err.to_string()
+            .contains("max_output_tokens must be at least 1")
+    );
+}
+
+#[test]
+fn test_encode_tool_choice_specific_requires_declared_tool() {
+    let mut req = base_request();
+    req.tools = vec![ToolDefinition {
+        name: "lookup_weather".to_string(),
+        description: None,
+        parameters_schema: json!({"type":"object"}),
+    }];
+    req.tool_choice = ToolChoice::Specific {
+        name: "missing_tool".to_string(),
+    };
+
+    let err = encode_anthropic_request(&req).expect_err("specific tool should be validated");
+    assert!(matches!(err, ProviderError::Protocol { .. }));
+    assert!(
+        err.to_string()
+            .contains("tool_choice specific references unknown tool")
+    );
+}
+
+#[test]
+fn test_encode_tool_call_arguments_must_be_object() {
+    let mut req = base_request();
+    req.messages = vec![
+        Message {
+            role: MessageRole::User,
+            content: vec![ContentPart::Text {
+                text: "call tool".to_string(),
+            }],
+        },
+        Message {
+            role: MessageRole::Assistant,
+            content: vec![ContentPart::ToolCall {
+                tool_call: ToolCall {
+                    id: "tool_1".to_string(),
+                    name: "lookup_weather".to_string(),
+                    arguments_json: json!(["not-object"]),
+                },
+            }],
+        },
+        Message {
+            role: MessageRole::Tool,
+            content: vec![ContentPart::ToolResult {
+                tool_result: ToolResult {
+                    tool_call_id: "tool_1".to_string(),
+                    content: vec![ContentPart::Text {
+                        text: "{\"temp\":55}".to_string(),
+                    }],
+                },
+            }],
+        },
+    ];
+
+    let err = encode_anthropic_request(&req).expect_err("non-object tool args should fail");
+    assert!(matches!(err, ProviderError::Protocol { .. }));
+    assert!(
+        err.to_string()
+            .contains("arguments_json must be a JSON object")
+    );
+}
+
+#[test]
+fn test_encode_tool_result_without_matching_tool_call_is_rejected() {
+    let mut req = base_request();
+    req.messages = vec![
+        Message {
+            role: MessageRole::User,
+            content: vec![ContentPart::Text {
+                text: "hello".to_string(),
+            }],
+        },
+        Message {
+            role: MessageRole::Tool,
+            content: vec![ContentPart::ToolResult {
+                tool_result: ToolResult {
+                    tool_call_id: "missing_call".to_string(),
+                    content: vec![ContentPart::Text {
+                        text: "tool output".to_string(),
+                    }],
+                },
+            }],
+        },
+    ];
+
+    let err = encode_anthropic_request(&req).expect_err("missing tool call should fail");
+    assert!(matches!(err, ProviderError::Protocol { .. }));
+    assert!(
+        err.to_string()
+            .contains("tool_result references unknown tool_call_id")
+    );
+}
+
+#[test]
+fn test_encode_assistant_tool_use_requires_following_tool_result() {
+    let mut req = base_request();
+    req.messages = vec![
+        Message {
+            role: MessageRole::User,
+            content: vec![ContentPart::Text {
+                text: "call the tool".to_string(),
+            }],
+        },
+        Message {
+            role: MessageRole::Assistant,
+            content: vec![ContentPart::ToolCall {
+                tool_call: ToolCall {
+                    id: "tool_1".to_string(),
+                    name: "lookup_weather".to_string(),
+                    arguments_json: json!({"city":"SF"}),
+                },
+            }],
+        },
+        Message {
+            role: MessageRole::User,
+            content: vec![ContentPart::Text {
+                text: "where are we now?".to_string(),
+            }],
+        },
+    ];
+
+    let err = encode_anthropic_request(&req).expect_err("missing tool_result should fail");
+    assert!(matches!(err, ProviderError::Protocol { .. }));
+    assert!(
+        err.to_string()
+            .contains("requires tool_result blocks at the start of the next user message")
+    );
+}
+
+#[test]
+fn test_encode_tool_result_content_non_text_is_rejected() {
+    let mut req = base_request();
+    req.messages = vec![
+        Message {
+            role: MessageRole::User,
+            content: vec![ContentPart::Text {
+                text: "call the tool".to_string(),
+            }],
+        },
+        Message {
+            role: MessageRole::Assistant,
+            content: vec![ContentPart::ToolCall {
+                tool_call: ToolCall {
+                    id: "tool_1".to_string(),
+                    name: "lookup_weather".to_string(),
+                    arguments_json: json!({"city":"SF"}),
+                },
+            }],
+        },
+        Message {
+            role: MessageRole::Tool,
+            content: vec![ContentPart::ToolResult {
+                tool_result: ToolResult {
+                    tool_call_id: "tool_1".to_string(),
+                    content: vec![ContentPart::ToolCall {
+                        tool_call: ToolCall {
+                            id: "nested".to_string(),
+                            name: "unsupported".to_string(),
+                            arguments_json: json!({"x": 1}),
+                        },
+                    }],
+                },
+            }],
+        },
+    ];
+
+    let err = encode_anthropic_request(&req).expect_err("non-text tool_result should fail");
+    assert!(matches!(err, ProviderError::Protocol { .. }));
+    assert!(
+        err.to_string()
+            .contains("tool_result content must contain only text parts")
+    );
 }
 
 #[test]
@@ -365,6 +683,70 @@ fn test_decode_structured_output_success_and_failure() {
             .warnings
             .iter()
             .any(|warning| warning.code == "structured_output_parse_failed")
+    );
+}
+
+#[test]
+fn test_decode_usage_missing_and_partial() {
+    let missing_usage_payload = AnthropicDecodeEnvelope {
+        body: json!({
+            "role": "assistant",
+            "model": "claude-sonnet-4-5",
+            "stop_reason": "end_turn",
+            "content": [{"type":"text","text":"ok"}]
+        }),
+        requested_response_format: ResponseFormat::Text,
+    };
+    let missing_usage = decode_anthropic_response(&missing_usage_payload).expect("decode missing");
+    assert_eq!(missing_usage.usage.input_tokens, None);
+    assert!(
+        missing_usage
+            .warnings
+            .iter()
+            .any(|warning| warning.code == "usage_missing")
+    );
+
+    let partial_usage_payload = AnthropicDecodeEnvelope {
+        body: json!({
+            "role": "assistant",
+            "model": "claude-sonnet-4-5",
+            "stop_reason": "end_turn",
+            "content": [{"type":"text","text":"ok"}],
+            "usage": {"input_tokens": 4}
+        }),
+        requested_response_format: ResponseFormat::Text,
+    };
+    let partial_usage = decode_anthropic_response(&partial_usage_payload).expect("decode partial");
+    assert_eq!(partial_usage.usage.input_tokens, Some(4));
+    assert_eq!(partial_usage.usage.output_tokens, None);
+    assert!(
+        partial_usage
+            .warnings
+            .iter()
+            .any(|warning| warning.code == "usage_partial")
+    );
+}
+
+#[test]
+fn test_decode_empty_output_emits_warning() {
+    let payload = AnthropicDecodeEnvelope {
+        body: json!({
+            "role": "assistant",
+            "model": "claude-sonnet-4-5",
+            "stop_reason": "end_turn",
+            "content": [],
+            "usage": {"input_tokens": 1, "output_tokens": 0}
+        }),
+        requested_response_format: ResponseFormat::Text,
+    };
+
+    let decoded = decode_anthropic_response(&payload).expect("decode should succeed");
+    assert!(decoded.output.content.is_empty());
+    assert!(
+        decoded
+            .warnings
+            .iter()
+            .any(|warning| warning.code == "empty_output")
     );
 }
 
