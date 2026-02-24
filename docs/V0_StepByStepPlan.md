@@ -148,7 +148,7 @@ Depends On:
 - Stage 2
 - Stage 3
 
-## [ ] Stage 5 - HTTP Transport Abstraction
+## [x] Stage 5 - HTTP Transport Abstraction
 Goal:
 Implement shared async HTTP utility used by adapters.
 
@@ -166,7 +166,7 @@ Depends On:
 - Stage 2
 - Stage 4
 
-## [ ] Stage 6 - Transport Module Export
+## [x] Stage 6 - Transport Module Export
 Goal:
 Expose transport module boundary.
 
@@ -181,7 +181,7 @@ Stage Documentation: `docs/Stage6.md`
 Depends On:
 - Stage 5
 
-## [ ] Stage 7 - Pricing Engine (Optional, Warning-Based)
+## [x] Stage 7 - Pricing Engine (Optional, Warning-Based)
 Goal:
 Implement cost estimation from canonical usage + configurable pricing table.
 
@@ -199,7 +199,7 @@ Depends On:
 - Stage 1
 - Stage 2
 
-## [ ] Stage 8 - Static-First Catalog Logic
+## [x] Stage 8 - Static-First Catalog Logic
 Goal:
 Implement model catalog merge/lookup/export behavior with static-first policy.
 
