@@ -11,6 +11,12 @@ use crate::core::types::{
 ///
 /// This trait is an extension point only. v0 does not include loop orchestration,
 /// session state, or provider protocol leakage in the public API.
+///
+/// Boundary note:
+/// - `ProviderAdapter` is runtime-facing orchestration.
+/// - Provider protocol translation is handled by crate-private provider-layer
+///   translator contracts (`providers::translator_contract`).
+/// - Provider wire shapes must not leak into core public traits.
 #[async_trait]
 pub trait ProviderAdapter: Send + Sync {
     /// Stable provider identifier for routing and diagnostics.
