@@ -51,7 +51,7 @@
       - model: ModelRef (provider_hint: Option<ProviderId>, model_id: String)
       - messages: Vec<Message>
       - tools: Vec<ToolDefinition>
-      - tool_choice: ToolChoice
+      - tool_choice: ToolChoice (none/auto/required/specific{name})
       - response_format: ResponseFormat (text/json-schema/json-object)
       - temperature/top_p/max_output_tokens/stop (optional, provider-mapped)
       - metadata: HashMap<String, String>

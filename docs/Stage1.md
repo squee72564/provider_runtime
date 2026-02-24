@@ -69,6 +69,11 @@ Field-Level Contract:
 - `ToolResult`
   - `tool_call_id: String`
   - `content: Vec<ContentPart>`
+- `ToolChoice`
+  - `None`
+  - `Auto`
+  - `Required`
+  - `Specific { name: String }`
 - `AssistantOutput`
   - `content: Vec<ContentPart>`
   - `structured_output: Option<serde_json::Value>` omitted when missing
@@ -123,6 +128,9 @@ Deterministic Behavior:
   - explicit `total_tokens` when present
   - otherwise `input_tokens.unwrap_or(0) + output_tokens.unwrap_or(0)`
 - `reasoning_tokens` and `cached_input_tokens` do not alter derived total in v0.
+
+Freeze Gate Exception (Approved for Stage 14):
+- `ToolChoice::Specific` carries `name: String` so adapters can deterministically force a specific tool without provider-specific leakage.
 
 Internal Responsibilities:
 - Serde derives and canonical field normalization.

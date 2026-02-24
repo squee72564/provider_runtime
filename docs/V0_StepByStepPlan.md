@@ -64,6 +64,9 @@ Dependency rules:
 Goal:
 Define provider-agnostic canonical request/response/message/tool/usage/cost/catalog types in one place.
 
+Exception Note (approved during Stage 14 planning):
+- `ToolChoice::Specific` is treated as `Specific { name: String }` to support deterministic forced-tool semantics across providers.
+
 Files:
 - [src/core/types/mod.rs](src/core/types/mod.rs)
 
@@ -115,7 +118,7 @@ Stage Documentation: `docs/Stage2.md`
 Depends On:
 - Stage 1
 
-## [ ] Stage 3 - Freeze Core Traits
+## [x] Stage 3 - Freeze Core Traits
 Goal:
 Define stable adapter/auth contracts used by all providers and runtime, and document the shared crate-private translator boundary used by provider modules.
 
@@ -256,7 +259,7 @@ Depends On:
 - Stage 3
 - Stage 8
 
-## [ ] Stage 11 - Registry Module Export
+## [x] Stage 11 - Registry Module Export
 Goal:
 Expose registry boundary.
 
@@ -316,7 +319,7 @@ Stage Documentation: `docs/Stage13.md`
 Depends On:
 - Stage 12
 
-## [ ] Stage 14 - OpenAI Translator
+## [x] Stage 14 - OpenAI Translator
 Goal:
 Implement canonical-to-OpenAI and OpenAI-to-canonical translation.
 
