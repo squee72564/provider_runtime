@@ -98,6 +98,22 @@ fn test_encode_openrouter_translator_category_contract() {
         provider_preferences: Some(json!({"allow_fallbacks":true})),
         plugins: vec![json!({"id":"response-healing","enabled":true})],
         parallel_tool_calls: Some(false),
+        frequency_penalty: Some(0.5),
+        presence_penalty: Some(-0.5),
+        logit_bias: Some(json!({"11": -100})),
+        logprobs: Some(true),
+        top_logprobs: Some(3),
+        reasoning: Some(json!({"effort":"medium"})),
+        seed: Some(42),
+        user: Some("user-123".to_string()),
+        session_id: Some("session-123".to_string()),
+        trace: Some(json!({"trace_id":"trace-1"})),
+        route: Some("fallback".to_string()),
+        max_tokens: Some(123),
+        modalities: Some(vec!["text".to_string()]),
+        image_config: None,
+        debug: None,
+        stream_options: None,
     };
 
     let encoded = encode_openrouter_request(&req, &options).expect("encode should succeed");
@@ -127,6 +143,34 @@ fn test_encode_openrouter_translator_category_contract() {
         encoded.body.pointer("/parallel_tool_calls"),
         Some(&json!(false))
     );
+    assert_eq!(
+        encoded.body.pointer("/frequency_penalty"),
+        Some(&json!(0.5))
+    );
+    assert_eq!(
+        encoded.body.pointer("/presence_penalty"),
+        Some(&json!(-0.5))
+    );
+    assert_eq!(encoded.body.pointer("/logit_bias/11"), Some(&json!(-100)));
+    assert_eq!(encoded.body.pointer("/logprobs"), Some(&json!(true)));
+    assert_eq!(encoded.body.pointer("/top_logprobs"), Some(&json!(3)));
+    assert_eq!(
+        encoded.body.pointer("/reasoning/effort"),
+        Some(&json!("medium"))
+    );
+    assert_eq!(encoded.body.pointer("/seed"), Some(&json!(42)));
+    assert_eq!(encoded.body.pointer("/user"), Some(&json!("user-123")));
+    assert_eq!(
+        encoded.body.pointer("/session_id"),
+        Some(&json!("session-123"))
+    );
+    assert_eq!(
+        encoded.body.pointer("/trace/trace_id"),
+        Some(&json!("trace-1"))
+    );
+    assert_eq!(encoded.body.pointer("/route"), Some(&json!("fallback")));
+    assert_eq!(encoded.body.pointer("/max_tokens"), Some(&json!(123)));
+    assert_eq!(encoded.body.pointer("/modalities/0"), Some(&json!("text")));
 
     assert!(
         encoded
@@ -328,6 +372,120 @@ fn test_encode_assistant_tool_call_arguments_are_stable_json() {
 }
 
 #[test]
+fn test_encode_option_validation_failures() {
+    let req = base_request();
+
+    let err = encode_openrouter_request(
+        &req,
+        &OpenRouterTranslateOptions {
+            frequency_penalty: Some(3.0),
+            ..Default::default()
+        },
+    )
+    .expect_err("frequency_penalty should fail");
+    assert!(err.to_string().contains("frequency_penalty"));
+
+    let err = encode_openrouter_request(
+        &req,
+        &OpenRouterTranslateOptions {
+            logit_bias: Some(json!({"12":"bad"})),
+            ..Default::default()
+        },
+    )
+    .expect_err("logit_bias should fail");
+    assert!(err.to_string().contains("logit_bias"));
+
+    let err = encode_openrouter_request(
+        &req,
+        &OpenRouterTranslateOptions {
+            top_logprobs: Some(21),
+            ..Default::default()
+        },
+    )
+    .expect_err("top_logprobs should fail");
+    assert!(err.to_string().contains("top_logprobs"));
+
+    let err = encode_openrouter_request(
+        &req,
+        &OpenRouterTranslateOptions {
+            session_id: Some(" ".to_string()),
+            ..Default::default()
+        },
+    )
+    .expect_err("session_id should fail");
+    assert!(err.to_string().contains("session_id"));
+
+    let err = encode_openrouter_request(
+        &req,
+        &OpenRouterTranslateOptions {
+            route: Some("bad".to_string()),
+            ..Default::default()
+        },
+    )
+    .expect_err("route should fail");
+    assert!(err.to_string().contains("route"));
+}
+
+#[test]
+fn test_encode_rejects_unsupported_modes() {
+    let req = base_request();
+
+    let err = encode_openrouter_request(
+        &req,
+        &OpenRouterTranslateOptions {
+            modalities: Some(vec!["image".to_string()]),
+            ..Default::default()
+        },
+    )
+    .expect_err("image modality should fail");
+    assert!(err.to_string().contains("modalities"));
+
+    let err = encode_openrouter_request(
+        &req,
+        &OpenRouterTranslateOptions {
+            image_config: Some(json!({"aspect_ratio":"16:9"})),
+            ..Default::default()
+        },
+    )
+    .expect_err("image_config should fail");
+    assert!(err.to_string().contains("image_config"));
+
+    let err = encode_openrouter_request(
+        &req,
+        &OpenRouterTranslateOptions {
+            debug: Some(json!({"echo_upstream_body":true})),
+            ..Default::default()
+        },
+    )
+    .expect_err("debug should fail");
+    assert!(err.to_string().contains("debug"));
+
+    let err = encode_openrouter_request(
+        &req,
+        &OpenRouterTranslateOptions {
+            stream_options: Some(json!({"include_usage":true})),
+            ..Default::default()
+        },
+    )
+    .expect_err("stream_options should fail");
+    assert!(err.to_string().contains("stream_options"));
+}
+
+#[test]
+fn test_encode_tool_name_regex_validation() {
+    let mut req = base_request();
+    req.tools = vec![ToolDefinition {
+        name: "bad name".to_string(),
+        description: None,
+        parameters_schema: json!({"type":"object"}),
+    }];
+
+    let err = encode_openrouter_request(&req, &OpenRouterTranslateOptions::default())
+        .expect_err("invalid tool definition name should fail");
+    assert!(err.to_string().contains("^[A-Za-z0-9_-]{1,64}$"));
+}
+
+#[test]
 fn test_decode_top_level_error_is_protocol_error() {
     let payload = OpenRouterDecodeEnvelope {
         body: json!({
@@ -379,6 +537,91 @@ fn test_decode_invalid_tool_arguments_warn_and_preserve_raw() {
         ContentPart::ToolCall { tool_call }
             if tool_call.arguments_json == json!("{not-json")
     ));
+}
+
+#[test]
+fn test_decode_non_text_content_item_is_error() {
+    let payload = OpenRouterDecodeEnvelope {
+        body: json!({
+            "id":"chatcmpl_1",
+            "object":"chat.completion",
+            "created":123,
+            "model":"openai/gpt-4o-mini",
+            "choices":[{
+                "index":0,
+                "finish_reason":"stop",
+                "message":{
+                    "role":"assistant",
+                    "content":[{"type":"image_url","image_url":{"url":"https://example.com/x.png"}}]
+                }
+            }],
+            "usage":{"prompt_tokens":1,"completion_tokens":1,"total_tokens":2}
+        }),
+        requested_response_format: ResponseFormat::Text,
+    };
+
+    let err = decode_openrouter_response(&payload).expect_err("non-text content should fail");
+    assert!(err.to_string().contains("unsupported"));
+}
+
+#[test]
+fn test_decode_tool_call_type_must_be_function() {
+    let payload = OpenRouterDecodeEnvelope {
+        body: json!({
+            "id":"chatcmpl_1",
+            "object":"chat.completion",
+            "created":123,
+            "model":"openai/gpt-4o-mini",
+            "choices":[{
+                "index":0,
+                "finish_reason":"tool_calls",
+                "message":{
+                    "role":"assistant",
+                    "content":null,
+                    "tool_calls":[{
+                        "id":"call_1",
+                        "type":"retrieval",
+                        "function":{"name":"lookup","arguments":"{}"}
+                    }]
+                }
+            }],
+            "usage":{"prompt_tokens":1,"completion_tokens":1,"total_tokens":2}
+        }),
+        requested_response_format: ResponseFormat::Text,
+    };
+
+    let err = decode_openrouter_response(&payload).expect_err("non-function tool call should fail");
+    assert!(err.to_string().contains("type must be function"));
+}
+
+#[test]
+fn test_decode_refusal_is_preserved_as_text_output() {
+    let payload = OpenRouterDecodeEnvelope {
+        body: json!({
+            "id":"chatcmpl_1",
+            "object":"chat.completion",
+            "created":123,
+            "model":"openai/gpt-4o-mini",
+            "choices":[{
+                "index":0,
+                "finish_reason":"content_filter",
+                "message":{
+                    "role":"assistant",
+                    "content":null,
+                    "refusal":"I cannot help with that."
+                }
+            }],
+            "usage":{"prompt_tokens":1,"completion_tokens":1,"total_tokens":2}
+        }),
+        requested_response_format: ResponseFormat::Text,
+    };
+
+    let decoded = decode_openrouter_response(&payload).expect("decode should succeed");
+    assert!(matches!(
+        decoded.output.content.first(),
+        Some(ContentPart::Text { text }) if text == "I cannot help with that."
+    ));
+    assert_eq!(decoded.finish_reason, FinishReason::ContentFilter);
 }
 
 #[test]

@@ -17,7 +17,7 @@ const WARN_USAGE_PARTIAL: &str = "usage_partial";
 const WARN_STRUCTURED_OUTPUT_PARSE_FAILED: &str = "structured_output_parse_failed";
 const WARN_UNKNOWN_FINISH_REASON: &str = "unknown_finish_reason";
 const WARN_EMPTY_OUTPUT: &str = "empty_output";
-const WARN_UNKNOWN_CONTENT_PART_MAPPED_TO_TEXT: &str = "unknown_content_part_mapped_to_text";
+const WARN_REASONING_DETAILS_MAPPED_TO_JSON: &str = "reasoning_details_mapped_to_json";
 
 #[derive(Debug, Clone, PartialEq, Default)]
 pub(crate) struct OpenRouterTranslateOptions {
@@ -25,6 +25,22 @@ pub(crate) struct OpenRouterTranslateOptions {
     pub provider_preferences: Option<Value>,
     pub plugins: Vec<Value>,
     pub parallel_tool_calls: Option<bool>,
+    pub frequency_penalty: Option<f32>,
+    pub presence_penalty: Option<f32>,
+    pub logit_bias: Option<Value>,
+    pub logprobs: Option<bool>,
+    pub top_logprobs: Option<u8>,
+    pub reasoning: Option<Value>,
+    pub seed: Option<i64>,
+    pub user: Option<String>,
+    pub session_id: Option<String>,
+    pub trace: Option<Value>,
+    pub route: Option<String>,
+    pub max_tokens: Option<u32>,
+    pub modalities: Option<Vec<String>>,
+    pub image_config: Option<Value>,
+    pub debug: Option<Value>,
+    pub stream_options: Option<Value>,
 }
 
 #[derive(Debug, Clone, PartialEq)]
@@ -138,11 +154,43 @@ pub(crate) fn encode_openrouter_request(
         body.insert("top_p".to_string(), json!(top_p));
     }
 
+    if let Some(frequency_penalty) = options.frequency_penalty {
+        body.insert("frequency_penalty".to_string(), json!(frequency_penalty));
+    }
+
+    if let Some(presence_penalty) = options.presence_penalty {
+        body.insert("presence_penalty".to_string(), json!(presence_penalty));
+    }
+
+    if let Some(logit_bias) = &options.logit_bias {
+        body.insert("logit_bias".to_string(), logit_bias.clone());
+    }
+
+    if let Some(logprobs) = options.logprobs {
+        body.insert("logprobs".to_string(), Value::Bool(logprobs));
+    }
+
+    if let Some(top_logprobs) = options.top_logprobs {
+        body.insert("top_logprobs".to_string(), json!(top_logprobs));
+    }
+
+    if let Some(reasoning) = &options.reasoning {
+        body.insert("reasoning".to_string(), reasoning.clone());
+    }
+
     if let Some(max_output_tokens) = req.max_output_tokens {
         body.insert(
             "max_completion_tokens".to_string(),
             json!(max_output_tokens),
         );
+    }
+
+    if let Some(max_tokens) = options.max_tokens {
+        body.insert("max_tokens".to_string(), json!(max_tokens));
+    }
+
+    if let Some(seed) = options.seed {
+        body.insert("seed".to_string(), json!(seed));
     }
 
     if !req.stop.is_empty() {
@@ -159,6 +207,38 @@ pub(crate) fn encode_openrouter_request(
 
     if let Some(provider) = &options.provider_preferences {
         body.insert("provider".to_string(), provider.clone());
+    }
+
+    if let Some(user) = &options.user {
+        body.insert("user".to_string(), Value::String(user.clone()));
+    }
+
+    if let Some(session_id) = &options.session_id {
+        body.insert("session_id".to_string(), Value::String(session_id.clone()));
+    }
+
+    if let Some(trace) = &options.trace {
+        body.insert("trace".to_string(), trace.clone());
+    }
+
+    if let Some(route) = &options.route {
+        body.insert("route".to_string(), Value::String(route.clone()));
+    }
+
+    if let Some(modalities) = &options.modalities {
+        body.insert("modalities".to_string(), json!(modalities));
+    }
+
+    if let Some(image_config) = &options.image_config {
+        body.insert("image_config".to_string(), image_config.clone());
+    }
+
+    if let Some(debug) = &options.debug {
+        body.insert("debug".to_string(), debug.clone());
+    }
+
+    if let Some(stream_options) = &options.stream_options {
+        body.insert("stream_options".to_string(), stream_options.clone());
     }
 
     if !options.plugins.is_empty() {
@@ -249,12 +329,8 @@ pub(crate) fn decode_openrouter_response(
     let mut content = Vec::new();
     let mut text_blocks = Vec::new();
 
-    decode_message_content(
-        message.get("content"),
-        &mut content,
-        &mut text_blocks,
-        &mut warnings,
-    )?;
+    decode_message_content(message.get("content"), &mut content, &mut text_blocks)?;
+    decode_refusal(message.get("refusal"), &mut content, &mut text_blocks)?;
     decode_tool_calls(
         message.get("tool_calls"),
         &mut content,
@@ -502,6 +578,149 @@ fn validate_options(
         }
     }
 
+    if let Some(frequency_penalty) = options.frequency_penalty
+        && !(-2.0..=2.0).contains(&frequency_penalty)
+    {
+        return Err(protocol_error(
+            Some(model_id),
+            format!("frequency_penalty must be in [-2.0, 2.0], got {frequency_penalty}"),
+        ));
+    }
+
+    if let Some(presence_penalty) = options.presence_penalty
+        && !(-2.0..=2.0).contains(&presence_penalty)
+    {
+        return Err(protocol_error(
+            Some(model_id),
+            format!("presence_penalty must be in [-2.0, 2.0], got {presence_penalty}"),
+        ));
+    }
+
+    if let Some(logit_bias) = &options.logit_bias {
+        let Some(entries) = logit_bias.as_object() else {
+            return Err(protocol_error(
+                Some(model_id),
+                "logit_bias must be a JSON object",
+            ));
+        };
+        for (token, bias) in entries {
+            if !bias.is_number() {
+                return Err(protocol_error(
+                    Some(model_id),
+                    format!("logit_bias value for token '{token}' must be numeric"),
+                ));
+            }
+        }
+    }
+
+    if let Some(top_logprobs) = options.top_logprobs
+        && top_logprobs > 20
+    {
+        return Err(protocol_error(
+            Some(model_id),
+            format!("top_logprobs must be in [0, 20], got {top_logprobs}"),
+        ));
+    }
+
+    if let Some(reasoning) = &options.reasoning
+        && !reasoning.is_object()
+    {
+        return Err(protocol_error(
+            Some(model_id),
+            "reasoning must be a JSON object",
+        ));
+    }
+
+    if let Some(user) = &options.user
+        && user.trim().is_empty()
+    {
+        return Err(protocol_error(
+            Some(model_id),
+            "user must be non-empty when provided",
+        ));
+    }
+
+    if let Some(session_id) = &options.session_id {
+        if session_id.trim().is_empty() {
+            return Err(protocol_error(
+                Some(model_id),
+                "session_id must be non-empty when provided",
+            ));
+        }
+        if session_id.chars().count() > 128 {
+            return Err(protocol_error(
+                Some(model_id),
+                "session_id must be 128 characters or fewer",
+            ));
+        }
+    }
+
+    if let Some(trace) = &options.trace
+        && !trace.is_object()
+    {
+        return Err(protocol_error(
+            Some(model_id),
+            "trace must be a JSON object",
+        ));
+    }
+
+    if let Some(route) = &options.route
+        && route != "fallback"
+        && route != "sort"
+    {
+        return Err(protocol_error(
+            Some(model_id),
+            "route must be 'fallback' or 'sort' when provided",
+        ));
+    }
+
+    if options.max_tokens == Some(0) {
+        return Err(protocol_error(
+            Some(model_id),
+            "max_tokens must be at least 1",
+        ));
+    }
+
+    if let Some(modalities) = &options.modalities {
+        if modalities.is_empty() {
+            return Err(protocol_error(
+                Some(model_id),
+                "modalities must be non-empty when provided",
+            ));
+        }
+        for modality in modalities {
+            if modality != "text" {
+                return Err(protocol_error(
+                    Some(model_id),
+                    format!(
+                        "modalities only supports 'text' in non-streaming canonical mode; got '{modality}'"
+                    ),
+                ));
+            }
+        }
+    }
+
+    if options.image_config.is_some() {
+        return Err(protocol_error(
+            Some(model_id),
+            "image_config is unsupported in non-streaming canonical mode",
+        ));
+    }
+
+    if options.debug.is_some() {
+        return Err(protocol_error(
+            Some(model_id),
+            "debug is unsupported in non-streaming canonical mode",
+        ));
+    }
+
+    if options.stream_options.is_some() {
+        return Err(protocol_error(
+            Some(model_id),
+            "stream_options is unsupported in non-streaming canonical mode",
+        ));
+    }
+
     Ok(())
 }
 
@@ -516,17 +735,13 @@ fn map_tools(req: &ProviderRequest) -> Result<Vec<Value>, ProviderError> {
 }
 
 fn map_tool_definition(tool: &ToolDefinition, model_id: &str) -> Result<Value, ProviderError> {
-    if tool.name.trim().is_empty() {
+    if !is_valid_tool_name(&tool.name) {
         return Err(protocol_error(
             Some(model_id),
-            "tool definitions require non-empty names",
-        ));
-    }
-
-    if tool.name.chars().count() > 64 {
-        return Err(protocol_error(
-            Some(model_id),
-            format!("tool '{}' name exceeds 64 characters", tool.name),
+            format!(
+                "tool '{}' name must match ^[A-Za-z0-9_-]{{1,64}}$",
+                tool.name
+            ),
         ));
     }
 
@@ -698,6 +913,15 @@ fn map_assistant_message(content: &[ContentPart], model_id: &str) -> Result<Valu
                         "assistant tool_call name must be non-empty",
                     ));
                 }
+                if !is_valid_tool_name(&tool_call.name) {
+                    return Err(protocol_error(
+                        Some(model_id),
+                        format!(
+                            "assistant tool_call '{}' name must match ^[A-Za-z0-9_-]{{1,64}}$",
+                            tool_call.name
+                        ),
+                    ));
+                }
 
                 let arguments = stable_json_string(&canonicalize_json(&tool_call.arguments_json));
                 tool_calls.push(json!({
@@ -823,11 +1047,18 @@ fn join_text_parts(
     Ok(parts.join("\n"))
 }
 
+fn is_valid_tool_name(name: &str) -> bool {
+    if name.is_empty() || name.chars().count() > 64 {
+        return false;
+    }
+    name.chars()
+        .all(|ch| ch.is_ascii_alphanumeric() || ch == '_' || ch == '-')
+}
+
 fn decode_message_content(
     value: Option<&Value>,
     content: &mut Vec<ContentPart>,
     text_blocks: &mut Vec<String>,
-    warnings: &mut Vec<RuntimeWarning>,
 ) -> Result<(), ProviderError> {
     let Some(value) = value else {
         return Ok(());
@@ -861,15 +1092,12 @@ fn decode_message_content(
                         text: text.to_string(),
                     });
                 } else {
-                    warnings.push(RuntimeWarning {
-                        code: WARN_UNKNOWN_CONTENT_PART_MAPPED_TO_TEXT.to_string(),
-                        message: format!(
-                            "openrouter assistant content item type '{item_type}' mapped to canonical text"
+                    return Err(protocol_error(
+                        None,
+                        format!(
+                            "assistant content item type '{item_type}' is unsupported in canonical text mode"
                         ),
-                    });
-                    let rendered = stable_json_string(item);
-                    text_blocks.push(rendered.clone());
-                    content.push(ContentPart::Text { text: rendered });
+                    ));
                 }
             }
             Ok(())
@@ -879,6 +1107,34 @@ fn decode_message_content(
             "assistant content must be string, array, or null",
         )),
     }
+}
+
+fn decode_refusal(
+    refusal_value: Option<&Value>,
+    content: &mut Vec<ContentPart>,
+    text_blocks: &mut Vec<String>,
+) -> Result<(), ProviderError> {
+    let Some(refusal_value) = refusal_value else {
+        return Ok(());
+    };
+
+    if refusal_value.is_null() {
+        return Ok(());
+    }
+
+    let refusal = refusal_value
+        .as_str()
+        .ok_or_else(|| protocol_error(None, "assistant refusal must be a string or null"))?;
+
+    if refusal.is_empty() {
+        return Ok(());
+    }
+
+    text_blocks.push(refusal.to_string());
+    content.push(ContentPart::Text {
+        text: refusal.to_string(),
+    });
+    Ok(())
 }
 
 fn decode_tool_calls(
@@ -907,6 +1163,17 @@ fn decode_tool_calls(
             return Err(protocol_error(
                 Some(model),
                 "tool_call id must be non-empty",
+            ));
+        }
+
+        let call_type = call_obj
+            .get("type")
+            .and_then(Value::as_str)
+            .ok_or_else(|| protocol_error(Some(model), "tool_call missing type"))?;
+        if call_type != "function" {
+            return Err(protocol_error(
+                Some(model),
+                format!("tool_call type must be function, got {call_type}"),
             ));
         }
 
@@ -972,7 +1239,7 @@ fn decode_reasoning(
         }
 
         warnings.push(RuntimeWarning {
-            code: WARN_UNKNOWN_CONTENT_PART_MAPPED_TO_TEXT.to_string(),
+            code: WARN_REASONING_DETAILS_MAPPED_TO_JSON.to_string(),
             message: "openrouter reasoning_details mapped to canonical thinking as JSON"
                 .to_string(),
         });

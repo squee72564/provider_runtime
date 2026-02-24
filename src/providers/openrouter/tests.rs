@@ -36,6 +36,7 @@ struct MockServer {
     addr: std::net::SocketAddr,
     request_count: Arc<AtomicUsize>,
     captured_headers: Arc<Mutex<Vec<BTreeMap<String, String>>>>,
+    captured_requests: Arc<Mutex<Vec<String>>>,
     handle: Option<thread::JoinHandle<()>>,
 }
 
@@ -50,10 +51,12 @@ impl MockServer {
         let queue = Arc::new(Mutex::new(VecDeque::from(responses)));
         let request_count = Arc::new(AtomicUsize::new(0));
         let captured_headers = Arc::new(Mutex::new(Vec::new()));
+        let captured_requests = Arc::new(Mutex::new(Vec::new()));
 
         let queue_clone = Arc::clone(&queue);
         let request_count_clone = Arc::clone(&request_count);
         let captured_headers_clone = Arc::clone(&captured_headers);
+        let captured_requests_clone = Arc::clone(&captured_requests);
 
         let handle = thread::spawn(move || {
             loop {
@@ -77,6 +80,10 @@ impl MockServer {
                     .lock()
                     .expect("captured headers lock")
                     .push(headers);
+                captured_requests_clone
+                    .lock()
+                    .expect("captured requests lock")
+                    .push(request);
                 request_count_clone.fetch_add(1, Ordering::SeqCst);
 
                 let response_text = build_http_response(&response);
@@ -91,6 +98,7 @@ impl MockServer {
             addr,
             request_count,
             captured_headers,
+            captured_requests,
             handle: Some(handle),
         }
     }
@@ -108,6 +116,15 @@ impl MockServer {
             .lock()
             .expect("captured headers lock")
             .clone()
+    }
+
+    fn captured_bodies(&self) -> Vec<String> {
+        self.captured_requests
+            .lock()
+            .expect("captured requests lock")
+            .iter()
+            .map(|request| parse_request_body(request))
+            .collect()
     }
 
     fn shutdown(&mut self) {
@@ -271,6 +288,92 @@ async fn test_openrouter_adapter_sets_auth_and_attribution_headers() {
     assert_eq!(
         headers[0].get("x-title"),
         Some(&"provider-runtime-tests".to_string())
+    );
+}
+
+#[tokio::test]
+async fn test_openrouter_adapter_maps_extended_options_to_request_body() {
+    let mut server = MockServer::start(vec![MockResponse::new(
+        200,
+        vec![],
+        r#"{
+            "id":"chatcmpl_1",
+            "object":"chat.completion",
+            "created":123,
+            "model":"openai/gpt-4o-mini",
+            "choices":[{
+                "index":0,
+                "finish_reason":"stop",
+                "message":{"role":"assistant","content":"ok"}
+            }],
+            "usage":{"prompt_tokens":1,"completion_tokens":1,"total_tokens":2}
+        }"#,
+    )]);
+
+    let options = OpenRouterAdapterOptions {
+        frequency_penalty: Some(0.5),
+        presence_penalty: Some(-0.25),
+        logit_bias: Some(json::from_str(r#"{"12":-100,"44":2}"#).expect("logit_bias")),
+        logprobs: Some(true),
+        top_logprobs: Some(4),
+        reasoning: Some(json::from_str(r#"{"effort":"medium"}"#).expect("reasoning")),
+        seed: Some(42),
+        user: Some("user-123".to_string()),
+        session_id: Some("session-abc".to_string()),
+        trace: Some(json::from_str(r#"{"trace_id":"t-1"}"#).expect("trace")),
+        route: Some("fallback".to_string()),
+        max_tokens: Some(333),
+        modalities: Some(vec!["text".to_string()]),
+        ..Default::default()
+    };
+    let adapter = OpenRouterAdapter::with_base_url_and_options(
+        Some("test-key".to_string()),
+        server.url(),
+        options,
+    )
+    .expect("adapter");
+
+    let _response = adapter
+        .run(&base_request(), &AdapterContext::default())
+        .await
+        .expect("run should succeed");
+
+    server.shutdown();
+    let bodies = server.captured_bodies();
+    let body = serde_json::from_str::<serde_json::Value>(&bodies[0]).expect("json body");
+    assert_eq!(
+        body.pointer("/frequency_penalty"),
+        Some(&serde_json::json!(0.5))
+    );
+    assert_eq!(
+        body.pointer("/presence_penalty"),
+        Some(&serde_json::json!(-0.25))
+    );
+    assert_eq!(
+        body.pointer("/logit_bias/12"),
+        Some(&serde_json::json!(-100))
+    );
+    assert_eq!(body.pointer("/logprobs"), Some(&serde_json::json!(true)));
+    assert_eq!(body.pointer("/top_logprobs"), Some(&serde_json::json!(4)));
+    assert_eq!(
+        body.pointer("/reasoning/effort"),
+        Some(&serde_json::json!("medium"))
+    );
+    assert_eq!(body.pointer("/seed"), Some(&serde_json::json!(42)));
+    assert_eq!(body.pointer("/user"), Some(&serde_json::json!("user-123")));
+    assert_eq!(
+        body.pointer("/session_id"),
+        Some(&serde_json::json!("session-abc"))
+    );
+    assert_eq!(
+        body.pointer("/trace/trace_id"),
+        Some(&serde_json::json!("t-1"))
+    );
+    assert_eq!(body.pointer("/route"), Some(&serde_json::json!("fallback")));
+    assert_eq!(body.pointer("/max_tokens"), Some(&serde_json::json!(333)));
+    assert_eq!(
+        body.pointer("/modalities/0"),
+        Some(&serde_json::json!("text"))
     );
 }
 
@@ -488,6 +591,56 @@ fn test_openrouter_options_validation() {
         Err(error) => error,
     };
     assert!(bad_provider.to_string().contains("provider_preferences"));
+
+    let bad_frequency = OpenRouterAdapter::with_base_url_and_options(
+        None,
+        "http://example.com",
+        OpenRouterAdapterOptions {
+            frequency_penalty: Some(3.0),
+            ..Default::default()
+        },
+    );
+    assert!(bad_frequency.is_err());
+
+    let bad_modalities = OpenRouterAdapter::with_base_url_and_options(
+        None,
+        "http://example.com",
+        OpenRouterAdapterOptions {
+            modalities: Some(vec!["image".to_string()]),
+            ..Default::default()
+        },
+    );
+    assert!(bad_modalities.is_err());
+
+    let bad_image_config = OpenRouterAdapter::with_base_url_and_options(
+        None,
+        "http://example.com",
+        OpenRouterAdapterOptions {
+            image_config: Some(json::from_str("{}").expect("json object")),
+            ..Default::default()
+        },
+    );
+    assert!(bad_image_config.is_err());
+
+    let bad_session_id = OpenRouterAdapter::with_base_url_and_options(
+        None,
+        "http://example.com",
+        OpenRouterAdapterOptions {
+            session_id: Some(" ".to_string()),
+            ..Default::default()
+        },
+    );
+    assert!(bad_session_id.is_err());
+
+    let bad_stream_options = OpenRouterAdapter::with_base_url_and_options(
+        None,
+        "http://example.com",
+        OpenRouterAdapterOptions {
+            stream_options: Some(json::from_str("{}").expect("json object")),
+            ..Default::default()
+        },
+    );
+    assert!(bad_stream_options.is_err());
 }
 
 mod json {
@@ -499,14 +652,26 @@ mod json {
 fn read_http_request(stream: &mut std::net::TcpStream) -> String {
     let mut request = Vec::new();
     let mut chunk = [0_u8; 1024];
+    let mut header_end_index: Option<usize> = None;
+    let mut content_length: usize = 0;
 
     loop {
         match stream.read(&mut chunk) {
             Ok(0) => break,
             Ok(bytes_read) => {
                 request.extend_from_slice(&chunk[..bytes_read]);
-                if request.windows(4).any(|window| window == b"\r\n\r\n") {
-                    break;
+                if header_end_index.is_none()
+                    && let Some(position) = find_header_end(&request)
+                {
+                    header_end_index = Some(position);
+                    content_length = parse_content_length(&request[..position]).unwrap_or_default();
+                }
+
+                if let Some(position) = header_end_index {
+                    let body_read = request.len().saturating_sub(position + 4);
+                    if body_read >= content_length {
+                        break;
+                    }
                 }
             }
             Err(error)
@@ -532,6 +697,29 @@ fn parse_request_headers(raw_request: &str) -> BTreeMap<String, String> {
             Some((name.trim().to_ascii_lowercase(), value.trim().to_string()))
         })
         .collect()
+}
+
+fn parse_request_body(raw_request: &str) -> String {
+    raw_request
+        .split_once("\r\n\r\n")
+        .map(|(_, body)| body.to_string())
+        .unwrap_or_default()
+}
+
+fn find_header_end(bytes: &[u8]) -> Option<usize> {
+    bytes.windows(4).position(|window| window == b"\r\n\r\n")
+}
+
+fn parse_content_length(headers: &[u8]) -> Option<usize> {
+    let headers = String::from_utf8_lossy(headers);
+    for line in headers.lines() {
+        if let Some((name, value)) = line.split_once(':')
+            && name.trim().eq_ignore_ascii_case("content-length")
+        {
+            return value.trim().parse::<usize>().ok();
+        }
+    }
+    None
 }
 
 fn build_http_response(response: &MockResponse) -> String {

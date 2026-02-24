@@ -29,6 +29,22 @@ pub struct OpenRouterAdapterOptions {
     pub provider_preferences: Option<Value>,
     pub plugins: Vec<Value>,
     pub parallel_tool_calls: Option<bool>,
+    pub frequency_penalty: Option<f32>,
+    pub presence_penalty: Option<f32>,
+    pub logit_bias: Option<Value>,
+    pub logprobs: Option<bool>,
+    pub top_logprobs: Option<u8>,
+    pub reasoning: Option<Value>,
+    pub seed: Option<i64>,
+    pub user: Option<String>,
+    pub session_id: Option<String>,
+    pub trace: Option<Value>,
+    pub route: Option<String>,
+    pub max_tokens: Option<u32>,
+    pub modalities: Option<Vec<String>>,
+    pub image_config: Option<Value>,
+    pub debug: Option<Value>,
+    pub stream_options: Option<Value>,
     pub http_referer: Option<String>,
     pub x_title: Option<String>,
 }
@@ -59,6 +75,120 @@ impl OpenRouterAdapterOptions {
             }
         }
 
+        if let Some(frequency_penalty) = self.frequency_penalty
+            && !(-2.0..=2.0).contains(&frequency_penalty)
+        {
+            return Err(Self::invalid_config(format!(
+                "frequency_penalty must be in [-2.0, 2.0], got {frequency_penalty}"
+            )));
+        }
+
+        if let Some(presence_penalty) = self.presence_penalty
+            && !(-2.0..=2.0).contains(&presence_penalty)
+        {
+            return Err(Self::invalid_config(format!(
+                "presence_penalty must be in [-2.0, 2.0], got {presence_penalty}"
+            )));
+        }
+
+        if let Some(top_logprobs) = self.top_logprobs
+            && top_logprobs > 20
+        {
+            return Err(Self::invalid_config(format!(
+                "top_logprobs must be in [0, 20], got {top_logprobs}"
+            )));
+        }
+
+        if let Some(logit_bias) = &self.logit_bias {
+            let Some(map) = logit_bias.as_object() else {
+                return Err(Self::invalid_config("logit_bias must be a JSON object"));
+            };
+            for (token, bias) in map {
+                if !bias.is_number() {
+                    return Err(Self::invalid_config(format!(
+                        "logit_bias value for token '{token}' must be numeric"
+                    )));
+                }
+            }
+        }
+
+        if let Some(reasoning) = &self.reasoning
+            && !reasoning.is_object()
+        {
+            return Err(Self::invalid_config("reasoning must be a JSON object"));
+        }
+
+        if let Some(trace) = &self.trace
+            && !trace.is_object()
+        {
+            return Err(Self::invalid_config("trace must be a JSON object"));
+        }
+
+        if let Some(user) = &self.user
+            && user.trim().is_empty()
+        {
+            return Err(Self::invalid_config("user must be non-empty when provided"));
+        }
+
+        if let Some(session_id) = &self.session_id {
+            if session_id.trim().is_empty() {
+                return Err(Self::invalid_config(
+                    "session_id must be non-empty when provided",
+                ));
+            }
+            if session_id.chars().count() > 128 {
+                return Err(Self::invalid_config(
+                    "session_id must be 128 characters or fewer",
+                ));
+            }
+        }
+
+        if let Some(route) = &self.route
+            && route != "fallback"
+            && route != "sort"
+        {
+            return Err(Self::invalid_config(
+                "route must be 'fallback' or 'sort' when provided",
+            ));
+        }
+
+        if self.max_tokens == Some(0) {
+            return Err(Self::invalid_config("max_tokens must be at least 1"));
+        }
+
+        if let Some(modalities) = &self.modalities {
+            if modalities.is_empty() {
+                return Err(Self::invalid_config(
+                    "modalities must be non-empty when provided",
+                ));
+            }
+            for modality in modalities {
+                if modality != "text" {
+                    return Err(Self::invalid_config(format!(
+                        "modalities only supports 'text' in non-streaming canonical mode; got '{modality}'"
+                    )));
+                }
+            }
+        }
+
+        if self.image_config.is_some() {
+            return Err(Self::invalid_config(
+                "image_config is unsupported in non-streaming canonical mode",
+            ));
+        }
+
+        if self.debug.is_some() {
+            return Err(Self::invalid_config(
+                "debug is unsupported in non-streaming canonical mode",
+            ));
+        }
+
+        if self.stream_options.is_some() {
+            return Err(Self::invalid_config(
+                "stream_options is unsupported in non-streaming canonical mode",
+            ));
+        }
+
         if let Some(http_referer) = &self.http_referer
             && http_referer.trim().is_empty()
         {
@@ -84,6 +214,22 @@ impl OpenRouterAdapterOptions {
             provider_preferences: self.provider_preferences.clone(),
             plugins: self.plugins.clone(),
             parallel_tool_calls: self.parallel_tool_calls,
+            frequency_penalty: self.frequency_penalty,
+            presence_penalty: self.presence_penalty,
+            logit_bias: self.logit_bias.clone(),
+            logprobs: self.logprobs,
+            top_logprobs: self.top_logprobs,
+            reasoning: self.reasoning.clone(),
+            seed: self.seed,
+            user: self.user.clone(),
+            session_id: self.session_id.clone(),
+            trace: self.trace.clone(),
+            route: self.route.clone(),
+            max_tokens: self.max_tokens,
+            modalities: self.modalities.clone(),
+            image_config: self.image_config.clone(),
+            debug: self.debug.clone(),
+            stream_options: self.stream_options.clone(),
         }
     }
 
