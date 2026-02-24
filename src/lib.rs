@@ -1,3 +1,5 @@
+#[allow(dead_code)]
+pub(crate) mod catalog;
 pub mod core;
 pub mod pricing;
 pub mod providers;
