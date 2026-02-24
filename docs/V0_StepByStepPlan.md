@@ -57,7 +57,7 @@ Dependency rules:
 
 ## 3. Stage Plan (Checkbox Format)
 
-## [ ] Stage 1 - Freeze Canonical Domain Types
+## [x] Stage 1 - Freeze Canonical Domain Types
 Goal:
 Define provider-agnostic canonical request/response/message/tool/usage/cost/catalog types in one place.
 
@@ -94,7 +94,7 @@ Stage Documentation: `docs/Stage1.md`
 Depends On:
 - None
 
-## [ ] Stage 2 - Runtime and Provider Error Taxonomy
+## [x] Stage 2 - Runtime and Provider Error Taxonomy
 Goal:
 Create deterministic error model for config, routing, transport, provider protocol, and cost warnings.
 
