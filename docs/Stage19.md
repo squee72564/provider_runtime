@@ -12,16 +12,20 @@ Public API Surface:
 
 Internal Responsibilities:
 - Capability declaration.
-- Run/discover via transport + translator.
+- Run/discover via transport + auth + translator composition.
 - Use provider-reported cost as response metadata input only.
+- Adapter orchestration must not perform ad hoc canonical<->provider field mapping.
+- All protocol mapping must go through the shared crate-private translator contract.
 
 Unit Tests:
 - `test_openrouter_adapter_capabilities`
 - `test_openrouter_adapter_missing_key_error`
+- `test_openrouter_adapter_uses_translator_boundary`
 
 Acceptance Criteria:
 - Adapter does not call pricing engine directly.
 - Canonical output contract preserved.
+- Adapter responsibilities are limited to orchestration (auth/transport/capabilities/error envelope handling).
 - `cargo check --lib` passes.
 
 Depends On:

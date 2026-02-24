@@ -112,6 +112,39 @@
       - fn capabilities(&self) -> ProviderCapabilities
   - AdapterContext includes HTTP client, auth resolver, timeout/retry policy, pricing/catalog handles.
 
+  ### 6a) Adapter vs Translator Boundaries
+
+  Invariant:
+  - Canonical models represent semantic intent and are provider-agnostic.
+  - Provider wire formats are protocol-specific and are not exposed as canonical shapes.
+
+  Boundary roles:
+  - `ProviderAdapter` is orchestration-facing:
+      - auth/headers
+      - transport invocation
+      - capability declaration
+      - provider error envelope handling
+  - Translator is protocol-facing and crate-private:
+      - canonical request -> provider request payload
+      - provider response payload -> canonical response
+      - provider protocol error payload -> `ProviderError`
+      - deterministic warning emission for lossy/unsupported conversions
+
+  Translator contract (doc-level, crate-private):
+  - Associated request/response protocol payload types per provider.
+  - `encode(canonical_request) -> provider_request_payload`
+  - `decode(provider_response_payload) -> canonical_response`
+  - Returns typed `ProviderError` on protocol/serialization failures.
+
+  Determinism requirements:
+  - Input-equal canonical requests must encode identically.
+  - Input-equal provider payloads must decode identically.
+  - Unsupported canonical intent must map to deterministic error/warning behavior.
+
+  Isolation requirements:
+  - Translator depends on canonical types + provider protocol schema only.
+  - Translator does not depend on registry internals, pricing internals, or runtime orchestration.
+
   ### 7) Registry/routing
 
   - ProviderRegistry
@@ -173,21 +206,21 @@
 
   ### OpenAI
 
-  - Use Responses API JSON shape.
-  - Map canonical tools/response_format to OpenAI equivalents.
-  - Parse usage fields into canonical Usage.
+  - Use Responses API JSON shape through the shared translator contract.
+  - Adapter composes auth + transport + translator; translator owns protocol conversion.
+  - Provider-specific field mapping details are deferred to provider implementation docs/tests.
 
   ### Anthropic
 
-  - Use Messages API shape.
-  - Translate tool definitions/calls to Anthropic tool format.
-  - Map thinking/reasoning blocks to canonical parts.
+  - Use Messages API shape through the shared translator contract.
+  - Adapter composes auth + transport + translator; translator owns protocol conversion.
+  - Provider-specific field mapping details are deferred to provider implementation docs/tests.
 
   ### OpenRouter
 
-  - Use OpenAI-compatible endpoint shape with compatibility flags.
-  - Consume provider-returned usage/cost fields when available.
-  - Fallback to local pricing table if provider cost missing.
+  - Use OpenAI-compatible endpoint shape with compatibility flags through the shared translator contract.
+  - Adapter composes auth + transport + translator; translator owns protocol conversion.
+  - Provider-specific field mapping details are deferred to provider implementation docs/tests.
 
   ## Error Taxonomy
 
@@ -251,4 +284,6 @@
   - Default pricing source is local config table; provider-reported cost is consumed when available.
   - OAuth providers are deferred; token provider trait is included for forward compatibility.
   - Canonical layer unifies semantics, not raw JSON protocol shapes.
+  - Translator contract is crate-private and not re-exported as public API.
+  - Provider-specific mapping tables are intentionally deferred until provider implementation stages.
   - Runtime is async (tokio) and transport uses shared reqwest client.

@@ -4,8 +4,9 @@
 - No streaming in v0.
 - Runtime is stateless.
 - Runtime speaks one universal language internally
-  - Each provider adaptor is a translator
-  - We translate our universal request into providers native format, send over HTTP, then translate providers response back into universal format
+  - Each provider adapter composes transport + auth + translator
+  - Translator is a shared crate-private contract used by all provider modules
+  - We translate our universal request into provider-native format, send over HTTP, then translate provider response back into universal format
   - Example:
     ```mermaid
     flowchart TD
@@ -31,6 +32,7 @@
 - Discovery is static-first with optional remote enrichment.
 - Handoff normalization is deterministic.
 - Provider adapters must not leak raw protocol shapes outside canonical response fields.
+- Translator contract is crate-private and not part of public API.
 - OAuth flows are out of scope for v0 (token-provider hook allowed, flow implementation forbidden).
 - Session persistence/state management is out of scope.
 
@@ -48,6 +50,7 @@ Topological stage ordering:
 
 Dependency rules:
 - Adapters require frozen canonical types and frozen `ProviderAdapter` trait (Stages 1-4 complete).
+- Translator stages (14/16/18) must conform to the shared translator contract defined in Stage 3 docs.
 - Registry requires canonical model/request types and provider trait (Stages 1-4 complete).
 - Runtime orchestration requires registry + pricing + catalog + handoff (Stages 7-11 complete).
 - Pricing requires `Usage` canonical type (Stage 1 complete).
@@ -114,7 +117,7 @@ Depends On:
 
 ## [ ] Stage 3 - Freeze Core Traits
 Goal:
-Define stable adapter/auth contracts used by all providers and runtime.
+Define stable adapter/auth contracts used by all providers and runtime, and document the shared crate-private translator boundary used by provider modules.
 
 Files:
 - [src/core/traits/mod.rs](src/core/traits/mod.rs)
@@ -122,6 +125,7 @@ Files:
 Public API Surface:
 - `trait ProviderAdapter`
 - `trait TokenProvider`
+- Translator contract is documented only (crate-private; not public API)
 
 Stage Documentation: `docs/Stage3.md`
 
@@ -317,7 +321,7 @@ Goal:
 Implement canonical-to-OpenAI and OpenAI-to-canonical translation.
 
 Files:
-- [src/providers/openai/mod.rs](src/providers/openai/mod.rs)
+- [src/providers/openai_translate/mod.rs](src/providers/openai_translate/mod.rs)
 
 Public API Surface:
 - `fn encode_openai_request(...)`
@@ -351,7 +355,7 @@ Goal:
 Implement canonical-to-Anthropic and Anthropic-to-canonical translation.
 
 Files:
-- [src/providers/anthropic/mod.rs](src/providers/anthropic/mod.rs)
+- [src/providers/anthropic_translate/mod.rs](src/providers/anthropic_translate/mod.rs)
 
 Public API Surface:
 - `fn encode_anthropic_request(...)`
@@ -385,7 +389,7 @@ Goal:
 Implement canonical-to-OpenRouter and OpenRouter-to-canonical translation.
 
 Files:
-- [src/providers/openrouter/mod.rs](src/providers/openrouter/mod.rs)
+- [src/providers/openrouter_translate/mod.rs](src/providers/openrouter_translate/mod.rs)
 
 Public API Surface:
 - `fn encode_openrouter_request(...)`
@@ -548,7 +552,9 @@ Registry (`registry/*`):
 
 Providers (`providers/*`):
 - Black box: canonical <-> provider translation + API invocation.
+- Translator boundary: shared crate-private translator contract for encode/decode + protocol error normalization.
 - Forbidden leak: no registry internals, no pricing internals, no session logic.
+- Forbidden leak: no ad hoc field mapping in adapters that bypasses translator contract.
 - Freeze point: each adapter API at its stage completion.
 
 Runtime (`runtime/*`):
@@ -559,17 +565,17 @@ Runtime (`runtime/*`):
 ## 5. Adapter Implementation Strategy
 
 OpenAI stage group:
-- Translator file: [src/providers/openai/mod.rs](src/providers/openai/mod.rs) (Stage 14)
+- Translator file: [src/providers/openai_translate/mod.rs](src/providers/openai_translate/mod.rs) (Stage 14)
 - Adapter struct + capabilities: [src/providers/openai/mod.rs](src/providers/openai/mod.rs) (Stage 15)
 - Golden fixtures: `tests/contract_openai.rs` (not in repo yet) (Stage 21)
 
 Anthropic stage group:
-- Translator file: [src/providers/anthropic/mod.rs](src/providers/anthropic/mod.rs) (Stage 16)
+- Translator file: [src/providers/anthropic_translate/mod.rs](src/providers/anthropic_translate/mod.rs) (Stage 16)
 - Adapter struct + capabilities: [src/providers/anthropic/mod.rs](src/providers/anthropic/mod.rs) (Stage 17)
 - Golden fixtures: `tests/contract_anthropic.rs` (not in repo yet) (Stage 22)
 
 OpenRouter stage group:
-- Translator file: [src/providers/openrouter/mod.rs](src/providers/openrouter/mod.rs) (Stage 18)
+- Translator file: [src/providers/openrouter_translate/mod.rs](src/providers/openrouter_translate/mod.rs) (Stage 18)
 - Adapter struct + capabilities: [src/providers/openrouter/mod.rs](src/providers/openrouter/mod.rs) (Stage 19)
 - Golden fixtures: `tests/contract_openrouter.rs` (not in repo yet) (Stage 23)
 
@@ -578,6 +584,7 @@ Hard rules for all adapters:
 - No direct coupling to registry internals.
 - No direct coupling to pricing internals.
 - No raw protocol structs in public API.
+- Adapters invoke translator contract for protocol mapping; no ad hoc canonical<->wire conversion in adapter orchestration code.
 
 ## 6. Testing Phases
 
