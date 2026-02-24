@@ -15,7 +15,7 @@
   2. `docs/V0_StepByStepPlan.md` (current stage specific plans and ordering)
   3. `docs/Stage*.md` (stage-specific implementation contracts)
 
-  If there is a conflict, treat `docs/PLAN.md` as canonical unless explicitly updated.
+  If there is a conflict, treat `docs/V0_Plan.md` as canonical unless explicitly updated.
 
   ## Working Model
   - Implement by stage, in order.
