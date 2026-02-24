@@ -6,24 +6,24 @@
 - Runtime speaks one universal language internally
   - Each provider adaptor is a translator
   - We translate our universal request into providers native format, send over HTTP, then translate providers response back into universal format
-  - Ex:
+  - Example:
+    ```mmd
+    flowchart TD
+        subgraph Runtime
+            A[Canonical Request]
+        end
 
-flowchart TD
-    subgraph Runtime
-        A[Canonical Request]
-    end
+        subgraph Provider Adapter
+            B[Translate to Provider Format]
+            D[Normalize to Canonical]
+        end
 
-    subgraph Provider Adapter
-        B[Translate to Provider Format]
-        D[Normalize to Canonical]
-    end
+        subgraph External API
+            C[HTTP Call]
+        end
 
-    subgraph External API
-        C[HTTP Call]
-    end
-
-    A --> B --> C --> D --> E[Canonical Response]
-
+        A --> B --> C --> D --> E[Canonical Response]
+    ```
 - No tool loop orchestration in library code.
 - Async-only execution surface.
 - Canonical types are provider-agnostic.
