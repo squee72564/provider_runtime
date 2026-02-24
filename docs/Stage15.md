@@ -16,6 +16,9 @@ Internal Responsibilities:
 - Credential validation and provider-specific error mapping.
 - Adapter orchestration must not perform ad hoc canonical<->provider field mapping.
 - All protocol mapping must go through the shared crate-private translator contract.
+- Remote discovery uses OpenAI `GET /v1/models` and maps discovered IDs into canonical `ModelInfo`
+  with conservative defaults (`display_name/context_window/max_output_tokens = None`) because the
+  endpoint does not provide complete catalog metadata for those fields.
 
 Unit Tests:
 - `test_openai_adapter_capabilities`

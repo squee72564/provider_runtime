@@ -37,6 +37,7 @@ Deterministic Validation / Error Policy:
   - strict-compatible schemas encode with `strict: true`
   - non-compatible schemas encode with `strict: false` and stable warning
 - `ToolChoice::Specific { name }` requires a matching tool definition name or deterministic protocol error.
+- Non-completed statuses (`cancelled`, `queued`, `in_progress`, `failed`) decode to deterministic protocol errors.
 - Unsupported payload shapes and unknown output item types return deterministic protocol errors.
 
 Warning Policy:
@@ -50,7 +51,6 @@ Warning Policy:
   - refusal mapped to text
   - structured output parse failure
   - incomplete reasons (`max_output_tokens`, `content_filter`, unknown/missing)
-  - cancelled status
   - empty output
 
 Determinism Requirements:

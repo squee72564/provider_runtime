@@ -336,7 +336,7 @@ Depends On:
 - Stage 4
 - Stage 6
 
-## [ ] Stage 15 - OpenAI Adapter
+## [x] Stage 15 - OpenAI Adapter
 Goal:
 Implement OpenAI `ProviderAdapter` with capability declaration.
 

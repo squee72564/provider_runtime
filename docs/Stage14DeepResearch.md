@@ -743,6 +743,14 @@ Grounding: strict-mode requirements are explicitly described.
 
 Grounding: OpenAI response object `status`, `output`, and function calling output item structure.
 
+## Stage 14 scope lock (canonical-complete, non-streaming)
+
+- Stage 14 implementation is intentionally non-streaming for v0.
+- “Full OpenAI Responses API surface” in this stage means:
+  - full non-streaming coverage for all behaviors representable by current canonical types, and
+  - deterministic `ProviderError::Protocol` for OpenAI-only item types or payload shapes that
+    cannot be represented without changing canonical public interfaces.
+
 ## Final completion criterion
 
 “The OpenAI adapter is complete when all canonical semantics are preserved without transport leakage and the translator contract is fully satisfied.”
