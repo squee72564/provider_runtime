@@ -267,7 +267,7 @@ Stage Documentation: `docs/Stage11.md`
 Depends On:
 - Stage 10
 
-## [ ] Stage 12 - ProviderRuntime and Builder Implementation
+## [x] Stage 12 - ProviderRuntime and Builder Implementation
 Goal:
 Implement stateless runtime orchestration API exactly as specified.
 
@@ -289,7 +289,7 @@ Depends On:
 - Stage 8
 - Stage 11
 
-## [ ] Stage 13 - Crate Exports and Runtime Freeze Gate
+## [x] Stage 13 - Crate Exports and Runtime Freeze Gate
 Goal:
 Wire crate-level modules and freeze public API surface.
 
