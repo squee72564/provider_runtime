@@ -5,10 +5,11 @@ use std::sync::{Arc, Mutex};
 use std::thread;
 use std::time::Duration;
 
+use provider_runtime::core::error::ProviderError;
 use provider_runtime::core::traits::ProviderAdapter;
 use provider_runtime::core::types::{
-    AdapterContext, ContentPart, FinishReason, Message, MessageRole, ModelRef, ProviderId,
-    ProviderRequest, ResponseFormat, ToolChoice, ToolDefinition,
+    AdapterContext, ContentPart, DiscoveryOptions, FinishReason, Message, MessageRole, ModelRef,
+    ProviderId, ProviderRequest, ResponseFormat, ToolChoice, ToolDefinition,
 };
 use provider_runtime::providers::openai::OpenAiAdapter;
 use serde_json::json;
@@ -16,6 +17,7 @@ use serde_json::json;
 #[derive(Debug, Clone)]
 struct MockResponse {
     status_code: u16,
+    headers: Vec<(String, String)>,
     body: String,
 }
 
@@ -23,6 +25,15 @@ impl MockResponse {
     fn json(body: &str) -> Self {
         Self {
             status_code: 200,
+            headers: Vec::new(),
+            body: body.to_string(),
+        }
+    }
+
+    fn with_status(status_code: u16, headers: Vec<(String, String)>, body: &str) -> Self {
+        Self {
+            status_code,
+            headers,
             body: body.to_string(),
         }
     }
@@ -67,7 +78,8 @@ impl MockServer {
                 let request = read_http_request_with_body(&mut stream);
                 captured_clone.lock().expect("capture lock").push(request);
 
-                let response_text = build_http_response(response.status_code, &response.body);
+                let response_text =
+                    build_http_response(response.status_code, &response.headers, &response.body);
                 stream
                     .write_all(response_text.as_bytes())
                     .expect("write response");
@@ -317,6 +329,128 @@ async fn test_openai_fixture_category_matrix_coverage() {
     }
 }
 
+#[tokio::test]
+async fn test_openai_contract_non_2xx_auth_maps_to_credentials_rejected() {
+    let mut server = MockServer::start(vec![MockResponse::with_status(
+        401,
+        vec![("x-request-id".to_string(), "req-contract-auth".to_string())],
+        r#"{
+            "error": {
+                "message": "Invalid API key",
+                "type": "invalid_request_error",
+                "param": null,
+                "code": "invalid_api_key"
+            }
+        }"#,
+    )]);
+    let adapter = OpenAiAdapter::with_base_url(Some("test-key".to_string()), server.url())
+        .expect("create adapter");
+
+    let err = adapter
+        .run(&request_for_contract(), &AdapterContext::default())
+        .await
+        .expect_err("auth error should fail");
+
+    match err {
+        ProviderError::CredentialsRejected {
+            provider,
+            request_id,
+            message,
+        } => {
+            assert_eq!(provider, ProviderId::Openai);
+            assert_eq!(request_id, Some("req-contract-auth".to_string()));
+            assert!(message.contains("openai error"));
+            assert!(message.contains("invalid_api_key"));
+        }
+        other => panic!("expected credentials rejected error, got {other:?}"),
+    }
+
+    server.shutdown();
+}
+
+#[tokio::test]
+async fn test_openai_contract_discovery_models_mapping() {
+    let mut server = MockServer::start(vec![MockResponse::json(
+        r#"{
+            "object":"list",
+            "data":[
+                {"id":"gpt-5-mini","object":"model"},
+                {"id":"gpt-4.1","object":"model"},
+                {"id":"gpt-5-mini","object":"model"}
+            ]
+        }"#,
+    )]);
+    let adapter = OpenAiAdapter::with_base_url(Some("test-key".to_string()), server.url())
+        .expect("create adapter");
+
+    let models = adapter
+        .discover_models(
+            &DiscoveryOptions {
+                remote: true,
+                include_provider: Vec::new(),
+                refresh_cache: true,
+            },
+            &AdapterContext::default(),
+        )
+        .await
+        .expect("discover should succeed");
+
+    assert_eq!(models.len(), 2);
+    assert_eq!(models[0].model_id, "gpt-5-mini");
+    assert_eq!(models[1].model_id, "gpt-4.1");
+    assert!(
+        models
+            .iter()
+            .all(|model| model.provider == ProviderId::Openai)
+    );
+    assert!(models.iter().all(|model| model.display_name.is_none()));
+    server.shutdown();
+}
+
+#[tokio::test]
+async fn test_openai_contract_non_2xx_non_auth_maps_to_status() {
+    let response = MockResponse::with_status(
+        429,
+        vec![("x-request-id".to_string(), "req-contract-rate".to_string())],
+        r#"{
+            "error": {
+                "message": "Rate limit exceeded",
+                "type": "rate_limit_error",
+                "param": "model",
+                "code": "rate_limit_exceeded"
+            }
+        }"#,
+    );
+    let mut server = MockServer::start(vec![response.clone(), response.clone(), response]);
+    let adapter = OpenAiAdapter::with_base_url(Some("test-key".to_string()), server.url())
+        .expect("create adapter");
+
+    let err = adapter
+        .run(&request_for_contract(), &AdapterContext::default())
+        .await
+        .expect_err("rate limit should fail");
+
+    match err {
+        ProviderError::Status {
+            provider,
+            model,
+            status_code,
+            request_id,
+            message,
+        } => {
+            assert_eq!(provider, ProviderId::Openai);
+            assert_eq!(model, Some("gpt-5-mini".to_string()));
+            assert_eq!(status_code, 429);
+            assert_eq!(request_id, Some("req-contract-rate".to_string()));
+            assert!(message.contains("Rate limit exceeded"));
+            assert!(message.contains("rate_limit_exceeded"));
+        }
+        other => panic!("expected status error, got {other:?}"),
+    }
+
+    server.shutdown();
+}
+
 fn read_http_request_with_body(stream: &mut std::net::TcpStream) -> String {
     let mut request = Vec::new();
     let mut chunk = [0_u8; 1024];
@@ -361,12 +495,30 @@ fn read_http_request_with_body(stream: &mut std::net::TcpStream) -> String {
     String::from_utf8_lossy(&request).to_string()
 }
 
-fn build_http_response(status_code: u16, body: &str) -> String {
-    format!(
-        "HTTP/1.1 {} {}\r\nContent-Type: application/json\r\nContent-Length: {}\r\nConnection: close\r\n\r\n{}",
+fn build_http_response(status_code: u16, headers: &[(String, String)], body: &str) -> String {
+    let mut rendered = format!(
+        "HTTP/1.1 {} {}\r\nContent-Type: application/json\r\nContent-Length: {}\r\nConnection: close\r\n",
         status_code,
-        if status_code == 200 { "OK" } else { "Unknown" },
+        status_reason(status_code),
         body.len(),
-        body
-    )
+    );
+    for (name, value) in headers {
+        rendered.push_str(name);
+        rendered.push_str(": ");
+        rendered.push_str(value);
+        rendered.push_str("\r\n");
+    }
+    rendered.push_str("\r\n");
+    rendered.push_str(body);
+    rendered
+}
+
+fn status_reason(status_code: u16) -> &'static str {
+    match status_code {
+        200 => "OK",
+        401 => "Unauthorized",
+        403 => "Forbidden",
+        429 => "Too Many Requests",
+        _ => "Unknown",
+    }
 }

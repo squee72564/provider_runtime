@@ -7,7 +7,10 @@ use crate::core::types::{
     AdapterContext, DiscoveryOptions, ModelInfo, ProviderCapabilities, ProviderId, ProviderRequest,
     ProviderResponse,
 };
-use crate::providers::openai_translate::{OpenAiDecodeEnvelope, OpenAiTranslator};
+use crate::providers::openai_translate::{
+    OpenAiDecodeEnvelope, OpenAiTranslator, decode_openai_models_list, format_openai_error_message,
+    parse_openai_error_envelope,
+};
 use crate::providers::translator_contract::ProviderTranslator;
 use crate::transport::http::{HttpTransport, RetryPolicy};
 
@@ -53,6 +56,10 @@ impl OpenAiAdapter {
         format!("{}/v1/responses", self.base_url)
     }
 
+    fn models_url(&self) -> String {
+        format!("{}/v1/models", self.base_url)
+    }
+
     fn resolve_api_key(&self, ctx: &AdapterContext) -> Option<String> {
         if let Some(key) = self.api_key.as_ref().cloned() {
             return Some(key);
@@ -79,6 +86,51 @@ impl OpenAiAdapter {
             ),
         }
     }
+
+    fn normalize_transport_error(
+        error: ProviderError,
+        requested_model: Option<&str>,
+    ) -> ProviderError {
+        match error {
+            ProviderError::Status {
+                status_code,
+                request_id,
+                message,
+                model,
+                ..
+            } => {
+                let model = requested_model.map(str::to_string).or(model);
+
+                if let Some(envelope) = parse_openai_error_envelope(&message) {
+                    let message = format_openai_error_message(&envelope);
+                    if status_code == 401 || status_code == 403 {
+                        return ProviderError::CredentialsRejected {
+                            provider: ProviderId::Openai,
+                            request_id,
+                            message,
+                        };
+                    }
+
+                    return ProviderError::Status {
+                        provider: ProviderId::Openai,
+                        model,
+                        status_code,
+                        request_id,
+                        message,
+                    };
+                }
+
+                ProviderError::Status {
+                    provider: ProviderId::Openai,
+                    model,
+                    status_code,
+                    request_id,
+                    message,
+                }
+            }
+            other => other,
+        }
+    }
 }
 
 #[async_trait]
@@ -92,7 +144,7 @@ impl ProviderAdapter for OpenAiAdapter {
             supports_tools: true,
             supports_structured_output: true,
             supports_thinking: false,
-            supports_remote_discovery: false,
+            supports_remote_discovery: true,
         }
     }
 
@@ -121,7 +173,8 @@ impl ProviderAdapter for OpenAiAdapter {
                 &encoded.body,
                 &request_ctx,
             )
-            .await?;
+            .await
+            .map_err(|error| Self::normalize_transport_error(error, Some(&req.model.model_id)))?;
 
         let envelope = OpenAiDecodeEnvelope {
             body: response_body,
@@ -141,9 +194,24 @@ impl ProviderAdapter for OpenAiAdapter {
     async fn discover_models(
         &self,
         _opts: &DiscoveryOptions,
-        _ctx: &AdapterContext,
+        ctx: &AdapterContext,
     ) -> Result<Vec<ModelInfo>, ProviderError> {
-        Ok(Vec::new())
+        let api_key = self
+            .resolve_api_key(ctx)
+            .ok_or_else(|| Self::missing_api_key_error(None))?;
+
+        let mut request_ctx = ctx.clone();
+        request_ctx
+            .metadata
+            .insert(TRANSPORT_AUTH_BEARER_TOKEN_KEY.to_string(), api_key);
+
+        let payload: Value = self
+            .transport
+            .get_json(ProviderId::Openai, None, &self.models_url(), &request_ctx)
+            .await
+            .map_err(|error| Self::normalize_transport_error(error, None))?;
+
+        decode_openai_models_list(&payload, &self.capabilities())
     }
 }
 

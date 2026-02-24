@@ -2,11 +2,14 @@ use std::collections::BTreeMap;
 
 use serde_json::json;
 
-use super::{OpenAiDecodeEnvelope, decode_openai_response, encode_openai_request};
+use super::{
+    OpenAiDecodeEnvelope, decode_openai_models_list, decode_openai_response, encode_openai_request,
+    format_openai_error_message, parse_openai_error_envelope,
+};
 use crate::core::error::ProviderError;
 use crate::core::types::{
-    ContentPart, FinishReason, Message, MessageRole, ModelRef, ProviderId, ProviderRequest,
-    ResponseFormat, ToolChoice, ToolDefinition,
+    ContentPart, FinishReason, Message, MessageRole, ModelRef, ProviderCapabilities, ProviderId,
+    ProviderRequest, ResponseFormat, ToolChoice, ToolDefinition,
 };
 
 fn base_request() -> ProviderRequest {
@@ -322,4 +325,213 @@ fn test_decode_structured_output_parse_failure_warns() {
             .iter()
             .any(|warning| warning.code == "structured_output_parse_failed")
     );
+}
+
+#[test]
+fn test_decode_cancelled_status_is_protocol_error() {
+    let payload = OpenAiDecodeEnvelope {
+        body: json!({
+            "status": "cancelled",
+            "model": "gpt-5-mini",
+            "output": [],
+            "usage": null
+        }),
+        requested_response_format: ResponseFormat::Text,
+    };
+
+    let err = decode_openai_response(&payload).expect_err("cancelled must be protocol error");
+    assert!(matches!(err, ProviderError::Protocol { .. }));
+    assert!(err.to_string().contains("status is cancelled"));
+}
+
+#[test]
+fn test_decode_unknown_output_item_type_is_protocol_error() {
+    let payload = OpenAiDecodeEnvelope {
+        body: json!({
+            "status": "completed",
+            "model": "gpt-5-mini",
+            "output": [
+                { "type": "web_search_call" }
+            ],
+            "usage": {
+                "input_tokens": 1,
+                "output_tokens": 1,
+                "total_tokens": 2
+            }
+        }),
+        requested_response_format: ResponseFormat::Text,
+    };
+
+    let err = decode_openai_response(&payload).expect_err("unknown types must fail");
+    assert!(matches!(err, ProviderError::Protocol { .. }));
+    assert!(err.to_string().contains("unsupported output item type"));
+}
+
+#[test]
+fn test_decode_tool_call_invalid_json_warns_and_preserves_raw_string() {
+    let payload = OpenAiDecodeEnvelope {
+        body: json!({
+            "status": "completed",
+            "model": "gpt-5-mini",
+            "output": [
+                {
+                    "type": "function_call",
+                    "call_id": "call_bad",
+                    "name": "lookup_weather",
+                    "arguments": "{not-valid-json"
+                }
+            ],
+            "usage": {
+                "input_tokens": 2,
+                "output_tokens": 3,
+                "total_tokens": 5
+            }
+        }),
+        requested_response_format: ResponseFormat::Text,
+    };
+
+    let decoded = decode_openai_response(&payload).expect("decode should succeed");
+    assert!(
+        decoded
+            .warnings
+            .iter()
+            .any(|warning| warning.code == "tool_arguments_invalid_json")
+    );
+    assert!(matches!(
+        &decoded.output.content[0],
+        ContentPart::ToolCall { tool_call }
+            if tool_call.id == "call_bad"
+                && tool_call.name == "lookup_weather"
+                && tool_call.arguments_json == json!("{not-valid-json")
+    ));
+}
+
+#[test]
+fn test_encode_json_object_requires_json_keyword() {
+    let mut req = base_request();
+    req.response_format = ResponseFormat::JsonObject;
+
+    let err = encode_openai_request(&req).expect_err("JSON keyword check should fail");
+    assert!(matches!(err, ProviderError::Protocol { .. }));
+    assert!(err.to_string().contains("requires the string 'JSON'"));
+}
+
+#[test]
+fn test_encode_metadata_bounds_validation() {
+    let mut req = base_request();
+    for index in 0..17 {
+        req.metadata
+            .insert(format!("k{index}"), format!("value-{index}"));
+    }
+
+    let err = encode_openai_request(&req).expect_err("metadata size should fail");
+    assert!(matches!(err, ProviderError::Protocol { .. }));
+    assert!(err.to_string().contains("at most 16 entries"));
+}
+
+#[test]
+fn test_encode_tool_result_role_validation() {
+    let mut req = base_request();
+    req.messages = vec![Message {
+        role: MessageRole::User,
+        content: vec![ContentPart::ToolResult {
+            tool_result: crate::core::types::ToolResult {
+                tool_call_id: "call_1".to_string(),
+                content: vec![ContentPart::Text {
+                    text: "result".to_string(),
+                }],
+            },
+        }],
+    }];
+
+    let err = encode_openai_request(&req).expect_err("tool_result role mismatch should fail");
+    assert!(matches!(err, ProviderError::Protocol { .. }));
+    assert!(
+        err.to_string()
+            .contains("tool_result content is only valid for tool role")
+    );
+}
+
+#[test]
+fn test_encode_tool_choice_specific_requires_declared_tool() {
+    let mut req = base_request();
+    req.tool_choice = ToolChoice::Specific {
+        name: "missing_tool".to_string(),
+    };
+
+    let err = encode_openai_request(&req).expect_err("unknown specific tool must fail");
+    assert!(matches!(err, ProviderError::Protocol { .. }));
+    assert!(err.to_string().contains("references unknown tool"));
+}
+
+#[test]
+fn test_parse_openai_error_envelope_and_format() {
+    let envelope = parse_openai_error_envelope(
+        r#"{
+            "error": {
+                "message": "Invalid API key",
+                "type": "invalid_request_error",
+                "param": null,
+                "code": "invalid_api_key"
+            }
+        }"#,
+    )
+    .expect("should parse");
+
+    assert_eq!(envelope.message, "Invalid API key");
+    assert_eq!(envelope.code.as_deref(), Some("invalid_api_key"));
+    assert_eq!(
+        envelope.error_type.as_deref(),
+        Some("invalid_request_error")
+    );
+    assert_eq!(envelope.param, None);
+
+    let message = format_openai_error_message(&envelope);
+    assert!(message.contains("openai error: Invalid API key"));
+    assert!(message.contains("code=invalid_api_key"));
+    assert!(message.contains("type=invalid_request_error"));
+}
+
+#[test]
+fn test_decode_openai_models_list_success() {
+    let capabilities = ProviderCapabilities {
+        supports_tools: true,
+        supports_structured_output: true,
+        supports_thinking: false,
+        supports_remote_discovery: true,
+    };
+
+    let models = decode_openai_models_list(
+        &json!({
+            "object": "list",
+            "data": [
+                {"id":"gpt-5-mini","object":"model"},
+                {"id":"gpt-4.1","object":"model"},
+                {"id":"gpt-5-mini","object":"model"}
+            ]
+        }),
+        &capabilities,
+    )
+    .expect("decode should succeed");
+
+    assert_eq!(models.len(), 2);
+    assert_eq!(models[0].model_id, "gpt-5-mini");
+    assert_eq!(models[1].model_id, "gpt-4.1");
+    assert!(models.iter().all(|model| model.supports_tools));
+    assert!(models.iter().all(|model| model.supports_structured_output));
+}
+
+#[test]
+fn test_decode_openai_models_list_rejects_missing_data_array() {
+    let capabilities = ProviderCapabilities {
+        supports_tools: true,
+        supports_structured_output: true,
+        supports_thinking: false,
+        supports_remote_discovery: true,
+    };
+
+    let err = decode_openai_models_list(&json!({"object":"list"}), &capabilities)
+        .expect_err("missing data must fail");
+    assert!(matches!(err, ProviderError::Protocol { .. }));
+    assert!(err.to_string().contains("missing data array"));
 }

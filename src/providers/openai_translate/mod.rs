@@ -2,8 +2,9 @@ use serde_json::{Map, Value, json};
 
 use crate::core::error::ProviderError;
 use crate::core::types::{
-    AssistantOutput, ContentPart, FinishReason, Message, MessageRole, ProviderId, ProviderRequest,
-    ProviderResponse, ResponseFormat, RuntimeWarning, ToolCall, ToolChoice, ToolDefinition, Usage,
+    AssistantOutput, ContentPart, FinishReason, Message, MessageRole, ModelInfo,
+    ProviderCapabilities, ProviderId, ProviderRequest, ProviderResponse, ResponseFormat,
+    RuntimeWarning, ToolCall, ToolChoice, ToolDefinition, Usage,
 };
 use crate::providers::translator_contract::ProviderTranslator;
 
@@ -19,7 +20,6 @@ const WARN_OPENAI_INCOMPLETE_MAX_OUTPUT_TOKENS: &str = "openai_incomplete_max_ou
 const WARN_OPENAI_INCOMPLETE_CONTENT_FILTER: &str = "openai_incomplete_content_filter";
 const WARN_OPENAI_INCOMPLETE_UNKNOWN_REASON: &str = "openai_incomplete_unknown_reason";
 const WARN_OPENAI_INCOMPLETE_MISSING_REASON: &str = "openai_incomplete_missing_reason";
-const WARN_OPENAI_CANCELLED: &str = "openai_cancelled";
 const WARN_EMPTY_OUTPUT: &str = "empty_output";
 
 #[derive(Debug, Clone, PartialEq)]
@@ -32,6 +32,14 @@ pub(crate) struct OpenAiEncodedRequest {
 pub(crate) struct OpenAiDecodeEnvelope {
     pub body: Value,
     pub requested_response_format: ResponseFormat,
+}
+
+#[derive(Debug, Clone, PartialEq, Eq)]
+pub(crate) struct OpenAiErrorEnvelope {
+    pub message: String,
+    pub code: Option<String>,
+    pub error_type: Option<String>,
+    pub param: Option<String>,
 }
 
 #[derive(Debug, Default, Clone, Copy)]
@@ -118,19 +126,8 @@ pub(crate) fn decode_openai_response(
         .as_object()
         .ok_or_else(|| protocol_error(None, "openai response payload must be a JSON object"))?;
 
-    if let Some(error_object) = root.get("error").and_then(Value::as_object) {
-        let code = error_object
-            .get("code")
-            .and_then(Value::as_str)
-            .unwrap_or("unknown");
-        let message = error_object
-            .get("message")
-            .and_then(Value::as_str)
-            .unwrap_or("openai response reported an error");
-        return Err(protocol_error(
-            None,
-            format!("openai error {code}: {message}"),
-        ));
+    if let Some(error) = parse_openai_error_value(root) {
+        return Err(protocol_error(None, format_openai_error_message(&error)));
     }
 
     let status = root
@@ -204,6 +201,92 @@ pub(crate) fn decode_openai_response(
         finish_reason,
         warnings,
     })
+}
+
+pub(crate) fn parse_openai_error_envelope(body: &str) -> Option<OpenAiErrorEnvelope> {
+    let payload = serde_json::from_str::<Value>(body).ok()?;
+    let root = payload.as_object()?;
+    parse_openai_error_value(root)
+}
+
+pub(crate) fn format_openai_error_message(envelope: &OpenAiErrorEnvelope) -> String {
+    let mut context = Vec::new();
+
+    if let Some(code) = &envelope.code {
+        context.push(format!("code={code}"));
+    }
+    if let Some(error_type) = &envelope.error_type {
+        context.push(format!("type={error_type}"));
+    }
+    if let Some(param) = &envelope.param {
+        context.push(format!("param={param}"));
+    }
+
+    if context.is_empty() {
+        format!("openai error: {}", envelope.message)
+    } else {
+        format!(
+            "openai error: {} [{}]",
+            envelope.message,
+            context.join(", ")
+        )
+    }
+}
+
+pub(crate) fn decode_openai_models_list(
+    payload: &Value,
+    capabilities: &ProviderCapabilities,
+) -> Result<Vec<ModelInfo>, ProviderError> {
+    let root = payload
+        .as_object()
+        .ok_or_else(|| protocol_error(None, "openai models payload must be a JSON object"))?;
+    let models = root
+        .get("data")
+        .and_then(Value::as_array)
+        .ok_or_else(|| protocol_error(None, "openai models payload missing data array"))?;
+
+    let mut discovered = Vec::new();
+    for (index, entry) in models.iter().enumerate() {
+        let model = entry.as_object().ok_or_else(|| {
+            protocol_error(
+                None,
+                format!("openai models payload contains non-object entry at index {index}"),
+            )
+        })?;
+
+        let model_id = model.get("id").and_then(Value::as_str).ok_or_else(|| {
+            protocol_error(
+                None,
+                format!("openai models payload entry missing id at index {index}"),
+            )
+        })?;
+        let model_id = model_id.trim();
+        if model_id.is_empty() {
+            return Err(protocol_error(
+                None,
+                format!("openai models payload entry has empty id at index {index}"),
+            ));
+        }
+
+        if discovered
+            .iter()
+            .any(|candidate: &ModelInfo| candidate.model_id == model_id)
+        {
+            continue;
+        }
+
+        discovered.push(ModelInfo {
+            provider: ProviderId::Openai,
+            model_id: model_id.to_string(),
+            display_name: None,
+            context_window: None,
+            max_output_tokens: None,
+            supports_tools: capabilities.supports_tools,
+            supports_structured_output: capabilities.supports_structured_output,
+        });
+    }
+
+    Ok(discovered)
 }
 
 fn validate_provider_hint(req: &ProviderRequest) -> Result<(), ProviderError> {
@@ -936,13 +1019,7 @@ fn map_finish_reason(
                 Ok(FinishReason::Other)
             }
         },
-        "cancelled" => {
-            warnings.push(RuntimeWarning {
-                code: WARN_OPENAI_CANCELLED.to_string(),
-                message: "openai response status is cancelled".to_string(),
-            });
-            Ok(FinishReason::Other)
-        }
+        "cancelled" => Err(protocol_error(None, "openai response status is cancelled")),
         "failed" => Err(protocol_error(None, "openai response status is failed")),
         "in_progress" | "queued" => Err(protocol_error(
             None,
@@ -952,6 +1029,35 @@ fn map_finish_reason(
             None,
             format!("unknown openai response status: {other}"),
         )),
+    }
+}
+
+fn parse_openai_error_value(root: &Map<String, Value>) -> Option<OpenAiErrorEnvelope> {
+    let error = root.get("error")?.as_object()?;
+    let message = value_to_string(error.get("message"))
+        .unwrap_or_else(|| "openai response reported an error".to_string());
+
+    Some(OpenAiErrorEnvelope {
+        message,
+        code: value_to_string(error.get("code")),
+        error_type: value_to_string(error.get("type")),
+        param: value_to_string(error.get("param")),
+    })
+}
+
+fn value_to_string(value: Option<&Value>) -> Option<String> {
+    match value {
+        Some(Value::String(text)) => {
+            let trimmed = text.trim();
+            if trimmed.is_empty() {
+                None
+            } else {
+                Some(trimmed.to_string())
+            }
+        }
+        Some(Value::Number(number)) => Some(number.to_string()),
+        Some(Value::Bool(flag)) => Some(flag.to_string()),
+        _ => None,
     }
 }
 

@@ -9,8 +9,8 @@ use std::time::Duration;
 use crate::core::error::ProviderError;
 use crate::core::traits::ProviderAdapter;
 use crate::core::types::{
-    AdapterContext, ContentPart, Message, MessageRole, ModelRef, ProviderId, ProviderRequest,
-    ResponseFormat, ToolChoice,
+    AdapterContext, ContentPart, DiscoveryOptions, Message, MessageRole, ModelRef, ProviderId,
+    ProviderRequest, ResponseFormat, ToolChoice,
 };
 use crate::providers::openai::OpenAiAdapter;
 use crate::transport::http::{HttpTransport, RetryPolicy};
@@ -154,7 +154,7 @@ fn test_openai_adapter_capabilities() {
     assert!(capabilities.supports_tools);
     assert!(capabilities.supports_structured_output);
     assert!(!capabilities.supports_thinking);
-    assert!(!capabilities.supports_remote_discovery);
+    assert!(capabilities.supports_remote_discovery);
 }
 
 #[tokio::test]
@@ -279,6 +279,270 @@ async fn test_openai_adapter_propagates_encode_warnings() {
     );
 }
 
+#[tokio::test]
+async fn test_openai_adapter_maps_auth_status_to_credentials_rejected() {
+    let mut server = MockServer::start(vec![MockResponse::new(
+        401,
+        vec![("x-request-id".to_string(), "req-auth-1".to_string())],
+        r#"{
+            "error": {
+                "message": "Invalid API key provided",
+                "type": "invalid_request_error",
+                "param": null,
+                "code": "invalid_api_key"
+            }
+        }"#,
+    )]);
+    let adapter = OpenAiAdapter::with_base_url(Some("test-key".to_string()), server.url())
+        .expect("create adapter");
+
+    let err = adapter
+        .run(&base_request(), &AdapterContext::default())
+        .await
+        .expect_err("auth failure should fail");
+
+    match err {
+        ProviderError::CredentialsRejected {
+            provider,
+            request_id,
+            message,
+        } => {
+            assert_eq!(provider, ProviderId::Openai);
+            assert_eq!(request_id, Some("req-auth-1".to_string()));
+            assert!(message.contains("openai error"));
+            assert!(message.contains("invalid_api_key"));
+        }
+        other => panic!("expected credentials rejected error, got {other:?}"),
+    }
+
+    server.shutdown();
+}
+
+#[tokio::test]
+async fn test_openai_adapter_maps_non_auth_status_to_normalized_status() {
+    let mut server = MockServer::start(vec![MockResponse::new(
+        429,
+        vec![("x-request-id".to_string(), "req-rate-1".to_string())],
+        r#"{
+            "error": {
+                "message": "Rate limit exceeded",
+                "type": "rate_limit_error",
+                "param": "model",
+                "code": "rate_limit_exceeded"
+            }
+        }"#,
+    )]);
+    let transport = HttpTransport::new(
+        1_000,
+        RetryPolicy {
+            max_attempts: 1,
+            initial_backoff_ms: 0,
+            max_backoff_ms: 0,
+            retryable_status_codes: vec![429],
+        },
+    )
+    .expect("create transport");
+    let adapter =
+        OpenAiAdapter::with_transport(Some("test-key".to_string()), server.url(), transport);
+
+    let err = adapter
+        .run(&base_request(), &AdapterContext::default())
+        .await
+        .expect_err("rate limit should fail");
+
+    match err {
+        ProviderError::Status {
+            provider,
+            model,
+            status_code,
+            request_id,
+            message,
+        } => {
+            assert_eq!(provider, ProviderId::Openai);
+            assert_eq!(model, Some("gpt-5-mini".to_string()));
+            assert_eq!(status_code, 429);
+            assert_eq!(request_id, Some("req-rate-1".to_string()));
+            assert!(message.contains("Rate limit exceeded"));
+            assert!(message.contains("type=rate_limit_error"));
+            assert!(message.contains("param=model"));
+        }
+        other => panic!("expected status error, got {other:?}"),
+    }
+
+    server.shutdown();
+}
+
+#[tokio::test]
+async fn test_openai_adapter_status_fallback_when_error_body_is_not_json() {
+    let mut server = MockServer::start(vec![MockResponse::new(
+        429,
+        vec![("x-request-id".to_string(), "req-raw-1".to_string())],
+        "not-json",
+    )]);
+    let transport = HttpTransport::new(
+        1_000,
+        RetryPolicy {
+            max_attempts: 1,
+            initial_backoff_ms: 0,
+            max_backoff_ms: 0,
+            retryable_status_codes: vec![429],
+        },
+    )
+    .expect("create transport");
+    let adapter =
+        OpenAiAdapter::with_transport(Some("test-key".to_string()), server.url(), transport);
+
+    let err = adapter
+        .run(&base_request(), &AdapterContext::default())
+        .await
+        .expect_err("status should fail");
+
+    match err {
+        ProviderError::Status {
+            status_code,
+            request_id,
+            message,
+            ..
+        } => {
+            assert_eq!(status_code, 429);
+            assert_eq!(request_id, Some("req-raw-1".to_string()));
+            assert_eq!(message, "not-json");
+        }
+        other => panic!("expected status error, got {other:?}"),
+    }
+
+    server.shutdown();
+}
+
+#[tokio::test]
+async fn test_openai_adapter_discover_models_success() {
+    let mut server = MockServer::start(vec![MockResponse::new(
+        200,
+        vec![],
+        r#"{
+            "object": "list",
+            "data": [
+                {"id": "gpt-5-mini", "object": "model"},
+                {"id": "gpt-4.1", "object": "model"},
+                {"id": "gpt-5-mini", "object": "model"}
+            ]
+        }"#,
+    )]);
+    let adapter = OpenAiAdapter::with_base_url(Some("test-key".to_string()), server.url())
+        .expect("create adapter");
+
+    let models = adapter
+        .discover_models(
+            &DiscoveryOptions {
+                remote: true,
+                include_provider: Vec::new(),
+                refresh_cache: true,
+            },
+            &AdapterContext::default(),
+        )
+        .await
+        .expect("discover should succeed");
+
+    assert_eq!(models.len(), 2);
+    assert_eq!(models[0].model_id, "gpt-5-mini");
+    assert_eq!(models[1].model_id, "gpt-4.1");
+    assert!(models.iter().all(|model| model.supports_tools));
+    assert!(models.iter().all(|model| model.supports_structured_output));
+
+    server.shutdown();
+}
+
+#[tokio::test]
+async fn test_openai_adapter_discover_models_missing_key_error() {
+    let adapter = OpenAiAdapter::with_base_url(None, "http://127.0.0.1:1").expect("create adapter");
+    let err = adapter
+        .discover_models(
+            &DiscoveryOptions {
+                remote: true,
+                include_provider: Vec::new(),
+                refresh_cache: true,
+            },
+            &AdapterContext::default(),
+        )
+        .await
+        .expect_err("discover should fail without key");
+
+    match err {
+        ProviderError::Protocol { message, .. } => {
+            assert!(message.contains("missing OpenAI API key"));
+        }
+        other => panic!("expected protocol error, got {other:?}"),
+    }
+}
+
+#[tokio::test]
+async fn test_openai_adapter_discover_models_auth_error_is_credentials_rejected() {
+    let mut server = MockServer::start(vec![MockResponse::new(
+        401,
+        vec![("x-request-id".to_string(), "req-auth-discover".to_string())],
+        r#"{
+            "error": {
+                "message": "Unauthorized",
+                "type": "invalid_request_error",
+                "param": null,
+                "code": "invalid_api_key"
+            }
+        }"#,
+    )]);
+    let adapter = OpenAiAdapter::with_base_url(Some("test-key".to_string()), server.url())
+        .expect("create adapter");
+
+    let err = adapter
+        .discover_models(
+            &DiscoveryOptions {
+                remote: true,
+                include_provider: Vec::new(),
+                refresh_cache: true,
+            },
+            &AdapterContext::default(),
+        )
+        .await
+        .expect_err("discover should fail");
+
+    match err {
+        ProviderError::CredentialsRejected {
+            request_id,
+            message,
+            ..
+        } => {
+            assert_eq!(request_id, Some("req-auth-discover".to_string()));
+            assert!(message.contains("invalid_api_key"));
+        }
+        other => panic!("expected credentials rejected error, got {other:?}"),
+    }
+
+    server.shutdown();
+}
+
+#[tokio::test]
+async fn test_openai_adapter_discover_models_invalid_payload_is_protocol_error() {
+    let mut server =
+        MockServer::start(vec![MockResponse::new(200, vec![], r#"{"object":"list"}"#)]);
+    let adapter = OpenAiAdapter::with_base_url(Some("test-key".to_string()), server.url())
+        .expect("create adapter");
+
+    let err = adapter
+        .discover_models(
+            &DiscoveryOptions {
+                remote: true,
+                include_provider: Vec::new(),
+                refresh_cache: true,
+            },
+            &AdapterContext::default(),
+        )
+        .await
+        .expect_err("discover should fail on invalid payload");
+
+    assert!(matches!(err, ProviderError::Protocol { .. }));
+    assert!(err.to_string().contains("missing data array"));
+    server.shutdown();
+}
+
 fn read_http_request(stream: &mut std::net::TcpStream) -> String {
     let mut request = Vec::new();
     let mut chunk = [0_u8; 1024];
@@ -339,6 +603,7 @@ fn status_reason(status_code: u16) -> &'static str {
     match status_code {
         200 => "OK",
         401 => "Unauthorized",
+        403 => "Forbidden",
         429 => "Too Many Requests",
         _ => "Unknown",
     }
