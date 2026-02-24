@@ -353,7 +353,7 @@ Depends On:
 - Stage 14
 - Stage 10
 
-## [ ] Stage 16 - Anthropic Translator
+## [x] Stage 16 - Anthropic Translator
 Goal:
 Implement canonical-to-Anthropic and Anthropic-to-canonical translation.
 
@@ -370,7 +370,7 @@ Depends On:
 - Stage 4
 - Stage 6
 
-## [ ] Stage 17 - Anthropic Adapter
+## [x] Stage 17 - Anthropic Adapter
 Goal:
 Implement Anthropic `ProviderAdapter` with capability declaration.
 
