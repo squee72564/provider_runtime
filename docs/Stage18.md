@@ -4,7 +4,7 @@ Goal:
 Implement canonical-to-OpenRouter and OpenRouter-to-canonical translation.
 
 Files:
-- [src/providers/openrouter_translate.rs](src/providers/openrouter_translate.rs)
+- [src/providers/openrouter/mod.rs](src/providers/openrouter/mod.rs)
 
 Public API Surface:
 - `fn encode_openrouter_request(...)`

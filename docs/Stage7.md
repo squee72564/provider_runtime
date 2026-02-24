@@ -4,7 +4,7 @@ Goal:
 Implement cost estimation from canonical usage + configurable pricing table.
 
 Files:
-- [src/pricing.rs](src/pricing.rs)
+- `src/pricing/mod.rs` (not in repo yet)
 
 Public API Surface:
 - `struct PricingTable`

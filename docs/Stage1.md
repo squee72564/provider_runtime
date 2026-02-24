@@ -1,7 +1,7 @@
 # Stage 1 - Freeze Canonical Domain Types
 
 Files:
-- [src/core/types.rs](src/core/types.rs)
+- [src/core/types/mod.rs](src/core/types/mod.rs)
 
 Goal:
 Define the canonical provider-agnostic domain schema and serde behavior used by all later stages.

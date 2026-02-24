@@ -62,7 +62,7 @@ Goal:
 Define provider-agnostic canonical request/response/message/tool/usage/cost/catalog types in one place.
 
 Files:
-- [src/core/types.rs](src/core/types.rs)
+- [src/core/types/mod.rs](src/core/types/mod.rs)
 
 Public API Surface:
 - `struct ProviderRequest`
@@ -99,7 +99,7 @@ Goal:
 Create deterministic error model for config, routing, transport, provider protocol, and cost warnings.
 
 Files:
-- [src/core/error.rs](src/core/error.rs)
+- [src/core/error/mod.rs](src/core/error/mod.rs)
 
 Public API Surface:
 - `enum RuntimeError`
@@ -117,7 +117,7 @@ Goal:
 Define stable adapter/auth contracts used by all providers and runtime.
 
 Files:
-- [src/core/traits.rs](src/core/traits.rs)
+- [src/core/traits/mod.rs](src/core/traits/mod.rs)
 
 Public API Surface:
 - `trait ProviderAdapter`
@@ -153,7 +153,7 @@ Goal:
 Implement shared async HTTP utility used by adapters.
 
 Files:
-- [src/transport/http.rs](src/transport/http.rs)
+- [src/transport/http/mod.rs](src/transport/http/mod.rs)
 
 Public API Surface:
 - `struct HttpTransport`
@@ -186,7 +186,7 @@ Goal:
 Implement cost estimation from canonical usage + configurable pricing table.
 
 Files:
-- [src/pricing.rs](src/pricing.rs)
+- `src/pricing/mod.rs` (not in repo yet)
 
 Public API Surface:
 - `struct PricingTable`
@@ -204,7 +204,7 @@ Goal:
 Implement model catalog merge/lookup/export behavior with static-first policy.
 
 Files:
-- [src/catalog.rs](src/catalog.rs)
+- `src/catalog/mod.rs` (not in repo yet)
 
 Public API Surface:
 - `fn merge_static_and_remote_catalog(...) -> ModelCatalog`
@@ -222,7 +222,7 @@ Goal:
 Implement cross-provider handoff conversion rules.
 
 Files:
-- [src/handoff.rs](src/handoff.rs)
+- `src/handoff/mod.rs` (not in repo yet)
 
 Public API Surface:
 - `fn normalize_handoff_messages(...) -> Vec<Message>`
@@ -237,7 +237,7 @@ Goal:
 Implement provider registration and model-to-provider routing.
 
 Files:
-- [src/registry/registry.rs](src/registry/registry.rs)
+- [src/registry/registry/mod.rs](src/registry/registry/mod.rs)
 
 Public API Surface:
 - `struct ProviderRegistry`
@@ -272,7 +272,7 @@ Goal:
 Implement stateless runtime orchestration API exactly as specified.
 
 Files:
-- [src/runtime.rs](src/runtime.rs)
+- `src/runtime/mod.rs` (not in repo yet)
 
 Public API Surface:
 - `struct ProviderRuntime`
@@ -317,7 +317,7 @@ Goal:
 Implement canonical-to-OpenAI and OpenAI-to-canonical translation.
 
 Files:
-- [src/providers/openai_translate.rs](src/providers/openai_translate.rs)
+- [src/providers/openai/mod.rs](src/providers/openai/mod.rs)
 
 Public API Surface:
 - `fn encode_openai_request(...)`
@@ -334,7 +334,7 @@ Goal:
 Implement OpenAI `ProviderAdapter` with capability declaration.
 
 Files:
-- [src/providers/openai.rs](src/providers/openai.rs)
+- [src/providers/openai/mod.rs](src/providers/openai/mod.rs)
 
 Public API Surface:
 - `struct OpenAiAdapter`
@@ -351,7 +351,7 @@ Goal:
 Implement canonical-to-Anthropic and Anthropic-to-canonical translation.
 
 Files:
-- [src/providers/anthropic_translate.rs](src/providers/anthropic_translate.rs)
+- [src/providers/anthropic/mod.rs](src/providers/anthropic/mod.rs)
 
 Public API Surface:
 - `fn encode_anthropic_request(...)`
@@ -368,7 +368,7 @@ Goal:
 Implement Anthropic `ProviderAdapter` with capability declaration.
 
 Files:
-- [src/providers/anthropic.rs](src/providers/anthropic.rs)
+- [src/providers/anthropic/mod.rs](src/providers/anthropic/mod.rs)
 
 Public API Surface:
 - `struct AnthropicAdapter`
@@ -385,7 +385,7 @@ Goal:
 Implement canonical-to-OpenRouter and OpenRouter-to-canonical translation.
 
 Files:
-- [src/providers/openrouter_translate.rs](src/providers/openrouter_translate.rs)
+- [src/providers/openrouter/mod.rs](src/providers/openrouter/mod.rs)
 
 Public API Surface:
 - `fn encode_openrouter_request(...)`
@@ -402,7 +402,7 @@ Goal:
 Implement OpenRouter `ProviderAdapter` with capability declaration.
 
 Files:
-- [src/providers/openrouter.rs](src/providers/openrouter.rs)
+- [src/providers/openrouter/mod.rs](src/providers/openrouter/mod.rs)
 
 Public API Surface:
 - `struct OpenRouterAdapter`
@@ -441,7 +441,7 @@ Goal:
 Add canonical↔OpenAI golden fixture contract tests.
 
 Files:
-- [tests/contract_openai.rs](tests/contract_openai.rs)
+- `tests/contract_openai.rs` (not in repo yet)
 
 Public API Surface:
 - None
@@ -456,7 +456,7 @@ Goal:
 Add canonical↔Anthropic golden fixture contract tests.
 
 Files:
-- [tests/contract_anthropic.rs](tests/contract_anthropic.rs)
+- `tests/contract_anthropic.rs` (not in repo yet)
 
 Public API Surface:
 - None
@@ -471,7 +471,7 @@ Goal:
 Add canonical↔OpenRouter golden fixture contract tests.
 
 Files:
-- [tests/contract_openrouter.rs](tests/contract_openrouter.rs)
+- `tests/contract_openrouter.rs` (not in repo yet)
 
 Public API Surface:
 - None
@@ -486,7 +486,7 @@ Goal:
 Validate registry+runtime+adapters end-to-end with mocked provider endpoints.
 
 Files:
-- [tests/integration_runtime_mock_http.rs](tests/integration_runtime_mock_http.rs)
+- `tests/integration_runtime_mock_http.rs` (not in repo yet)
 
 Public API Surface:
 - None
@@ -503,7 +503,7 @@ Goal:
 Final acceptance suite for v0 invariants across providers and handoffs.
 
 Files:
-- [tests/acceptance_multi_provider_run.rs](tests/acceptance_multi_provider_run.rs)
+- `tests/acceptance_multi_provider_run.rs` (not in repo yet)
 
 Public API Surface:
 - None
@@ -526,17 +526,17 @@ Transport (`transport/*`):
 - Forbidden leak: no canonical translation or routing decisions.
 - Freeze point: end of Stage 6 for adapter consumption.
 
-Pricing (`pricing.rs`):
+Pricing (`pricing/*`):
 - Black box: deterministic cost math from usage + table.
 - Forbidden leak: no provider request/response parsing, no routing.
 - Freeze point: end of Stage 7 output contract.
 
-Catalog (`catalog.rs`):
+Catalog (`catalog/*`):
 - Black box: model catalog merge/resolve/export policy.
 - Forbidden leak: no HTTP calls and no adapter internals.
 - Freeze point: end of Stage 8 behavior contract.
 
-Handoff (`handoff.rs`):
+Handoff (`handoff/*`):
 - Black box: pure message transformation.
 - Forbidden leak: no transport/adapters/routing coupling.
 - Freeze point: end of Stage 9 deterministic transformation contract.
@@ -551,7 +551,7 @@ Providers (`providers/*`):
 - Forbidden leak: no registry internals, no pricing internals, no session logic.
 - Freeze point: each adapter API at its stage completion.
 
-Runtime (`runtime.rs`):
+Runtime (`runtime/*`):
 - Black box: stateless orchestration around registry/adapters/pricing/catalog.
 - Forbidden leak: no streaming, no loops, no persistent conversation state.
 - Freeze point: end of Stage 13 public methods.
@@ -559,19 +559,19 @@ Runtime (`runtime.rs`):
 ## 5. Adapter Implementation Strategy
 
 OpenAI stage group:
-- Translator file: [src/providers/openai_translate.rs](src/providers/openai_translate.rs) (Stage 14)
-- Adapter struct + capabilities: [src/providers/openai.rs](src/providers/openai.rs) (Stage 15)
-- Golden fixtures: [tests/contract_openai.rs](tests/contract_openai.rs) (Stage 21)
+- Translator file: [src/providers/openai/mod.rs](src/providers/openai/mod.rs) (Stage 14)
+- Adapter struct + capabilities: [src/providers/openai/mod.rs](src/providers/openai/mod.rs) (Stage 15)
+- Golden fixtures: `tests/contract_openai.rs` (not in repo yet) (Stage 21)
 
 Anthropic stage group:
-- Translator file: [src/providers/anthropic_translate.rs](src/providers/anthropic_translate.rs) (Stage 16)
-- Adapter struct + capabilities: [src/providers/anthropic.rs](src/providers/anthropic.rs) (Stage 17)
-- Golden fixtures: [tests/contract_anthropic.rs](tests/contract_anthropic.rs) (Stage 22)
+- Translator file: [src/providers/anthropic/mod.rs](src/providers/anthropic/mod.rs) (Stage 16)
+- Adapter struct + capabilities: [src/providers/anthropic/mod.rs](src/providers/anthropic/mod.rs) (Stage 17)
+- Golden fixtures: `tests/contract_anthropic.rs` (not in repo yet) (Stage 22)
 
 OpenRouter stage group:
-- Translator file: [src/providers/openrouter_translate.rs](src/providers/openrouter_translate.rs) (Stage 18)
-- Adapter struct + capabilities: [src/providers/openrouter.rs](src/providers/openrouter.rs) (Stage 19)
-- Golden fixtures: [tests/contract_openrouter.rs](tests/contract_openrouter.rs) (Stage 23)
+- Translator file: [src/providers/openrouter/mod.rs](src/providers/openrouter/mod.rs) (Stage 18)
+- Adapter struct + capabilities: [src/providers/openrouter/mod.rs](src/providers/openrouter/mod.rs) (Stage 19)
+- Golden fixtures: `tests/contract_openrouter.rs` (not in repo yet) (Stage 23)
 
 Hard rules for all adapters:
 - Depend only on canonical types/contracts and `AdapterContext` + transport.
@@ -600,7 +600,7 @@ Phase 4: Acceptance tests (multi-provider run)
 ## 7. Freeze Points
 
 Freeze Point A (end of Stage 4):
-- Canonical types in `core/types.rs` are frozen.
+- Canonical types in `core/types/mod.rs` are frozen.
 - `RuntimeError`/`ProviderError` taxonomy is frozen.
 - Later stages may not change field names or semantic meaning.
 

@@ -4,7 +4,7 @@ Goal:
 Implement OpenRouter `ProviderAdapter` with capability declaration.
 
 Files:
-- [src/providers/openrouter.rs](src/providers/openrouter.rs)
+- [src/providers/openrouter/mod.rs](src/providers/openrouter/mod.rs)
 
 Public API Surface:
 - `struct OpenRouterAdapter`

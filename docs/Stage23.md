@@ -4,7 +4,7 @@ Goal:
 Add canonical↔OpenRouter golden fixture contract tests.
 
 Files:
-- [tests/contract_openrouter.rs](tests/contract_openrouter.rs)
+- `tests/contract_openrouter.rs` (not in repo yet)
 
 Public API Surface:
 - None

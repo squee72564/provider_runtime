@@ -4,7 +4,7 @@ Goal:
 Implement canonical-to-OpenAI and OpenAI-to-canonical translation.
 
 Files:
-- [src/providers/openai_translate.rs](src/providers/openai_translate.rs)
+- [src/providers/openai/mod.rs](src/providers/openai/mod.rs)
 
 Public API Surface:
 - `fn encode_openai_request(...)`

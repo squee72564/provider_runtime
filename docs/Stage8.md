@@ -4,7 +4,7 @@ Goal:
 Implement model catalog merge/lookup/export behavior with static-first policy.
 
 Files:
-- [src/catalog.rs](src/catalog.rs)
+- `src/catalog/mod.rs` (not in repo yet)
 
 Public API Surface:
 - `fn merge_static_and_remote_catalog(...) -> ModelCatalog`

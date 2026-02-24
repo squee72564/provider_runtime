@@ -4,7 +4,7 @@ Goal:
 Add canonical↔OpenAI golden fixture contract tests.
 
 Files:
-- [tests/contract_openai.rs](tests/contract_openai.rs)
+- `tests/contract_openai.rs` (not in repo yet)
 
 Public API Surface:
 - None

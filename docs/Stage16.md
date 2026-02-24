@@ -4,7 +4,7 @@ Goal:
 Implement canonical-to-Anthropic and Anthropic-to-canonical translation.
 
 Files:
-- [src/providers/anthropic_translate.rs](src/providers/anthropic_translate.rs)
+- [src/providers/anthropic/mod.rs](src/providers/anthropic/mod.rs)
 
 Public API Surface:
 - `fn encode_anthropic_request(...)`

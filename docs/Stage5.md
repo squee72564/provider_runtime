@@ -4,7 +4,7 @@ Goal:
 Implement shared async HTTP utility used by adapters.
 
 Files:
-- [src/transport/http.rs](src/transport/http.rs)
+- [src/transport/http/mod.rs](src/transport/http/mod.rs)
 
 Public API Surface:
 - `struct HttpTransport`

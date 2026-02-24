@@ -4,7 +4,7 @@ Goal:
 Implement cross-provider handoff conversion rules.
 
 Files:
-- [src/handoff.rs](src/handoff.rs)
+- `src/handoff/mod.rs` (not in repo yet)
 
 Public API Surface:
 - `fn normalize_handoff_messages(...) -> Vec<Message>`

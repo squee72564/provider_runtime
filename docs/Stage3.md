@@ -4,7 +4,7 @@ Goal:
 Define stable adapter/auth contracts used by all providers and runtime.
 
 Files:
-- [src/core/traits.rs](src/core/traits.rs)
+- [src/core/traits/mod.rs](src/core/traits/mod.rs)
 
 Public API Surface:
 - `trait ProviderAdapter`

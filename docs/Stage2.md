@@ -4,7 +4,7 @@ Goal:
 Create deterministic error model for config, routing, transport, provider protocol, and cost warnings.
 
 Files:
-- [src/core/error.rs](src/core/error.rs)
+- [src/core/error/mod.rs](src/core/error/mod.rs)
 
 Public API Surface:
 - `enum RuntimeError`

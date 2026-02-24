@@ -4,7 +4,7 @@ Goal:
 Implement stateless runtime orchestration API exactly as specified.
 
 Files:
-- [src/runtime.rs](src/runtime.rs)
+- `src/runtime/mod.rs` (not in repo yet)
 
 Public API Surface:
 - `struct ProviderRuntime`

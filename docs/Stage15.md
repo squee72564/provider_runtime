@@ -4,7 +4,7 @@ Goal:
 Implement OpenAI `ProviderAdapter` with capability declaration.
 
 Files:
-- [src/providers/openai.rs](src/providers/openai.rs)
+- [src/providers/openai/mod.rs](src/providers/openai/mod.rs)
 
 Public API Surface:
 - `struct OpenAiAdapter`

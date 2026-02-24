@@ -4,7 +4,7 @@ Goal:
 Final acceptance suite for v0 invariants across providers and handoffs.
 
 Files:
-- [tests/acceptance_multi_provider_run.rs](tests/acceptance_multi_provider_run.rs)
+- `tests/acceptance_multi_provider_run.rs` (not in repo yet)
 
 Public API Surface:
 - None

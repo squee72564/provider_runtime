@@ -4,7 +4,7 @@ Goal:
 Implement provider registration and model-to-provider routing.
 
 Files:
-- [src/registry/registry.rs](src/registry/registry.rs)
+- [src/registry/registry/mod.rs](src/registry/registry/mod.rs)
 
 Public API Surface:
 - `struct ProviderRegistry`

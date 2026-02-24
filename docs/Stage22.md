@@ -4,7 +4,7 @@ Goal:
 Add canonical↔Anthropic golden fixture contract tests.
 
 Files:
-- [tests/contract_anthropic.rs](tests/contract_anthropic.rs)
+- `tests/contract_anthropic.rs` (not in repo yet)
 
 Public API Surface:
 - None

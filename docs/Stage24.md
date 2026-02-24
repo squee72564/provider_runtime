@@ -4,7 +4,7 @@ Goal:
 Validate registry+runtime+adapters end-to-end with mocked provider endpoints.
 
 Files:
-- [tests/integration_runtime_mock_http.rs](tests/integration_runtime_mock_http.rs)
+- `tests/integration_runtime_mock_http.rs` (not in repo yet)
 
 Public API Surface:
 - None

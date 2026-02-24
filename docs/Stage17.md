@@ -4,7 +4,7 @@ Goal:
 Implement Anthropic `ProviderAdapter` with capability declaration.
 
 Files:
-- [src/providers/anthropic.rs](src/providers/anthropic.rs)
+- [src/providers/anthropic/mod.rs](src/providers/anthropic/mod.rs)
 
 Public API Surface:
 - `struct AnthropicAdapter`
