@@ -7,7 +7,7 @@
   - Each provider adaptor is a translator
   - We translate our universal request into providers native format, send over HTTP, then translate providers response back into universal format
   - Example:
-    ```mmd
+    ```mermaid
     flowchart TD
         subgraph Runtime
             A[Canonical Request]
