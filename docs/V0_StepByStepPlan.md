@@ -129,7 +129,7 @@ Depends On:
 - Stage 1
 - Stage 2
 
-## [ ] Stage 4 - Core Module Exports and Freeze Gate
+## [x] Stage 4 - Core Module Exports and Freeze Gate
 Goal:
 Export frozen core interfaces and lock core boundary.
 
