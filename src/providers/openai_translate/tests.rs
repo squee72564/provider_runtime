@@ -111,6 +111,7 @@ fn test_encode_openai_translator_category_contract() {
     let encoded = encode_openai_request(&req).expect("encode should succeed");
 
     assert_eq!(encoded.body.pointer("/model"), Some(&json!("gpt-5-mini")));
+    assert_eq!(encoded.body.pointer("/store"), Some(&json!(false)));
     assert_eq!(
         encoded.body.pointer("/text/format/type"),
         Some(&json!("json_schema"))
@@ -534,4 +535,11 @@ fn test_decode_openai_models_list_rejects_missing_data_array() {
         .expect_err("missing data must fail");
     assert!(matches!(err, ProviderError::Protocol { .. }));
     assert!(err.to_string().contains("missing data array"));
+}
+
+#[test]
+fn test_encode_openai_request_always_sets_store_false() {
+    let req = base_request();
+    let encoded = encode_openai_request(&req).expect("encode should succeed");
+    assert_eq!(encoded.body.pointer("/store"), Some(&json!(false)));
 }

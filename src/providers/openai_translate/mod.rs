@@ -92,6 +92,7 @@ pub(crate) fn encode_openai_request(
         "model".to_string(),
         Value::String(req.model.model_id.clone()),
     );
+    body.insert("store".to_string(), Value::Bool(false));
     body.insert("input".to_string(), Value::Array(input));
     body.insert("text".to_string(), json!({ "format": text_format }));
     if !tools.is_empty() {

@@ -210,6 +210,7 @@ async fn test_openai_encode_fixture_contract() {
     let body = &bodies[0];
 
     assert_eq!(body.pointer("/model"), Some(&json!("gpt-5-mini")));
+    assert_eq!(body.pointer("/store"), Some(&json!(false)));
     assert_eq!(
         body.pointer("/text/format/type"),
         Some(&json!("json_object"))
