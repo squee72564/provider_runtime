@@ -11,8 +11,9 @@
 
   ## Source of Truth
   Before making changes, read:
-  1. `docs/PLAN.md` (master plan + current stage ordering)
-  2. `docs/Stage*.md` (stage-specific implementation contracts)
+  1. `docs/V0_Plan.md` (master plan)
+  2. `docs/V0_StepByStepPlan.md` (current stage specific plans and ordering)
+  3. `docs/Stage*.md` (stage-specific implementation contracts)
 
   If there is a conflict, treat `docs/PLAN.md` as canonical unless explicitly updated.
 
