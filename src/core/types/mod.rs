@@ -114,7 +114,7 @@ pub enum ToolChoice {
     None,
     Auto,
     Required,
-    Specific,
+    Specific { name: String },
 }
 
 impl Default for ToolChoice {

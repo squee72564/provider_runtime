@@ -110,3 +110,18 @@ fn test_content_part_invariants() {
         .expect_err("unknown fields should fail for Message");
     assert!(err.to_string().contains("unknown field"));
 }
+
+#[test]
+fn test_tool_choice_specific_roundtrip() {
+    let choice = ToolChoice::Specific {
+        name: "lookup_weather".to_string(),
+    };
+
+    let value = serde_json::to_value(&choice).expect("tool choice should serialize");
+    assert_eq!(value.get("type"), Some(&json!("specific")));
+    assert_eq!(value.get("name"), Some(&json!("lookup_weather")));
+
+    let decoded: ToolChoice =
+        serde_json::from_value(value).expect("tool choice should deserialize");
+    assert_eq!(decoded, choice);
+}
