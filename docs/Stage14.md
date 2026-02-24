@@ -22,6 +22,7 @@ Internal Responsibilities:
   - tools + tool choice (`none`, `auto`, `required`, `specific{name}`)
   - response formats (`text`, `json_object`, `json_schema`)
   - optional controls (`temperature`, `top_p`, `max_output_tokens`, `metadata`)
+  - force `store: false` on OpenAI Responses API requests to avoid provider-side persisted context in v0
   - deterministic unsupported handling for canonical `stop`
 - Decode coverage:
   - assistant text output

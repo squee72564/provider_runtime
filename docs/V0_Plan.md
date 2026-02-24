@@ -44,6 +44,7 @@
   - ProviderRuntime::export_catalog_json(&self, catalog: &ModelCatalog) -> Result<String, RuntimeError> (optional helper)
 
   No session state in runtime. Caller/harness owns conversation state and loop control.
+  Where provider APIs support server-side response persistence, adapters should disable it by default in v0.
 
   ### 2) Canonical request/response types
 
