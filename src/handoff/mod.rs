@@ -48,15 +48,15 @@ fn provider_family(provider: &ProviderId) -> ApiFamily {
     match provider {
         ProviderId::Openai | ProviderId::Openrouter => ApiFamily::OpenAiCompatible,
         ProviderId::Anthropic => ApiFamily::Anthropic,
-        ProviderId::Custom => ApiFamily::Custom,
+        ProviderId::Other(family) => ApiFamily::Other(family.clone()),
     }
 }
 
-#[derive(Debug, Clone, Copy, PartialEq, Eq)]
+#[derive(Debug, Clone, PartialEq, Eq)]
 enum ApiFamily {
     OpenAiCompatible,
     Anthropic,
-    Custom,
+    Other(String),
 }
 
 #[cfg(test)]

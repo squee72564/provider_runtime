@@ -21,7 +21,7 @@ fn test_internal_translator_contract_module_is_accessible_within_crate() {
         ) -> Result<crate::core::types::ProviderResponse, crate::core::error::ProviderError>
         {
             Err(crate::core::error::ProviderError::Protocol {
-                provider: crate::core::types::ProviderId::Custom,
+                provider: crate::core::types::ProviderId::Other("Other".to_string()),
                 model: None,
                 request_id: None,
                 message: "not implemented".to_string(),

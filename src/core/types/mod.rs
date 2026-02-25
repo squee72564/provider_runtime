@@ -245,7 +245,7 @@ pub enum ProviderId {
     Openai,
     Anthropic,
     Openrouter,
-    Custom,
+    Other(String),
 }
 
 #[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]

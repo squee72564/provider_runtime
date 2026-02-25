@@ -189,7 +189,7 @@ fn provider_order(provider: &ProviderId) -> u8 {
         ProviderId::Openai => 0,
         ProviderId::Anthropic => 1,
         ProviderId::Openrouter => 2,
-        ProviderId::Custom => 3,
+        ProviderId::Other(_) => 3,
     }
 }
 
