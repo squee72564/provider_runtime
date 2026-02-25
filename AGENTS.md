@@ -31,14 +31,16 @@
   cargo fmt --all --check
   cargo clippy --all-targets --all-features -- -D warnings
   cargo test --all-targets --all-features
+  ```
 
   (If needed to apply formatting:)
 
+  ```bash
   cargo fmt --all
+  ```
 
   ## PR / Change Expectations
 
-  - Reference the stage being implemented (e.g., Stage 12).
   - Keep behavior deterministic.
   - Add/adjust tests required by that stage.
-  - Preserve architectural invariants and non-goals above.
+  - Preserve architectural invariants
