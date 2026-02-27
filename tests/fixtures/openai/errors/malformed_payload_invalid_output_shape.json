@@ -1,0 +1,14 @@
+{
+  "status": "completed",
+  "model": "gpt-5-mini",
+  "output": [
+    {
+      "type": "unknown_item_type"
+    }
+  ],
+  "usage": {
+    "input_tokens": 1,
+    "output_tokens": 1,
+    "total_tokens": 2
+  }
+}

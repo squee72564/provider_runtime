@@ -1,0 +1,17 @@
+{
+  "model": "gpt-5-mini",
+  "output": [
+    {
+      "type": "message",
+      "role": "assistant",
+      "content": [
+        { "type": "output_text", "text": "missing status" }
+      ]
+    }
+  ],
+  "usage": {
+    "input_tokens": 1,
+    "output_tokens": 1,
+    "total_tokens": 2
+  }
+}

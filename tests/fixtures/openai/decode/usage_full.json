@@ -1,0 +1,21 @@
+{
+  "status": "completed",
+  "model": "gpt-5-mini",
+  "output": [
+    {
+      "type": "message",
+      "role": "assistant",
+      "content": [
+        { "type": "output_text", "text": "usage full" }
+      ]
+    }
+  ],
+  "usage": {
+    "input_tokens": 11,
+    "output_tokens": 9,
+    "total_tokens": 20,
+    "input_tokens_details": {
+      "cached_tokens": 3
+    }
+  }
+}

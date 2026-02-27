@@ -1,0 +1,17 @@
+{
+  "status": "incomplete",
+  "incomplete_details": {
+    "reason": "content_filter"
+  },
+  "model": "gpt-5-mini",
+  "output": [
+    {
+      "type": "message",
+      "role": "assistant",
+      "content": [
+        { "type": "refusal", "text": "blocked" }
+      ]
+    }
+  ],
+  "usage": null
+}

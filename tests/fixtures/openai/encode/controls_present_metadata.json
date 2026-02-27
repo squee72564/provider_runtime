@@ -1,0 +1,21 @@
+{
+  "model": {
+    "provider_hint": { "type": "openai" },
+    "model_id": "gpt-5-mini"
+  },
+  "messages": [
+    {
+      "role": { "type": "user" },
+      "content": [
+        { "type": "text", "text": "Include metadata." }
+      ]
+    }
+  ],
+  "tools": [],
+  "tool_choice": { "type": "auto" },
+  "response_format": { "type": "text" },
+  "metadata": {
+    "trace_id": "fixture-1",
+    "tenant": "acme"
+  }
+}

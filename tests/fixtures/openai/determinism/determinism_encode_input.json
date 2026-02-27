@@ -1,0 +1,41 @@
+{
+  "model": {
+    "provider_hint": { "type": "openai" },
+    "model_id": "gpt-5-mini"
+  },
+  "messages": [
+    {
+      "role": { "type": "system" },
+      "content": [
+        { "type": "text", "text": "Deterministic output" }
+      ]
+    },
+    {
+      "role": { "type": "user" },
+      "content": [
+        { "type": "text", "text": "Return JSON" }
+      ]
+    }
+  ],
+  "tools": [
+    {
+      "name": "lookup_weather",
+      "description": "Lookup weather",
+      "parameters_schema": {
+        "type": "object",
+        "properties": {
+          "city": { "type": "string" }
+        },
+        "required": ["city"],
+        "additionalProperties": false
+      }
+    }
+  ],
+  "tool_choice": { "type": "specific", "name": "lookup_weather" },
+  "response_format": { "type": "json_object" },
+  "temperature": 0.3,
+  "max_output_tokens": 64,
+  "metadata": {
+    "trace_id": "determinism-1"
+  }
+}

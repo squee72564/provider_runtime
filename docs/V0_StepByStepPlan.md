@@ -399,7 +399,7 @@ Depends On:
 - Stage 16
 - Stage 10
 
-## [ ] Stage 18 - OpenRouter Translator
+## [x] Stage 18 - OpenRouter Translator
 Goal:
 Implement canonical-to-OpenRouter and OpenRouter-to-canonical translation.
 
@@ -416,7 +416,7 @@ Depends On:
 - Stage 4
 - Stage 6
 
-## [ ] Stage 19 - OpenRouter Adapter
+## [x] Stage 19 - OpenRouter Adapter
 Goal:
 Implement OpenRouter `ProviderAdapter` with capability declaration.
 
@@ -433,7 +433,7 @@ Depends On:
 - Stage 18
 - Stage 10
 
-## [ ] Stage 20 - Providers Module Wiring
+## [x] Stage 20 - Providers Module Wiring
 Goal:
 Expose provider adapters/translators without leaking internals.
 
@@ -455,7 +455,7 @@ Depends On:
 - Stage 17
 - Stage 19
 
-## [ ] Stage 21 - OpenAI Contract Fixtures
+## [x] Stage 21 - OpenAI Contract Fixtures
 Goal:
 Add canonical↔OpenAI golden fixture contract tests.
 

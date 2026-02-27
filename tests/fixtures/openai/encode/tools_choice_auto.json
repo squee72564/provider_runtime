@@ -1,0 +1,32 @@
+{
+  "model": {
+    "provider_hint": { "type": "openai" },
+    "model_id": "gpt-5-mini"
+  },
+  "messages": [
+    {
+      "role": { "type": "user" },
+      "content": [
+        { "type": "text", "text": "Use tools if useful." }
+      ]
+    }
+  ],
+  "tools": [
+    {
+      "name": "lookup_weather",
+      "description": "Lookup weather",
+      "parameters_schema": {
+        "type": "object",
+        "properties": {
+          "city": { "type": "string" }
+        },
+        "required": ["city"],
+        "additionalProperties": false
+      }
+    }
+  ],
+  "tool_choice": { "type": "auto" },
+  "response_format": { "type": "text" },
+  "stop": [],
+  "metadata": {}
+}

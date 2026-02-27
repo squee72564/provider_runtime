@@ -1,0 +1,21 @@
+{
+  "status": "incomplete",
+  "incomplete_details": {
+    "reason": "max_output_tokens"
+  },
+  "model": "gpt-5-mini",
+  "output": [
+    {
+      "type": "message",
+      "role": "assistant",
+      "content": [
+        { "type": "output_text", "text": "truncated" }
+      ]
+    }
+  ],
+  "usage": {
+    "input_tokens": 3,
+    "output_tokens": 3,
+    "total_tokens": 6
+  }
+}

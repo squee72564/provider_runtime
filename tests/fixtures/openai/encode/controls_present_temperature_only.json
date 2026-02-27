@@ -1,0 +1,18 @@
+{
+  "model": {
+    "provider_hint": { "type": "openai" },
+    "model_id": "gpt-5-mini"
+  },
+  "messages": [
+    {
+      "role": { "type": "user" },
+      "content": [
+        { "type": "text", "text": "Temperature set." }
+      ]
+    }
+  ],
+  "tools": [],
+  "tool_choice": { "type": "auto" },
+  "response_format": { "type": "text" },
+  "temperature": 0.2
+}

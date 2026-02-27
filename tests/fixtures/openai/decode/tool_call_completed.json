@@ -1,0 +1,17 @@
+{
+  "status": "completed",
+  "model": "gpt-5-mini",
+  "output": [
+    {
+      "type": "function_call",
+      "call_id": "call_weather_1",
+      "name": "lookup_weather",
+      "arguments": "{\"city\":\"SF\"}"
+    }
+  ],
+  "usage": {
+    "input_tokens": 8,
+    "output_tokens": 4,
+    "total_tokens": 12
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "status": "completed",
+  "model": "gpt-5-mini",
+  "output": [
+    {
+      "type": "message",
+      "role": "assistant",
+      "content": [
+        { "type": "output_text", "text": "usage absent" }
+      ]
+    }
+  ],
+  "usage": null
+}
