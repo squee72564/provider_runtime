@@ -4,7 +4,10 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "capture:errors:openai": "tsx providers/openai/error_response_test.ts",
+    "capture:errors:anthropic": "tsx providers/anthropic/error_response_test.ts",
+    "capture:errors:openrouter": "tsx providers/openrouter/error_response_test.ts"
   },
   "keywords": [],
   "author": "",

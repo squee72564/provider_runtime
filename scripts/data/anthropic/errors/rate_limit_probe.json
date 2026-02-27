@@ -1,0 +1,12 @@
+{
+  "system": "You are a helpful assistant.",
+  "messages": [
+    {
+      "role": "user",
+      "content": [
+        { "type": "text", "text": "Return a short answer." }
+      ]
+    }
+  ],
+  "max_tokens": 64
+}

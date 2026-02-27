@@ -1,0 +1,8 @@
+{
+  "instructions": "You are a helpful assistant.",
+  "input": [
+    { "role": "user", "content": "Ping" }
+  ],
+  "store": false,
+  "max_output_tokens": 64
+}

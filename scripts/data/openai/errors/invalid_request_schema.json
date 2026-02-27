@@ -1,0 +1,6 @@
+{
+  "instructions": "You are a helpful assistant.",
+  "input": "this-should-be-an-array",
+  "store": false,
+  "max_output_tokens": 64
+}

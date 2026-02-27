@@ -1,0 +1,20 @@
+{
+  "system": "You are a helpful assistant.",
+  "messages": [
+    {
+      "role": "user",
+      "content": [
+        { "type": "text", "text": "Use calculator" }
+      ]
+    }
+  ],
+  "tools": [
+    {
+      "name": "calculator",
+      "description": "Evaluate math expressions",
+      "input_schema": "invalid-input-schema"
+    }
+  ],
+  "tool_choice": { "type": "tool", "name": "calculator" },
+  "max_tokens": 64
+}

@@ -1,0 +1,17 @@
+{
+  "instructions": "You are a helpful assistant.",
+  "input": [
+    { "role": "user", "content": "What is the weather in SF?" }
+  ],
+  "tools": [
+    {
+      "type": "function",
+      "name": "get_weather",
+      "description": "Get weather",
+      "parameters": "invalid-parameters"
+    }
+  ],
+  "tool_choice": { "type": "function", "name": "missing_tool" },
+  "store": false,
+  "max_output_tokens": 64
+}
