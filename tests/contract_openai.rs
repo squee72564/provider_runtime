@@ -51,6 +51,7 @@ const DECODE_FIXTURES: &[&str] = &[
 
 const ERROR_FIXTURES: &[&str] = &[
     "errors/error_envelope_protocol_mapping.json",
+    "errors/status_non_auth_mapping.json",
     "errors/unsupported_intent_stop_sequence.json",
     "errors/malformed_payload_non_object.json",
     "errors/malformed_payload_missing_status.json",
@@ -757,7 +758,10 @@ fn test_openai_fixture_category_matrix_coverage() {
     let error_edge_categories: &[(&str, &[&str])] = &[
         (
             "protocol error payload mapping",
-            &["errors/error_envelope_protocol_mapping.json"],
+            &[
+                "errors/error_envelope_protocol_mapping.json",
+                "errors/status_non_auth_mapping.json",
+            ],
         ),
         (
             "unsupported canonical intent",
@@ -851,6 +855,7 @@ async fn test_openai_contract_non_2xx_auth_maps_to_credentials_rejected() {
             assert_eq!(provider, ProviderId::Openai);
             assert_eq!(request_id, Some("req-contract-auth".to_string()));
             assert!(message.contains("openai error"));
+            assert!(message.contains("invalid_request_error"));
             assert!(message.contains("invalid_api_key"));
         }
         other => panic!("expected credentials rejected error, got {other:?}"),
@@ -861,7 +866,7 @@ async fn test_openai_contract_non_2xx_auth_maps_to_credentials_rejected() {
 
 #[tokio::test]
 async fn test_openai_contract_non_2xx_non_auth_maps_to_status() {
-    let error_body = load_fixture_str("errors/error_envelope_protocol_mapping.json");
+    let error_body = load_fixture_str("errors/status_non_auth_mapping.json");
     let response = MockResponse::with_status(
         429,
         vec![("x-request-id".to_string(), "req-contract-rate".to_string())],
@@ -888,8 +893,9 @@ async fn test_openai_contract_non_2xx_non_auth_maps_to_status() {
             assert_eq!(model, Some("gpt-5-mini".to_string()));
             assert_eq!(status_code, 429);
             assert_eq!(request_id, Some("req-contract-rate".to_string()));
-            assert!(message.contains("Invalid API key"));
-            assert!(message.contains("invalid_api_key"));
+            assert!(message.contains("requested model"));
+            assert!(message.contains("invalid_request_error"));
+            assert!(message.contains("model_not_found"));
         }
         other => panic!("expected status error, got {other:?}"),
     }

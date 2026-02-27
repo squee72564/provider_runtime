@@ -51,6 +51,7 @@ const DECODE_FIXTURES: &[&str] = &[
 
 const ERROR_FIXTURES: &[&str] = &[
     "errors/error_envelope_protocol_mapping.json",
+    "errors/status_non_auth_mapping.json",
     "errors/unsupported_intent_json_prefill.json",
     "errors/malformed_payload_non_object.json",
     "errors/malformed_payload_missing_stop_reason.json",
@@ -782,7 +783,10 @@ fn test_anthropic_fixture_category_matrix_coverage() {
     let error_edge_categories: &[(&str, &[&str])] = &[
         (
             "protocol error payload mapping",
-            &["errors/error_envelope_protocol_mapping.json"],
+            &[
+                "errors/error_envelope_protocol_mapping.json",
+                "errors/status_non_auth_mapping.json",
+            ],
         ),
         (
             "unsupported canonical intent",
@@ -873,7 +877,7 @@ async fn test_anthropic_contract_non_2xx_auth_maps_to_credentials_rejected() {
             assert_eq!(provider, ProviderId::Anthropic);
             assert_eq!(request_id, Some("req-contract-auth".to_string()));
             assert!(message.contains("anthropic error"));
-            assert!(message.contains("invalid_request_error"));
+            assert!(message.contains("authentication_error"));
         }
         other => panic!("expected credentials rejected error, got {other:?}"),
     }
@@ -883,7 +887,7 @@ async fn test_anthropic_contract_non_2xx_auth_maps_to_credentials_rejected() {
 
 #[tokio::test]
 async fn test_anthropic_contract_non_2xx_non_auth_maps_to_status() {
-    let error_body = load_fixture_str("errors/error_envelope_protocol_mapping.json");
+    let error_body = load_fixture_str("errors/status_non_auth_mapping.json");
     let response = MockResponse::with_status(
         429,
         vec![("request-id".to_string(), "req-contract-rate".to_string())],
@@ -910,13 +914,57 @@ async fn test_anthropic_contract_non_2xx_non_auth_maps_to_status() {
             assert_eq!(model, Some("claude-sonnet-4-5-20250929".to_string()));
             assert_eq!(status_code, 429);
             assert_eq!(request_id, Some("req-contract-rate".to_string()));
-            assert!(message.contains("Invalid API key"));
-            assert!(message.contains("invalid_request_error"));
+            assert!(message.contains("model: this-model-does-not-exist"));
+            assert!(message.contains("not_found_error"));
         }
         other => panic!("expected status error, got {other:?}"),
     }
 
     server.shutdown();
+}
+
+#[tokio::test]
+async fn test_anthropic_contract_request_id_precedence_is_deterministic() {
+    let error_body = load_fixture_str("errors/status_non_auth_mapping.json");
+    let request = request_fixture("encode/minimal_text_request.json");
+
+    let mut header_server = MockServer::start(vec![MockResponse::with_status(
+        404,
+        vec![("request-id".to_string(), "req-header-wins".to_string())],
+        &error_body,
+    )]);
+    let adapter = anthropic_adapter(header_server.url());
+    let err = adapter
+        .run(&request, &AdapterContext::default())
+        .await
+        .expect_err("status error should fail");
+
+    match err {
+        ProviderError::Status { request_id, .. } => {
+            assert_eq!(request_id, Some("req-header-wins".to_string()));
+        }
+        other => panic!("expected status error with request id, got {other:?}"),
+    }
+    header_server.shutdown();
+
+    let mut body_server = MockServer::start(vec![MockResponse::with_status(
+        404,
+        Vec::new(),
+        &error_body,
+    )]);
+    let adapter = anthropic_adapter(body_server.url());
+    let err = adapter
+        .run(&request, &AdapterContext::default())
+        .await
+        .expect_err("status error should fail");
+
+    match err {
+        ProviderError::Status { request_id, .. } => {
+            assert_eq!(request_id, Some("req_011CYY4ftCMjv6Q96YKCRVba".to_string()));
+        }
+        other => panic!("expected status error with body request id, got {other:?}"),
+    }
+    body_server.shutdown();
 }
 
 #[tokio::test]

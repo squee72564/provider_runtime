@@ -1,8 +1,8 @@
 {
   "type": "error",
   "error": {
-    "type": "invalid_request_error",
-    "message": "Invalid API key"
+    "type": "authentication_error",
+    "message": "invalid x-api-key"
   },
-  "request_id": "req_err_1"
+  "request_id": "req_011CYY4fsfMvu51eL4rnLTAN"
 }

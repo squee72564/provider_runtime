@@ -1,0 +1,8 @@
+{
+  "type": "error",
+  "error": {
+    "type": "not_found_error",
+    "message": "model: this-model-does-not-exist"
+  },
+  "request_id": "req_011CYY4ftCMjv6Q96YKCRVba"
+}
