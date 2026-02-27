@@ -485,7 +485,7 @@ Stage Documentation: `docs/Stage22.md`
 Depends On:
 - Stage 20
 
-## [ ] Stage 23 - OpenRouter Contract Fixtures
+## [x] Stage 23 - OpenRouter Contract Fixtures
 Goal:
 Add canonical↔OpenRouter golden fixture contract tests.
 
