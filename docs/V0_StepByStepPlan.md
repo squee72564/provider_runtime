@@ -517,7 +517,7 @@ Depends On:
 - Stage 20
 - Stage 23
 
-## [ ] Stage 25 - Acceptance: Multi-Provider Canonical Behavior
+## [x] Stage 25 - Acceptance: Multi-Provider Canonical Behavior
 Goal:
 Final acceptance suite for v0 invariants across providers and handoffs.
 
