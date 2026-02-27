@@ -73,14 +73,13 @@
       - content: Vec<ContentPart>
   - ContentPart
       - Text(String)
-      - Thinking { text: String, provider: Option<ProviderId> }
       - ToolCall(ToolCall)
       - ToolResult(ToolResult)
 
   Handoff rule:
 
-  - If assistant thinking originates from same provider/API family, keep as typed Thinking.
-  - If crossing provider families, convert to text tags: <thinking>...</thinking> in Text.
+  - Canonical content parts are replayable request/response artifacts only.
+  - Handoff normalization is identity for canonical content parts in v0.
   - Preserve tool calls and tool results unchanged.
 
   ### 4) Tools + structured output
@@ -100,10 +99,10 @@
   ### 5) Usage and cost
 
   - Usage
-      - input_tokens, output_tokens, reasoning_tokens (optional), cached_input_tokens (optional), total_tokens (derived if missing)
+      - input_tokens, output_tokens, cached_input_tokens (optional), total_tokens (derived if missing)
   - CostBreakdown
       - currency: "USD"
-      - input_cost, output_cost, reasoning_cost (optional), total_cost
+      - input_cost, output_cost, total_cost
       - pricing_source: PricingSource (Configured, ProviderReported, Mixed)
   - PricingTable keyed by (provider, model_pattern/version) with per-token rates
   - Cost calculation always runs when usage + matching price exist; otherwise cost: None with warning.
@@ -249,8 +248,7 @@
   3. Cost computation with exact/partial/missing pricing entries.
   4. Registry routing precedence and ambiguity handling.
   5. Handoff normalization:
-      - same-provider thinking preserved
-      - cross-provider thinking converted to <thinking> text
+      - canonical content preserved unchanged
       - tool calls/results preserved
 
   ### Integration tests (mock HTTP)

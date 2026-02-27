@@ -27,7 +27,8 @@ Internal Responsibilities:
 - Decode coverage:
   - assistant text output
   - tool-call output
-  - refusal + reasoning normalization
+  - refusal mapping to canonical text
+  - ignore provider reasoning blocks (not canonicalized)
   - structured output extraction using request context envelope
   - usage mapping for full/partial/absent usage payloads
   - finish-reason mapping from `status` + `incomplete_details.reason`
@@ -44,7 +45,6 @@ Deterministic Validation / Error Policy:
 Warning Policy:
 - Stable warning code + message for same condition.
 - Required warning categories:
-  - dropped thinking on encode
   - both temperature and top_p set
   - non-strict tool schema strict disabled
   - tool arguments invalid JSON fallback

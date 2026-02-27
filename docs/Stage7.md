@@ -13,8 +13,8 @@ Public API Surface:
 
 Internal Responsibilities:
 - Match provider/model to price rule.
-- Compute input/output/reasoning costs when available.
-- Return warning when pricing missing or partial.
+- Compute input/output costs when available.
+- Return warning when pricing or required usage is missing/partial.
 
 Unit Tests:
 - `test_estimate_cost_known_model`

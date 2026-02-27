@@ -86,14 +86,12 @@ Field-Level Contract:
 - `Usage`
   - `input_tokens: Option<u64>`
   - `output_tokens: Option<u64>`
-  - `reasoning_tokens: Option<u64>`
   - `cached_input_tokens: Option<u64>`
   - `total_tokens: Option<u64>`
 - `CostBreakdown`
   - `currency: String`
   - `input_cost: f64`
   - `output_cost: f64`
-  - `reasoning_cost: Option<f64>` omitted when missing
   - `total_cost: f64`
   - `pricing_source: PricingSource`
 - `RuntimeWarning`
@@ -133,7 +131,7 @@ Deterministic Behavior:
 - `Usage::derived_total_tokens()` returns:
   - explicit `total_tokens` when present
   - otherwise `input_tokens.unwrap_or(0) + output_tokens.unwrap_or(0)`
-- `reasoning_tokens` and `cached_input_tokens` do not alter derived total in v0.
+- `cached_input_tokens` does not alter derived total in v0.
 
 Freeze Gate Exception (Approved for Stage 14):
 - `ToolChoice::Specific` carries `name: String` so adapters can deterministically force a specific tool without provider-specific leakage.

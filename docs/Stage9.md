@@ -10,15 +10,13 @@ Public API Surface:
 - `fn normalize_handoff_messages(...) -> Vec<Message>`
 
 Internal Responsibilities:
-- Preserve user messages/tool results unchanged.
-- Preserve same-provider assistant blocks as-is.
-- Convert cross-provider thinking blocks to tagged text.
-- Preserve tool calls and normal text unchanged.
+- Preserve canonical messages unchanged.
+- Preserve tool calls/results and text unchanged.
 
 Unit Tests:
-- `test_same_provider_assistant_preserved`
-- `test_cross_provider_thinking_to_tagged_text`
-- `test_tool_calls_and_results_preserved`
+- `test_handoff_normalization_is_identity_for_assistant_content`
+- `test_handoff_normalization_preserves_non_assistant_messages`
+- `test_handoff_normalization_is_idempotent`
 
 Acceptance Criteria:
 - Transform is deterministic and pure.

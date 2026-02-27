@@ -64,6 +64,12 @@ Dependency rules:
 Goal:
 Define provider-agnostic canonical request/response/message/tool/usage/cost/catalog types in one place.
 
+Breaking Cleanup Note (pre-v0):
+- Removed canonical reasoning/thinking surface from v0:
+  - `ContentPart::Thinking`
+  - `Usage.reasoning_tokens`
+  - `CostBreakdown.reasoning_cost`
+
 Exception Note (approved during Stage 14 planning):
 - `ToolChoice::Specific` is treated as `Specific { name: String }` to support deterministic forced-tool semantics across providers.
 
