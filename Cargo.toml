@@ -5,6 +5,10 @@ edition = "2024"
 license = "MIT"
 description = "Provider-agnostic runtime adapters for LLM platforms"
 
+[features]
+default = []
+live-tests = []
+
 [dependencies]
 tokio = { version = "1", features = ["macros", "rt-multi-thread"] }
 reqwest = { version = "0.11", features = ["json", "rustls-tls"] }
