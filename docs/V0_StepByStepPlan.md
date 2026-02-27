@@ -500,7 +500,7 @@ Stage Documentation: `docs/Stage23.md`
 Depends On:
 - Stage 20
 
-## [ ] Stage 24 - Runtime Integration Tests (Mock HTTP)
+## [x] Stage 24 - Runtime Integration Tests (Mock HTTP)
 Goal:
 Validate registry+runtime+adapters end-to-end with mocked provider endpoints.
 
