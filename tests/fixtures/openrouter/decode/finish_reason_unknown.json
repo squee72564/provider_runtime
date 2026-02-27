@@ -1,0 +1,17 @@
+{
+  "id": "chatcmpl_finish_unknown",
+  "object": "chat.completion",
+  "created": 1772172607,
+  "model": "openai/gpt-5-mini",
+  "choices": [
+    {
+      "index": 0,
+      "finish_reason": "new_reason",
+      "message": {
+        "role": "assistant",
+        "content": "unknown"
+      }
+    }
+  ],
+  "usage": {"prompt_tokens": 1, "completion_tokens": 1, "total_tokens": 2}
+}

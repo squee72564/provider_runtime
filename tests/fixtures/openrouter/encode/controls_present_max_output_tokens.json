@@ -1,0 +1,18 @@
+{
+  "model": {
+    "provider_hint": { "type": "openrouter" },
+    "model_id": "openai/gpt-5-mini"
+  },
+  "messages": [
+    {
+      "role": { "type": "user" },
+      "content": [
+        { "type": "text", "text": "Limit output tokens." }
+      ]
+    }
+  ],
+  "tools": [],
+  "tool_choice": { "type": "auto" },
+  "response_format": { "type": "text" },
+  "max_output_tokens": 64
+}

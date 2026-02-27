@@ -1,0 +1,16 @@
+{
+  "id": "chatcmpl_usage_absent",
+  "object": "chat.completion",
+  "created": 1772172602,
+  "model": "openai/gpt-5-mini",
+  "choices": [
+    {
+      "index": 0,
+      "finish_reason": "stop",
+      "message": {
+        "role": "assistant",
+        "content": "usage absent"
+      }
+    }
+  ]
+}

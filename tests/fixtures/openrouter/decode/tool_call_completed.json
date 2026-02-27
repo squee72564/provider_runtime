@@ -1,0 +1,66 @@
+{
+  "id": "gen-1772160183-yTYiY1W3wLLfIsAUKt5a",
+  "provider": "OpenAI",
+  "model": "openai/gpt-5-mini",
+  "object": "chat.completion",
+  "created": 1772160183,
+  "choices": [
+    {
+      "logprobs": null,
+      "finish_reason": "tool_calls",
+      "native_finish_reason": "completed",
+      "index": 0,
+      "message": {
+        "role": "assistant",
+        "content": "",
+        "refusal": null,
+        "reasoning": "**Fetching weather information**\n\nI need to use the function to get the weather, specifically using `functions.get_weather`. Since there's no need for the multi_tool_use.parallel wrapper here—I'm just looking for one tool—I'll go ahead and call `functions.get_weather` with \"San Francisco.\" After that, I’ll make sure to reply with whatever the result is. It should be pretty straightforward!",
+        "tool_calls": [
+          {
+            "type": "function",
+            "index": 0,
+            "id": "call_XiXyHd1CVfi2637JmTd4nDc7",
+            "function": {
+              "name": "get_weather",
+              "arguments": "{\"city\":\"San Francisco\"}"
+            }
+          }
+        ],
+        "reasoning_details": [
+          {
+            "format": "openai-responses-v1",
+            "index": 0,
+            "type": "reasoning.summary",
+            "summary": "**Fetching weather information**\n\nI need to use the function to get the weather, specifically using `functions.get_weather`. Since there's no need for the multi_tool_use.parallel wrapper here—I'm just looking for one tool—I'll go ahead and call `functions.get_weather` with \"San Francisco.\" After that, I’ll make sure to reply with whatever the result is. It should be pretty straightforward!"
+          },
+          {
+            "id": "rs_0a205937a3faef7a0169a104b7b7848194bb6e53b85e792be6",
+            "format": "openai-responses-v1",
+            "index": 1,
+            "type": "reasoning.encrypted",
+            "data": "gAAAAABpoQS6j6SRE0akFa1kqZlXuBigEEr1AjWZsh3jCzBLRyLgKUvfjPD1L3bmnC9gQtKAHwtt6Q9ACDXa2LgiHMrVjA8BoZKPBUMeJ1fOaliosl7Ui9xWGu1eNzpI2nIK9kZdpJqU_fFbyOwHOUfFyzjVJWcRmSE2yPXCfzsLd6yDXxk6uS4zczabtDirUej8BefbTTPupxQRSvpNicOSLr7d65lZgSqXgL1ZtmJX4l4qzHNRdlDgQprnZwzP9nMEkjxw4IzxhVs-ZLurmXoaZUWYZ2-lSh_hdyBbI3JyGydlCIZJNb3tEQdEHsREb998MuBwpH9sna1gWQqFPwxwCO8l5bx-1Syui5_YgIllv7tiOMOVyRySlDzFaQklu1T4uYK3F_3NV_DvwzAkzqXt1Q_DDu3qa4qF31uiCtOEKYXzVIz9uVyryrC4yVlEL1wc0CoGBUDqU2ZMNbIZDs-Y9-K8snkD1NB6hLgYLDoQK5J-ixy8vPm1On3d7jhU4Zq6HWjsMZMtTkymxxqDxlpHjowCgl_WpwoHG8QfNNzUlPCyM_-pMmaaGz9JsX9Jo5mDrWnBQMwYFagR8K4sJ7Wh1lQJglypw7AIbFmrsaYjML_jgRe3OgBbrVEyZVZxrtLW2BNRu5scgG-z-95YEmawQUg3tTcKfZNcW7Z-Sb4Mv8Vca9i2jFWSMI3osdhOT5MbYJuPdZ3NuTRyVvHMLQZDFHxHt2krvNOPqZa8Z7y-UTKITlhrOL9CRBbkWXLcLqnIjVM3iZDR4x3WiDuFCxx9SYtYZEZNy9wNOq0dTcmjyCU7osh8mg8NZGfyz29ZgK0cKfSd611vinBapJ6LC-JyrDH4tWfQC_2ZObqr9LXNWcJekWoR58qsqRQd7KSnpeitei7LD8PcJ1IwM30eTA69J3fYltUgjPWsNda0wB7nQGnL1wI0tNr-o6XxUTRACJkACH8OJYoO7RE_8DWUDEEGW5Z2z9CFP5U1HW8au6Dd9zqzeBD3y7tchYxBCoiJhjs-_M8WLeHe9LQkO-5quSp08TGAYjzL5BslOOoiH2HSQfOfm25HUMOTg4LB39CNo-gwuh-LD63ZQ6YlYTO4RZpZEWCg5kj3UgEb-xH-jKIbuW9Ksy5z9a7PnTY6ezd8t7FkKTv_0r3eFxax6LuPJAA2-RauaovLE9wXYANjUrzyBHraoWRnyTjFxaedvT8W80Wb8Q_J3PcDoghSYmas67EXg85vqlEug71eN54rChMQ_MGF3t0dQC4="
+          }
+        ]
+      }
+    }
+  ],
+  "usage": {
+    "prompt_tokens": 60,
+    "completion_tokens": 86,
+    "total_tokens": 146,
+    "cost": 0.000187,
+    "is_byok": false,
+    "prompt_tokens_details": {
+      "cached_tokens": 0
+    },
+    "cost_details": {
+      "upstream_inference_cost": 0.000187,
+      "upstream_inference_prompt_cost": 0.000015,
+      "upstream_inference_completions_cost": 0.000172
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 64,
+      "image_tokens": 0
+    }
+  }
+}

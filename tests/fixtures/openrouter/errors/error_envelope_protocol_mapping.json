@@ -1,0 +1,6 @@
+{
+  "error": {
+    "message": "Missing Authentication header",
+    "code": 401
+  }
+}

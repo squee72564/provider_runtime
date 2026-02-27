@@ -1,0 +1,27 @@
+{
+  "id": "chatcmpl_finish_tool_calls",
+  "object": "chat.completion",
+  "created": 1772172605,
+  "model": "openai/gpt-5-mini",
+  "choices": [
+    {
+      "index": 0,
+      "finish_reason": "tool_calls",
+      "message": {
+        "role": "assistant",
+        "content": "",
+        "tool_calls": [
+          {
+            "id": "call_abc",
+            "type": "function",
+            "function": {
+              "name": "lookup_weather",
+              "arguments": "{\"city\":\"SF\"}"
+            }
+          }
+        ]
+      }
+    }
+  ],
+  "usage": {"prompt_tokens": 2, "completion_tokens": 3, "total_tokens": 5}
+}

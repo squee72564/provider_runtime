@@ -1,0 +1,7 @@
+{
+  "error": {
+    "message": "openai/this-model-does-not-exist is not a valid model ID",
+    "code": 400
+  },
+  "user_id": "user_36xUKicUd09o37yU25oy6GgRHVr"
+}

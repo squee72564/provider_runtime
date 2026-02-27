@@ -1,0 +1,17 @@
+{
+  "id": "chatcmpl_determinism",
+  "object": "chat.completion",
+  "created": 1772172610,
+  "model": "openai/gpt-5-mini",
+  "choices": [
+    {
+      "index": 0,
+      "finish_reason": "stop",
+      "message": {
+        "role": "assistant",
+        "content": "{\"ok\":true}"
+      }
+    }
+  ],
+  "usage": {"prompt_tokens": 3, "completion_tokens": 4, "total_tokens": 7}
+}

@@ -1,0 +1,55 @@
+{
+  "id": "gen-1772159933-lQIoCw15hQ2l7tMJPQpY",
+  "provider": "OpenAI",
+  "model": "openai/gpt-5-mini",
+  "object": "chat.completion",
+  "created": 1772159933,
+  "choices": [
+    {
+      "logprobs": null,
+      "finish_reason": "stop",
+      "native_finish_reason": "completed",
+      "index": 0,
+      "message": {
+        "role": "assistant",
+        "content": "Feeling ready and helpful today.",
+        "refusal": null,
+        "reasoning": "**Crafting a five-word response**\n\nThe user asked me to describe how I'm doing today in just five words. I'm counting out the words and ensuring it fits their request. So, I'll go with \"Feeling ready and helpful today,\" which definitely counts as five words. I want to keep it brief and avoid any extra text since the user prefers conciseness. I’m confident this satisfies their request, so I'll deliver that sentence!**Creating a concise response**\n\nThe user asked me to describe how I'm doing today in exactly five words. I understand they want a brief, straightforward answer, so I’ll focus on delivering just that without any additional commentary. It's important to keep it clear and concise, meeting their expectations perfectly. I’m ready to provide a five-word sentence that captures how I’m feeling today, which is the core of their request. I'll make sure to get it right!",
+        "reasoning_details": [
+          {
+            "format": "openai-responses-v1",
+            "index": 0,
+            "type": "reasoning.summary",
+            "summary": "**Crafting a five-word response**\n\nThe user asked me to describe how I'm doing today in just five words. I'm counting out the words and ensuring it fits their request. So, I'll go with \"Feeling ready and helpful today,\" which definitely counts as five words. I want to keep it brief and avoid any extra text since the user prefers conciseness. I’m confident this satisfies their request, so I'll deliver that sentence!**Creating a concise response**\n\nThe user asked me to describe how I'm doing today in exactly five words. I understand they want a brief, straightforward answer, so I’ll focus on delivering just that without any additional commentary. It's important to keep it clear and concise, meeting their expectations perfectly. I’m ready to provide a five-word sentence that captures how I’m feeling today, which is the core of their request. I'll make sure to get it right!"
+          },
+          {
+            "id": "rs_04808f0f80b752600169a103bd6e948196a5ed5754b48e70d4",
+            "format": "openai-responses-v1",
+            "index": 1,
+            "type": "reasoning.encrypted",
+            "data": "gAAAAABpoQPEd9qZkqSFUX1jSKpoXGOQ2OtRoN_kNqInY7DE1bfEtuuCd4KX8Hr07WgeuMWMhwCE2wliVcAzluizGLNlm7tfGgW-1cf127Jj-0gV3n7RQSZcgBe855yhhQtfRzg3YUngO1BAAIeTzGepKafKhhj-BruBDzKWY0389cAm8MnTMjKvjcic_ql_PAkvHcPonPcFyOPW8v-wmWsBdr3RT9MZCN_WDLOMafQCno82Wd53Z1SwIv6C0aYAISAtG2PPqVhvE_0s2CYANtRqc2NcRgQlitI9r2DrnhmcFNmlBHPt95BikojpjvE_GPHLy_J49Zmz7pBvjHkgpginVGkDoH0xwxTusBJ0J2FB5CkYyOi0wVlO5E8sBjkrhsNc635tKhrtBZmXt1p6xoW-7lvcNUZ9x3iKVDwMWYFQDlWX9oCT0JBfoWXWQcJTn6GEjM4dy-GKpQkOnIEf4gza1ZAKJGbJKdNPKv8FNkCPReu47Yte01s9naoav4_sKw8H8lUP7sv1O4aLkcPnUlXJuhnXy25CVxghOFfz1HvsNhECxny2zOa4VwNyze90uXrKzDcUonUZ0qsQVM268L35mrSPRWJkaOH8xdY4aGIGJUqkZJeuR1GeTGO2INVWAQfyJt_D6jhWjCN4KkQ9sPqMp0D2qjA7GV5URYml-ZET8gTsB9tilSS7W02SYSydNgjVgzqlcQ0-4ewY7Raurrp32opapECOMkbH-wpOzfnjax4D0DdYyB7y33mW7rvt0-XrVN9MzZ7gwqsycznm6ntS1bvgOgYQgoGeaxDZkjcJzUraz42xgija0gO4b2BC1MdbNezNG1cwOynQiQETMdVqN2WnBUsd_iEa-sVeM58jrNTFkpCTkD1e1mgKXUFDcwBlNtqvXi2-Cu233lydmocOqusaAMh9PcY0-74EUDuKGxp40yaZZ-AvrZNwR29bZOm4UWHMw3RGlE4dEybIZ1Dg0k0CDhkyo_0zovBr7zEUYiiBc_0l4J4JZi3ODWyT9m7GBaYAC6jw242ceIyHcXqym2fZsI6amvI42NNHRKVOm3Q53SDfqNR5t9fC5C_nLm8L3MH4Aktd-unbbtyqr-dN791GryXMFhHGXFc4UIskKt4SZtoiW4OwdeNG2_rafe2x05V5NHnWxY_Wmgk-Kj1Sdb0G3kh-yuRxphGL4hnWQWoACAMlsfVG73e4OfR6krjt9f39bVWQ7IN6irWxA8OXFfeq6FmQv3ZhbAKLgSfXvKmWL0B7TtW3w3oYYcS-YLkp_pxKev1dgzIehLBZaANTNBX6QVU2Rg-mybBYM09lC1uR5j-BSWMcN87YQCAAQXnR6px37DRhewYiwtxDOmVdE3e8mcnPvHcQZra2gT7jCLihDsm0fCOd4NSzV4LpNSWJrIQorzw7k6h98WX-_mnxN4Cvr-oAAf2OdTNL_Uje0MW3SfGmhMroiGbhuObtUINeHgch-RxF32G3d2sEWoTDYjtAM54QI5j834_dXjQp5ebj22tHiyfuzuiiJQj_o19aiQKqQwbxNqiOafrk7HSI2UDrR3Nmgt022mFn-IZb8vLaUPU-VhASfdZt1A6QQIE0Tq-S2ui_MW5IIK5rW5pQFlNmCep30oOxqdIOxw4jQ1ty2FQG-Btj_q96Ilt4jxbB2-gT43OVVqVva9kdvFpX7HT-aCUZNPpeHaiiC49ELfsHOlTdU57LKUdi6QUS4mP2-NlMP_N7_3i5hzK1ucvpjOyBeodf1vlfawNwoZOxk__R3n-BVSs2KxCZnxT3gTuQ2IpKi7XmCnC0r9oa499XyWi-SJzAVh06AcN7uPxk0Tqn392DrVBxoTVEYT5kuvXD6TfBd_7KGsFyVSvZOK5f29JyM77qjVmU24JDAnStrxSKXSszxWfSadiy6a_wLJXhxNiQmSgkSuVeHOZPfxsqM03aOs6kZJOTks8VGRQColhYVzlJz66POn1eGY6s-Cff_l4LeHdoZPnWhS7eLza3Aereul-HAJqV6MU54Y0_OJHbm9hLH1DA0RloRXI4BBupfJgdQ9Dq4AyrekJXZd8YukOjrwZV89unoE21HbkKclad0eQwLGcB65SLsEIMaCf2f6RJyqEUpcI3LC-A8S4FIXOwnVJ-KtixkP0vj-TJDKS-VVFS8ycH675uiqs1BqHeEVjLIgkI"
+          }
+        ]
+      }
+    }
+  ],
+  "usage": {
+    "prompt_tokens": 50,
+    "completion_tokens": 261,
+    "total_tokens": 311,
+    "cost": 0.0005345,
+    "is_byok": false,
+    "prompt_tokens_details": {
+      "cached_tokens": 0
+    },
+    "cost_details": {
+      "upstream_inference_cost": 0.0005345,
+      "upstream_inference_prompt_cost": 0.0000125,
+      "upstream_inference_completions_cost": 0.000522
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 192,
+      "image_tokens": 0
+    }
+  }
+}
