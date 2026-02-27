@@ -16,6 +16,7 @@ Public API Surface:
 - `struct ToolDefinition`
 - `struct ToolCall`
 - `struct ToolResult`
+- `enum ToolResultContent`
 - `enum ToolChoice`
 - `enum ResponseFormat`
 - `struct AssistantOutput`
@@ -68,7 +69,12 @@ Field-Level Contract:
   - `arguments_json: serde_json::Value`
 - `ToolResult`
   - `tool_call_id: String`
-  - `content: Vec<ContentPart>`
+  - `content: ToolResultContent`
+  - `raw_provider_content: Option<serde_json::Value>` omitted when missing
+- `ToolResultContent`
+  - `Text { text: String }`
+  - `Json { value: serde_json::Value }`
+  - `Parts { parts: Vec<ContentPart> }`
 - `ToolChoice`
   - `None`
   - `Auto`
@@ -131,6 +137,11 @@ Deterministic Behavior:
 
 Freeze Gate Exception (Approved for Stage 14):
 - `ToolChoice::Specific` carries `name: String` so adapters can deterministically force a specific tool without provider-specific leakage.
+
+Freeze Gate Exception (Approved after Stage 18 implementation):
+- `ToolResult` widened for deterministic cross-provider handoff and same-provider roundtrip fidelity:
+  - canonical content union via `ToolResultContent`
+  - optional `raw_provider_content` passthrough for provider-native payload preservation
 
 Internal Responsibilities:
 - Serde derives and canonical field normalization.

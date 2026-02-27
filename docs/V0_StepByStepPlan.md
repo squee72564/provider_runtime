@@ -67,6 +67,11 @@ Define provider-agnostic canonical request/response/message/tool/usage/cost/cata
 Exception Note (approved during Stage 14 planning):
 - `ToolChoice::Specific` is treated as `Specific { name: String }` to support deterministic forced-tool semantics across providers.
 
+Exception Note (approved after Stage 18 implementation):
+- `ToolResult` is widened to support cross-provider handoff + same-provider roundtrip:
+  - `content: ToolResultContent` where variants are `Text`, `Json`, `Parts`
+  - `raw_provider_content: Option<serde_json::Value>` for lossless provider-native passthrough
+
 Files:
 - [src/core/types/mod.rs](src/core/types/mod.rs)
 
@@ -80,6 +85,7 @@ Public API Surface:
 - `struct ToolDefinition`
 - `struct ToolCall`
 - `struct ToolResult`
+- `enum ToolResultContent`
 - `enum ToolChoice`
 - `enum ResponseFormat`
 - `struct AssistantOutput`

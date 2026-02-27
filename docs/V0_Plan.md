@@ -87,7 +87,11 @@
 
   - ToolDefinition with JSON Schema parameters
   - ToolCall { id, name, arguments_json }
-  - ToolResult { tool_call_id, content }
+  - ToolResult {
+      tool_call_id,
+      content: ToolResultContent (Text | Json | Parts),
+      raw_provider_content?: serde_json::Value
+    }
   - ResponseFormat
       - Text
       - JsonObject
