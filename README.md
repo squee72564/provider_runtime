@@ -25,3 +25,13 @@ Testing & contributions
 ------------------------
 - Tests live next to each module (`src/runtime/tests.rs`, `src/transport/tests.rs`, etc.). Keep additions focused on the stage you’re touching and reuse the `ProviderRuntime` builder to assert runtime behavior.
 - The crate exports `ProviderRuntime`, `ProviderRuntimeBuilder`, and the canonical types from `core::types`, so keep breaking changes to those interfaces pegged to a new major version.
+
+Live API smoke tests
+--------------------
+- Live tests are opt-in and cost-bearing. They are compiled only with `--features live-tests` and marked `ignored`.
+- Run all live smoke tests:
+  - `cargo test --features live-tests --test live_runtime_smoke -- --ignored --nocapture`
+- Run a provider-specific subset:
+  - `cargo test --features live-tests --test live_runtime_smoke live_openai -- --ignored --nocapture`
+  - `cargo test --features live-tests --test live_runtime_smoke live_anthropic -- --ignored --nocapture`
+  - `cargo test --features live-tests --test live_runtime_smoke live_openrouter -- --ignored --nocapture`
