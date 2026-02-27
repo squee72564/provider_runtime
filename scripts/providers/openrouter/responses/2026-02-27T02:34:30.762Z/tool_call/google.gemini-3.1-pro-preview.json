@@ -1,0 +1,70 @@
+{
+  "id": "gen-1772160220-HxJk1qZh7kfkGGjURkGd",
+  "provider": "Google AI Studio",
+  "model": "google/gemini-3.1-pro-preview",
+  "object": "chat.completion",
+  "created": 1772160220,
+  "choices": [
+    {
+      "logprobs": null,
+      "finish_reason": "tool_calls",
+      "native_finish_reason": "STOP",
+      "index": 0,
+      "message": {
+        "role": "assistant",
+        "content": "",
+        "refusal": null,
+        "reasoning": "**Initiating the Inquiry**\n\nI've grasped the user's need: they're after San Francisco's weather. My next step? To select and apply the `get_weather` tool, which seems perfect for this job. I've pinpointed \"San Francisco\" as the city parameter, ready for processing.\n\n\n",
+        "tool_calls": [
+          {
+            "type": "function",
+            "index": 0,
+            "id": "tool_get_weather_f6jw0xdZbG2A6EFSpziM",
+            "function": {
+              "name": "get_weather",
+              "arguments": "{\"city\":\"San Francisco\"}"
+            }
+          }
+        ],
+        "reasoning_details": [
+          {
+            "format": "google-gemini-v1",
+            "index": 0,
+            "type": "reasoning.text",
+            "text": "**Initiating the Inquiry**\n\nI've grasped the user's need: they're after San Francisco's weather. My next step? To select and apply the `get_weather` tool, which seems perfect for this job. I've pinpointed \"San Francisco\" as the city parameter, ready for processing.\n\n\n"
+          },
+          {
+            "id": "tool_get_weather_f6jw0xdZbG2A6EFSpziM",
+            "format": "google-gemini-v1",
+            "index": 1,
+            "type": "reasoning.encrypted",
+            "data": "Ev0ECvoEAb4+9vs5WAfovIjALVPHKqPdFQlNTPjJ0d55GaUIVQpH2PwvqeodJSy40Hbq/+JaayNX+tYKFDo0Znl+9pM7TR3DqsdJ64mQyJ4SCWTMAUgG3JxRZMGpMoltRGNazA2EvFUOUDK0JA7k1CDv6H+IZkB+6V2yeAhe6UUJxwwEdNJiENrKAX9rJMdpQ2vQbBdIIkdyln98ntNZ6nM0BQ6ri6xBpliK9sd1zwOsx+gepI1p59FbT3VLVXJiuXU2Aqa/wt0gDQa/nZwsqmPTGNwK9Q9BvnEFG4lZKaODjpJ0QVDhGIxmYMkwNtbJT90QaSY9X94ei+PJ8QvvKSBS70noKRdDSWz3m16LLBwbhZZ9XHMlXng4oegfAHGcTtjmS/5UijmM/YQu0iZxUXUnG9ZiNTr5ihkrfoQCSGlHfzNz9SVRiMLKK+b22VJ7wzvmulRB2Tn1Ym0f1YGebJINOG54xNAS6xIqNyv5hII1+/8BMwS7wCXsWVAiZQ0P8YjQKRB/W3wHe+sS85xoduvf/A7pgfbFuBFloMSu9UH2MkUfE4FnWouduWCrVGVSZ+fzKbWJ2kLuJ2oxjm6VIKSCe+zAwltGNrv8ykFL1MblMYAHSnmCHXeWPRLkZ1K/jBMEIdFLZow2+3yjQYq36TAII8ehRx7GbB+fKhnxMrQf9KmEnqbjts6aan9fmwIyDo1v3AQ89d4o/qMGaD+FE35kV+hM4mQ92AvLC/ojMokXY1/WDec6widGOoji5FoI1iKDkB6Uw282BqaFU/kWDXW1Q1aTUtF0FNTyhuwoNx/V0hgzaxZj+HXJvw8QxRnMfUFEVJWzLfqwyB4CWENPpw=="
+          }
+        ],
+        "annotations": []
+      }
+    }
+  ],
+  "usage": {
+    "prompt_tokens": 163,
+    "completion_tokens": 145,
+    "total_tokens": 308,
+    "cost": 0.002066,
+    "is_byok": false,
+    "prompt_tokens_details": {
+      "cached_tokens": 0,
+      "cache_write_tokens": 0,
+      "audio_tokens": 0,
+      "video_tokens": 0
+    },
+    "cost_details": {
+      "upstream_inference_cost": 0.002066,
+      "upstream_inference_prompt_cost": 0.000326,
+      "upstream_inference_completions_cost": 0.00174
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 128,
+      "image_tokens": 0
+    }
+  }
+}

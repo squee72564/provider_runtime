@@ -1,0 +1,76 @@
+{
+  "id": "resp_0093f4c2a7cb0d700169a10e9c821c819393d2dc3e522328c0",
+  "object": "response",
+  "created_at": 1772162716,
+  "status": "completed",
+  "background": false,
+  "billing": {
+    "payer": "developer"
+  },
+  "completed_at": 1772162727,
+  "error": null,
+  "frequency_penalty": 0,
+  "incomplete_details": null,
+  "instructions": "You are a helpful assistant.",
+  "max_output_tokens": 1024,
+  "max_tool_calls": null,
+  "model": "o3-pro-2025-06-10",
+  "output": [
+    {
+      "id": "rs_0093f4c2a7cb0d700169a10ea767808193b37eb073d154fb80",
+      "type": "reasoning",
+      "summary": []
+    },
+    {
+      "id": "msg_0093f4c2a7cb0d700169a10ea768ec81939a4bd3698d2ce66f",
+      "type": "message",
+      "status": "completed",
+      "content": [
+        {
+          "type": "output_text",
+          "annotations": [],
+          "logprobs": [],
+          "text": "I'm functioning optimally, thank you."
+        }
+      ],
+      "role": "assistant"
+    }
+  ],
+  "parallel_tool_calls": true,
+  "presence_penalty": 0,
+  "previous_response_id": null,
+  "prompt_cache_key": null,
+  "prompt_cache_retention": null,
+  "reasoning": {
+    "effort": "medium",
+    "summary": null
+  },
+  "safety_identifier": null,
+  "service_tier": "default",
+  "store": false,
+  "temperature": 1,
+  "text": {
+    "format": {
+      "type": "text"
+    },
+    "verbosity": "medium"
+  },
+  "tool_choice": "auto",
+  "tools": [],
+  "top_logprobs": 0,
+  "top_p": 1,
+  "truncation": "disabled",
+  "usage": {
+    "input_tokens": 50,
+    "input_tokens_details": {
+      "cached_tokens": 0
+    },
+    "output_tokens": 233,
+    "output_tokens_details": {
+      "reasoning_tokens": 192
+    },
+    "total_tokens": 283
+  },
+  "user": null,
+  "metadata": {}
+}

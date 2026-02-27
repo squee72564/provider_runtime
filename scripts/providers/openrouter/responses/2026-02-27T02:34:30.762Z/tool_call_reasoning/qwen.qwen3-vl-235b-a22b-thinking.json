@@ -1,0 +1,51 @@
+{
+  "id": "gen-1772160314-h9ELgmaFGHjDpE78j145",
+  "provider": "Alibaba",
+  "model": "qwen/qwen3-vl-235b-a22b-thinking",
+  "object": "chat.completion",
+  "created": 1772160314,
+  "choices": [
+    {
+      "logprobs": null,
+      "finish_reason": "stop",
+      "native_finish_reason": "stop",
+      "index": 0,
+      "message": {
+        "role": "assistant",
+        "content": "The current weather in San Francisco is 16°C (60°F).",
+        "refusal": null,
+        "reasoning": "Okay, the user asked for the weather in San Francisco. I called the get_weather function with the city parameter as \"San Francisco\". The response came back with the temperature in both Celsius and Fahrenheit.\n\nNow, I need to present this information clearly. The response says 16°C and 60°F. I should format it in a way that's easy to read. Maybe start with \"The current weather in San Francisco is 16°C (60°F).\" That covers both units. Let me check if there's any other data, but it seems like just the temperatures. No mention of conditions like sunny or cloudy, so I'll stick to the temperatures provided. Alright, that should answer the user's question accurately.\n",
+        "reasoning_details": [
+          {
+            "format": "unknown",
+            "index": 0,
+            "type": "reasoning.text",
+            "text": "Okay, the user asked for the weather in San Francisco. I called the get_weather function with the city parameter as \"San Francisco\". The response came back with the temperature in both Celsius and Fahrenheit.\n\nNow, I need to present this information clearly. The response says 16°C and 60°F. I should format it in a way that's easy to read. Maybe start with \"The current weather in San Francisco is 16°C (60°F).\" That covers both units. Let me check if there's any other data, but it seems like just the temperatures. No mention of conditions like sunny or cloudy, so I'll stick to the temperatures provided. Alright, that should answer the user's question accurately.\n"
+          }
+        ]
+      }
+    }
+  ],
+  "system_fingerprint": null,
+  "usage": {
+    "prompt_tokens": 201,
+    "completion_tokens": 169,
+    "total_tokens": 370,
+    "cost": 0,
+    "is_byok": false,
+    "prompt_tokens_details": {
+      "cached_tokens": 0,
+      "audio_tokens": 0,
+      "video_tokens": 0
+    },
+    "cost_details": {
+      "upstream_inference_cost": null,
+      "upstream_inference_prompt_cost": 0,
+      "upstream_inference_completions_cost": 0
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 150,
+      "image_tokens": 0
+    }
+  }
+}

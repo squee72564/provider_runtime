@@ -1,0 +1,55 @@
+{
+  "id": "gen-1772160439-wa7ANoZyaFZIbqt9R4KD",
+  "provider": "OpenAI",
+  "model": "openai/gpt-5-mini",
+  "object": "chat.completion",
+  "created": 1772160439,
+  "choices": [
+    {
+      "logprobs": null,
+      "finish_reason": "stop",
+      "native_finish_reason": "completed",
+      "index": 0,
+      "message": {
+        "role": "assistant",
+        "content": "Right now in San Francisco it's about 16°C (60°F). That's mild — a light jacket or sweater should be enough. Would you like a forecast or current conditions (sunny/cloudy/rain)?",
+        "refusal": null,
+        "reasoning": "**Responding to weather inquiry**\n\nI've received the weather tool response for San Francisco with the current temperature being 16°C (60°F). I need to respond to the user with this information and make sure to address spelling in terms like Celsius and Fahrenheit. It’s important to mention that it’s mild and suggest they might need a light jacket. Since I don’t have additional weather conditions, I should include a note to say that. I’ll keep it concise!",
+        "reasoning_details": [
+          {
+            "format": "openai-responses-v1",
+            "index": 0,
+            "type": "reasoning.summary",
+            "summary": "**Responding to weather inquiry**\n\nI've received the weather tool response for San Francisco with the current temperature being 16°C (60°F). I need to respond to the user with this information and make sure to address spelling in terms like Celsius and Fahrenheit. It’s important to mention that it’s mild and suggest they might need a light jacket. Since I don’t have additional weather conditions, I should include a note to say that. I’ll keep it concise!"
+          },
+          {
+            "id": "rs_043d9219c2cc0a1b0169a105b781a08193a2a32d9a09314e6b",
+            "format": "openai-responses-v1",
+            "index": 1,
+            "type": "reasoning.encrypted",
+            "data": "gAAAAABpoQW8n8AX_s68cnDq1wdDzSdz0umPjJ8wPKuVli4QZD3sSwhGtpSnKz3Hh7lou5TooeW8W33z35R3fyehafuYIwJkbrQSEF3zbt9e0J4z56kd4h7tgve-gLbPVOMWV39_GINl6RcuTUUrIXEWQ9-Dm3zSfE4rt3qBkluAH1ZGqCR7n7CQ85leUOKJEgSp8WrOnSbNy4o4TYs26lEI8-DK0hE-MG22FJHUtaAhV4T2FzVzGjdIgArxQIUkaX7StnkshAdiLB24Mym3CoXUQjKatkQJD54xIQ8g00vY7JQjmH7yMeOiZZmAvGz6gRNUIV-TJpn40yXDeKp0qd8rOQs9KJT8-obcURHDLkU6lpHcZkKEIIJ0wBZSR_te48giOu6zyh-LQ4-8bbqTYnaTlqXURi-jx3mn8CW_00g2B6vFp0619QJ1zKS5ccbls4L29n_SOe1U5sDkujal9ZhUxMIkZwqod5bcd11QQ-Zvbn8rerN35pvQdD6fjuGjdgo9myCHBM0CY2wXPdZDGlcOt1s1ExiwwLRUuRT40_gzf2xBECjjbEY9zLQkKeVXzpPefMHys948Of11M01YbpNnshh-E4nWcFgVO7dyYpvexh5p2PDpicRWoAsvN5V3Rn1UL7FlV4irgPmaHFNv_JkCy5wXUz77p_REn5wm-vGq-CXf_F4BLiuGy6X9lDvpm6wRqy07yox_am860lr0UqAe6sJv_Kl0X70Nn0AO0-bAE5Yi_abGyZREaZ6_XQ9B93ojM8vW5LauH7UI-L68VH2uuYdu-jRO2iMDRal4OJWkzJArQZWIn7kPA---UIriWOM7Vz_QrwYyNgh2P-CyqfmROmCTYcWGtZw-CnbADWQhlGwdNgPRdVnn-AU69ezzJdbBUlD6lzdeAdxnGRxioRM9G0bFZNp4qazG1xHH4IpBHP6iBsPmBroQz9WeR9fJeL_ZfyMBaXn7nTHPMGTmWT-RFPWSqo7a_a7Mydk5zaJck6WIOshWGArnsNrlkVVKQWT-Fe1dpKn7q5NjaRT3PtkfC-Nvjh9HIcAEab6Pzujw6llE0CTFsisYqj-tdEdboTp07QtmOcjEXK4biesuNgrMVj2-qfTQa9P3GkaYq6YH-vS_n7wlNxX_7sU50-TDOkOzN2aHe_jVya2G6_JlZnRv03TqCibiOqRNX-Rw5mpc71WHutV2P6f0aOj7MmKH2ghukscaJrs4LrKAcNvKb_FN9CQEHjirhBq_QoM_kQ3vsEX-C8y5iHmHSihvFahXFsRPoM9t8VfXKcess2FkMuEA_oWHnviPFhH9-mWhL_O0zsmCEBPNQmnmEnqTMlM5tUiRruwd6V9Fl614NUAmV_sKjI6Fba6-uEMBF9NMBTVSgOF8iUZ_-SeY309jo4o2RVhcPvG0x1ES4VxFDadqd9kVO0Y1meGUqJ55yR2pYRXS_xbSskm5JBKQQOAH2ysnCFxm0TugVVoC33_gY-gBBgmA6_k2g40n9F2co6WXbWW41UUi2BF0Af5h7RwATAzCk4-PTtd42tSjo81JI6sDhoVTFmwqAMuu5oIsJXKhWqDcupY0dTWTE6h7W1fN0AbrV-gXQNsn7Lex7GQswrKU3NZZ_PCeHWKZP1OJFjdq56kD0tmCUc4F8AJ7rTcB3SSdxRqxAbBReM-A8TJ7-_9m8l4ZyUrAbZZMbKfTV4HOPDaQ65xso6zUv9TzIHBKxI6vrt2mBH2ybG-lovUxozxXaV1cxruGevcaEW1J5jbCWQRsVKVjW5l-b61hCVDGtoqXH2_ElCjoAOJh20wFlnRl-qu4vLW8Hn9KqzXDdLxfu8_64FcMcvozZg6BDpY2SI2x0ouiNBz0yE3ixW5M9e7Jgsm1Q5B2Ro1K2eVDtDo19twwyVKc8cnrMfRB6DUPTL6fwjo3CcbSBTQ5QYr1Q7PqHfWI7NS9yB8zdGKW8DEkDJ-0Kg8XIhObt6G0Vs_GlgGPq9ZKAY63gQ4LAABV3H3Ma290mIOaNg-KGwd0oimeoOEmEY57zp7vZp19sFyGGKKWZaxO3sZTSWCmDDNQ7cUMOVbt8MrqNHnpv6pfQD3GnNgORPGh19mBm_j3HZB_GNu4jZaHusLrHoLPf3lO0bGoKNjdfflDi_dly63PCtycNkHhZAMY4ErYYEAatExFrZXXZ2xIomkJRM1BKnnD71bHYcZeP1GJehD6Xw=="
+          }
+        ]
+      }
+    }
+  ],
+  "usage": {
+    "prompt_tokens": 111,
+    "completion_tokens": 271,
+    "total_tokens": 382,
+    "cost": 0.00056975,
+    "is_byok": false,
+    "prompt_tokens_details": {
+      "cached_tokens": 0
+    },
+    "cost_details": {
+      "upstream_inference_cost": 0.00056975,
+      "upstream_inference_prompt_cost": 0.00002775,
+      "upstream_inference_completions_cost": 0.000542
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 192,
+      "image_tokens": 0
+    }
+  }
+}

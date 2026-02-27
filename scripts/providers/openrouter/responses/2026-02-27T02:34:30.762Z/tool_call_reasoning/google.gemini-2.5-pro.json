@@ -1,0 +1,58 @@
+{
+  "id": "gen-1772160486-61LO0AL50eBCIs5bLd7u",
+  "provider": "Google AI Studio",
+  "model": "google/gemini-2.5-pro",
+  "object": "chat.completion",
+  "created": 1772160486,
+  "choices": [
+    {
+      "logprobs": null,
+      "finish_reason": "stop",
+      "native_finish_reason": "STOP",
+      "index": 0,
+      "message": {
+        "role": "assistant",
+        "content": "The weather in San Francisco is 16°C and 60°F.",
+        "refusal": null,
+        "reasoning": "**Analyzing User Request**\n\nI'm focusing on the user's weather inquiry for San \"Francisco.\" The `get_weather(city: str)` function is crucial here, as it can retrieve weather data. I need to figure out how to best integrate this function to fulfill the user's request.\n\n\n**Refining Function Call**\n\nI've determined I need to call the `get_weather` function, using \"San Francisco\" as the `city` parameter. This seems straightforward now that I know the function's parameter requirements. The function call will provide the raw weather data. I will then need to process it for a better user experience.\n\n\n**Synthesizing User Needs**\n\nI'm now integrating the raw data, returned from calling `get_weather(\"San Francisco\")`, into a polished response. My plan is to format the data in a way that directly addresses the user's initial inquiry. I will make sure to mention both Celsius and Fahrenheit readings for clarity.\n\n\n",
+        "reasoning_details": [
+          {
+            "format": "google-gemini-v1",
+            "index": 0,
+            "type": "reasoning.text",
+            "text": "**Analyzing User Request**\n\nI'm focusing on the user's weather inquiry for San \"Francisco.\" The `get_weather(city: str)` function is crucial here, as it can retrieve weather data. I need to figure out how to best integrate this function to fulfill the user's request.\n\n\n**Refining Function Call**\n\nI've determined I need to call the `get_weather` function, using \"San Francisco\" as the `city` parameter. This seems straightforward now that I know the function's parameter requirements. The function call will provide the raw weather data. I will then need to process it for a better user experience.\n\n\n**Synthesizing User Needs**\n\nI'm now integrating the raw data, returned from calling `get_weather(\"San Francisco\")`, into a polished response. My plan is to format the data in a way that directly addresses the user's initial inquiry. I will make sure to mention both Celsius and Fahrenheit readings for clarity.\n\n\n"
+          },
+          {
+            "format": "google-gemini-v1",
+            "index": 1,
+            "type": "reasoning.encrypted",
+            "data": "CiIBvj72+6yJY3dmrUL7O0g4CnZqxDR8K9jwKAuRRX8bd2WNCnABvj72+4C9Quj07TgHMMybIgl968WvFWBVIMeLKO8Kf5GAEAgFgK2pIM1YGG+QUexooR9iZBGPjPvcDVynCeM9uJZdtay/ufsUUzpyl++sG4WGouq9TJ5SBn62bkk4HJVuor8diP8mSkTDZLnZWBs8Cp0BAb4+9vvdUXzplflYKhnY6gmXs182uPdCTRFaT1vhclpibo/6kzKDdYlXyRq5U/EcCn0W3mW/c4Qge3JjbcgO1n68pE0gcc4lKteqyNNdGwceJA1JeEZBp/fVVNMfqOPKyDOfWE9pGUaoo0pddFYkFrkEnIp8ZVONv/1zazDpXVQzC3TLqVmbq0er3f9K+cCVLzdayUMyC7Tl5UM9gAp7Ab4+9vuDXJyL/vJQC+MO6gorDCwmav3dmeeHkmjj43vQB9cQD7ltjkT8eorWxbbkEoXy5rdmLHpjEUOoEDStTyRrHGKa9HiSa24NLtnA7xDre0SmJnYnU3d3aaKJtt6XUlWDPR9xVSkTzDg7iFAlr6lD6349eK14UB5CCooBAb4+9vsn0ScI5bZcmL4pAxEHo23xOPBsGfNu4JjT64khPl36NA57Xo3rfy0HQjCqcayAvg790XVJn3a77SQtWBygegJ9dSjdnjAQunF6A1jhsVMfKJ95/1OfDiiEWBSP+dC0crgAGUsZJ2h3Tj9/a/f7RXM6h3BEUw4m8vp4HBEVz3MVrc8NXRyCCoMBAb4+9vs2kR5dUBEO9nh5HA0FDeZsTk2FXs6FmL9DqOShSmAFRx0GslSkv74SmFIyjF1n92+/EvkSrDy1B9/whtg3/U2CnUhsLZJdL4OvEKoELEyx/qDDbvEF4PDGbM1OSam9Pzfy7whnd+kbmntWTbec1y8L5r5V2cLr+QznYUSBsygKiwEBvj72+9xE243NNRIB3hKkrbYVZrhXodo+/fgmC4oyzD1dHTLIsGv94nElhS5kr6OOylhw4Y2C+TcJbCmglOgEA27QdOtXf0ILO7EGsFpHCj8gfBNsrJoDWnATHAUNp3NqvDRxbcoWRW8VnH9s5yS5hRCJfEBn0IQ7rW96LceL9fntDa0yd/tejShbCoABAb4+9vtb8ayReCalH46TlG3S7b4QsWpjxKvx/gSxcmBwacSk0Lx9icUqcg+Q4GwiwfNHovTf6L/4exL0k4SdpWophzsl9/REYSqrPQyIVZ/yyNbKmmB1LyPdZrwLsTsWykLo6i1u+ajf0dV+EWU21csSc5+54/eNqkO4DNBQyr0KhQEBvj72+2LbmEgj9i0l7gTK53NQb8gMVoQYgBEC6XaUORQojx2YStBJbkzuIRRpDS+iuZOSaAYqD8ff1ELFKg7aQsu2qrVHtoYlw689W11TZ/Nv8UcZa0Ci2Oqbz3wsjg11nb+MnNvKuIt8/14rJzOz0fWDjNb2XeTOaAr7qzbNOc8k797YCoUBAb4+9vvb+gupjE6K5Ir5vWWut31EVtXLfMvHNCGJJABdmg7iGN0bmfPOwPUWRUbojUBm53np95KMLatHUnd+htGe8vgVUmopxhBg6MCv2BsJ4eHZtLK+m/1hglAw/BzJylYI1bQhekXir7JRipaK/Wvfr1Ld0XVBQwrtOrcIrTaqdYCGaAqLAQG+Pvb7K+FhEEMuHkK2uwtykVMEltuGORJ88Xr6rrW7pVf+KEMUa0JfqnIvJidxcX8webkIIExg3HLHU26fvIK1cdDbgr+HacIpEu3XUrNxwmRxrRlG1JYDjAtADTPZ0OgOHNLTYluqFxmZ99zrdjSRRa+2ZLrOSNPScM+6AhzpihUwbP5KqhnbHboKiQEBvj72+/YwG/F19dCWgUpyc0b7EvaeisMfLiSswQQXL+31+nfrWkv+hSrCGj16inGNWTwORRPy6psbzmQpRX+bpnGLylMEU9I4kPiG+tXncvUYZFfCcO6CbIrvZ11QAXc3T1vPm3AjxRzGwNZZBrKM4opIa29p0mK90hlnWx2M7Q1Km6zI+SkH7gqDAQG+Pvb7K7CdbQuSVe9X4DXy1ZpLSPXu9QFcV05hRYa9f/1djR/ryhFRjCJ4Qg2jCwa3YDBr0lczjqyiaF5b1gQjM8H7Pa62FWugDGJmsMbbeMAi3Gu15AAQwbVH0bKTGAZFgFXIU8E+GL72f6WUq+K8IF1o9GV3fVvmq5GybEbRuu16Co4BAb4+9vu8EkkhuKwmjJyn+NgS1LYZNO9gaVNc93xNGfd0rCqBlWJ8N2ipbe4pNAICUMg4bUY7amLO2pIPZmU1CakO64MGF5FGKI/ErW0q5FE+/bw8EylSv9poqrYX1CYMloQvt3KMfJw7uD4BMF9qgMzLhUQDhW/aYkDf0WRx5I+ILvduFyl67Cct3ENtNAqRAQG+Pvb7+3+cB9ML8nVUOxVgb51eJV9DRbhgK5keIlIo7IYe+iKVMpkM1RRSJSeBv3OhBp3+LTbg0X6CvEAXRVpgHF0uyD3TvmzlpEIL3GbHYwdKWlCr/jwN0kkujp00Vu6qiDmuF0kj9bSYFon01iRlluvjDU9fGRxHxHVlbplnAS0cDELM8rhgZhGG8H96SNgKJgG+Pvb7yVGQLv0KZn7u6exl7RdLWC+J7drYjNGkcuAr+O2cQpid"
+          }
+        ],
+        "annotations": []
+      }
+    }
+  ],
+  "usage": {
+    "prompt_tokens": 121,
+    "completion_tokens": 365,
+    "total_tokens": 486,
+    "cost": 0.00380125,
+    "is_byok": false,
+    "prompt_tokens_details": {
+      "cached_tokens": 0,
+      "cache_write_tokens": 0,
+      "audio_tokens": 0,
+      "video_tokens": 0
+    },
+    "cost_details": {
+      "upstream_inference_cost": 0.00380125,
+      "upstream_inference_prompt_cost": 0.00015125,
+      "upstream_inference_completions_cost": 0.00365
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 350,
+      "image_tokens": 0
+    }
+  }
+}

@@ -1,0 +1,41 @@
+{
+  "model": "claude-haiku-4-5-20251001",
+  "system": "You are a helpful assistant.",
+  "messages": [
+    {
+      "role": "user", 
+      "content": [
+        { "type": "text", "text": "Hello World!" }
+      ]
+    },
+    {
+      "role": "assistant",
+      "content": [
+        { "type": "text", "text": "Hello! How can I assist you today" }
+      ]
+    },
+    {
+      "role": "user",
+      "content": [
+        { "type": "text", "text": "Please explain how you are feeling today in 5 words max." }
+      ]
+    }
+  ],
+  "tools": [
+    {
+      "name": "calculator",
+      "description": "Evaluate math expressions.",
+      "input_schema": {
+        "type": "object",
+        "properties": { 
+          "expression": { "type": "string" }
+        },
+        "required": ["expression"]
+      }
+    }
+  ],
+  "tool_choice": { "type": "auto" },
+  "stream": false,
+  "temperature": 0.0,
+  "max_tokens": 1024
+}

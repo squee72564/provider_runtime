@@ -1,0 +1,55 @@
+{
+  "id": "gen-1772160356-Dd96VT6NKnIgmlHSJjTZ",
+  "provider": "OpenAI",
+  "model": "openai/gpt-5-pro",
+  "object": "chat.completion",
+  "created": 1772160356,
+  "choices": [
+    {
+      "logprobs": null,
+      "finish_reason": "stop",
+      "native_finish_reason": "completed",
+      "index": 0,
+      "message": {
+        "role": "assistant",
+        "content": "The current temperature in San Francisco is about 16°C (60°F).",
+        "refusal": null,
+        "reasoning": "**Presenting weather details**\n\nI’ve already made a call to get the weather in San Francisco, and I have the JSON result: { \"city\": \"San Francisco\", \"celcius\": 16, \"farhenheit\": 60}. I notice some misspellings like \"celcius\" and \"farhenheit.\" \n\nThe tool only provides temperature, so I should present it clearly. I'll say, \"It's about 16°C (60°F) right now.\" Since the tool indicates this is the current weather, I might want to clarify that! However, it lacks details about sky conditions, which is a bit of a bummer.**Delivering concise weather info**\n\nI should focus on providing just the available information without any embellishments. The weather tool has already been used, so I’ll present it plainly. The tool gives 16 for Celsius and 60 for Fahrenheit. I’ll phrase it like this: \"Currently around 16°C (60°F) in San Francisco.\" \n\nI might ask if the user wants a forecast or more details, but keeping it brief is fine too. I need to avoid adding unnecessary information like the time of day since it's not included.**Crafting the weather response**\n\nI'm thinking about how to present the temperature accurately. I want to say, \"Right now in San Francisco, it's about 16°C (60°F).\" I could use \"temperatures around\" to be a bit more casual, but I’ll stick to just presenting the temperature without extra details about conditions.\n\nI will go with, \"The current temperature is about 16°C (60°F).\" That feels safe and clear for the user! So, I think that will be my final answer.",
+        "reasoning_details": [
+          {
+            "format": "openai-responses-v1",
+            "index": 0,
+            "type": "reasoning.summary",
+            "summary": "**Presenting weather details**\n\nI’ve already made a call to get the weather in San Francisco, and I have the JSON result: { \"city\": \"San Francisco\", \"celcius\": 16, \"farhenheit\": 60}. I notice some misspellings like \"celcius\" and \"farhenheit.\" \n\nThe tool only provides temperature, so I should present it clearly. I'll say, \"It's about 16°C (60°F) right now.\" Since the tool indicates this is the current weather, I might want to clarify that! However, it lacks details about sky conditions, which is a bit of a bummer.**Delivering concise weather info**\n\nI should focus on providing just the available information without any embellishments. The weather tool has already been used, so I’ll present it plainly. The tool gives 16 for Celsius and 60 for Fahrenheit. I’ll phrase it like this: \"Currently around 16°C (60°F) in San Francisco.\" \n\nI might ask if the user wants a forecast or more details, but keeping it brief is fine too. I need to avoid adding unnecessary information like the time of day since it's not included.**Crafting the weather response**\n\nI'm thinking about how to present the temperature accurately. I want to say, \"Right now in San Francisco, it's about 16°C (60°F).\" I could use \"temperatures around\" to be a bit more casual, but I’ll stick to just presenting the temperature without extra details about conditions.\n\nI will go with, \"The current temperature is about 16°C (60°F).\" That feels safe and clear for the user! So, I think that will be my final answer."
+          },
+          {
+            "id": "rs_0e6397a44199105f0169a105a8cb788195a78d0c55b34a604a",
+            "format": "openai-responses-v1",
+            "index": 1,
+            "type": "reasoning.encrypted",
+            "data": "gAAAAABpoQWwU2x3yCxpHTXYSHBqj22vUYlWol9FPSArgZTIaP8hp70UCBefI294GcYmLH2RTqXlDg8c8iUbUdrth-4J2aZQxHE8gKiWoJ_EXVXB-kIssGBi_kD7C5YSMg-a5Z6Dt7ICeRQKbaz0WWgkdcBDtYAu5XlyngQ0xUKUUyMIZkyo4bs2ANrnuSQSR0wXHmhP8YDLRqCZ2nfO9Y7r0FZb_ijfdlyy9C4iejOwiYghWrmtbXqC0v6ecI-P3AVzC1u8xb9oSBM8ZFdcoe16CgMe_AMZh5f6Yhl2RdltaM9RBtraNDOJC5j2jn3EAgeJvAtta6nrLAXuNwEjVb7DidtWNOGDoBAysoXjOP6jqUNEOB-Vuw5UnXrjDXmHpldB7zeTIs_TV6Q-TNorrhLqmi1nFfGd2PD-nkv4ONfgYpMWHqtExWvFx3fvCdRZ35-mrRRGMx-yo89tbnTgrmelqTkSvrMgcXxNP3jBBk-Fp3AQisTV2z9X6Zh0DWbGa2rWfu1c7HLIy5LunklvROUBbRuqflKKT7hOgXCKXqQtIKSN185QjKTT0KzQQB8UTNQTJU3qoUqoZcey5I3yHesjHM2WMQMe_iS7Wm0O_Vz5nxWWJbmpajXWH8Pk4bk-Q5fCffprxMDtPEqBVH33zmQKcNygrTWIgv4fRp9Mg3F0A6fIIcAofd8H1RfWxH2px59CiCgB7tIfezgFO0K101519U8M7TAT5MeINcHgzZFFiZwjA71KeFjP8tg3QQd4epZ8Ox3ch6KERNgcp96BMwTxL2r-9vYIcs3PBBIElz1MawMunx0ezx31TPBqcZyyDBtzYZsHxLaP4GXVPhyUpSQ2Ux78w9xRcLKkvXNlrHQhjuQgrW6Yoh5wftVhdtJyqI_8RHgGOMhVfhxms2CpN3K_qQHcCJCfqTfGQPpQEq1WG61qv5pBlnWnBLsXvh5TTeBhUSxWxcjLdlFqVDEdmp780Pj5rAroQLcAtWVVF2oA8LhTxi3TMGQsTqtDux4Q2huEABmLEX68tiRaQUCFgveCLQeRi8rzGzKnx3G9xyDCrspTsI2_75lprd6SwPBW-HyrtRWS_HZ8yhYZB1vLGSvwH4iLn7bdYlUb4ANwLnx33IxEMpyRy2tXdus_DOMsg0I4Ub4j9jUJx04rkii0hXSm2UZ8twbpx4xlVZEWOrel7hTsOYSUgthHsiuTmSL6XQFm29KDqHAvYS6cofQUp0qkYQh0mpMv3jKaaYVdz-e1--bCyvKUIhWouHxd2yNg_bDiAv7bcRUmvKgNdDqymAARssg3CTu66MgD3hqx5uRZ2GyMCmmitN9aNZlHVQBfAbHcj9LTkkHD0UKTDc1_hT4SMnUvSSDebUbiHJXs_13S3fz9qmhbgCBobFj7ziormHrPzpIN6syrLLUPOLsx-mdWgtyncloMMOejkb2rcB6snrc57o9jb3U75VxmexRKW58iElS3YaEBYzUAfcFNWAoP2ce10tQ6WOZwF37gUS0VvnFac0qGDL4u9y4ZIumWtNwvMKntsRR-PCpt1OxoFTth2AFSQV08Awv-PUJyKKc16O0EjOIDj2Cfu62lnteUXG6Tv6a8-au5nGN9B39JAN50GoyYPTH-UroJ1GXjHWz0otK7GJwjYR9hpXBoiXKDT1JYrb67ulK5UO4BHWDhniNawNyj56r7_9-wx1ZMo6dR999MzkFaVLGzggxAn0Asxlj5usNlEyPf6O1TYDE_uNlZQc4UCMlnrmv_1Pc9IojRG6qNJEKs91CkumTBhlIMCz3LXwL67X_JodXvttH-G9UzzR5HhC2oR1yte8ativ_KF9OszwKfF8GygvQDFeNRZl1Ek0AnK9TSBScGm_R0znzeSytE8Ff7LdJUIHvBZOoj4zofLFl6pKQ3s0vWyyiPkbm3-Eyt-jopEV1RJomIw8gQmthN-KKrtsU1xfhidvljO8xiBFohjgam65fB534MyKR3d_L7Y1S12IXS-3thuxe7WxXhu-Duos-hP_NZFzqPsbkS1udaWtrzD-m5doWysold8HHnxF1hoWg3xbzluaL2oy7relu0_Yppmt1ef6k19irvmmF8lKOt_CvxRM6OnQ9GTd1LD7nANR7Vy88Hl0sr1PHwvwa2H_t7KzyHLVOZAf3sGlanNB0jJoUrdeHy8aZfJ1byjuGltmvCmtmRZkH0esP6EL0mLyRkdW6K646FDm5YU3TjtPDZTmYT7O_QFfyCXqAnytVAAZae-IzQJJVF-T08_vmZ2g2XWNFrcjhpfE7RdGgVA1Yf3sFwtenblsJFHNqPg3xjoWeLD2oqyLJQuGY3I41LuGzsBebUKSIQDwMQeo56ZcNu1vuh_2QsNsYNNfMFuW47k58WSkGu48XqZkAgIFrp7mGYY3quqiSToRK8fXaqRw7ndepy7QvrByAa2Yrr0jWjRGAkBGx7u0JXIJeyhzcMn_uP_0IIriB_dCejwUf5THB4I3hZf9vMwzsoc3sAPOm2sVh6ookg-fj6N-_kMlLp_VZFwrBgmY8KD5pCdhv0LsifMdIvDNjhmZcqwmkofC04YIadQJ6itUjB46yzRdrxzZimrWrDdkix9NaMxuV0sVpZkIcWVVtZbZck6UnRdLkyuEhqY1AKMPzmr1eSff7UMgOP699Xl7BNUbz7YHfr30sI1PJhb7cx7puqn7wGvwBlxL59ST5pY2ccJ1lmAZ1bnn1nZzEq76-fypxLv4jSjuO1xMn49c1GaGcyquxNiMUczf8FohixfFhz0CY6Uv5eGIwvFH70doBMOHfKIKEg1d9Xsv2ZSzF16L_PjWqM_gxHx_4wgGAWMUB0NdXeGnAQFL5RcgJUOzBtlTcNe9qR8pdVk5SZ-6JXEkDN9h3z7FdNC6bwAGKa7R0URTAarxkrnJEeR-MS9fsJV1JaK5blsEjryVyn90i-V9mHVsfZpmJJgkP_coIFHGYq-vwbcOeP26VHk32d6PFYfCnRperrEl3fJ5U4T6wTN8XCWP82qxmzxSYg8pce_ItfaaSRA5kf0VO-Kp2Q9JCd4k84Z_o9aV_yPPCJ4E9UyRncXR96ilNWm3UCY92CiuRP3FIsjAA1ijZZcn_1eG1ptQ3dJiMhfBYx036Ur1VB6Mio8R1HkYXbScEFiCwemk26T9RMHrtyiMU_CyPWQnNc3LEukqWbRpFHIWZHM3BpH3ElLp11K1f7K8lDSwt402k5N-GgXRC-rnukl7B0ZWU10BG3UfhNbu7zGvdJ_B851mcchW2aVS2837yHSo3r9uC2ZpgT86BTW5XhNL9r7nl0z8Mly-GINdhf7rzDZB31FJ2eKxXi9phGbd70WKFS0PWyjoED2dQ9c7FLFUlEOPtNh2qkWFV6gTLYPZzSGGOHquVYzeX0rDfl_jyNWXOLVz2Wl5p85qDukO6A9LZzIYxqKhL3G-YOmFPF-8KWDMXf-gHUqDxgwb4Wtjthrm128HmRWHqQHozBnKuVyvFIf3mGeOT06urkF3GrhDtdIvZFy0bO2QB9VIkPDpckpc0tjCO4L0rMXRF7VczCuI_xOtun6_tMDY6q6CBo8ovEAHNUGfuriWFQj5HPlQ20cYx0HcieGjcBdPaDb7-ogsyLrX-Ut8AZQMqUPppJLpkyxMvo1jhEY5tGX-Uv6nURBsTTpb7cEVVDcNsUnkOynNHoZ6Df--BqzOfbsCNM0mkh3aOwIcImr8klX3laGJReLMJ--xq7LT0oOQrtbFIu6ZhzPH-WsxmzpkwRhjo-IA2MDlOGklhWzKX0uZoz"
+          }
+        ]
+      }
+    }
+  ],
+  "usage": {
+    "prompt_tokens": 111,
+    "completion_tokens": 500,
+    "total_tokens": 611,
+    "cost": 0.061665,
+    "is_byok": false,
+    "prompt_tokens_details": {
+      "cached_tokens": 0
+    },
+    "cost_details": {
+      "upstream_inference_cost": 0.061665,
+      "upstream_inference_prompt_cost": 0.001665,
+      "upstream_inference_completions_cost": 0.06
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 448,
+      "image_tokens": 0
+    }
+  }
+}

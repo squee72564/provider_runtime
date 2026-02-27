@@ -1,0 +1,58 @@
+{
+  "id": "gen-1772159974-sZynfgE5aFggvXCNpooJ",
+  "provider": "Google AI Studio",
+  "model": "google/gemini-3-pro-preview",
+  "object": "chat.completion",
+  "created": 1772159974,
+  "choices": [
+    {
+      "logprobs": null,
+      "finish_reason": "stop",
+      "native_finish_reason": "STOP",
+      "index": 0,
+      "message": {
+        "role": "assistant",
+        "content": "I am ready to help.",
+        "refusal": null,
+        "reasoning": "**Assessing Five Word Constraint**\n\nI'm currently focused on the five-word limit. The task is to concisely describe my status, which demands careful word selection to accurately and efficiently convey my state. I'm prioritizing accuracy and brevity. I'm also considering that \"how are you today\" is an informal request.\n\n\n",
+        "reasoning_details": [
+          {
+            "format": "google-gemini-v1",
+            "index": 0,
+            "type": "reasoning.text",
+            "text": "**Assessing Five Word Constraint**\n\nI'm currently focused on the five-word limit. The task is to concisely describe my status, which demands careful word selection to accurately and efficiently convey my state. I'm prioritizing accuracy and brevity. I'm also considering that \"how are you today\" is an informal request.\n\n\n"
+          },
+          {
+            "format": "google-gemini-v1",
+            "index": 1,
+            "type": "reasoning.encrypted",
+            "data": "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"
+          }
+        ],
+        "annotations": []
+      }
+    }
+  ],
+  "usage": {
+    "prompt_tokens": 34,
+    "completion_tokens": 387,
+    "total_tokens": 421,
+    "cost": 0.004712,
+    "is_byok": false,
+    "prompt_tokens_details": {
+      "cached_tokens": 0,
+      "cache_write_tokens": 0,
+      "audio_tokens": 0,
+      "video_tokens": 0
+    },
+    "cost_details": {
+      "upstream_inference_cost": 0.004712,
+      "upstream_inference_prompt_cost": 0.000068,
+      "upstream_inference_completions_cost": 0.004644
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 381,
+      "image_tokens": 0
+    }
+  }
+}

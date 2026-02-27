@@ -1,0 +1,76 @@
+{
+  "id": "resp_02d6dbae6f1a548e0169a10f0149c08197949bf75d1b5d4a1e",
+  "object": "response",
+  "created_at": 1772162818,
+  "status": "completed",
+  "background": false,
+  "billing": {
+    "payer": "developer"
+  },
+  "completed_at": 1772162822,
+  "error": null,
+  "frequency_penalty": 0,
+  "incomplete_details": null,
+  "instructions": "You are a helpful assistant.",
+  "max_output_tokens": 1024,
+  "max_tool_calls": null,
+  "model": "gpt-5-nano-2025-08-07",
+  "output": [
+    {
+      "id": "rs_02d6dbae6f1a548e0169a10f0270cc819791fb0c3422ae0f62",
+      "type": "reasoning",
+      "summary": []
+    },
+    {
+      "id": "msg_02d6dbae6f1a548e0169a10f06bb8c8197a1df465a28f04770",
+      "type": "message",
+      "status": "completed",
+      "content": [
+        {
+          "type": "output_text",
+          "annotations": [],
+          "logprobs": [],
+          "text": "I'm here, ready to help."
+        }
+      ],
+      "role": "assistant"
+    }
+  ],
+  "parallel_tool_calls": true,
+  "presence_penalty": 0,
+  "previous_response_id": null,
+  "prompt_cache_key": null,
+  "prompt_cache_retention": null,
+  "reasoning": {
+    "effort": "medium",
+    "summary": null
+  },
+  "safety_identifier": null,
+  "service_tier": "default",
+  "store": false,
+  "temperature": 1,
+  "text": {
+    "format": {
+      "type": "text"
+    },
+    "verbosity": "medium"
+  },
+  "tool_choice": "auto",
+  "tools": [],
+  "top_logprobs": 0,
+  "top_p": 1,
+  "truncation": "disabled",
+  "usage": {
+    "input_tokens": 50,
+    "input_tokens_details": {
+      "cached_tokens": 0
+    },
+    "output_tokens": 556,
+    "output_tokens_details": {
+      "reasoning_tokens": 512
+    },
+    "total_tokens": 606
+  },
+  "user": null,
+  "metadata": {}
+}

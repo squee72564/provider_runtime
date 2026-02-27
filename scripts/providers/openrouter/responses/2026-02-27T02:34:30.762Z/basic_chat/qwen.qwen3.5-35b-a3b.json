@@ -1,0 +1,48 @@
+{
+  "id": "gen-1772159704-LAxtID9D5o2dBPEbjWa9",
+  "provider": "Alibaba",
+  "model": "qwen/qwen3.5-35b-a3b",
+  "object": "chat.completion",
+  "created": 1772159704,
+  "choices": [
+    {
+      "logprobs": null,
+      "finish_reason": "stop",
+      "native_finish_reason": "stop",
+      "index": 0,
+      "message": {
+        "role": "assistant",
+        "content": "I am doing very well.",
+        "refusal": null,
+        "reasoning": "Thinking Process:\n\n1.  **Analyze the Request:**\n    *   Input: \"tell me how you are doing today in 5 words.\"\n    *   Constraint: Exactly 5 words.\n    *   Topic: How I am doing (status/greeting).\n    *   Tone: Friendly, helpful, concise.\n\n2.  **Drafting Options:**\n    *   Option 1: I am doing very well today. (5 words) - *Good.*\n    *   Option 2: Doing great, ready to help you. (5 words) - *Good.*\n    *   Option 3: I am functioning perfectly right now. (5 words) - *A bit robotic.*\n    *   Option 4: Very well, thank you for asking. (5 words) - *Polite.*\n    *   Option 5: I am happy to assist you. (5 words) - *Focuses on service.*\n\n3.  **Selecting the Best Option:**\n    *   Option 1 is simple and direct.\n    *   Option 4 is polite.\n    *   Let's go with something friendly and accurate.\n    *   \"I am doing very well today.\" (5 words)\n    *   \"Doing great, ready to help you.\" (5 words)\n    *   \"I am functioning well and ready.\" (5 words)\n\n    Let's pick: \"I am doing very well today.\"\n\n4.  **Word Count Check:**\n    1. I\n    2. am\n    3. doing\n    4. very\n    5. well\n    6. today. (Wait, \"today\" makes it 6 if I count the period? No, words are tokens. \"today.\" is one word. But let's count: I (1) am (2) doing (3) very (4) well (5) today (6). Oops.)\n\n    Correction: \"I am doing very well.\" (5 words)\n    1. I\n    2. am\n    3. doing\n    4. very\n    5. well\n\n    Or: \"Doing great, ready to help you.\"\n    1. Doing\n    2. great,\n    3. ready\n    4. to\n    5. help\n    6. you. (6 words)\n\n    Let's try: \"I am doing great today.\"\n    1. I\n    2. am\n    3. doing\n    4. great\n    5. today. (5 words)\n\n    Let's try: \"Very well, thank you for asking.\"\n    1. Very\n    2. well,\n    3. thank\n    4. you\n    5. for\n    6. asking. (6 words)\n\n    Let's try: \"I am functioning well and ready.\"\n    1. I\n    2. am\n    3. functioning\n    4. well\n    5. and\n    6. ready. (6 words)\n\n    Let's try: \"Doing well, ready to assist you.\"\n    1. Doing\n    2. well,\n    3. ready\n    4. to\n    5. assist\n    6. you. (6 words)\n\n    Let's try: \"I am doing well today.\"\n    1. I\n    2. am\n    3. doing\n    4. well\n    5. today. (5 words)\n\n    Let's try: \"Great, ready to help you now.\"\n    1. Great,\n    2. ready\n    3. to\n    4. help\n    5. you\n    6. now. (6 words)\n\n    Let's try: \"I am doing great right now.\"\n    1. I\n    2. am\n    3. doing\n    4. great\n    5. right\n    6. now. (6 words)\n\n    Let's try: \"Doing well, ready to help.\"\n    1. Doing\n    2. well,\n    3. ready\n    4. to\n    5. help. (5 words)\n\n    Let's try: \"I am doing very well.\"\n    1. I\n    2. am\n    3. doing\n    4. very\n    5. well. (5 words)\n\n    This seems safe and accurate.\n\n5.  **Final Verification:**\n    \"I am doing very well.\"\n    1: I\n    2: am\n    3: doing\n    4: very\n    5: well\n\n    Perfect.\n\n6.  **Final Output Generation.**\n    I am doing very well.",
+        "reasoning_details": [
+          {
+            "format": "unknown",
+            "index": 0,
+            "type": "reasoning.text",
+            "text": "Thinking Process:\n\n1.  **Analyze the Request:**\n    *   Input: \"tell me how you are doing today in 5 words.\"\n    *   Constraint: Exactly 5 words.\n    *   Topic: How I am doing (status/greeting).\n    *   Tone: Friendly, helpful, concise.\n\n2.  **Drafting Options:**\n    *   Option 1: I am doing very well today. (5 words) - *Good.*\n    *   Option 2: Doing great, ready to help you. (5 words) - *Good.*\n    *   Option 3: I am functioning perfectly right now. (5 words) - *A bit robotic.*\n    *   Option 4: Very well, thank you for asking. (5 words) - *Polite.*\n    *   Option 5: I am happy to assist you. (5 words) - *Focuses on service.*\n\n3.  **Selecting the Best Option:**\n    *   Option 1 is simple and direct.\n    *   Option 4 is polite.\n    *   Let's go with something friendly and accurate.\n    *   \"I am doing very well today.\" (5 words)\n    *   \"Doing great, ready to help you.\" (5 words)\n    *   \"I am functioning well and ready.\" (5 words)\n\n    Let's pick: \"I am doing very well today.\"\n\n4.  **Word Count Check:**\n    1. I\n    2. am\n    3. doing\n    4. very\n    5. well\n    6. today. (Wait, \"today\" makes it 6 if I count the period? No, words are tokens. \"today.\" is one word. But let's count: I (1) am (2) doing (3) very (4) well (5) today (6). Oops.)\n\n    Correction: \"I am doing very well.\" (5 words)\n    1. I\n    2. am\n    3. doing\n    4. very\n    5. well\n\n    Or: \"Doing great, ready to help you.\"\n    1. Doing\n    2. great,\n    3. ready\n    4. to\n    5. help\n    6. you. (6 words)\n\n    Let's try: \"I am doing great today.\"\n    1. I\n    2. am\n    3. doing\n    4. great\n    5. today. (5 words)\n\n    Let's try: \"Very well, thank you for asking.\"\n    1. Very\n    2. well,\n    3. thank\n    4. you\n    5. for\n    6. asking. (6 words)\n\n    Let's try: \"I am functioning well and ready.\"\n    1. I\n    2. am\n    3. functioning\n    4. well\n    5. and\n    6. ready. (6 words)\n\n    Let's try: \"Doing well, ready to assist you.\"\n    1. Doing\n    2. well,\n    3. ready\n    4. to\n    5. assist\n    6. you. (6 words)\n\n    Let's try: \"I am doing well today.\"\n    1. I\n    2. am\n    3. doing\n    4. well\n    5. today. (5 words)\n\n    Let's try: \"Great, ready to help you now.\"\n    1. Great,\n    2. ready\n    3. to\n    4. help\n    5. you\n    6. now. (6 words)\n\n    Let's try: \"I am doing great right now.\"\n    1. I\n    2. am\n    3. doing\n    4. great\n    5. right\n    6. now. (6 words)\n\n    Let's try: \"Doing well, ready to help.\"\n    1. Doing\n    2. well,\n    3. ready\n    4. to\n    5. help. (5 words)\n\n    Let's try: \"I am doing very well.\"\n    1. I\n    2. am\n    3. doing\n    4. very\n    5. well. (5 words)\n\n    This seems safe and accurate.\n\n5.  **Final Verification:**\n    \"I am doing very well.\"\n    1: I\n    2: am\n    3: doing\n    4: very\n    5: well\n\n    Perfect.\n\n6.  **Final Output Generation.**\n    I am doing very well."
+          }
+        ]
+      }
+    }
+  ],
+  "system_fingerprint": null,
+  "usage": {
+    "prompt_tokens": 55,
+    "completion_tokens": 1079,
+    "total_tokens": 1134,
+    "cost": 0.00217175,
+    "is_byok": false,
+    "prompt_tokens_details": {
+      "cached_tokens": 0
+    },
+    "cost_details": {
+      "upstream_inference_cost": 0.00217175,
+      "upstream_inference_prompt_cost": 0.00001375,
+      "upstream_inference_completions_cost": 0.002158
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 1068
+    }
+  }
+}

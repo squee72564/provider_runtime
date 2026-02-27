@@ -1,0 +1,48 @@
+{
+  "id": "gen-1772160296-5QLPpauSkNT87x4OUQmQ",
+  "provider": "xAI",
+  "model": "x-ai/grok-4-fast",
+  "object": "chat.completion",
+  "created": 1772160296,
+  "choices": [
+    {
+      "logprobs": null,
+      "finish_reason": "stop",
+      "native_finish_reason": "completed",
+      "index": 0,
+      "message": {
+        "role": "assistant",
+        "content": "The current weather in San Francisco is 16°C (60°F).",
+        "refusal": null,
+        "reasoning": null,
+        "reasoning_details": [
+          {
+            "id": "rs_baf31ba6-d411-18eb-7dde-f82051a66cc7",
+            "format": "xai-responses-v1",
+            "index": 0,
+            "type": "reasoning.encrypted",
+            "data": "7XGiFeaalE8+IEEosMunLnj7yhd5zVNUe8NQxXdGgj19xxVEyvyFBxhfVkArVB3o3alTe0AbWyHc7pIjxqFYfB2yQQnooXRPnbLxIwDkNo6drjs9qNc1r0+9xHue/leTYLKo0CQ1ePbT601p7T+Fzpjng6sTnosD40EHspD+HFmSwmoAta82nbWy1S1WZg9JX8t7QJFW5Tgmu6TWPZs+ljjOcLwEIECeo1UwbbJE9Dnx3tWsv8PoFYtQ+pcXr5MI/zY6utsOnU+bD90xrEiJ4GL7IaN4IrazkkxhYQLXGsVMSGlHseXkfDgCBI3A0/fC+juiDZmdrxzIHqbL9bYZ6id7KAAc99ytQY1+JpH9sfccU5l6lV8D0KrUu+go3aKH7my82pUw/pgiXRYUTQKFuxGXDu1V7z3JoYhBtgKk9J39U20tdn9rcIPBrE9R4skOstKa3hBqC7MK0aF0kS4GXNk3hm9WdeVopTa3R4REZi5/jhloTLHDKtCJ1p+TvxzfzuZGjyFMdZbsvQKAqLjOawCRaAbZbJseZiWydl45NecPpHjPZeW7RtoKElKl38E7kFojWrPfo2gJGWcgduaRiOaRPjiM+9Fx3BBmyngmSoxaSAn3NdA"
+          }
+        ]
+      }
+    }
+  ],
+  "usage": {
+    "prompt_tokens": 419,
+    "completion_tokens": 117,
+    "total_tokens": 536,
+    "cost": 0.0000889,
+    "is_byok": false,
+    "prompt_tokens_details": {
+      "cached_tokens": 356
+    },
+    "cost_details": {
+      "upstream_inference_cost": 0.0000889,
+      "upstream_inference_prompt_cost": 0.0000304,
+      "upstream_inference_completions_cost": 0.0000585
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 103
+    }
+  }
+}

@@ -1,0 +1,60 @@
+{
+  "id": "gen-1772160151-UGadpIfTl9Hqm3PGLo1q",
+  "provider": "OpenAI",
+  "model": "openai/gpt-5.1",
+  "object": "chat.completion",
+  "created": 1772160151,
+  "choices": [
+    {
+      "logprobs": null,
+      "finish_reason": "tool_calls",
+      "native_finish_reason": "completed",
+      "index": 0,
+      "message": {
+        "role": "assistant",
+        "content": "",
+        "refusal": null,
+        "reasoning": null,
+        "tool_calls": [
+          {
+            "type": "function",
+            "index": 0,
+            "id": "call_2N2PEWVEXiP6OX3HDjdAS5LJ",
+            "function": {
+              "name": "get_weather",
+              "arguments": "{\"city\":\"San Francisco\"}"
+            }
+          }
+        ],
+        "reasoning_details": [
+          {
+            "id": "rs_03d9769db579d1350169a10497faf08197960369a5800d6c77",
+            "format": "openai-responses-v1",
+            "index": 0,
+            "type": "reasoning.encrypted",
+            "data": "gAAAAABpoQSYoNKMwjlT2Mf2bXWPOjt57FCcxEKYFd611k6d_m5oBFR6GEEHnPFLWbT76yAX5Q2jgPvLl-dLVl9phixLCxeJamAnUXJRvUCHkE0iSOqtxcXY7y_zyBxYVOM1973voNX5YwUeWiKJMXg7FCDBghoUgH3xDuQt3kjobceR09iQK-kQHJWTOLBaef5nOntXBB37-WM4isanGo4mDjPOlI9oZo0IYIUO3U-aJCUEBRxjUqHznmchUMs8jSfmML1EsVTupOHncq8hoUEHE11gVriwwd4fne1xMosStoeToxWe_v6tYB9Y5Mlqjblozn1KU39S5ir22ZKOis-p8DWjQbW8Zf4qJqeKbWhokiJKfHOasu9ocwJgzEPjzPuIHdWf36_J06dEvj7WCgg_yAyKVTfpUx-nZBDTM-eRqltYDVerzepVDJ-IUDqac55ItcjyuSWVxNnWjR9YczYPRzPnCg6r6_3qOlQRtoDZkFPb38Me5Sjy1G0x3Y3zLEWQM0DivmrLBuxoCdS3RPCVUWRh2evDgIhgsT0ouyMpKG6EUORk0kA8-gdzdEepQtFWo7w5DvRBhxTMjos8GSRGg7bByfapsQvs7R9knOftY2rICcIUo1y5UOU-q2_TZrgA1wshzac5PulTvjXfA6b7YC4gbPdAAXwmgnGP3pEMZQsVoPF8p89H98zAmrS3EA0Vt1ulu00q-6r0BvITz7IecUv9WQRbCI1wTEueFMC8V8ZAEFRvZyFpOlJHn7dOAVfLPcao-dJlN7aAuO3IohF5tX83yr0aerRlOlfXVeQy_9xh4Y4p88jehv0k-Xv7M7gee8EXYoLyP2bt3M8UZP4pF6U6sNvgOWuccqX7iUb050i6rluI5nzkeChXUsAifawfzGpFStqP"
+          }
+        ]
+      }
+    }
+  ],
+  "usage": {
+    "prompt_tokens": 60,
+    "completion_tokens": 33,
+    "total_tokens": 93,
+    "cost": 0.000405,
+    "is_byok": false,
+    "prompt_tokens_details": {
+      "cached_tokens": 0
+    },
+    "cost_details": {
+      "upstream_inference_cost": 0.000405,
+      "upstream_inference_prompt_cost": 0.000075,
+      "upstream_inference_completions_cost": 0.00033
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 12,
+      "image_tokens": 0
+    }
+  }
+}

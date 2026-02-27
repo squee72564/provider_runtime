@@ -1,0 +1,48 @@
+{
+  "id": "gen-1772159690-NaUmIZvnSiJ0Eg6jfwBK",
+  "provider": "Alibaba",
+  "model": "qwen/qwen3.5-flash-02-23",
+  "object": "chat.completion",
+  "created": 1772159690,
+  "choices": [
+    {
+      "logprobs": null,
+      "finish_reason": "stop",
+      "native_finish_reason": "stop",
+      "index": 0,
+      "message": {
+        "role": "assistant",
+        "content": "I am doing very well.",
+        "refusal": null,
+        "reasoning": "Thinking Process:\n\n1.  **Analyze the Request:**\n    *   Input: \"tell me how you are doing today in 5 words.\"\n    *   Constraint: Exactly 5 words.\n    *   Topic: How I am doing (status/mood).\n    *   Tone: Friendly, helpful, concise.\n\n2.  **Drafting Options:**\n    *   Option 1: I am doing very well today. (5 words) - Good.\n    *   Option 2: Doing great, ready to help you. (5 words) - Good.\n    *   Option 3: I feel happy and ready to help. (6 words) - Too long.\n    *   Option 4: Very well, thank you for asking. (5 words) - Good.\n    *   Option 5: I am functioning perfectly today. (5 words) - A bit robotic.\n    *   Option 6: Doing well, ready to assist you. (5 words) - Good.\n\n3.  **Selecting the Best Option:**\n    *   \"I am doing very well today.\" is simple and direct.\n    *   \"Doing great, ready to help you.\" is more engaging.\n    *   Let's go with a friendly, standard response.\n    *   \"I am doing very well today.\" (5 words: I / am / doing / very / well / today -> Wait, that's 6 words.)\n    *   Count: I (1) am (2) doing (3) very (4) well (5) today (6). Oops.\n    *   Correction: \"I am doing very well.\" (5 words: I / am / doing / very / well).\n    *   Correction 2: \"Doing great, ready to help.\" (5 words: Doing / great, / ready / to / help).\n    *   Correction 3: \"I feel great and ready to help.\" (6 words).\n    *   Correction 4: \"I am doing well, thank you.\" (5 words: I / am / doing / well, / thank / you -> 6 words).\n    *   Correction 5: \"Doing well, thank you for asking.\" (5 words: Doing / well, / thank / you / for / asking -> 6 words).\n    *   Correction 6: \"I am doing well today.\" (5 words: I / am / doing / well / today).\n    *   Let's count again: I (1) am (2) doing (3) well (4) today (5). Perfect.\n\n4.  **Final Verification:**\n    *   Sentence: \"I am doing well today.\"\n    *   Word count: 1 (I) + 1 (am) + 1 (doing) + 1 (well) + 1 (today) = 5 words.\n    *   Constraint met.\n\n5.  **Output Generation.**\n    *   \"I am doing well today.\"\n\n    *Wait, let me try another one that sounds more natural.*\n    *   \"Doing great, ready to assist you.\" (5 words: Doing / great, / ready / to / assist / you -> 6 words).\n    *   \"Doing great, ready to help.\" (5 words: Doing / great, / ready / to / help).\n    *   \"I am functioning well today.\" (5 words).\n    *   \"I am doing very well.\" (5 words: I / am / doing / very / well).\n\n    Let's pick \"I am doing very well.\" It's classic.\n    Count: I (1) am (2) doing (3) very (4) well (5).\n\n    Or \"Doing well, ready to help.\"\n    Count: Doing (1) well, (2) ready (3) to (4) help. (5).\n\n    Let's go with \"I am doing very well.\" It's safe and clear.\n    Actually, \"I am doing well today.\" is also 5 words.\n    Let's check \"I am doing well today.\"\n    1: I\n    2: am\n    3: doing\n    4: well\n    5: today\n    Yes.\n\n    Let's check \"I am doing very well.\"\n    1: I\n    2: am\n    3: doing\n    4: very\n    5: well\n    Yes.\n\n    I'll choose \"I am doing very well.\" It sounds slightly more positive.\n\n    Wait, I need to make sure I don't add punctuation that counts as words or extra spaces.\n    \"I am doing very well.\" -> 5 words.\n\n    Let's try: \"Doing great, ready to help.\"\n    1: Doing\n    2: great,\n    3: ready\n    4: to\n    5: help.\n    (Punctuation usually doesn't count as words, but let's be safe).\n\n    \"I am doing very well.\" is safer.\n\n    Wait, is there a better one?\n    \"Thank you, I am doing well.\" (6 words).\n    \"I feel good and ready.\" (5 words).\n    \"I am happy to be here.\" (6 words).\n    \"I am functioning perfectly today.\" (5 words).\n\n    Let's stick with \"I am doing very well.\"\n\n    Wait, counting again:\n    1. I\n    2. am\n    3. doing\n    4. very\n    5. well.\n\n    Yes. 5 words.\n\n    Another option: \"Doing well, ready to assist.\"\n    1. Doing\n    2. well,\n    3. ready\n    4. to\n    5. assist.\n\n    Let's go with \"I am doing very well.\" It's simple.\n\n    Wait, one more check.\n    \"I am doing very well.\"\n    Words: I, am, doing, very, well.\n    Count: 5.\n\n    Okay, ready to output.cw\n",
+        "reasoning_details": [
+          {
+            "format": "unknown",
+            "index": 0,
+            "type": "reasoning.text",
+            "text": "Thinking Process:\n\n1.  **Analyze the Request:**\n    *   Input: \"tell me how you are doing today in 5 words.\"\n    *   Constraint: Exactly 5 words.\n    *   Topic: How I am doing (status/mood).\n    *   Tone: Friendly, helpful, concise.\n\n2.  **Drafting Options:**\n    *   Option 1: I am doing very well today. (5 words) - Good.\n    *   Option 2: Doing great, ready to help you. (5 words) - Good.\n    *   Option 3: I feel happy and ready to help. (6 words) - Too long.\n    *   Option 4: Very well, thank you for asking. (5 words) - Good.\n    *   Option 5: I am functioning perfectly today. (5 words) - A bit robotic.\n    *   Option 6: Doing well, ready to assist you. (5 words) - Good.\n\n3.  **Selecting the Best Option:**\n    *   \"I am doing very well today.\" is simple and direct.\n    *   \"Doing great, ready to help you.\" is more engaging.\n    *   Let's go with a friendly, standard response.\n    *   \"I am doing very well today.\" (5 words: I / am / doing / very / well / today -> Wait, that's 6 words.)\n    *   Count: I (1) am (2) doing (3) very (4) well (5) today (6). Oops.\n    *   Correction: \"I am doing very well.\" (5 words: I / am / doing / very / well).\n    *   Correction 2: \"Doing great, ready to help.\" (5 words: Doing / great, / ready / to / help).\n    *   Correction 3: \"I feel great and ready to help.\" (6 words).\n    *   Correction 4: \"I am doing well, thank you.\" (5 words: I / am / doing / well, / thank / you -> 6 words).\n    *   Correction 5: \"Doing well, thank you for asking.\" (5 words: Doing / well, / thank / you / for / asking -> 6 words).\n    *   Correction 6: \"I am doing well today.\" (5 words: I / am / doing / well / today).\n    *   Let's count again: I (1) am (2) doing (3) well (4) today (5). Perfect.\n\n4.  **Final Verification:**\n    *   Sentence: \"I am doing well today.\"\n    *   Word count: 1 (I) + 1 (am) + 1 (doing) + 1 (well) + 1 (today) = 5 words.\n    *   Constraint met.\n\n5.  **Output Generation.**\n    *   \"I am doing well today.\"\n\n    *Wait, let me try another one that sounds more natural.*\n    *   \"Doing great, ready to assist you.\" (5 words: Doing / great, / ready / to / assist / you -> 6 words).\n    *   \"Doing great, ready to help.\" (5 words: Doing / great, / ready / to / help).\n    *   \"I am functioning well today.\" (5 words).\n    *   \"I am doing very well.\" (5 words: I / am / doing / very / well).\n\n    Let's pick \"I am doing very well.\" It's classic.\n    Count: I (1) am (2) doing (3) very (4) well (5).\n\n    Or \"Doing well, ready to help.\"\n    Count: Doing (1) well, (2) ready (3) to (4) help. (5).\n\n    Let's go with \"I am doing very well.\" It's safe and clear.\n    Actually, \"I am doing well today.\" is also 5 words.\n    Let's check \"I am doing well today.\"\n    1: I\n    2: am\n    3: doing\n    4: well\n    5: today\n    Yes.\n\n    Let's check \"I am doing very well.\"\n    1: I\n    2: am\n    3: doing\n    4: very\n    5: well\n    Yes.\n\n    I'll choose \"I am doing very well.\" It sounds slightly more positive.\n\n    Wait, I need to make sure I don't add punctuation that counts as words or extra spaces.\n    \"I am doing very well.\" -> 5 words.\n\n    Let's try: \"Doing great, ready to help.\"\n    1: Doing\n    2: great,\n    3: ready\n    4: to\n    5: help.\n    (Punctuation usually doesn't count as words, but let's be safe).\n\n    \"I am doing very well.\" is safer.\n\n    Wait, is there a better one?\n    \"Thank you, I am doing well.\" (6 words).\n    \"I feel good and ready.\" (5 words).\n    \"I am happy to be here.\" (6 words).\n    \"I am functioning perfectly today.\" (5 words).\n\n    Let's stick with \"I am doing very well.\"\n\n    Wait, counting again:\n    1. I\n    2. am\n    3. doing\n    4. very\n    5. well.\n\n    Yes. 5 words.\n\n    Another option: \"Doing well, ready to assist.\"\n    1. Doing\n    2. well,\n    3. ready\n    4. to\n    5. assist.\n\n    Let's go with \"I am doing very well.\" It's simple.\n\n    Wait, one more check.\n    \"I am doing very well.\"\n    Words: I, am, doing, very, well.\n    Count: 5.\n\n    Okay, ready to output.cw\n"
+          }
+        ]
+      }
+    }
+  ],
+  "system_fingerprint": null,
+  "usage": {
+    "prompt_tokens": 55,
+    "completion_tokens": 1342,
+    "total_tokens": 1397,
+    "cost": 0.0005423,
+    "is_byok": false,
+    "prompt_tokens_details": {
+      "cached_tokens": 0
+    },
+    "cost_details": {
+      "upstream_inference_cost": 0.0005423,
+      "upstream_inference_prompt_cost": 0.0000055,
+      "upstream_inference_completions_cost": 0.0005368
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 1331
+    }
+  }
+}

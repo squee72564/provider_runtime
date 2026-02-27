@@ -1,0 +1,52 @@
+{
+  "id": "gen-1772159992-f5V2DCXAuI2GhUDBIUV6",
+  "provider": "Google AI Studio",
+  "model": "google/gemini-2.5-pro",
+  "object": "chat.completion",
+  "created": 1772159992,
+  "choices": [
+    {
+      "logprobs": null,
+      "finish_reason": "stop",
+      "native_finish_reason": "STOP",
+      "index": 0,
+      "message": {
+        "role": "assistant",
+        "content": "Ready and eager to help",
+        "refusal": null,
+        "reasoning": "**Assessing Response Feasibility**\n\nI've determined the user's request: a progress update. The essential constraint is a 5-word response. \"I am doing very well\" seems viable. I need to consider if this concise answer truly reflects my thought process effectively.\n\n\n**Evaluating Response Options**\n\nI've explored various 5-word answers. \"I am doing very well\" seemed viable, but lacks dynamism. I brainstormed many options, and \"Ready and waiting to help\" emphasizes my role. \"Happy to help you today\" is friendly, and \"Doing great, thanks for asking!\" is conversational. \"I am here to help you\" is simple, direct, and I think that it's also a good choice.\n\n\n**Refining Optimal Answer**\n\nI've been refining the optimal response, and am currently leaning toward a friendly and direct approach. \"Doing great, ready to help!\" seemed overly casual. \"Ready and eager to assist\" hits the right balance. I think this conveys my state accurately.\n\n\n",
+        "reasoning_details": [
+          {
+            "format": "google-gemini-v1",
+            "index": 0,
+            "type": "reasoning.text",
+            "text": "**Assessing Response Feasibility**\n\nI've determined the user's request: a progress update. The essential constraint is a 5-word response. \"I am doing very well\" seems viable. I need to consider if this concise answer truly reflects my thought process effectively.\n\n\n**Evaluating Response Options**\n\nI've explored various 5-word answers. \"I am doing very well\" seemed viable, but lacks dynamism. I brainstormed many options, and \"Ready and waiting to help\" emphasizes my role. \"Happy to help you today\" is friendly, and \"Doing great, thanks for asking!\" is conversational. \"I am here to help you\" is simple, direct, and I think that it's also a good choice.\n\n\n**Refining Optimal Answer**\n\nI've been refining the optimal response, and am currently leaning toward a friendly and direct approach. \"Doing great, ready to help!\" seemed overly casual. \"Ready and eager to assist\" hits the right balance. I think this conveys my state accurately.\n\n\n"
+          }
+        ],
+        "annotations": []
+      }
+    }
+  ],
+  "usage": {
+    "prompt_tokens": 34,
+    "completion_tokens": 608,
+    "total_tokens": 642,
+    "cost": 0.0061225,
+    "is_byok": false,
+    "prompt_tokens_details": {
+      "cached_tokens": 0,
+      "cache_write_tokens": 0,
+      "audio_tokens": 0,
+      "video_tokens": 0
+    },
+    "cost_details": {
+      "upstream_inference_cost": 0.0061225,
+      "upstream_inference_prompt_cost": 0.0000425,
+      "upstream_inference_completions_cost": 0.00608
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 606,
+      "image_tokens": 0
+    }
+  }
+}

@@ -1,0 +1,70 @@
+{
+  "id": "gen-1772160245-fipH6fNmoUfDVwimKCId",
+  "provider": "Google AI Studio",
+  "model": "google/gemini-2.5-pro",
+  "object": "chat.completion",
+  "created": 1772160245,
+  "choices": [
+    {
+      "logprobs": null,
+      "finish_reason": "tool_calls",
+      "native_finish_reason": "STOP",
+      "index": 0,
+      "message": {
+        "role": "assistant",
+        "content": "",
+        "refusal": null,
+        "reasoning": "**Identifying Relevant Tool**\n\nI've identified the `get_weather` tool as the most relevant for the user's request. The key is to leverage `get_weather(city: str)`. I've extracted the `city` parameter from the user's input, which is \"San Francisco.\" Now the goal is to get this passed through correctly.\n\n\n**Formulating Function Call**\n\nI am now moving on to formulating the precise function call. I plan to use `get_weather` with the city as an argument. The next step is to make sure the city name, \"San Francisco,\" is correctly formatted and passed. I've concluded that the output should look like `print(functions.get_weather(city='San Francisco'))`.\n\n\n",
+        "tool_calls": [
+          {
+            "type": "function",
+            "index": 0,
+            "id": "tool_get_weather_1AcoopHiUHCvPk1tHFKc",
+            "function": {
+              "name": "get_weather",
+              "arguments": "{\"city\":\"San Francisco\"}"
+            }
+          }
+        ],
+        "reasoning_details": [
+          {
+            "format": "google-gemini-v1",
+            "index": 0,
+            "type": "reasoning.text",
+            "text": "**Identifying Relevant Tool**\n\nI've identified the `get_weather` tool as the most relevant for the user's request. The key is to leverage `get_weather(city: str)`. I've extracted the `city` parameter from the user's input, which is \"San Francisco.\" Now the goal is to get this passed through correctly.\n\n\n**Formulating Function Call**\n\nI am now moving on to formulating the precise function call. I plan to use `get_weather` with the city as an argument. The next step is to make sure the city name, \"San Francisco,\" is correctly formatted and passed. I've concluded that the output should look like `print(functions.get_weather(city='San Francisco'))`.\n\n\n"
+          },
+          {
+            "id": "tool_get_weather_1AcoopHiUHCvPk1tHFKc",
+            "format": "google-gemini-v1",
+            "index": 1,
+            "type": "reasoning.encrypted",
+            "data": "CiIBvj72+/rukHgVRNY6feXi390g1t5VnGUW3garC0irzNstCnEBvj72+3JunhTvteT8nvUJ4iTc31wXhBYHFkOwai1IfKxdx1vNPbr1WIQUihZt6dB5D1TD+w7BM3M+qUPEoluEdD7fbB7JSsTS73Mi1GfsotqqXzbDT6MGl/00M9HEZr3vyJurziQN+qlRi8jkht26NwqOAQG+Pvb7skSdYoHAtJKOwfQgHux9cINM5RcKi5dshGN62xiUTU/VIIB90V/6ciFrq9g37+LUOb+z5Wp2tgJIDwm85YlCf00mZ5HEvX3jtSg8YNTB+JSoUPoHeDMVzk5MGpMoOlRFZy2H8GkMRImdbF3yCULWQUA9EJqq7QJBLri5p5rL8pNB4iqhXEUgdNIKiAEBvj72+4kspuabS1eVPvr01hexA/huFv1HQP2MeEeyCHCvjASLN237lChiPw7R7s1JFKIHuylxOxTwFJndDAUZWVMsDPknbTAsI/M3TSOO81+uEI2rMdZF8+J+taMvRn5VPHpzSZVOCm5hBFIUMm2GjwgmCmQSIh+7tX+aVHP2j+qwwCzWHqX3Cn0Bvj72+6pShbk7G32GHDoqDbACNqNYX3T28yT5LoksfK6KD8AlC18KpERK2VnIZtyWo4wKCv9+pN3P2NCBmqc2MFzsnws/vt3z+nm9wae+JsV9f50z+uq8OFPQSvfvMR7EZ/4bF8sT/PZ7XZSogAvTxMEC5LkFgt0IVbv6ZgqFAQG+Pvb7brvAsiqRtdr6GZ+gz0f6A5Q4uucn926IDXWCsSdlgnXhwkgRgPbVCHFw8XLMhMijrQjHTeWGB31gNx7eO0DZgAezcyaFVaWOJY9D41Oi8KEF1DtfmQCDR7L9SsXelyK7gEUnN2qe/7dQUKsYW4iOPTL5wknDCge1USf2qTK+tdcKhgEBvj72+3AV6iq13uw3he3BU/Y04kmz4H/on0UjQ+UDEJr2efjez3ur/QqlmpzfTrzX80lpFcBOA1fSdHmS4c0qGk/ZdjoymFbc1t+/9beq/e/bNOIesxayAG25P5ZG7xmhkD5cL3Yp0MV7lANLxeuG0uMefk2k3tqktPVzHBA5LrCqzWTsiwomAb4+9vsNV3gr6uKJCVNeb3Dv0gonF0In6k2OTzSn51KqtEndFRc="
+          }
+        ],
+        "annotations": []
+      }
+    }
+  ],
+  "usage": {
+    "prompt_tokens": 53,
+    "completion_tokens": 159,
+    "total_tokens": 212,
+    "cost": 0.00165625,
+    "is_byok": false,
+    "prompt_tokens_details": {
+      "cached_tokens": 0,
+      "cache_write_tokens": 0,
+      "audio_tokens": 0,
+      "video_tokens": 0
+    },
+    "cost_details": {
+      "upstream_inference_cost": 0.00165625,
+      "upstream_inference_prompt_cost": 0.00006625,
+      "upstream_inference_completions_cost": 0.00159
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 145,
+      "image_tokens": 0
+    }
+  }
+}

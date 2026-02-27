@@ -1,0 +1,61 @@
+{
+  "id": "gen-1772160192-WYtS4O2jFN4qsqsMJzx4",
+  "provider": "SiliconFlow",
+  "model": "moonshotai/kimi-k2.5",
+  "object": "chat.completion",
+  "created": 1772160202,
+  "choices": [
+    {
+      "logprobs": null,
+      "finish_reason": "tool_calls",
+      "native_finish_reason": "tool_calls",
+      "index": 0,
+      "message": {
+        "role": "assistant",
+        "content": "",
+        "refusal": null,
+        "reasoning": "The user is asking for the weather in San Francisco. I have a function called `get_weather` that can get the current weather by city. I should call this function with \"San Francisco\" as the city parameter.",
+        "tool_calls": [
+          {
+            "type": "function",
+            "index": 0,
+            "id": "functions.get_weather:0",
+            "function": {
+              "name": "get_weather",
+              "arguments": "{\"city\":\"San Francisco\"}"
+            }
+          }
+        ],
+        "reasoning_details": [
+          {
+            "format": "unknown",
+            "index": 0,
+            "type": "reasoning.text",
+            "text": "The user is asking for the weather in San Francisco. I have a function called `get_weather` that can get the current weather by city. I should call this function with \"San Francisco\" as the city parameter."
+          }
+        ]
+      }
+    }
+  ],
+  "system_fingerprint": "",
+  "usage": {
+    "prompt_tokens": 74,
+    "completion_tokens": 64,
+    "total_tokens": 138,
+    "cost": 0.0001773,
+    "is_byok": false,
+    "prompt_tokens_details": {
+      "cached_tokens": 0,
+      "audio_tokens": 0
+    },
+    "cost_details": {
+      "upstream_inference_cost": 0.0001773,
+      "upstream_inference_prompt_cost": 0.0000333,
+      "upstream_inference_completions_cost": 0.000144
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 52,
+      "audio_tokens": 0
+    }
+  }
+}

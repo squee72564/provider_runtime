@@ -1,0 +1,70 @@
+{
+  "id": "gen-1772160231-E4YSz4d2HxA6UaPA8Hmk",
+  "provider": "Google",
+  "model": "google/gemini-3-pro-preview",
+  "object": "chat.completion",
+  "created": 1772160231,
+  "choices": [
+    {
+      "logprobs": null,
+      "finish_reason": "tool_calls",
+      "native_finish_reason": "STOP",
+      "index": 0,
+      "message": {
+        "role": "assistant",
+        "content": "",
+        "refusal": null,
+        "reasoning": "**Analyzing the Request**\n\nI've zeroed in on the user's need: weather data for San Francisco.  My next step is to use the `get_weather` function to get the weather in San Francisco.  I've confirmed the `city` parameter is required, and I'll pass \"San Francisco\" to fulfill the request.\n\n\n",
+        "tool_calls": [
+          {
+            "type": "function",
+            "index": 0,
+            "id": "tool_get_weather_F0YR00ZZrNLNW0Xdk5dL",
+            "function": {
+              "name": "get_weather",
+              "arguments": "{\"city\":\"San Francisco\"}"
+            }
+          }
+        ],
+        "reasoning_details": [
+          {
+            "format": "google-gemini-v1",
+            "index": 0,
+            "type": "reasoning.text",
+            "text": "**Analyzing the Request**\n\nI've zeroed in on the user's need: weather data for San Francisco.  My next step is to use the `get_weather` function to get the weather in San Francisco.  I've confirmed the `city` parameter is required, and I'll pass \"San Francisco\" to fulfill the request.\n\n\n"
+          },
+          {
+            "id": "tool_get_weather_F0YR00ZZrNLNW0Xdk5dL",
+            "format": "google-gemini-v1",
+            "index": 1,
+            "type": "reasoning.encrypted",
+            "data": "CiQBjz1rX8elHSe5EGxZ2o1yViR7PnH18fpEF9MbXu/ugqdlD0YKdAGPPWtfy8q51B3o5FvYaTXKCtIqOcqKCP+B3jrQXh94qYZ0vY/nKdk9F5VMm1cizsFDuePGbfVeA4xAS6MoNw+3/0DYuEjvCanyJJ46R2aC3bXouplKWKmJ7+hM0XlnicbuEpyUkaxU29jxv6rDYB1dS2KBCnkBjz1rX/6OwjH1Z87PmxSo9ASBF7pHUrfHABRrNaSKUrA4duzX1Vs136pLq8Yrwut3GRG20s4Oe5bEqMBDboJzmrPsBit9JqC1x4OePAx8KB136A7nlF3B/N31HPXAHvlJIwqZ1sFryCFcv1iL6TbZ1MQciyCm7f85Cn4Bjz1rXyaY6COxAMfw7xKojTyL+3Kh8K6+O5LQElQNJvJROpszCL8kLmY6dI7ygx79clLUILDQDAUbKcgz5tj00LQDudfUE964VvcZ54gjBGIdPsqLcfIHTOi6GAT7wiaU4Wf4HG2D20FTgYtiNEPY+MmAKJwH0vVa4hiWF1c="
+          }
+        ],
+        "annotations": []
+      }
+    }
+  ],
+  "usage": {
+    "prompt_tokens": 26,
+    "completion_tokens": 68,
+    "total_tokens": 94,
+    "cost": 0.000868,
+    "is_byok": false,
+    "prompt_tokens_details": {
+      "cached_tokens": 0,
+      "cache_write_tokens": 0,
+      "audio_tokens": 0,
+      "video_tokens": 0
+    },
+    "cost_details": {
+      "upstream_inference_cost": 0.000868,
+      "upstream_inference_prompt_cost": 0.000052,
+      "upstream_inference_completions_cost": 0.000816
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 58,
+      "image_tokens": 0
+    }
+  }
+}

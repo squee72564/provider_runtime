@@ -1,0 +1,66 @@
+{
+  "id": "gen-1772160149-UCjdAYwNKh6QuTryLTnl",
+  "provider": "OpenAI",
+  "model": "openai/gpt-5.1-codex-max",
+  "object": "chat.completion",
+  "created": 1772160149,
+  "choices": [
+    {
+      "logprobs": null,
+      "finish_reason": "tool_calls",
+      "native_finish_reason": "completed",
+      "index": 0,
+      "message": {
+        "role": "assistant",
+        "content": "",
+        "refusal": null,
+        "reasoning": "**Planning weather fetch**\n\nI'm preparing to call the weather function with \"San Francisco\" to retrieve current data.",
+        "tool_calls": [
+          {
+            "type": "function",
+            "index": 0,
+            "id": "call_NR9JnkZv0feLNr3JjlJuOY8k",
+            "function": {
+              "name": "get_weather",
+              "arguments": "{\"city\":\"San Francisco\"}"
+            }
+          }
+        ],
+        "reasoning_details": [
+          {
+            "format": "openai-responses-v1",
+            "index": 0,
+            "type": "reasoning.summary",
+            "summary": "**Planning weather fetch**\n\nI'm preparing to call the weather function with \"San Francisco\" to retrieve current data."
+          },
+          {
+            "id": "rs_02bee2ff261d3d560169a104957df881909f8b4871f9478763",
+            "format": "openai-responses-v1",
+            "index": 1,
+            "type": "reasoning.encrypted",
+            "data": "gAAAAABpoQSWLoG7qeWwaZZpXKnxLjDFrpqgnRrIop0QnpmbNE_7TzrxJhxTqUHnCmveA8CE6UcYLRgct0iPmhO3DKDJMwntOsAL7Jkn9cnNv-U4LWg5Edrj4UB6kAb0iZyCDDoVRMIYxDmbNgSLNC465cmEnhfCaEDprDC12XkauQRdXi7UAhvIm-Gg2ppGbBs40OPMYz1regMES75WH-UkBaA7jdhr1Ndr0-oUiGp2gXfF7dJmrzIwliLIEv8yvkErJbDsyHeynVd8nYb8WcNYMrCl9MYtfsDwqZZg2KoV4C1_rpVRzH7yg6bHKSJR0Y7GBs-z-VrrDm6p6_NNNeJ0ANcpec0YC8AuUbdhayG2xatSF64PAg5JjGcZqwsAquaDXrRxI2wbhY3D39jkvWis0qVWDeUSfSamvwq1mzHkZnxKMTDramMwgF-KbLlOTkumkqaEw5VS4KAWgSgdSdCoc4GBE6QuqF-POeRu7Mvxxpg9rZDGUKcc_Bq7U7lmT288KtU_2Vj5mPL9IwY3WhCutH1bJqqKPX9QBsw2HEns3SRKUZRwsaW89J9psaO06EPcqFe0BHqjnweOVyl8SdkxdOdJsX26BGvuWnjY9uauFRQLFjKBVEWLHr-5kvTnOBVCPd7BInc77iF5cg1oO1jv2zYA2YJT7-0UvET2lIOeSr26y5gIBvc8AhA4bu2baWPS8Ctdbb2fnvYT20MT_xnpzUkGMKIx3OTBwe5TkIaLMyi7vuZid480fETcB1Mn7Iei3BqYvr8z1QaXy0kiv5pnD6rKB7i2tHdKu7S9EWjU5Et5NVxuj5Ol7-L9pQikxza-UTLiCKVH85K0dvp3UB3oLiBa8WocP4ypNv7x3KpJzEBaEVOcqDD9jio4CMwLymbDz4yKQx0OaXsiui7GeqG2lpE610W4sVwXNViKJ8LlYQIsQvQ-oaw="
+          }
+        ]
+      }
+    }
+  ],
+  "usage": {
+    "prompt_tokens": 60,
+    "completion_tokens": 41,
+    "total_tokens": 101,
+    "cost": 0.000485,
+    "is_byok": false,
+    "prompt_tokens_details": {
+      "cached_tokens": 0
+    },
+    "cost_details": {
+      "upstream_inference_cost": 0.000485,
+      "upstream_inference_prompt_cost": 0.000075,
+      "upstream_inference_completions_cost": 0.00041
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 31,
+      "image_tokens": 0
+    }
+  }
+}

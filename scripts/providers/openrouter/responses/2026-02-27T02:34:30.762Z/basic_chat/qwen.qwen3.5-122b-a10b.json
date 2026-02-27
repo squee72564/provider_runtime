@@ -1,0 +1,48 @@
+{
+  "id": "gen-1772159722-8akQkWaNjVMk2BIsRQJ8",
+  "provider": "Alibaba",
+  "model": "qwen/qwen3.5-122b-a10b",
+  "object": "chat.completion",
+  "created": 1772159722,
+  "choices": [
+    {
+      "logprobs": null,
+      "finish_reason": "stop",
+      "native_finish_reason": "stop",
+      "index": 0,
+      "message": {
+        "role": "assistant",
+        "content": "I am doing very well.",
+        "refusal": null,
+        "reasoning": "Thinking Process:\n\n1.  **Analyze the Request:**\n    *   Input: \"tell me how you are doing today in 5 words.\"\n    *   Constraint: The response must be exactly 5 words.\n    *   Topic: How I am doing today (as an AI).\n\n2.  **Determine the Content:**\n    *   As an AI, I don't have feelings, but I can express readiness or status.\n    *   Common phrases: \"I am doing well today\", \"Ready to help you now\", \"Functioning perfectly, ready to assist\".\n    *   Need to count words carefully.\n\n3.  **Draft Options:**\n    *   \"I am doing very well.\" (5 words) - Good.\n    *   \"Ready to help you today.\" (5 words) - Good.\n    *   \"Functioning perfectly, ready to assist.\" (5 words) - Good.\n    *   \"All systems operational and ready.\" (5 words) - Good.\n    *   \"Doing great, how about you?\" (5 words) - Good.\n\n4.  **Select the Best Option:**\n    *   \"I am doing very well.\" is simple and direct.\n    *   \"Ready to help you today.\" is more service-oriented.\n    *   Let's go with a friendly, direct response.\n    *   \"I am doing very well.\"\n\n5.  **Verify Word Count:**\n    *   I (1)\n    *   am (2)\n    *   doing (3)\n    *   very (4)\n    *   well (5)\n    *   Total: 5 words.\n\n6.  **Final Check:** Does it meet the constraint? Yes.\n\n7.  **Output Generation:** I am doing very well.cw\n",
+        "reasoning_details": [
+          {
+            "format": "unknown",
+            "index": 0,
+            "type": "reasoning.text",
+            "text": "Thinking Process:\n\n1.  **Analyze the Request:**\n    *   Input: \"tell me how you are doing today in 5 words.\"\n    *   Constraint: The response must be exactly 5 words.\n    *   Topic: How I am doing today (as an AI).\n\n2.  **Determine the Content:**\n    *   As an AI, I don't have feelings, but I can express readiness or status.\n    *   Common phrases: \"I am doing well today\", \"Ready to help you now\", \"Functioning perfectly, ready to assist\".\n    *   Need to count words carefully.\n\n3.  **Draft Options:**\n    *   \"I am doing very well.\" (5 words) - Good.\n    *   \"Ready to help you today.\" (5 words) - Good.\n    *   \"Functioning perfectly, ready to assist.\" (5 words) - Good.\n    *   \"All systems operational and ready.\" (5 words) - Good.\n    *   \"Doing great, how about you?\" (5 words) - Good.\n\n4.  **Select the Best Option:**\n    *   \"I am doing very well.\" is simple and direct.\n    *   \"Ready to help you today.\" is more service-oriented.\n    *   Let's go with a friendly, direct response.\n    *   \"I am doing very well.\"\n\n5.  **Verify Word Count:**\n    *   I (1)\n    *   am (2)\n    *   doing (3)\n    *   very (4)\n    *   well (5)\n    *   Total: 5 words.\n\n6.  **Final Check:** Does it meet the constraint? Yes.\n\n7.  **Output Generation:** I am doing very well.cw\n"
+          }
+        ]
+      }
+    }
+  ],
+  "system_fingerprint": null,
+  "usage": {
+    "prompt_tokens": 55,
+    "completion_tokens": 404,
+    "total_tokens": 459,
+    "cost": 0.0013148,
+    "is_byok": false,
+    "prompt_tokens_details": {
+      "cached_tokens": 0
+    },
+    "cost_details": {
+      "upstream_inference_cost": 0.0013148,
+      "upstream_inference_prompt_cost": 0.000022,
+      "upstream_inference_completions_cost": 0.0012928
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 393
+    }
+  }
+}

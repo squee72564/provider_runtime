@@ -1,0 +1,47 @@
+{
+  "id": "gen-1772160052-0zgMJx3MSeBYPvsem8Ek",
+  "provider": "Seed",
+  "model": "bytedance-seed/seed-1.6-flash",
+  "object": "chat.completion",
+  "created": 1772160052,
+  "choices": [
+    {
+      "logprobs": null,
+      "finish_reason": "stop",
+      "native_finish_reason": "stop",
+      "index": 0,
+      "message": {
+        "role": "assistant",
+        "content": "Helpful, focused, ready, calm, eager.  \n\n(Each word captures a key aspect of being a supportive assistant!)",
+        "refusal": null,
+        "reasoning": "\nGot it, the user wants me to describe how I'm doing in 5 words. Let me start by thinking about what's relevant. Since I'm an AI, I don't have feelings, but I should keep it positive and helpful. Maybe \"Helpful, focused, ready to assist.\" Wait, that's 5. Let me check: Helpful (1), focused (2), ready (3), to (4), assist (5). Yeah, that works. It conveys being prepared and useful, which is what I'm here for. I think that's a good fit. Let me make sure it's concise and fits the 5-word requirement. Yep, that should do.",
+        "reasoning_details": [
+          {
+            "format": "unknown",
+            "index": 0,
+            "type": "reasoning.text",
+            "text": "\nGot it, the user wants me to describe how I'm doing in 5 words. Let me start by thinking about what's relevant. Since I'm an AI, I don't have feelings, but I should keep it positive and helpful. Maybe \"Helpful, focused, ready to assist.\" Wait, that's 5. Let me check: Helpful (1), focused (2), ready (3), to (4), assist (5). Yeah, that works. It conveys being prepared and useful, which is what I'm here for. I think that's a good fit. Let me make sure it's concise and fits the 5-word requirement. Yep, that should do."
+          }
+        ]
+      }
+    }
+  ],
+  "usage": {
+    "prompt_tokens": 125,
+    "completion_tokens": 170,
+    "total_tokens": 295,
+    "cost": 0.000060375,
+    "is_byok": false,
+    "prompt_tokens_details": {
+      "cached_tokens": 0
+    },
+    "cost_details": {
+      "upstream_inference_cost": 0.000060375,
+      "upstream_inference_prompt_cost": 0.000009375,
+      "upstream_inference_completions_cost": 0.000051
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 145
+    }
+  }
+}

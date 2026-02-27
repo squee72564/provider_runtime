@@ -1,0 +1,26 @@
+{
+  "model": "gpt-4o-mini",
+  "instructions": "You are a helpful assistant.",
+  "input": [
+    {"role": "user", "content": "What is the weather in San Francisco?"}
+  ],
+  "tools": [
+    {
+      "type": "function",
+      "name": "get_weather",
+      "description": "Get current weather by city",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "city": {"type": "string"}
+        },
+        "required": ["city"],
+        "additionalProperties": false
+      }
+    }
+  ],
+  "tool_choice": "auto",
+  "store": false,
+  "stream": false,
+  "max_output_tokens": 1024
+}

@@ -1,0 +1,66 @@
+{
+  "id": "gen-1772160187-kEZoq4RpqzKLgDVOfb3U",
+  "provider": "OpenAI",
+  "model": "openai/gpt-5",
+  "object": "chat.completion",
+  "created": 1772160187,
+  "choices": [
+    {
+      "logprobs": null,
+      "finish_reason": "tool_calls",
+      "native_finish_reason": "completed",
+      "index": 0,
+      "message": {
+        "role": "assistant",
+        "content": "",
+        "refusal": null,
+        "reasoning": "**Getting the current weather**\n\nI need to fetch the current weather by city. For that, I'm using the tool functions.get_weather with the input being the city name. We only need one tool call, so no need for the multi_tool_use here. I'll go ahead and call functions.get_weather for \"San Francisco.\" It's important to keep in mind that the output could vary, so I’ll just retrieve the weather info and then provide that to the user. Let's move forward!",
+        "tool_calls": [
+          {
+            "type": "function",
+            "index": 0,
+            "id": "call_tZitM8a8o07in3J4IukSOduH",
+            "function": {
+              "name": "get_weather",
+              "arguments": "{\"city\":\"San Francisco\"}"
+            }
+          }
+        ],
+        "reasoning_details": [
+          {
+            "format": "openai-responses-v1",
+            "index": 0,
+            "type": "reasoning.summary",
+            "summary": "**Getting the current weather**\n\nI need to fetch the current weather by city. For that, I'm using the tool functions.get_weather with the input being the city name. We only need one tool call, so no need for the multi_tool_use here. I'll go ahead and call functions.get_weather for \"San Francisco.\" It's important to keep in mind that the output could vary, so I’ll just retrieve the weather info and then provide that to the user. Let's move forward!"
+          },
+          {
+            "id": "rs_0476abd1813aafed0169a104bc3b1c8190a33925237523bc9a",
+            "format": "openai-responses-v1",
+            "index": 1,
+            "type": "reasoning.encrypted",
+            "data": "gAAAAABpoQTANIYgaLQ1aG-tLXCDtbDV5CfanLoNE7fmzysp_Nb-KuGjFos0RmZN5FQJpMjRS206V7NTAu8Y9PgxGAF8m6BbEwdnReysuQ0Rw2daoOhEqLi6r36ir6X7FpLJpKQI4I7-6a_7edzz9zqStFbvUUgFaRF5CGq4wcRvt-dunEgmyDg3vsxxISWk7c4KwA2JPT0vre-_chsi0d4XTEbGY9KfQnGTwKPZ_XvHUN61K9kMlL9bVqV0SZQcKErufO2h-j3h-agGyvN6l3Njyglt-GNB8qt3J0xf21yMyk4dhHlEWM7PONX2yAEKJpwubw5l06dCB5zQt_EmJtCZyJcuY0YnaHJbGWUXo9pTA-eqgHpjauf_v4Pk1yF-BkNKEFpp6cMlyzTWfMYNDXsiUKM3BRPfMRYZvdsVxCYd08D08SArcM4qZdxZFcPa2-AvnUCav_p-fVlDDXmyJ_G9x2jRoSPTw6Jr_lfqlWOakNStQtJPXknHCvcfYXCkYujlqXldSGri2AjP7VL-xGoNLC6mTqolwB4SUfyRiI3Ln_mpCPxOoR8omkGcchYsJ4W-xpkQy3Zk1NabzdCMlmjWEYHDWX2YVs7tSBhGnj68nfSFNju2Ipsf574yHGBgWwBOeRGu5pld2ff30zC-eikoGshDFJtf1YvImDEqipcmo-l4NJlg4wP-TCrM2BoOF2Rhc_VpQvILW-rWwzWS3a7BvY8XwgbyFxgncqGxqKSeO1LVUh05zU1QOxOItazjjPSKRi3WD4e4etUgBvEAGtk6jw9gcIikaHxa2GKXRrRo3q5TbcduOR7pJIixvXXSz7kWtwf1hIT1hWGiF9j_yJV2DETogqMAuT2wczj2P8fZlNl8f01t1OIvGxBT5TB1EA-JFP59Fy46Sdcg8-UFiaUXlRY9umjt4eiB1gQpoYrPBynDbLcBqVYUqVZY1zM4KXvJmYL9Cm1OmeX1s6pSR-tJYHwsv1lCY40JCpv6QSTp1waAP24ke3I6EQoVfXNmdXlwZUdCPsPeX1_o3kWx5keIo7ci2NWzeqGV1SO-1lpOaDvm1BG5Lv36C2Ocirb18A7cg5itwpWvkRz3IPNH9xycc4bbJluCKO3KUFLTMYiiY0TKEH1YmFmNQSbfSPY_DW-PP7U6_mhqCPetZr-LayQZ_plwGOMIJ8LR2Rx5w-38Mx6QpipH9Wig1H4O8YHyHQKsjyVoKnRnYI09jQ1sYC7orOlLbUi5SJ4rYB2mpQ-FMHvNEA_3QcKF-PiFIbvkAvON1b5hJ3c5NnRLhrAF-eA4GdxKX5O4WQyG9_GuVfHHiZhjdo6EVgdvgIyzUVgvrGDPVFJUafhCVnOeZ1ykCHyqAiM5wpDoRyifPX9Qz2Qw4wvwJyD8x4T7zd90Ut9TQkUG-xdVLSG9"
+          }
+        ]
+      }
+    }
+  ],
+  "usage": {
+    "prompt_tokens": 60,
+    "completion_tokens": 116,
+    "total_tokens": 176,
+    "cost": 0.001235,
+    "is_byok": false,
+    "prompt_tokens_details": {
+      "cached_tokens": 0
+    },
+    "cost_details": {
+      "upstream_inference_cost": 0.001235,
+      "upstream_inference_prompt_cost": 0.000075,
+      "upstream_inference_completions_cost": 0.00116
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 64,
+      "image_tokens": 0
+    }
+  }
+}

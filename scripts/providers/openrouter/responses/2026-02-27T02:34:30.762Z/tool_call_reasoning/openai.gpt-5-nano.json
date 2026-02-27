@@ -1,0 +1,55 @@
+{
+  "id": "gen-1772160432-QtxgBvcma3lcD6XAyqep",
+  "provider": "OpenAI",
+  "model": "openai/gpt-5-nano",
+  "object": "chat.completion",
+  "created": 1772160432,
+  "choices": [
+    {
+      "logprobs": null,
+      "finish_reason": "stop",
+      "native_finish_reason": "completed",
+      "index": 0,
+      "message": {
+        "role": "assistant",
+        "content": "Current weather in San Francisco: 16°C (60°F).\n\nWould you like a forecast or more details (humidity, wind, etc.)?",
+        "refusal": null,
+        "reasoning": "**Presenting current weather**\n\nThe user asked for the weather in San Francisco, so I used the function to get the weather data. The tool responded with a JSON that includes the temperature in Celsius and Fahrenheit, but there are some spelling errors in the keys. I should present it simply: \"It's 16°C (60°F) in San Francisco.\" It’s relatively mild, and I could mention that it's the current temperature. I might offer to fetch updates or a forecast if the user is interested.**Crafting final weather answer**\n\nI’m ready to put together the final response. I’ll say, “Current weather in San Francisco: 16°C (60°F).” I can also add, “If you’d like a forecast or more details like humidity and wind, I can get that for you!” This gives the user the option for more information if they want. We’ve already used the tool, so there’s no need to call anything else. Let’s wrap it up!",
+        "reasoning_details": [
+          {
+            "format": "openai-responses-v1",
+            "index": 0,
+            "type": "reasoning.summary",
+            "summary": "**Presenting current weather**\n\nThe user asked for the weather in San Francisco, so I used the function to get the weather data. The tool responded with a JSON that includes the temperature in Celsius and Fahrenheit, but there are some spelling errors in the keys. I should present it simply: \"It's 16°C (60°F) in San Francisco.\" It’s relatively mild, and I could mention that it's the current temperature. I might offer to fetch updates or a forecast if the user is interested.**Crafting final weather answer**\n\nI’m ready to put together the final response. I’ll say, “Current weather in San Francisco: 16°C (60°F).” I can also add, “If you’d like a forecast or more details like humidity and wind, I can get that for you!” This gives the user the option for more information if they want. We’ve already used the tool, so there’s no need to call anything else. Let’s wrap it up!"
+          },
+          {
+            "id": "rs_0fba2cac3338479e0169a105b147dc81959c75d858d858ebcb",
+            "format": "openai-responses-v1",
+            "index": 1,
+            "type": "reasoning.encrypted",
+            "data": "gAAAAABpoQW2sf0iQq68DtX8DkE7qhClLHzu_niSCIEair6kHqeutLnyRsoBTVo28Hgl-L2HCllyGXQlyJFtwgNvU-eSEeA7yB2VfBr1FmB9jwcunbQm9hs4cbDV64OJnry4ClYSbTVBU51XVQ6lIvPMhKOtdcmfSIHeKrRqW9lGP44HTmJk2QE473FaDUL1TKBLrdQ8okoE6nGMYJxlJtaq1pPk0E3aYFM-SfPaR0oSRTYa6InPgW8aFUm6Nj5T9ejZ2vAPF-oE0k2Zkc_uQKipBJbMrwp3VRxgJqHJ5sbX2Mfxt4V3uOaNyCuCss4kGL0gqpGAgI29AeoBpjkzPzsFq42jObqeFaJ_Ahepot250qZm-Jwfolsd7NTw-e23jYSvlnwPOJk5AlWpjL0f_Ckv7-w2optK2G8YQZdf2flxE8mQk_ngmxYHTmC_a1OSjm44b8r4VuvG34hvthRd6xDQUZwoCC_TSHqM9bUfK1ZQ_c9DnLffaNmNcY3sZZXCQhPpTvKXRjeMaJpgCvsKlb6QciZLtYdpvBIeO1OEiqnRM1jnOtGI_zYCV5AhWSb7plxxac4_9sYR5IrqXi58CYHIosxrcJdNpazvwHmxUUl_qX_MpYfk1bS_Isl5GfugQ4yslgwUhCub8pmdokp3HjEGf1Tw5d8ogrkr3UC5wTWwblQJdGjW5ifEGiyQA7x_BcwEXoxPjkT_WC1Frmae97ZmDEyzT1RYFrZIL0IBq7fH7YIrfL9sUS8oRJmDeZkIh3sN4gvaQKGHnAJbtqD6Dh7GOfX0IDsWoEyIoOutXiemI7MFn_8O8XInA9BQgwhFsofltDcNVzejyQxmbcBjAGfUtofPLLTwkLJpuaznMHCwocxdJkWpd2xHrgn9w5EfTG40MXtzsW0ejqp1udgEd2EY872F8beafcDXzAnzsCbS63jb8Vd9DMgDvBahkBtPQNEYFqcV9Zg1m0LSxxiEH0dETiXBCHPq5PNUZzGNX3iAly-SOfwdFOtmKqsrcZqlWENNxwYNYyXeiwCDelsq52hffGELFLKF4158_4tHhN2IqNwZEIusSkOcEcftaf8w_ws6MUTs3E2-jIYctf1aXIBkAYcft9JnPjFx6K2oc9SkVJHcBXbJNoORhYfBtvcCJGb8gixd8614yodpXZzkIDsI_jbw7LKs2EcV3l9P7RVgYGEXAnHB_GiHTUoevjOqjcLGVHUB7-AriFDP4Wmc5Tw8xiqWQnj1mKEuoNBYltDpptJCt6NklEm_pbj043b0btxj4Qh2JEvl9VpIkKmtIRtPuTFohMbqglR9RCVDsUDeAVfH4iM6jhQ7JkLrfHZiQUPuYJPKTasTAks5BNcWqyYtS9XSnKlguK7MwBwtiUqLLrJWLlkslW54oFn3MNx9Y64QyCLDy8Xx_6lVnLa4FXbRSXdS6UZnB25TPJb09zTTHaBm0uKKJs2BMGCstUTE2rGfCgevODznZQhgNRHAPfBx4hgbwf_rvwcT_Fwd3y60Y3R5LLgtKFu9UY01oSG503ys9l-4-xepoKn89VjF5jar9K0VWsAXlIvPMm9FJhl3t0Lue4r0kYZs6xIz-P-PYK6_m9XlFFh7tN0qslyPNrgD2HQ2eNsDfCmDRFXSv8qMMMtzSj8eNBnzUrSP7LKUVP3syjMEKfGNsyLO-iZkC3ZG2gZT3-qGXPV8FJ17-QlkidYMJtEwzdVRikVs_dmehzaZ9HtiglZ3j0bKYSalW33t2aZ3AklRavDjdiJr_jVnuJszeJzE6agj3DGmq2SXBYptzSuniLEql2cSBdU3DeerlZZpXoTUZVr63lAJsZOA6Ton3__bv1hneC5S0l1Jk7d9zhhl7P5HTjZTMpmTiRFtQuw-xOCTlmftgzn3PrufX3NpcmBAvs9ozLOhcPxUtNipMul23UsTnbJomP0pgaEZjET98PQdh1GiM5Oq6cf9vYJhzpQ94c0EtoVY6-YzIxYkfHtCR5ys0azD8MEdKQYPC8V2mn1SNJTMfwg4nd1cYGmLrp3WNykfqVCv56sOzWig4fQJAD5QrYWrGEYqIKnre4Pk1nz4sMVd-0smBPRp_1hKk52VqwHg0Rb8yWgpeayQsDdImBnSB6QcYCydFDMVlCyuz7YTieGCw6r8jjaBc7_5rkpueUHynthXm5B6r2PDAAQoKkL4XWnDvu8MOnE34Bljfe-42s8TtHdfDyERfVgqI_Su8QhAWCXpA8GVuyaaZYg5IvpECX9PT0JRPYZnB363rFuRafr7VxsROl0LGt3zPHY1Cws_4rKwto2-duyGxVKKCR2pOIOkMrYPpLVKmFBPRiSTXxwt2q2WL4no3SbfbYzw-iWvsqx1adDkd7L1D_YzFFQOeC_2DOI0OkvvFhDp8L2oZfW4kYhBtETk9YN6zof6oZZv4yBHQ2yWVtMXCm37KEc40tBeAjRL8zflDbWAD2KrTvDCaEjsehc1V6Iq_-QoabW0olZuT1ELIh26rmniOH4q"
+          }
+        ]
+      }
+    }
+  ],
+  "usage": {
+    "prompt_tokens": 111,
+    "completion_tokens": 319,
+    "total_tokens": 430,
+    "cost": 0.00013315,
+    "is_byok": false,
+    "prompt_tokens_details": {
+      "cached_tokens": 0
+    },
+    "cost_details": {
+      "upstream_inference_cost": 0.00013315,
+      "upstream_inference_prompt_cost": 0.00000555,
+      "upstream_inference_completions_cost": 0.0001276
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 256,
+      "image_tokens": 0
+    }
+  }
+}

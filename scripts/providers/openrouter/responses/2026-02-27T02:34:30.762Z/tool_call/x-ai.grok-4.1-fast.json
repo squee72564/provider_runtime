@@ -1,0 +1,65 @@
+{
+  "id": "gen-1772160086-nRFq9TaeiCQ5OAG55fS9",
+  "provider": "xAI",
+  "model": "x-ai/grok-4.1-fast",
+  "object": "chat.completion",
+  "created": 1772160086,
+  "choices": [
+    {
+      "logprobs": null,
+      "finish_reason": "tool_calls",
+      "native_finish_reason": "completed",
+      "index": 0,
+      "message": {
+        "role": "assistant",
+        "content": "",
+        "refusal": null,
+        "reasoning": "First, the user asked: \"What is the weather in San Francisco?\"\n\n\n## Processing user request  \n- The user wants to know the current weather in San Francisco.  \n- Looking for a way to fetch weather data based on the city name.",
+        "tool_calls": [
+          {
+            "type": "function",
+            "index": 0,
+            "id": "call_87160979",
+            "function": {
+              "name": "get_weather",
+              "arguments": "{\"city\":\"San Francisco\"}"
+            }
+          }
+        ],
+        "reasoning_details": [
+          {
+            "format": "xai-responses-v1",
+            "index": 0,
+            "type": "reasoning.summary",
+            "summary": "First, the user asked: \"What is the weather in San Francisco?\"\n\n\n## Processing user request  \n- The user wants to know the current weather in San Francisco.  \n- Looking for a way to fetch weather data based on the city name."
+          },
+          {
+            "id": "rs_1bfb614d-3bce-3281-248e-8972ba2cb391",
+            "format": "xai-responses-v1",
+            "index": 1,
+            "type": "reasoning.encrypted",
+            "data": "FnEqglXmK+apfwqkFTpBu1H+Ugqjl8gWCLxjNZbFgpZMIZfD7Cxm6Ubpv64q4AIzfn0yWua6HS0w0WCNn1xsfKRDSGWiPGQ55JTdgc7lEpqs7C340/bD6uGFc1QCkM/aOaUF9o6qcKSDvpmCM/8IOW2UO1l265sC2HwlXlAsT80A6UCcTovSUswq2e2Jf3JYxxF1Tr4iwNY9PuTuhxpMGaWHDv3W6O51Cn/7VJF8QOSjmZSMLAtsp4nP7iOOlMK4SYXxEFRqrTcjqIEEGEKeMRN3TpqJ39MQWqG4CCdht8/Gt4USVUO1OkYXEnj+G+sBc0Ah8CKjYZ3nUauEWsTi2cvVsZ9ACj6RFUJT4m2z622eMZ1tlqNQctmL3Qa4GbBGFtUV+mpMBuNeq7MkVz0wuP/4zXMWWrJnX9cLMAUKFf8T5HHraXBPUtTKyYRCjo5k0L56/Vlaqv334XUq9nkKsrKk/C4cbDGtCLD8E67gqscSM2LyelF0EOwRGoQNdKor8BnOZ3x1OWnnfo2RhzDITeLhAYYpe0/lpkJy9iyzyNDnjwCYYeGJHVDpViTaFtTl0HRZdBPU8OZX6o0nkqGFaXq7UT1E3VplLp1vfeoOEJM/uuxK68ZKfy18tu/c2VgpFI37iekksG9aFKWCO1aRzoYIyKCP+tv4oW+cnCLE1iNB3p7d7wn/QXGM33nGqbRSDH33BA8jPPdiePnQO8zQxsdAGslLUQcCOB+yRAJtYyOnnMUBkixo+G3rBjCJ2h62sdjDtS/1KV744oL9zTpWo63sabyaE4utOIUpwBIkhjBoUhpFGcWWM+ZUV94LPc5cwnTbkbC62gkolIyWpB6gE9tqacOtuJX27LH4iJbfZKfgunF/RfPGvNXx/g9nXu9axYbVlKIi51YLwn0ZdF2n7OlqR8qHlXu3GyucpcnGDlX8ZfzL/+/3Z5+vD+rb8AvhQ+YYu+t58GPKNA5ZBnAAD9A1pGxo0SEWtOEVNCJfLRFIUwjWHz6A7KhW/LC2jjxYUs3h+M2hebtea2GWMFJ3hhXltj2AoOg1KRPuFfqIX0SXDpCY4Qjv9e084P6TbBLOrsNgU6EOBnHqTwEMC/fBHkXWop2lC3jqR+mgFpbE/KEGn4CFYM3cMnL3DYFQC6UZft25Ud/lpyhWgXegaiYALDDPYiDe6/GMG6QzH9wzEQReP9ysDpz8z2FBNEXsivBmsfrcCHFgt5HeyLEtqLYPDm+MtoB/DpTASJsjyVmuu1Du25paLTlStwA3c9ewoRto04Ca9wb5CjLfpIVSdjLYE7dvpuVTpuUgZ5xmQexS8x47KsG7hX5TkmFtrOvht8FjNOWD/k+HAhr5hqPxGQRI0Rlh"
+          }
+        ]
+      }
+    }
+  ],
+  "usage": {
+    "prompt_tokens": 361,
+    "completion_tokens": 247,
+    "total_tokens": 608,
+    "cost": 0.0001729,
+    "is_byok": false,
+    "prompt_tokens_details": {
+      "cached_tokens": 152
+    },
+    "cost_details": {
+      "upstream_inference_cost": 0.0001729,
+      "upstream_inference_prompt_cost": 0.0000494,
+      "upstream_inference_completions_cost": 0.0001235
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 221
+    }
+  }
+}

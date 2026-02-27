@@ -1,0 +1,50 @@
+{
+  "id": "gen-1772159670-ghuBEH4XAL90Xzip0rHX",
+  "provider": "Novita",
+  "model": "z-ai/glm-4.6v",
+  "object": "chat.completion",
+  "created": 1772159670,
+  "choices": [
+    {
+      "logprobs": null,
+      "finish_reason": "stop",
+      "native_finish_reason": "stop",
+      "index": 0,
+      "message": {
+        "role": "assistant",
+        "content": "I'm doing great, thanks!",
+        "refusal": null,
+        "reasoning": "The user wants me to describe how I'm doing today in exactly 5 words. I need to keep it concise and positive, as that's a common and friendly tone for an AI assistant. I'll aim for something simple and clear. \"I'm doing great, thanks!\" is 5 words and conveys a positive state. Let me double-check the word count. Yep, that's 5 words. It's a good, standard response. I'll go with that.",
+        "reasoning_details": [
+          {
+            "format": "unknown",
+            "index": 0,
+            "type": "reasoning.text",
+            "text": "The user wants me to describe how I'm doing today in exactly 5 words. I need to keep it concise and positive, as that's a common and friendly tone for an AI assistant. I'll aim for something simple and clear. \"I'm doing great, thanks!\" is 5 words and conveys a positive state. Let me double-check the word count. Yep, that's 5 words. It's a good, standard response. I'll go with that."
+          }
+        ]
+      }
+    }
+  ],
+  "system_fingerprint": "",
+  "usage": {
+    "prompt_tokens": 45,
+    "completion_tokens": 108,
+    "total_tokens": 153,
+    "cost": 0.000108985,
+    "is_byok": false,
+    "prompt_tokens_details": {
+      "cached_tokens": 7,
+      "audio_tokens": 0
+    },
+    "cost_details": {
+      "upstream_inference_cost": 0.000108985,
+      "upstream_inference_prompt_cost": 0.000011785,
+      "upstream_inference_completions_cost": 0.0000972
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 97,
+      "audio_tokens": 0
+    }
+  }
+}

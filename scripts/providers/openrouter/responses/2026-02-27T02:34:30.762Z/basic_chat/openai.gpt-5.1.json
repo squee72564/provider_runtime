@@ -1,0 +1,49 @@
+{
+  "id": "gen-1772159822-kItv9BQDGpQh1jAN07iM",
+  "provider": "OpenAI",
+  "model": "openai/gpt-5.1",
+  "object": "chat.completion",
+  "created": 1772159822,
+  "choices": [
+    {
+      "logprobs": null,
+      "finish_reason": "stop",
+      "native_finish_reason": "completed",
+      "index": 0,
+      "message": {
+        "role": "assistant",
+        "content": "Running smoothly and ready to help.",
+        "refusal": null,
+        "reasoning": null,
+        "reasoning_details": [
+          {
+            "id": "rs_0d38c95da99d464a0169a1034e96d88195b67955a144a5186b",
+            "format": "openai-responses-v1",
+            "index": 0,
+            "type": "reasoning.encrypted",
+            "data": "gAAAAABpoQNPpRCOdCAyfPUxfzqWSvOcBB5mwZemicQDl5eNSDZmsy1vxxW71msQTTDFGMQSkklPhymyElKBBbJrfIvFTSnhdOe1Et3gqvEcyUsjMS-Qlrrmwi_Bp46-cc_q8xksJilhV0LXoIZl8XezDmLq8BdP8volIMLUAGrOvgrtYXx1KMtxV3sB-00OtTgngUjsck_Joac639NlGvoKI9_qiEY1Z7fUmWJ6q2xNflK2AQ_X7TL2RcDbzWFb6JudbpHhoMLhgvEAH5YsbkXU4b-6-C9pHnF5y2KsbkhZu_aVwgebYoAcbf7JjZZLL266_BWiBT5p8zOeu_lmX_DD4sOyRGdvEfkSkHfojXiQeysJFUE7ieSD3zMQ7MyulrJ1i2r7qqqCG2SB3LUb14K4LgqASNjrlTyIiVddWesElITe53vD_sZuSC--6JSFyMwr450tflcJEThpKTjiVWPF4-eZipIIiwLJkRxfTm26PMRA1mtWy4MHgeTIHh9nAPmyF3GVGP0xz3_MNuYHtaFDxiEmYhhWTZahDtkahYWtLyEiEmMxd_naZdko8ytidhIhKZupQuWwYzJamyWqfha3SXaFnYUm0qCUZmGEiQQ1QJ-Mra00fBLv5OaYset8B3a2GxLbiAJGGJLftRPMhFifb9O4O5RrA_VMqlTEJ1V8fFads4MyaLRGtEBZ3L_d0COQwtRacq8sZMf6stqrDVeCQOZblHpFfaYIgOhhUDmOKYrZaKur_E4tmL0t65qrUG48z1B3PCdycPutc7lSTgXn39WLi-vg1kpnWgE-7bStKbr1fb9xvXOv7yBA3yCAUEew_t0Kr32_Bp31EX7fXphBVzpgRGJJCrxkGSvOh36V_J02my2PF-CJORqxeffCMj_sD-2Lh6yU"
+          }
+        ]
+      }
+    }
+  ],
+  "usage": {
+    "prompt_tokens": 50,
+    "completion_tokens": 27,
+    "total_tokens": 77,
+    "cost": 0.0003325,
+    "is_byok": false,
+    "prompt_tokens_details": {
+      "cached_tokens": 0
+    },
+    "cost_details": {
+      "upstream_inference_cost": 0.0003325,
+      "upstream_inference_prompt_cost": 0.0000625,
+      "upstream_inference_completions_cost": 0.00027
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 14,
+      "image_tokens": 0
+    }
+  }
+}

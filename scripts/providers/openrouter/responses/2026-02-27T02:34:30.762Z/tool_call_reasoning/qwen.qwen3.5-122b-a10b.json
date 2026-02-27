@@ -1,0 +1,40 @@
+{
+  "id": "gen-1772160309-zMwQwlDO0efw1VCGAyzI",
+  "provider": "Alibaba",
+  "model": "qwen/qwen3.5-122b-a10b",
+  "object": "chat.completion",
+  "created": 1772160309,
+  "choices": [
+    {
+      "logprobs": null,
+      "finish_reason": "stop",
+      "native_finish_reason": "stop",
+      "index": 0,
+      "message": {
+        "role": "assistant",
+        "content": "The current weather in San Francisco is 16°C (60°F).",
+        "refusal": null,
+        "reasoning": null
+      }
+    }
+  ],
+  "system_fingerprint": null,
+  "usage": {
+    "prompt_tokens": 356,
+    "completion_tokens": 20,
+    "total_tokens": 376,
+    "cost": 0.0002064,
+    "is_byok": false,
+    "prompt_tokens_details": {
+      "cached_tokens": 0
+    },
+    "cost_details": {
+      "upstream_inference_cost": 0.0002064,
+      "upstream_inference_prompt_cost": 0.0001424,
+      "upstream_inference_completions_cost": 0.000064
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 0
+    }
+  }
+}

@@ -1,0 +1,42 @@
+{
+  "id": "gen-1772160293-cvAbsqEUtixVvxpl8Rbv",
+  "provider": "Novita",
+  "model": "z-ai/glm-4.5v",
+  "object": "chat.completion",
+  "created": 1772160293,
+  "choices": [
+    {
+      "logprobs": null,
+      "finish_reason": "stop",
+      "native_finish_reason": "stop",
+      "index": 0,
+      "message": {
+        "role": "assistant",
+        "content": "The weather in San Francisco is currently 16°C (60°F).",
+        "refusal": null,
+        "reasoning": null
+      }
+    }
+  ],
+  "system_fingerprint": "",
+  "usage": {
+    "prompt_tokens": 230,
+    "completion_tokens": 15,
+    "total_tokens": 245,
+    "cost": 0.00016304,
+    "is_byok": false,
+    "prompt_tokens_details": {
+      "cached_tokens": 4,
+      "audio_tokens": 0
+    },
+    "cost_details": {
+      "upstream_inference_cost": 0.00016304,
+      "upstream_inference_prompt_cost": 0.00013604,
+      "upstream_inference_completions_cost": 0.000027
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 0,
+      "audio_tokens": 0
+    }
+  }
+}

@@ -1,0 +1,52 @@
+{
+  "id": "gen-1772159981-RkVzkOpcOUf7fB5Ff6G5",
+  "provider": "Google AI Studio",
+  "model": "google/gemini-2.5-pro",
+  "object": "chat.completion",
+  "created": 1772159981,
+  "choices": [
+    {
+      "logprobs": null,
+      "finish_reason": "stop",
+      "native_finish_reason": "STOP",
+      "index": 0,
+      "message": {
+        "role": "assistant",
+        "content": "Ready and waiting to assist.",
+        "refusal": null,
+        "reasoning": "**Assessing AI Status**\n\nI've identified the user's need: a five-word response. My analysis confirms I'm an AI, lacking human feelings, yet operating functionally. The task requires a concise, literal answer to describe my current state, which, is, of course, operational.\n\n\n**Evaluating Response Options**\n\nI've selected candidate phrases. \"Ready and waiting to assist\" seems most appropriate: polite, accurate, concise. \"Functioning perfectly, ready to help\" is also valid, though a tad more technical. I also find that \"Eager and ready to assist\" conveys a helpful tone, which I value. Now, I'm ready to move forward.\n\n\n**Refining Choice Selection**\n\nI've re-evaluated potential answers. \"Ready and waiting to assist\" remains a strong contender. \"Eager and ready to assist\" offers a warmer tone, which I find appealing for a user-facing response. \"Ready to help you now\" feels very direct, too. My current thinking leans towards balancing helpfulness with accuracy. Ultimately, I select \"Ready and waiting to assist,\" feeling that it provides a solid balance of accuracy and helpful intent.\n\n\n",
+        "reasoning_details": [
+          {
+            "format": "google-gemini-v1",
+            "index": 0,
+            "type": "reasoning.text",
+            "text": "**Assessing AI Status**\n\nI've identified the user's need: a five-word response. My analysis confirms I'm an AI, lacking human feelings, yet operating functionally. The task requires a concise, literal answer to describe my current state, which, is, of course, operational.\n\n\n**Evaluating Response Options**\n\nI've selected candidate phrases. \"Ready and waiting to assist\" seems most appropriate: polite, accurate, concise. \"Functioning perfectly, ready to help\" is also valid, though a tad more technical. I also find that \"Eager and ready to assist\" conveys a helpful tone, which I value. Now, I'm ready to move forward.\n\n\n**Refining Choice Selection**\n\nI've re-evaluated potential answers. \"Ready and waiting to assist\" remains a strong contender. \"Eager and ready to assist\" offers a warmer tone, which I find appealing for a user-facing response. \"Ready to help you now\" feels very direct, too. My current thinking leans towards balancing helpfulness with accuracy. Ultimately, I select \"Ready and waiting to assist,\" feeling that it provides a solid balance of accuracy and helpful intent.\n\n\n"
+          }
+        ],
+        "annotations": []
+      }
+    }
+  ],
+  "usage": {
+    "prompt_tokens": 34,
+    "completion_tokens": 420,
+    "total_tokens": 454,
+    "cost": 0.0042425,
+    "is_byok": false,
+    "prompt_tokens_details": {
+      "cached_tokens": 0,
+      "cache_write_tokens": 0,
+      "audio_tokens": 0,
+      "video_tokens": 0
+    },
+    "cost_details": {
+      "upstream_inference_cost": 0.0042425,
+      "upstream_inference_prompt_cost": 0.0000425,
+      "upstream_inference_completions_cost": 0.0042
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 417,
+      "image_tokens": 0
+    }
+  }
+}

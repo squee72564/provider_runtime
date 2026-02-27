@@ -1,0 +1,48 @@
+{
+  "id": "gen-1772160298-S7tKMc6aX8Jm921ZtUo0",
+  "provider": "xAI",
+  "model": "x-ai/grok-4",
+  "object": "chat.completion",
+  "created": 1772160298,
+  "choices": [
+    {
+      "logprobs": null,
+      "finish_reason": "stop",
+      "native_finish_reason": "completed",
+      "index": 0,
+      "message": {
+        "role": "assistant",
+        "content": "The current temperature in San Francisco is 16°C (60°F). If you need more details like conditions, forecasts, or weather for another location, let me know!",
+        "refusal": null,
+        "reasoning": null,
+        "reasoning_details": [
+          {
+            "id": "rs_26b200b2-1795-cabc-3ac9-f3d15c5db5a9",
+            "format": "xai-responses-v1",
+            "index": 0,
+            "type": "reasoning.encrypted",
+            "data": "EUSmOCZkdHkJYW0UdnV/GZF9CsQYqleW0JQNPsiO6Yie1P1iKt88jt45mRvf63oCAtIlZG/3fg0EKhoE3JjYR58fSnU1HDDq9P00kdHfFLw3kFv670y0lE9eZg2EyIwG6jKDfq+LgwQMNTfrocX+QZNetoC4Mgcet1uvzm2FZqfTZ1eTnfr6coxhEMHfectE/htZZsQIkJsavqu+67S1DWlaX3m6qN88hcZPxn9Ck26aDMIIZmZo88lj3qVisv6o6DmRx4A7ihW5dNVH9OQfNLekSuZ1qrH3OT2wwjjNu/BHTWkIx2KwQzztxMwcgCBk1j2pvGDiBfFXygCdAXeAswkn10me1C+/V4IkbdlYVZEJLgRP6PLO4IwM9J8BIENRBrn/Z4gcMlZB9xg+h65oL/1xHyanP1yR+5oPnrMdn6QQ62SD8rnXaFpQX4BZ+zml806avxe2fQUUFNc59qWeBTAUmFfVG1r+ZLK7V2P2dCZRtFdh1RLw7Z2VyDkdsDS04qiXgyR/dtbr/lFugWmQXLM75Rm0/c0x4ZxwpJnVpELmjNR7VbsE0AOKybQzpzTjO577jtqFHbMgeGUt7QDIZP4wCJ/IBDNs7FiTvsHbMLei9SX4Q9dC66fFCXPHnHT4bfWa+ztZXKbTVBDh4VgJ/4iRIPUQFc5iqy1iBZwwjUS+W0cM9RHDYXb66+AftS4MQztZfYFtJemPBRkphxwqKRUsuel8YEsAi3vP6C4uhEPvQ1+R1p3pTrZfEMC0hXMZ3Hk5JenEMsU8pT1g95dzGFwfjomhyVjLSilsJA2pa1ocHBLqcM71r3KE26EZMpvhWWw8ihticP84zRrGofOuUWbvwLu+1s/1KA"
+          }
+        ]
+      }
+    }
+  ],
+  "usage": {
+    "prompt_tokens": 948,
+    "completion_tokens": 172,
+    "total_tokens": 1120,
+    "cost": 0.003894,
+    "is_byok": false,
+    "prompt_tokens_details": {
+      "cached_tokens": 680
+    },
+    "cost_details": {
+      "upstream_inference_cost": 0.003894,
+      "upstream_inference_prompt_cost": 0.001314,
+      "upstream_inference_completions_cost": 0.00258
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 138
+    }
+  }
+}

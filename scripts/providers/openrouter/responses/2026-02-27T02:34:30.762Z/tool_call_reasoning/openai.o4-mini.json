@@ -1,0 +1,40 @@
+{
+  "id": "gen-1772160319-mQnyVqJfXHuQ9uBaBano",
+  "provider": "OpenAI",
+  "model": "openai/o4-mini",
+  "object": "chat.completion",
+  "created": 1772160319,
+  "choices": [
+    {
+      "logprobs": null,
+      "finish_reason": "stop",
+      "native_finish_reason": "completed",
+      "index": 0,
+      "message": {
+        "role": "assistant",
+        "content": "The current temperature in San Francisco is 16°C (60°F).",
+        "refusal": null,
+        "reasoning": null
+      }
+    }
+  ],
+  "usage": {
+    "prompt_tokens": 108,
+    "completion_tokens": 18,
+    "total_tokens": 126,
+    "cost": 0.000198,
+    "is_byok": false,
+    "prompt_tokens_details": {
+      "cached_tokens": 0
+    },
+    "cost_details": {
+      "upstream_inference_cost": 0.000198,
+      "upstream_inference_prompt_cost": 0.0001188,
+      "upstream_inference_completions_cost": 0.0000792
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 0,
+      "image_tokens": 0
+    }
+  }
+}

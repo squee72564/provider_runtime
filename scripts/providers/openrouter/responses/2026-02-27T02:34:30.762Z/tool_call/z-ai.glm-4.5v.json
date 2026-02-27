@@ -1,0 +1,53 @@
+{
+  "id": "gen-1772160085-wF5oddGgF7BTKAK0A97f",
+  "provider": "Novita",
+  "model": "z-ai/glm-4.5v",
+  "object": "chat.completion",
+  "created": 1772160085,
+  "choices": [
+    {
+      "logprobs": null,
+      "finish_reason": "tool_calls",
+      "native_finish_reason": "tool_calls",
+      "index": 0,
+      "message": {
+        "role": "assistant",
+        "content": "I'll help you find the current weather in San Francisco. Let me check that for you.\n",
+        "refusal": null,
+        "reasoning": null,
+        "tool_calls": [
+          {
+            "type": "function",
+            "index": 0,
+            "id": "call_202602271041254efb840dd8fc4fa5_0",
+            "function": {
+              "name": "get_weather",
+              "arguments": "{\"city\": \"San Francisco\"}"
+            }
+          }
+        ]
+      }
+    }
+  ],
+  "system_fingerprint": "",
+  "usage": {
+    "prompt_tokens": 182,
+    "completion_tokens": 34,
+    "total_tokens": 216,
+    "cost": 0.00014492,
+    "is_byok": false,
+    "prompt_tokens_details": {
+      "cached_tokens": 52,
+      "audio_tokens": 0
+    },
+    "cost_details": {
+      "upstream_inference_cost": 0.00014492,
+      "upstream_inference_prompt_cost": 0.00008372,
+      "upstream_inference_completions_cost": 0.0000612
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 0,
+      "audio_tokens": 0
+    }
+  }
+}

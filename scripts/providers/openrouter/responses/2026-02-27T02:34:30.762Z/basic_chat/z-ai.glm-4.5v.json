@@ -1,0 +1,42 @@
+{
+  "id": "gen-1772159674-Vk7gdrUcpUOK6FraLnvM",
+  "provider": "Novita",
+  "model": "z-ai/glm-4.5v",
+  "object": "chat.completion",
+  "created": 1772159674,
+  "choices": [
+    {
+      "logprobs": null,
+      "finish_reason": "stop",
+      "native_finish_reason": "stop",
+      "index": 0,
+      "message": {
+        "role": "assistant",
+        "content": "I'm feeling great, thanks for asking!",
+        "refusal": null,
+        "reasoning": null
+      }
+    }
+  ],
+  "system_fingerprint": "",
+  "usage": {
+    "prompt_tokens": 50,
+    "completion_tokens": 10,
+    "total_tokens": 60,
+    "cost": 0.00004604,
+    "is_byok": false,
+    "prompt_tokens_details": {
+      "cached_tokens": 4,
+      "audio_tokens": 0
+    },
+    "cost_details": {
+      "upstream_inference_cost": 0.00004604,
+      "upstream_inference_prompt_cost": 0.00002804,
+      "upstream_inference_completions_cost": 0.000018
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 0,
+      "audio_tokens": 0
+    }
+  }
+}

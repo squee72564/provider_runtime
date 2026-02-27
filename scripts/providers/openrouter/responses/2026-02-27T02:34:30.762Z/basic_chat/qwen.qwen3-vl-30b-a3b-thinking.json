@@ -1,0 +1,51 @@
+{
+  "id": "gen-1772159727-4iN5dWluWCoJPVWdBGFb",
+  "provider": "Alibaba",
+  "model": "qwen/qwen3-vl-30b-a3b-thinking",
+  "object": "chat.completion",
+  "created": 1772159727,
+  "choices": [
+    {
+      "logprobs": null,
+      "finish_reason": "stop",
+      "native_finish_reason": "stop",
+      "index": 0,
+      "message": {
+        "role": "assistant",
+        "content": "I'm excellent, thank you for asking!",
+        "refusal": null,
+        "reasoning": "Okay, the user asked me to tell them how I'm doing today in exactly 5 words. Hmm, interesting request—they probably want a quick, concise response without any fluff. \n\nLooking back at the conversation history, they started with a simple \"Hello World!\" and then immediately jumped to this specific 5-word challenge. That makes me think they might be testing my ability to follow precise instructions or just want a fun, lighthearted exchange. \n\nI should keep it warm and positive since they seem friendly. \"I'm excellent, thank you for asking!\" is perfect—it's 5 words, polite, and matches their playful tone. \n\nWait, let me count: \"I'm\" (1), \"excellent\" (2), \"thank\" (3), \"you\" (4), \"asking!\" (5). Yep, exactly 5. And the exclamation point adds energy without breaking the count. \n\n...Did they expect me to be literal about \"I'm doing\"? Like, as if I have feelings? Nah, they're probably just being casual. Better not overcomplicate it. Keep it simple and cheerful.\n",
+        "reasoning_details": [
+          {
+            "format": "unknown",
+            "index": 0,
+            "type": "reasoning.text",
+            "text": "Okay, the user asked me to tell them how I'm doing today in exactly 5 words. Hmm, interesting request—they probably want a quick, concise response without any fluff. \n\nLooking back at the conversation history, they started with a simple \"Hello World!\" and then immediately jumped to this specific 5-word challenge. That makes me think they might be testing my ability to follow precise instructions or just want a fun, lighthearted exchange. \n\nI should keep it warm and positive since they seem friendly. \"I'm excellent, thank you for asking!\" is perfect—it's 5 words, polite, and matches their playful tone. \n\nWait, let me count: \"I'm\" (1), \"excellent\" (2), \"thank\" (3), \"you\" (4), \"asking!\" (5). Yep, exactly 5. And the exclamation point adds energy without breaking the count. \n\n...Did they expect me to be literal about \"I'm doing\"? Like, as if I have feelings? Nah, they're probably just being casual. Better not overcomplicate it. Keep it simple and cheerful.\n"
+          }
+        ]
+      }
+    }
+  ],
+  "system_fingerprint": null,
+  "usage": {
+    "prompt_tokens": 55,
+    "completion_tokens": 248,
+    "total_tokens": 303,
+    "cost": 0,
+    "is_byok": false,
+    "prompt_tokens_details": {
+      "cached_tokens": 0,
+      "audio_tokens": 0,
+      "video_tokens": 0
+    },
+    "cost_details": {
+      "upstream_inference_cost": null,
+      "upstream_inference_prompt_cost": 0,
+      "upstream_inference_completions_cost": 0
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 236,
+      "image_tokens": 0
+    }
+  }
+}

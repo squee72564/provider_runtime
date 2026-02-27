@@ -1,0 +1,49 @@
+{
+  "id": "gen-1772160305-wa1mliB4rQnZQ2HtuWkn",
+  "provider": "AtlasCloud",
+  "model": "qwen/qwen3.5-397b-a17b",
+  "object": "chat.completion",
+  "created": 1772160305,
+  "choices": [
+    {
+      "logprobs": null,
+      "finish_reason": "stop",
+      "native_finish_reason": "stop",
+      "index": 0,
+      "message": {
+        "role": "assistant",
+        "content": "The current weather in San Francisco is 16°C (60°F).",
+        "refusal": null,
+        "reasoning": "The user asked about the weather in San Francisco, and I got the weather data from the function call. The temperature is 16°C (60°F). I should provide this information to the user in a clear and helpful way.",
+        "reasoning_details": [
+          {
+            "format": "unknown",
+            "index": 0,
+            "type": "reasoning.text",
+            "text": "The user asked about the weather in San Francisco, and I got the weather data from the function call. The temperature is 16°C (60°F). I should provide this information to the user in a clear and helpful way."
+          }
+        ]
+      }
+    }
+  ],
+  "usage": {
+    "prompt_tokens": 356,
+    "completion_tokens": 69,
+    "total_tokens": 425,
+    "cost": 0.0004373,
+    "is_byok": false,
+    "prompt_tokens_details": {
+      "cached_tokens": 0,
+      "audio_tokens": 0
+    },
+    "cost_details": {
+      "upstream_inference_cost": 0.0004373,
+      "upstream_inference_prompt_cost": 0.0001958,
+      "upstream_inference_completions_cost": 0.0002415
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 48,
+      "audio_tokens": 0
+    }
+  }
+}

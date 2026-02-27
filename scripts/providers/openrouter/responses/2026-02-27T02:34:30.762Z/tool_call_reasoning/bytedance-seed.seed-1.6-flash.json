@@ -1,0 +1,47 @@
+{
+  "id": "gen-1772160497-hHWD3zYxjoBEkYnM9SOs",
+  "provider": "Seed",
+  "model": "bytedance-seed/seed-1.6-flash",
+  "object": "chat.completion",
+  "created": 1772160497,
+  "choices": [
+    {
+      "logprobs": null,
+      "finish_reason": "stop",
+      "native_finish_reason": "stop",
+      "index": 0,
+      "message": {
+        "role": "assistant",
+        "content": "The current weather in San Francisco is 16°C (60°F).",
+        "refusal": null,
+        "reasoning": "\nGot it, let's see. The user asked for the weather in San Francisco. I previously called the get_weather tool with the city parameter, and the tool returned a temperature of 16°C (60°F). \n\nNow, I need to determine if I need to take further action. The user's question is straightforward, asking for the current weather. The tool provided the temperature, but maybe they also want other details like condition, humidity, or wind speed. However, the tool's response only includes Celsius and Fahrenheit. \n\nWait, the tool's description says \"Get current weather by city,\" but the parameters and response only have temperature. Maybe the tool is limited, or perhaps I need to check if there's more information available. But according to the given tool response, that's all. \n\nSince the user didn't specify additional details, and the tool only provided temperature, I should present that information. I should convert the temperature to both units as given and maybe mention that it's the current temperature. \n\nIs there a need to call the tool again? Probably not, because the response doesn't include more data. The user might be satisfied with the temperature. So the answer should be based on the provided data. \n\nLet me structure the response: \"The current weather in San Francisco is 16°C (60°F).\" That should suffice. No further tool calls are needed here.",
+        "reasoning_details": [
+          {
+            "format": "unknown",
+            "index": 0,
+            "type": "reasoning.text",
+            "text": "\nGot it, let's see. The user asked for the weather in San Francisco. I previously called the get_weather tool with the city parameter, and the tool returned a temperature of 16°C (60°F). \n\nNow, I need to determine if I need to take further action. The user's question is straightforward, asking for the current weather. The tool provided the temperature, but maybe they also want other details like condition, humidity, or wind speed. However, the tool's response only includes Celsius and Fahrenheit. \n\nWait, the tool's description says \"Get current weather by city,\" but the parameters and response only have temperature. Maybe the tool is limited, or perhaps I need to check if there's more information available. But according to the given tool response, that's all. \n\nSince the user didn't specify additional details, and the tool only provided temperature, I should present that information. I should convert the temperature to both units as given and maybe mention that it's the current temperature. \n\nIs there a need to call the tool again? Probably not, because the response doesn't include more data. The user might be satisfied with the temperature. So the answer should be based on the provided data. \n\nLet me structure the response: \"The current weather in San Francisco is 16°C (60°F).\" That should suffice. No further tool calls are needed here."
+          }
+        ]
+      }
+    }
+  ],
+  "usage": {
+    "prompt_tokens": 516,
+    "completion_tokens": 304,
+    "total_tokens": 820,
+    "cost": 0.0001299,
+    "is_byok": false,
+    "prompt_tokens_details": {
+      "cached_tokens": 0
+    },
+    "cost_details": {
+      "upstream_inference_cost": 0.0001299,
+      "upstream_inference_prompt_cost": 0.0000387,
+      "upstream_inference_completions_cost": 0.0000912
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 288
+    }
+  }
+}

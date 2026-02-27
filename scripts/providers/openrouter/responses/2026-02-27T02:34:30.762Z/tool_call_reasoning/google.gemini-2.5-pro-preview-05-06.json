@@ -1,0 +1,58 @@
+{
+  "id": "gen-1772160478-VtXFGzRyObspjkFBCu0K",
+  "provider": "Google AI Studio",
+  "model": "google/gemini-2.5-pro",
+  "object": "chat.completion",
+  "created": 1772160478,
+  "choices": [
+    {
+      "logprobs": null,
+      "finish_reason": "stop",
+      "native_finish_reason": "STOP",
+      "index": 0,
+      "message": {
+        "role": "assistant",
+        "content": "The weather in San Francisco is 16°C and 60°F.",
+        "refusal": null,
+        "reasoning": "**Analyzing User Request**\n\nI'm focusing on the user's weather inquiry for San \"Francisco.\" The `get_weather(city: str)` function is crucial here, as it can retrieve weather data. I need to figure out how to best integrate this function to fulfill the user's request.\n\n\n**Refining Function Execution**\n\nI've determined I can call the `get_weather` function with \"San Francisco.\" Now, I'm concentrating on presenting the output clearly. The function returns a dictionary with Celsius and Fahrenheit values. I'll translate this into a readable sentence, stating both temperature scales to give the user the best possible answer.\n\n\n**Confirming Tool Application**\n\nI'm confident I should use the `get_weather` function; the user's weather inquiry directly relates to its purpose. I've ascertained I'll call it with the \"San Francisco\" parameter. The tool's output format is defined; now I need to determine the best response format for the user, clearly communicating the Celsius and Fahrenheit values.\n\n\n",
+        "reasoning_details": [
+          {
+            "format": "google-gemini-v1",
+            "index": 0,
+            "type": "reasoning.text",
+            "text": "**Analyzing User Request**\n\nI'm focusing on the user's weather inquiry for San \"Francisco.\" The `get_weather(city: str)` function is crucial here, as it can retrieve weather data. I need to figure out how to best integrate this function to fulfill the user's request.\n\n\n**Refining Function Execution**\n\nI've determined I can call the `get_weather` function with \"San Francisco.\" Now, I'm concentrating on presenting the output clearly. The function returns a dictionary with Celsius and Fahrenheit values. I'll translate this into a readable sentence, stating both temperature scales to give the user the best possible answer.\n\n\n**Confirming Tool Application**\n\nI'm confident I should use the `get_weather` function; the user's weather inquiry directly relates to its purpose. I've ascertained I'll call it with the \"San Francisco\" parameter. The tool's output format is defined; now I need to determine the best response format for the user, clearly communicating the Celsius and Fahrenheit values.\n\n\n"
+          },
+          {
+            "format": "google-gemini-v1",
+            "index": 1,
+            "type": "reasoning.encrypted",
+            "data": "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"
+          }
+        ],
+        "annotations": []
+      }
+    }
+  ],
+  "usage": {
+    "prompt_tokens": 121,
+    "completion_tokens": 365,
+    "total_tokens": 486,
+    "cost": 0.00380125,
+    "is_byok": false,
+    "prompt_tokens_details": {
+      "cached_tokens": 0,
+      "cache_write_tokens": 0,
+      "audio_tokens": 0,
+      "video_tokens": 0
+    },
+    "cost_details": {
+      "upstream_inference_cost": 0.00380125,
+      "upstream_inference_prompt_cost": 0.00015125,
+      "upstream_inference_completions_cost": 0.00365
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 350,
+      "image_tokens": 0
+    }
+  }
+}

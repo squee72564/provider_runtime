@@ -1,0 +1,54 @@
+{
+  "id": "gen-1772159681-smiqXjoJe9bTFUzClul9",
+  "provider": "xAI",
+  "model": "x-ai/grok-4.1-fast",
+  "object": "chat.completion",
+  "created": 1772159681,
+  "choices": [
+    {
+      "logprobs": null,
+      "finish_reason": "stop",
+      "native_finish_reason": "completed",
+      "index": 0,
+      "message": {
+        "role": "assistant",
+        "content": "I'm great, thanks for asking!",
+        "refusal": null,
+        "reasoning": "First, the user asks: \"tell me how you are doing today in 5 words.\"\n\n\n## Crafting a response  \n- The user asked for a 5-word update on how I'm doing today.  \n- The response needs to be positive, engaging, and exactly 5 words long.  \n- Focusing on a helpful, cheerful tone to meet the user's request.",
+        "reasoning_details": [
+          {
+            "format": "xai-responses-v1",
+            "index": 0,
+            "type": "reasoning.summary",
+            "summary": "First, the user asks: \"tell me how you are doing today in 5 words.\"\n\n\n## Crafting a response  \n- The user asked for a 5-word update on how I'm doing today.  \n- The response needs to be positive, engaging, and exactly 5 words long.  \n- Focusing on a helpful, cheerful tone to meet the user's request."
+          },
+          {
+            "id": "rs_4732adf4-16f5-c189-c7d5-2c5aaaf40ba5",
+            "format": "xai-responses-v1",
+            "index": 1,
+            "type": "reasoning.encrypted",
+            "data": "UFVG1KJgclC8DsfGvxn7APLMY7dQFGY4KWXKB9AJukkCcA4by+tQuOmOy2pMfbxqN+96b1koaRdG/RN14A9u2i51zZAH+Z9uVUcIXvHxqK6X0h/tGfcIWdWBYOpZsUawO0tEH3GSnBO7vPkaphOLbfTM7auVKN6PCJQIXBo0vw12pYCmOk2x9eRMW8XOFGH5nL5B8CnZtiXzLt154Ir+w2vWTThWbRZaKUDZRFRbv7+gw7YExi1epW8CSAEvLC90K5chh3SxSE7pHBlrvuBdeRjXDWSiEKYtsJahtYiy6dJ6tAt0srcZ1PACvJal/QPZD91Jf+oeAL5teg0j/pnZRDYhPlQB1DFpDCD37cYXIUM86SgnUZ9D/kucmI0dgx9a6h2yW1u65ptQCLQ/0HsKFFkwS2TDd8NzIX5mDJPyE4i1G+MCrBOzOWw3zNkB+arBXSmw5gnJBmXUfYt07CXw+sz32g7Ez1HYyWddhIaNPrV5mGTyTEtMnpcoCegqoABlKewz+HNWYiGlvkvh2ECbBJxB8Jyci1C9UgNDljWr/2vYztRYSqj2x+1BUK6SDxRcEUwT7UKGb5Cz7kbd3NczNyGPUhhxtp6SLTsBe77O/sLEhRwMMK2sRSe/69bw74F1D88UWjmKA7w0CIeMYFSakYuVlXFoJNQVBq8ynvro86CvAHZuQtIgqkH+mCsauypG7V4hyGiOIKZTMtheYjara42KGuTFkjU4r/q795DTpQea2v/h2mmeTXBjlw3ivws+52nFUtYMkao0Ln3hvrsOIZyS7F0RBF4xKBauK7TAOshBeoAU+xqCHfXIncOlOaf2pldIzfM3Fc2+dnHYS6gl2/AlmNn5VJTvG4bsCbYzUOvjwF5OwA3L0OJ3MXLDDIvFMTvqAHlRnxKRE8Z+Xm/eXBddKPyzcTHrJpfzOzIPYh3Ku2NDh+AuQphTwCQkKhoIQ+TvgxLjKPH31H5s4gIALhks+NL0gGwNsytmRN5yk4ZEl6kbP6kvMdS4sPDq7VEd1/giegfYRXEhDfWwn4i1Y5AqdlKvRrcjMKh8Bc7pA3BrUFP2aQnh3EQbfazeuWKe85wUK+BJVAqQDZx90jctQZD3a53arLwTAC3HfdGZ8G4oblz2DXej"
+          }
+        ]
+      }
+    }
+  ],
+  "usage": {
+    "prompt_tokens": 194,
+    "completion_tokens": 223,
+    "total_tokens": 417,
+    "cost": 0.00012675,
+    "is_byok": false,
+    "prompt_tokens_details": {
+      "cached_tokens": 157
+    },
+    "cost_details": {
+      "upstream_inference_cost": 0.00012675,
+      "upstream_inference_prompt_cost": 0.00001525,
+      "upstream_inference_completions_cost": 0.0001115
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 216
+    }
+  }
+}

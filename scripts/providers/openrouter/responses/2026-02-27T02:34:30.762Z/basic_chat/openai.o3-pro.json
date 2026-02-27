@@ -1,0 +1,55 @@
+{
+  "id": "gen-1772159777-iMDLcTK1Nl6NF6rZ8Ht3",
+  "provider": "OpenAI",
+  "model": "openai/o3-pro",
+  "object": "chat.completion",
+  "created": 1772159777,
+  "choices": [
+    {
+      "logprobs": null,
+      "finish_reason": "stop",
+      "native_finish_reason": "completed",
+      "index": 0,
+      "message": {
+        "role": "assistant",
+        "content": "I am doing great today.",
+        "refusal": null,
+        "reasoning": "**Considering five-word responses**\n\nI need to answer the question, “How are you doing today in five words?” So, I can say something like, “Running smoothly, ready to help.” Let me count: that’s five words. I could also say, “I’m doing great, thank you,” but then I wonder if “I’m” counts as one or two words. To be safe, I think it’s better to avoid contractions and say, “I am doing great today.” That definitely gives me five words!",
+        "reasoning_details": [
+          {
+            "format": "openai-responses-v1",
+            "index": 0,
+            "type": "reasoning.summary",
+            "summary": "**Considering five-word responses**\n\nI need to answer the question, “How are you doing today in five words?” So, I can say something like, “Running smoothly, ready to help.” Let me count: that’s five words. I could also say, “I’m doing great, thank you,” but then I wonder if “I’m” counts as one or two words. To be safe, I think it’s better to avoid contractions and say, “I am doing great today.” That definitely gives me five words!"
+          },
+          {
+            "id": "rs_0de35be0ba773f140169a10335740c8195858a0e94c43ce8a3",
+            "format": "openai-responses-v1",
+            "index": 1,
+            "type": "reasoning.encrypted",
+            "data": "gAAAAABpoQM3Pyp5DMaZspc3LsD7LC6ETwBM8kR7fHplUiI2gjhhSCnTer62m3Zxy3JQgLaDD0l4u4RJuX1YYA_1NB8dRcgsjvCphNInkMNeI3JhKTXH0VFNonnqv9gbMAseX8i48RsHKpHT-NtUSjihoyAMj0nPgWVoaK__39QLjR5JRFTXBE46bzClaFGg_0NRdss2QAhG18-9gBWb0UbkwvhJ10SMa9L5SJmr08OYGGy5dBHBl7C7MB2aVRj52ba2pHl-xosLSVzBXQAo33PGyCABmqOkqxD68UoVhKrzkfbBZvEGqutMaAJMm4ha4ptkYaD-ARuMKr-4hs95is8GyPIlu9N6Kp7s_41N1HHpfBSSEbrn76ZIaqQZUPw8g6sw5bKIpZ3d_2U39fpKHUBBAV-o1uXgnYDjNiuvKkNyzu-_PSsdxMeXJv2E5FSpmojV1v8NGN-VDJFbwNzIllraN6bxzVujf_3yyLRfn3ledY3i0O6SjxG0wsiShsZtin4OHI1J7W4Jso1zzh6Wry_c8Esz0B9OuhYJdLSwBx0Pqr4sqkm5tf6NkSBgFvpw_resUcIQlHr_ITMiZjfHDocTgzvA72yjZQaZfuwNd6NJGfKM2JIRlcQBcjJJKNH7wFOmko3SeSCxUN37y-rTccSlWgZwf7aoF18r5kMnw1OMqt_OYMnLJ6pYGBXgnz2KH9KcsoFwK6ZTtmc-CFJ9hA7t-86aNU1QWBb6gYlBsBooHpjvPnxL0v1ECf-EiKgPjZgXaF6vni_WPTj6TGDPcu_abKkYiTh2Gded959nyWf3aooeyEcjr53U5FHg1_imva3mZB0wgszSP71qVQIaqwlPHVZnSTvvJ_Y2o1lwYI1HkJttu4RA63njc_V9CG0sOaGkPZeP1petgG00XuCx6JBfCPmXJP5zxMH_SjQCDi4lVmLAKwLc8rGZwwYa0H0Qlezpq1oAFG41nrnLee_nz2wVbSoerJGGxDALCtwF4dnYsGJxYI2sS19HGb629uyMJn658xd5GiEkhgSAaGZRwzswvpnfspeP7q62bi8jysC5sf2DCKV5uG6njgJ7sMXZNWtcmtCJKvsDjDlxi7un9gWXC3ynKKK8w2q3IK8ktc1LONht6Dn1blnYRUbLWtymTrtFfbTbP3qT2LVJSKe22mfTptiDFhEBtBVIdUu3qafjQ0KC3ZKpbsy_GX7ApoFYEc9bwUZk0BwWxKbX8wIPKffUcdfSz-n3DatGVYvwAf8YbR_gmhCnj6ozWEXbe17XfrW0DBWqVxQAckvjOLZYsHWygT-Zj5legZlYzp_rn-w8Gl9QDxSGcjnN3S0P0r3gZtoNZae8bwIHWfBfaIebC-jg3aozWlYTzG7wWWPTimRQPSK-nHu3IiAmCsyBWuP7vdqconyU8QCRjH8Ewn4l-QR1uPgTNvWJIIldOteZtIKcYl69vCMPe4cwm_LBlgXMFEQCnO9VX-_zN03e8UA6WJPFqFFj6oYs4bWKyN8KGUh8GqKtiwyxNC_KDoMZrrEWUm7eiZ7l-27v_HPw5ixUG9GGBFLv62w84-LqT8MlSGoduQdhO5anXCmIT8k-UZSbnXclJD2Iia9C1ikcD9iBR62YxRwP5htiVMm6RJH7AFoPAg6RiXC9tSTXRIzFJubCOdVDuXA3E0-7YG9V9KFZFliIqtLxfZHG1UTfYBYKgOQQ4UHtBp35I1GRwZz32wFEDXtPTQYe0geNBuo0rlixtC9IpzStNU03mcGeHCxByBmGSBcL4UccewM="
+          }
+        ]
+      }
+    }
+  ],
+  "usage": {
+    "prompt_tokens": 50,
+    "completion_tokens": 211,
+    "total_tokens": 261,
+    "cost": 0.01788,
+    "is_byok": false,
+    "prompt_tokens_details": {
+      "cached_tokens": 0
+    },
+    "cost_details": {
+      "upstream_inference_cost": 0.01788,
+      "upstream_inference_prompt_cost": 0.001,
+      "upstream_inference_completions_cost": 0.01688
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 192,
+      "image_tokens": 0
+    }
+  }
+}

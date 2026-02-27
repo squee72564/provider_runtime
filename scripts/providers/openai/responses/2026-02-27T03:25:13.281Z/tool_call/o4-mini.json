@@ -1,0 +1,89 @@
+{
+  "id": "resp_0bba5afb9338f55d0169a10f1261308190979c219c0ff64503",
+  "object": "response",
+  "created_at": 1772162834,
+  "status": "completed",
+  "background": false,
+  "billing": {
+    "payer": "developer"
+  },
+  "completed_at": 1772162836,
+  "error": null,
+  "frequency_penalty": 0,
+  "incomplete_details": null,
+  "instructions": "You are a helpful assistant.",
+  "max_output_tokens": 1024,
+  "max_tool_calls": null,
+  "model": "o4-mini-2025-04-16",
+  "output": [
+    {
+      "id": "rs_0bba5afb9338f55d0169a10f12ae1c8190980330dd3b0412fe",
+      "type": "reasoning",
+      "summary": []
+    },
+    {
+      "id": "fc_0bba5afb9338f55d0169a10f14053081908cc036059270cc69",
+      "type": "function_call",
+      "status": "completed",
+      "arguments": "{\"city\":\"San Francisco\"}",
+      "call_id": "call_MS7ZpyiHNCilW78J0fWQDcXq",
+      "name": "get_weather"
+    }
+  ],
+  "parallel_tool_calls": true,
+  "presence_penalty": 0,
+  "previous_response_id": null,
+  "prompt_cache_key": null,
+  "prompt_cache_retention": null,
+  "reasoning": {
+    "effort": "medium",
+    "summary": null
+  },
+  "safety_identifier": null,
+  "service_tier": "default",
+  "store": false,
+  "temperature": 1,
+  "text": {
+    "format": {
+      "type": "text"
+    },
+    "verbosity": "medium"
+  },
+  "tool_choice": "auto",
+  "tools": [
+    {
+      "type": "function",
+      "description": "Get current weather by city",
+      "name": "get_weather",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "city": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "city"
+        ],
+        "additionalProperties": false
+      },
+      "strict": true
+    }
+  ],
+  "top_logprobs": 0,
+  "top_p": 1,
+  "truncation": "disabled",
+  "usage": {
+    "input_tokens": 57,
+    "input_tokens_details": {
+      "cached_tokens": 0
+    },
+    "output_tokens": 178,
+    "output_tokens_details": {
+      "reasoning_tokens": 128
+    },
+    "total_tokens": 235
+  },
+  "user": null,
+  "metadata": {}
+}

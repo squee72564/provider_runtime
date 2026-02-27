@@ -1,0 +1,55 @@
+{
+  "id": "gen-1772159926-NsPMEQxGOeAzkdFohunI",
+  "provider": "OpenAI",
+  "model": "openai/gpt-5-nano",
+  "object": "chat.completion",
+  "created": 1772159926,
+  "choices": [
+    {
+      "logprobs": null,
+      "finish_reason": "stop",
+      "native_finish_reason": "completed",
+      "index": 0,
+      "message": {
+        "role": "assistant",
+        "content": "Operating smoothly, ready to assist.",
+        "refusal": null,
+        "reasoning": "**Finalizing response clarity**\n\nThe instruction says I need five words, and punctuation outside doesn’t matter. So, I'll go with \"Operating smoothly, ready to assist.\" Perfect, that's exactly five words! Yes, let’s stick with that as my final response without adding any extra text. I want to keep it clear and straightforward.",
+        "reasoning_details": [
+          {
+            "format": "openai-responses-v1",
+            "index": 0,
+            "type": "reasoning.summary",
+            "summary": "**Finalizing response clarity**\n\nThe instruction says I need five words, and punctuation outside doesn’t matter. So, I'll go with \"Operating smoothly, ready to assist.\" Perfect, that's exactly five words! Yes, let’s stick with that as my final response without adding any extra text. I want to keep it clear and straightforward."
+          },
+          {
+            "id": "rs_0d6fc1af18fc20090169a103b861288193aef25c644b4b4f01",
+            "format": "openai-responses-v1",
+            "index": 1,
+            "type": "reasoning.encrypted",
+            "data": "gAAAAABpoQO8fVuyzBQ5Fen2xrMCQc2uXerqU5B72WbNjqWNzHwnXSYfm0iCahslwrjVe_V-pRjvd9vgfiR8Xl9DCV51dV-wADyVejgJTpDYMp6Ukz3ViwmcDorL5s8ylJ6elUROEb6kjkVqql5TYdPnJJPnuN7h6JYAkn2qgtpzbELgmqDX4yotsMDmtsn_2kjhOR1oqYsEJT8Folt9CyMd-Ls5j1rEba6cnoPc1RMAciLo9faOUVivCEBtEfBo4cseuIAxEaD2ETGywB04RU3oyc9apraygehdMhImavrgnGh7Hsdkj-yKliF8e-WzFwYr7jxpOEwQ5xVZPTXGHoAJI9CO-IHGLYMiOrmANNDOpOZv0HbKVOdayFpsEdi4XkDAHzJMUKtvoKbCN53uCeDQpc44Tmlssh-eluODi-Ry9T9WubOoMh1xG31EtEgt3IVktKF8_P3732ruud28mi2RzYXAUJ3ucOWmLL6I9GYV3fGS800qgNKRMEmOCQOnTGilfVq27V3RvB1A06OerKLOOG4JAl95L8FBp4qZnSrsZjgBmMs2N5rZVxCI3hT_XXVt6kX4zMGSwAuapJu_9YNqUuuuEJ7Tnanqk0JpyozLx5rWMaHT-bIy1ZUGRYElgudTVpgjp-V6ULmJc5TPwn3beZsEOBnUWAn_8x-B_snWR_MxDSRp126NSvemjkmINwsueX5KyeBQJwxNQzKBErfftBc22v29TIXzEFLdDkKcqFiD_fI3gaeaDpHPY04hDVEDnxv7Bhm6fciLm2Q-wpUp7O6StsLEsRYsVsXlrEebEbiqaMhIxqvN8EJ2lvNd3HxVncyRwO7Th7bMlrs-zdYAknGXd9tmophiz-xguleAO4qX-jdq_YTU2Rr2WzIHkC-KCtGHs7r5kQKKz71cFh_U3nNEueEsD3ifGKzdWr4j2ldwfzArRofuWrD0WEj3rxv0_iYCx1RKRbVSOHnOsCQ5MYAVW3HLqfkkq47Q76Ef3K_WYTZUMEHpJYyAa2yq43fF1Wq6K6SeLouc1GaSUOr4iQNF9wDrZLdA8zp_KoEapN2itaEffPryxmpACGrfKmvqhM79WcLINkTCwuPCUAlmxGH6WcosWIXODiFSOwq-wsIJTm6vqTJjmm4EH6s9prLqO1IzVWia-pWGdZe0Fvfag9exfuQrkh9HXIpxMUlXa3mwW64qzcY4L1oBJmvxuNgzNR1C-djGsswG7GJsLijcyqX8hx3mL-1aYioBpUd-EAIut-akQvq3otdbYqnfGoIzZUZq2F3w9myuyfEkqCoTHDshiZkFkx2vRsuW5SSRQbnaFEui_wyZ0FLBKok1pQ2yc0qUeur4Laz1CiVIF8z7JIqsC_W_1uzPNYSUt4awkchYdx3XJrwUlWmNIf-d9NUssKjQ16he-D8PX7FDIY6EBWE0wZ_rxh3JtwogrmQBN2535kVGTV2M5R7TAx8EX0oR05m6MwZy9htB1Rlk0cwPIiYjwZzW4poud_Jf3TAwXKjfwFWa7qUGbS6ZX8v57ZKEZKMAebaCTsxvTGqqU7O_-Uv7tDbN-kcBKZI0lOWiA3m8X6i70aSRA0wdvO7gTs1BK6-JVAUodQ-Iqbi5uJSgdG-yAuoGP6VVjEyRAT2L7C3dWLGsvemmf0XwPGuw2U5Uqhva7Eoqk2STzdaxG6Djef7IqR6QFB7QUevHzkApfh8DnLG83eBmmqzx4rYwwlMfeBnbGmwKP7XoAy-oKf40tY9Cp0_ik8NUL4mruQ3nn70W-PHdeE6MnVTGvPJoIUC_qj3ZVyo5GFI5fiVHcwCUEXFtScqUCEnP7nyDUkRwLgxINNU-JXegXz8GkiSMza2XmcE8nfdsawsHZA9fH16LG5_tryPTMABla0Hc7hwHnM6Sm-2e5OSLBuzobP6v5tct3f4evhx_nz35EHRM1_xKGgBld_5XH9ptdv6RmLJLKd8CIfYjsyX0C4-A5jpDInzAH_li1n4nIYWXFb0PswX4YmuIi34SRzuUuA-domiWWgWAuQw6WjwxWW3Kp5Ip6VCXUMYl-OlHIuZNY_kDKwcVKJHTF1mzSB_-V7D_zZCkrn3mFfes91OvKPBB1fqTRFQLVatBbaf6x6qWsYeATqWTrXn5qWhqJ6l18G4trumslVUW7DQ3TvhxDKw_mXqhg7uzCDnglPaIOkxaOZONYrplThxZvLT3dHGqGIBqf0ve2EfLScNfDsQj4mqOQEIGvOokxeEAa6lK5g0bApA4dHk4XNPnVNtUPSQhOPNTauIriRLrTmOZ-UtXKiVSgYBmFh3Dquxx9d_JIyo5SEOym6b75sDCKp822dBrPhzp0rFix7x74eHrYXTXhQuw1TZ93D4aSxkLCYMgSWbfbgmvkOBHP4WXc6AjDc3wRnljIVVOaYGOlNKn_TDUp0JuS8Kfh4bNkxCD63QQbts7UwjNx0Om0qUv333IRA61HRiG9DCSqLlak9uMgXwRgT5q3H8bQC3ygmygWu5ikPFdwQFJwgH-zDNsR5Wr87d-zq8pEDaVK1lVBFKMTkdqOF3OX5QQgOUjtNTyMU0zY2GYbwqF4p_IAhE09uV1UwkgYGiaDZtOsKx3stutVZkXJMjO3r-EP3PpLU9hBSX4-NISj1zHIPwLtAYfXKZl24QzCq4vQYM3gygMS5xCmdIAcXTSTYh7neXEjg7Apa1IJmebX-jpiHFxtKw2e37L9ocsSaAHx06nD3nqKUC4y1MKNsE5jtA9JwcCfXwQjPOhYe9lQJqnpNRR-BUPKxRZreImVuwXOMnmTTnsDYjrsau92RLu2Ac6RPtJPf01SvvlmpUeIDjLms20ANWZAsu--N38tOVu_vfP10t-8Tt0mPMN64TqVneVz79QH3d7vhtf4nsdrHmDIp8WKljlX6J-iXUhPEY0y_ZVCeGvX15iTceSv6e40wRTcPJlEwxTBVl83UYG5tc7vtGgStjKpugLocWy8E5JsMF3mNEv_nse2caGB8Cb_alhCsatoqKTAuSOylUYhiM6FOYsWsr6uzM9lCmSL7u2q5hpZIk7B8qF8DIsgZCmYuXh1t0p0esvy8oV_k22bKRG0KBYlZNapGamg98tfuhC-PclKB4i0j4-EXWTyDaCNUi9qvB3bHetPOBDdFStRrVSdpCUmMI9YxiMAsUo_lns8qL8AlaJLjM5k0q75qg2pg9xXUQOiUm1e1dqgpX2DJL5c0uMJ-umPvKlbCj08PoYvhoi3H_msJr6GGbg2x2Ydt3UKsePQNJwYdRq3g3xR2om59pNzBvU_UxnWMbrtqCqcVo6BuXEHBQXS_weBBdPOXBjbmQZGmCLKzrnul-6vHs4Am1ZpV_OYmTjjYBHYX4PDLfEh49Q59hjdt7eCqi8vvcDAsnXYPVvYE9AHvrS_TNmHjnx4V59NNlyEZ8f-1t0cLRqyDYdZ4StCq7rFuFVyt1fnRuuQAumEiVu-cYJssHT3yGKprJPNvl9GSyEZFtE9-vpazzf3_EPw30tcPBFYlgSMpywGIGXcnQQSmCEVOhsbg-KKhrAc8V2Rw=="
+          }
+        ]
+      }
+    }
+  ],
+  "usage": {
+    "prompt_tokens": 50,
+    "completion_tokens": 508,
+    "total_tokens": 558,
+    "cost": 0.0002057,
+    "is_byok": false,
+    "prompt_tokens_details": {
+      "cached_tokens": 0
+    },
+    "cost_details": {
+      "upstream_inference_cost": 0.0002057,
+      "upstream_inference_prompt_cost": 0.0000025,
+      "upstream_inference_completions_cost": 0.0002032
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 448,
+      "image_tokens": 0
+    }
+  }
+}

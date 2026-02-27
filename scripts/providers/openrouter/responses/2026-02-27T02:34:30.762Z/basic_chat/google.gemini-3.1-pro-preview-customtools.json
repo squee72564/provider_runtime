@@ -1,0 +1,58 @@
+{
+  "id": "gen-1772159959-bNKH6bmjh7PUlISfNyIf",
+  "provider": "Google AI Studio",
+  "model": "google/gemini-3.1-pro-preview-customtools",
+  "object": "chat.completion",
+  "created": 1772159959,
+  "choices": [
+    {
+      "logprobs": null,
+      "finish_reason": "stop",
+      "native_finish_reason": "STOP",
+      "index": 0,
+      "message": {
+        "role": "assistant",
+        "content": "I am doing great today!",
+        "refusal": null,
+        "reasoning": "**Assessing Current State**\n\nI'm now determining the most effective method to address the current step. I am reviewing the best option to move towards that aim, evaluating potential paths. My focus is on ensuring the path forward is the best.\n\n\n",
+        "reasoning_details": [
+          {
+            "format": "google-gemini-v1",
+            "index": 0,
+            "type": "reasoning.text",
+            "text": "**Assessing Current State**\n\nI'm now determining the most effective method to address the current step. I am reviewing the best option to move towards that aim, evaluating potential paths. My focus is on ensuring the path forward is the best.\n\n\n"
+          },
+          {
+            "format": "google-gemini-v1",
+            "index": 1,
+            "type": "reasoning.encrypted",
+            "data": "Es4HCssHAb4+9vt0giWVqeXO8k/tGzvkcLsqb5JGxvDnKLPtLR4Yqg43uqmTI/3++Hb+tQdMOrD5zhEHCctFFuZeyF3PQ1psnbJT++ZniuqBYiu07pPnhkRy4D4qMXYBvWbdCAJBAt2xdgZ46ITzzJNe7xBialRbJlBoDj8dJDwe/RHTrJBmP8VDcPk2y47TnOqAmSW3TN2HfOsXLBpbBcR2hwFkc8olYZtkWfVZ6Il3BQDHdWKYejQWUS6f6cZ3eX+6H4tpn0sE+M+Z29+EmBpMs+E3j40Pm+T4LoUxJYcQOuXzWoHzfcqBwXnVeMPKxOFY/i5qfrIucCS3oiQXfQBGUEW8rMBBZB86wsbjr7iSjoS6yYjtodIQM19VxgkWI+FMZszh6zCLu9nSDy6eeTNm1kGDf6UQvSD4vexe++tXCNa/PqjGL9/tkFSpH47K+jkM+d1aCkOTP2flg8s+9tK9SbIIi8O1vLm0k6nM9wNeVSluEFTlC5WFICgTuPWZxd3Hz1Oiw5ALzuMsdOE9iU1+gwcsrcYKKjOL4PsaY0u2kAF94FztQ5o/MdU+ogfNt2RW77ypFh4lNQ6mWqn2brlZFh9Y9v0//pi7d4zHN9XNDlnoqwUQzdkfC+Eb49ZJ/Zelb+7ZGJ6WwGja52KLXgcxkZId2ZYX3BwjGqu+q7aeT4ELxuwJ7p5WnSSQEvLYDpqRUBiVjksUwhPwDB9r+BvCuqwMRLLupd275j5/VivKTeHlJ42hR2sEAgcK6K6Gx0qTpWrwwoif94uevaIBJD4D31cWw8z/ebCqvpD+AuXeAGL/JKDdFOesRb9EqigwFTDJftuV8HLbipSV9QZ16GvtVywVDXpqebSMtjOalB7YKCCOd1ImN0/cnKig4oii87WTVl3C2dc9NvK5wGcC+LNYZadPXuTsCmayJppJ3s8nP4zTTaKYNBXVjsUDMpeqdzmzImJ4IVMCiZpRrZT0KZwbQUUTFO5so0J/gJK0HzyuCyZ18ihyphJlJKONVA45dkthnvlFjRGIAuAtUK3hvtex4fFIzEl0nOKLPUieON3frmDk9UDRf6j6L5rz/0zdKglNVczD8SLevruJKLi/gQTukXdfekUHe0awDdcka+3nRzLrSQoQN8WIPfQIrDK9BTu3hklYLfQ056RkelDW2YL7xzgOgo8NQpnaxzN91SsuXkannGEWbrYbeNt3TYUo2qLaIsYOGaH2wtoPNCtFvFIoPXBD9Hz3Cb5LJ2adkqyxQ50kblfeU2NJBqLjSMKIiTMQQ/wMFkx0c6RB0YukFPQ="
+          }
+        ],
+        "annotations": []
+      }
+    }
+  ],
+  "usage": {
+    "prompt_tokens": 34,
+    "completion_tokens": 249,
+    "total_tokens": 283,
+    "cost": 0.003056,
+    "is_byok": false,
+    "prompt_tokens_details": {
+      "cached_tokens": 0,
+      "cache_write_tokens": 0,
+      "audio_tokens": 0,
+      "video_tokens": 0
+    },
+    "cost_details": {
+      "upstream_inference_cost": 0.003056,
+      "upstream_inference_prompt_cost": 0.000068,
+      "upstream_inference_completions_cost": 0.002988
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 243,
+      "image_tokens": 0
+    }
+  }
+}

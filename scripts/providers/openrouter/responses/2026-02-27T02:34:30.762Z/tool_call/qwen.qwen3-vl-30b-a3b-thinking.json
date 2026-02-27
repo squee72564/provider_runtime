@@ -1,0 +1,62 @@
+{
+  "id": "gen-1772160102-eG9W4AEw7s9MXYDZszov",
+  "provider": "Alibaba",
+  "model": "qwen/qwen3-vl-30b-a3b-thinking",
+  "object": "chat.completion",
+  "created": 1772160102,
+  "choices": [
+    {
+      "logprobs": null,
+      "finish_reason": "tool_calls",
+      "native_finish_reason": "tool_calls",
+      "index": 0,
+      "message": {
+        "role": "assistant",
+        "content": "",
+        "refusal": null,
+        "reasoning": "Okay, the user is asking for the weather in San Francisco. Let me check the tools provided. There's a function called get_weather that requires a city parameter. The user specified San Francisco, so I need to call that function with city set to \"San Francisco\". I should make sure the parameters are correct and follow the required format. No other tools are available, so this is the only function to use. Let me structure the tool call properly.\n",
+        "tool_calls": [
+          {
+            "type": "function",
+            "index": 0,
+            "id": "call_78245f212ef54541afbb90",
+            "function": {
+              "name": "get_weather",
+              "arguments": " {\"city\": \"San Francisco\"}"
+            }
+          }
+        ],
+        "reasoning_details": [
+          {
+            "format": "unknown",
+            "index": 0,
+            "type": "reasoning.text",
+            "text": "Okay, the user is asking for the weather in San Francisco. Let me check the tools provided. There's a function called get_weather that requires a city parameter. The user specified San Francisco, so I need to call that function with city set to \"San Francisco\". I should make sure the parameters are correct and follow the required format. No other tools are available, so this is the only function to use. Let me structure the tool call properly.\n"
+          }
+        ]
+      }
+    }
+  ],
+  "system_fingerprint": null,
+  "usage": {
+    "prompt_tokens": 167,
+    "completion_tokens": 116,
+    "total_tokens": 283,
+    "cost": 0,
+    "is_byok": false,
+    "prompt_tokens_details": {
+      "cached_tokens": 0,
+      "audio_tokens": 0,
+      "video_tokens": 0
+    },
+    "cost_details": {
+      "upstream_inference_cost": null,
+      "upstream_inference_prompt_cost": 0,
+      "upstream_inference_completions_cost": 0
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 93,
+      "image_tokens": 0
+    }
+  }
+}

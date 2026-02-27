@@ -1,0 +1,52 @@
+{
+  "id": "gen-1772160466-sR7JpzBbGJZf1hCTua2r",
+  "provider": "Google AI Studio",
+  "model": "google/gemini-3-flash-preview",
+  "object": "chat.completion",
+  "created": 1772160477,
+  "choices": [
+    {
+      "logprobs": null,
+      "finish_reason": "stop",
+      "native_finish_reason": "STOP",
+      "index": 0,
+      "message": {
+        "role": "assistant",
+        "content": "The current weather in San Francisco is 16°C (60°F).",
+        "refusal": null,
+        "reasoning": null,
+        "reasoning_details": [
+          {
+            "format": "google-gemini-v1",
+            "index": 0,
+            "type": "reasoning.encrypted",
+            "data": "EjQKMgG+Pvb7edxScWgUlupljSDJCQrV6fSJ+9rFFuuqBeH62amvbDULLM/76lFQIPMnNXxI"
+          }
+        ],
+        "annotations": []
+      }
+    }
+  ],
+  "usage": {
+    "prompt_tokens": 122,
+    "completion_tokens": 18,
+    "total_tokens": 140,
+    "cost": 0.000115,
+    "is_byok": false,
+    "prompt_tokens_details": {
+      "cached_tokens": 0,
+      "cache_write_tokens": 0,
+      "audio_tokens": 0,
+      "video_tokens": 0
+    },
+    "cost_details": {
+      "upstream_inference_cost": 0.000115,
+      "upstream_inference_prompt_cost": 0.000061,
+      "upstream_inference_completions_cost": 0.000054
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 0,
+      "image_tokens": 0
+    }
+  }
+}

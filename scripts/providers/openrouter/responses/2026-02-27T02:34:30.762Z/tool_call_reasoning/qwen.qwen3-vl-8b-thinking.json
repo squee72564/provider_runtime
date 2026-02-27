@@ -1,0 +1,48 @@
+{
+  "id": "gen-1772160309-nbqgG1MUSxFVEJqIew1d",
+  "provider": "Alibaba",
+  "model": "qwen/qwen3-vl-8b-thinking",
+  "object": "chat.completion",
+  "created": 1772160309,
+  "choices": [
+    {
+      "logprobs": null,
+      "finish_reason": "stop",
+      "native_finish_reason": "stop",
+      "index": 0,
+      "message": {
+        "role": "assistant",
+        "content": "The current weather in San Francisco is **16°C (60°F)**. It's a mild day with temperatures comfortably in the low 60s Fahrenheit. Let me know if you'd like further details! 😊",
+        "refusal": null,
+        "reasoning": "Okay, the user asked for the weather in San Francisco. I called the get_weather function with the city parameter set to San Francisco. The response came back with the temperature in Celsius as 16 and Fahrenheit as 60. Now I need to present this information clearly.\n\nFirst, I should state the current weather in San Francisco. Since the user might be more familiar with Fahrenheit, I'll mention both values but highlight the Fahrenheit temperature. I should also check if there's any additional info, but the tool response only has temperature. Let me make sure to convert Celsius to Fahrenheit correctly. Wait, 16°C is indeed 60°F, so that's correct.\n\nI'll structure the response: start with the city, mention the temperature in both scales, and maybe add a brief note about the weather being mild. Keep it friendly and concise. Let me check for any errors in the numbers. Yep, looks good. Alright, time to write the response.\n",
+        "reasoning_details": [
+          {
+            "format": "unknown",
+            "index": 0,
+            "type": "reasoning.text",
+            "text": "Okay, the user asked for the weather in San Francisco. I called the get_weather function with the city parameter set to San Francisco. The response came back with the temperature in Celsius as 16 and Fahrenheit as 60. Now I need to present this information clearly.\n\nFirst, I should state the current weather in San Francisco. Since the user might be more familiar with Fahrenheit, I'll mention both values but highlight the Fahrenheit temperature. I should also check if there's any additional info, but the tool response only has temperature. Let me make sure to convert Celsius to Fahrenheit correctly. Wait, 16°C is indeed 60°F, so that's correct.\n\nI'll structure the response: start with the city, mention the temperature in both scales, and maybe add a brief note about the weather being mild. Keep it friendly and concise. Let me check for any errors in the numbers. Yep, looks good. Alright, time to write the response.\n"
+          }
+        ]
+      }
+    }
+  ],
+  "system_fingerprint": null,
+  "usage": {
+    "prompt_tokens": 201,
+    "completion_tokens": 247,
+    "total_tokens": 448,
+    "cost": 0.000360672,
+    "is_byok": false,
+    "prompt_tokens_details": {
+      "cached_tokens": 0
+    },
+    "cost_details": {
+      "upstream_inference_cost": 0.00055488,
+      "upstream_inference_prompt_cost": 0.00003618,
+      "upstream_inference_completions_cost": 0.0005187
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 198
+    }
+  }
+}

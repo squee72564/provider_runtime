@@ -1,0 +1,55 @@
+{
+  "id": "gen-1772160445-NhCV3IBRaJRm0K9ZP7R3",
+  "provider": "OpenAI",
+  "model": "openai/gpt-5",
+  "object": "chat.completion",
+  "created": 1772160445,
+  "choices": [
+    {
+      "logprobs": null,
+      "finish_reason": "stop",
+      "native_finish_reason": "completed",
+      "index": 0,
+      "message": {
+        "role": "assistant",
+        "content": "It’s about 16°C (60°F) in San Francisco right now. Would you like the forecast for the next few days?",
+        "refusal": null,
+        "reasoning": "**Summarizing weather details**\n\nI’ve used the get_weather tool, which returned data for San Francisco, but I noticed some typos in the temperature labels—“celcius” and “farhenheit.” I'll provide a concise answer, mentioning only the temperature in both Celsius and Fahrenheit. It doesn't include conditions like sunny or cloudy, and there’s no timestamp, so I might say it’s about 16°C (60°F). I’ll keep it simple and ask if the user wants a forecast as well.",
+        "reasoning_details": [
+          {
+            "format": "openai-responses-v1",
+            "index": 0,
+            "type": "reasoning.summary",
+            "summary": "**Summarizing weather details**\n\nI’ve used the get_weather tool, which returned data for San Francisco, but I noticed some typos in the temperature labels—“celcius” and “farhenheit.” I'll provide a concise answer, mentioning only the temperature in both Celsius and Fahrenheit. It doesn't include conditions like sunny or cloudy, and there’s no timestamp, so I might say it’s about 16°C (60°F). I’ll keep it simple and ask if the user wants a forecast as well."
+          },
+          {
+            "id": "rs_05b61b6ac30ea93c0169a105be574081948289c28788ae85a5",
+            "format": "openai-responses-v1",
+            "index": 1,
+            "type": "reasoning.encrypted",
+            "data": "gAAAAABpoQXDawM2pW7LuhtC82U9X3_XhG_NOemBwt_dlZ-dfAICkIB2YZFcrh3iJVl4Ni6rBFn4LIpuO5H4Sbiz10a3-Y1pGTNqy6w2J05qRjSaLtGoU8n5bfTuErHr1rLJ4HiIExcGiNl7N1obJ_EcHbb2JIEpeRQ6NVrkXb4kyku83TABiDBQebuZWNrlpnjMKKdSB8nfymvHC4ZVd47ZgqSwQLz9keLB8_d4uuTeZtGAC0Ofy8YHAyesPhkFJPpyqrsCQQbFdLObMM0KE6VrghNueUPfrVSL-1Mb6s7MyqO_jV8jQy65SHjwYQHm2VIklTeH6BCUISwxSfgKy4EN_2hFelAEe3dYaQgckbg_nDBrDkPzYrhx0K9lcN7dJEtywkzDJJthnSIqK8XRtTTjUQLTCUlXPBn1GTylOUVXKJn2PH1gsvxXA8x4dvF716V_SoXIN31nz4BMYRNo09TQj-FLP-6mq-r0ROsCpDWR_W9xsjDq-DhoiTCCRGIuxgMFLkleSiV406Uh9cwWb7DwzCjQc_-_KUNii9WlyOAfPFaZtNJginEeHQ7Fo7nccSnTQF9c_r-MFvWTM6UyX2VLZnSBU1b9bPRvTQBSp0oXV4ero3idphkpmTDOp8iHzlRLxXagHLMTbnuq8EN8Ql7i0o8_z23L_xRMO7ewb3D9Eo2PXwqij5FKeSgWUw0lswNunDrPLIZg0hF39WS_cx_rOtaFJFCC6raNC156q9qV4H5nIpvDzflxsKlnNbuINjljODWyeXD0AOWyeljrj3A8kiO0YlseZKpRK8LZMFx_DNCFOB2KvmqKqXOBq5jKyG22HSv76nRD2DQctW1poE7PPizJyDzoiQSIrLp7pAvbglABXey5U7CgjBi2YPvqXBhEZ6k4lvN7mpv21hknk-1cK78r5ef7KW1Py2GhqEdQLEFC-W4jgcUyvKzz8ceGbresWkxhX9Rce00cl1u14GnyoeAvsE-6CzkrtvsnH7ksvJsQU89oFt2Mt4BMjyLZFOyVnmGG7RrYsMt1VQPgcd5mcbHzEnHgCoqzAaJU1tNBtDwell9OajX9X2VQGW5nIqXJOIgp02WeDEsKky9ZbYi5BHdh33CK5Zdya9TdgXy4GGghFOT4lnEoAgyeDXMEI6MIC6VneDrwaQq__BQBLuzAC0EKRE4ls-jCVo8cPftnsDhn-PT-zzwXDSTbtR98mPUR-j7f-nlEKJDeaWQLDxy-h8tibpgbpgBttliFQzgMh4099ilCpW9PDAZGivtzs2XROyHSiMSwhvO3bsxkfbKVMhA27PweVgfpjvhNmzSH1Q_m7UCS3bGOMX_rS95xTmi2Gi9XOwb-M0CHV38tx2hd7fTWAXblyI-OqNtEpqDjnmZZV7D6PDuIK_JqElXd4XvP07E_dWKkGEXsJHw7dux3ySgA2PaWLYyjr4z1Ie1Qx_M-xjON0JbeNd9SNbWJ4r4kLkG2Ml-GctB-G42OvzIkau2vz60ruk9eC-JuAhNOckLhEch9JBSPT7YjHxdkaBeIxI7iET4wi_GgBoxxZ1BiPFY5ucPUAMmgs9vK_NrnqdI2V54MTnXjt0IKX3Qpl-pAGikybhTAVPJayRPqgEqYE-2atTiqH9-99gvumvII7VmKn7ArVeKuQxetyMdDGnMaQsDFJCw9d5q7SvIWw_IVqrNXW_6wwgNLx-e-Awr51CspaeikbN4="
+          }
+        ]
+      }
+    }
+  ],
+  "usage": {
+    "prompt_tokens": 111,
+    "completion_tokens": 189,
+    "total_tokens": 300,
+    "cost": 0.00202875,
+    "is_byok": false,
+    "prompt_tokens_details": {
+      "cached_tokens": 0
+    },
+    "cost_details": {
+      "upstream_inference_cost": 0.00202875,
+      "upstream_inference_prompt_cost": 0.00013875,
+      "upstream_inference_completions_cost": 0.00189
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 128,
+      "image_tokens": 0
+    }
+  }
+}

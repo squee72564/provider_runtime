@@ -1,0 +1,58 @@
+{
+  "id": "gen-1772160257-5olW7fsNcrbzmgYt9hrk",
+  "provider": "Seed",
+  "model": "bytedance-seed/seed-1.6",
+  "object": "chat.completion",
+  "created": 1772160257,
+  "choices": [
+    {
+      "logprobs": null,
+      "finish_reason": "tool_calls",
+      "native_finish_reason": "tool_calls",
+      "index": 0,
+      "message": {
+        "role": "assistant",
+        "content": "",
+        "refusal": null,
+        "reasoning": "\nGot it, let's see. The user is asking for the weather in San Francisco. The available tool is get_weather which requires a city parameter. So I need to call that tool with city set to San Francisco. Let me make sure the JSON is correct. The single tool call format is right, so the output should be the function call with the correct name and parameters.",
+        "tool_calls": [
+          {
+            "type": "function",
+            "index": 0,
+            "id": "call_oxuzp6rr6h6i7k85wq55qu6q",
+            "function": {
+              "name": "get_weather",
+              "arguments": "{\"city\":\"San Francisco\"}"
+            }
+          }
+        ],
+        "reasoning_details": [
+          {
+            "format": "unknown",
+            "index": 0,
+            "type": "reasoning.text",
+            "text": "\nGot it, let's see. The user is asking for the weather in San Francisco. The available tool is get_weather which requires a city parameter. So I need to call that tool with city set to San Francisco. Let me make sure the JSON is correct. The single tool call format is right, so the output should be the function call with the correct name and parameters."
+          }
+        ]
+      }
+    }
+  ],
+  "usage": {
+    "prompt_tokens": 455,
+    "completion_tokens": 107,
+    "total_tokens": 562,
+    "cost": 0.00032775,
+    "is_byok": false,
+    "prompt_tokens_details": {
+      "cached_tokens": 0
+    },
+    "cost_details": {
+      "upstream_inference_cost": 0.00032775,
+      "upstream_inference_prompt_cost": 0.00011375,
+      "upstream_inference_completions_cost": 0.000214
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 79
+    }
+  }
+}

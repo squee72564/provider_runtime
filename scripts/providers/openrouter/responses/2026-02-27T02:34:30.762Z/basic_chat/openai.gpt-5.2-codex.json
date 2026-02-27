@@ -1,0 +1,55 @@
+{
+  "id": "gen-1772159810-NJsqDFODzVQP2NRjnFY0",
+  "provider": "OpenAI",
+  "model": "openai/gpt-5.2-codex",
+  "object": "chat.completion",
+  "created": 1772159810,
+  "choices": [
+    {
+      "logprobs": null,
+      "finish_reason": "stop",
+      "native_finish_reason": "completed",
+      "index": 0,
+      "message": {
+        "role": "assistant",
+        "content": "Doing well, ready to help.",
+        "refusal": null,
+        "reasoning": "**Clarifying word count requirement**",
+        "reasoning_details": [
+          {
+            "format": "openai-responses-v1",
+            "index": 0,
+            "type": "reasoning.summary",
+            "summary": "**Clarifying word count requirement**"
+          },
+          {
+            "id": "rs_0e7018bf92967b4f0169a103428824819493b559599e2a042e",
+            "format": "openai-responses-v1",
+            "index": 1,
+            "type": "reasoning.encrypted",
+            "data": "gAAAAABpoQNDpwDYWt25wqFIwgmbUTyLh6Ow8jIJiaSg-KV1h_vRB3wOeEhjhMhJOPGEoz0OjI-FW-0UuT8DO012VYheS6230tGQaDtF29kIXwN04zEReAQtoplSMX1DiJ8P-Iya0wTnjdhbNU9p-uykHcNruWKW7sL7_tBt8xgdSFuR6Gh9ap-mXJn8r5rFmhMdkelaguQruQqsCuXg5dBOciIpTBKQvZt31bfeiu_0wk0xGeAAKSLJT2QAGd_FHrV5SPjMs5FtrnLwPYh9DugrYhQ3iKLhzCJrqIyG64qE1mrcY9rkpxsfYII4ggUVRk00tfmEDUxe9RVNOv1DxFXHdyziJJfD_-gww9Jj6ipgjNmv3xXrkDqXG5_iDDo-SQo3mFCYEfk0TefvKLrOy_qz_qZjmsF9jM3wUfAqglX9SetNwMKDZl3fc0eP7xBn27p9V8luHNEMJl9yjGwt91qaHKJ9gPxUUUa9_hRqJHm4o7qsQ2z9DXqqgr4LAqaC_ANbfyft66MnyzcLbGPgwns1jX34zLjv0ZwV_jfJl7HVKft0_wx0-LwUqCdAGR-fY8HU7eQSIporTJeByY4Z0Yq27oOBjgU7XQ3uPMFe4q4guCMOqrjieOmW90yWyUS1hB4PqS4cllYjcck6Qc62z8Zdao-b7NgJVmoCJo25GXBmhJ7EeTN6DU0BGNSXtCxpM6yvfzbA-f-G88oNYDxd3MFJJURV6xPpb9yAqKfPRMTb-Y_6lNO62ETL4Vni1JXd6pLOeF9wLGDTYzhPZgUTUi9pfntQAVE-9LaQRoW6oRKKcKxT8d02SUewR-S6qP_YRK3F5SMt03sIJpYu3z6-uwkkofiz4ftjDw=="
+          }
+        ]
+      }
+    }
+  ],
+  "usage": {
+    "prompt_tokens": 50,
+    "completion_tokens": 22,
+    "total_tokens": 72,
+    "cost": 0.0003955,
+    "is_byok": false,
+    "prompt_tokens_details": {
+      "cached_tokens": 0
+    },
+    "cost_details": {
+      "upstream_inference_cost": 0.0003955,
+      "upstream_inference_prompt_cost": 0.0000875,
+      "upstream_inference_completions_cost": 0.000308
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 10,
+      "image_tokens": 0
+    }
+  }
+}

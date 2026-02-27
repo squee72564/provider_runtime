@@ -1,0 +1,55 @@
+{
+  "id": "gen-1772159941-Pprh6sDRf3tzsY70lYQG",
+  "provider": "OpenAI",
+  "model": "openai/gpt-5",
+  "object": "chat.completion",
+  "created": 1772159941,
+  "choices": [
+    {
+      "logprobs": null,
+      "finish_reason": "stop",
+      "native_finish_reason": "completed",
+      "index": 0,
+      "message": {
+        "role": "assistant",
+        "content": "Doing well, thanks for asking.",
+        "refusal": null,
+        "reasoning": "**Formulating a five-word response**\n\nI need to respond to the prompt “tell me how you are doing today in five words.” The goal is to be concise and meet the exact word count. I initially thought of “I’m doing great, thanks—how about you?” but that’s six words. Instead, I can use “Doing well, thanks for asking” or “Feeling productive and happy today.” Both of these hit the mark. I think I'll go with “Doing well, thanks for asking.”",
+        "reasoning_details": [
+          {
+            "format": "openai-responses-v1",
+            "index": 0,
+            "type": "reasoning.summary",
+            "summary": "**Formulating a five-word response**\n\nI need to respond to the prompt “tell me how you are doing today in five words.” The goal is to be concise and meet the exact word count. I initially thought of “I’m doing great, thanks—how about you?” but that’s six words. Instead, I can use “Doing well, thanks for asking” or “Feeling productive and happy today.” Both of these hit the mark. I think I'll go with “Doing well, thanks for asking.”"
+          },
+          {
+            "id": "rs_0562242cb9403fde0169a103c6a22481939d1660d5ac5570b8",
+            "format": "openai-responses-v1",
+            "index": 1,
+            "type": "reasoning.encrypted",
+            "data": "gAAAAABpoQPMf-e_1vtkez_MHRb_OUQWni7Wv8Rv0oVkVJ8B8Ff1AavCMqaApAe_4fXkQW9UVPkqArHk0MN3BBIGB683TcMK_xMAGcqUg6x1NWQD9p_Y-U18amStnxANsIMrOHl0nnrcqwYcy6t1g1IGRc-FWd7cFAlx-AGNAgzj37jMT-gKWN4pgqmt50f7fQa2OBXOhJhHjU7Llr6hbu0E-MUSZc23ergnIVF-15sdgu321rvdawdpnSJfYivFwo7Jluwtk0f9h6tITuqJrNj64swhOH1NCXJXbKgLDXQbqZ0RM56MrSdA8FWsOvBo14aKgKQO2i_8N47S04G449tWv0JcFKQuRyKa7ifoZyIy0Bosijgq1i8Jwc0p0Gx7Yp53KbHZs4k-_eNhZOMcTWmItro9fp2DCRufZ_J0kiFvE2897nMHRYmclUnEEY4NbMGPLPRGbDK0R09ti7Fuq4T3maIe1Q_UNZ2MU10TUvaq0zEhdUC_Ynx2RkP_HdYo9HonqUzU65lNgm3cZTKNUGuqzH9kZ-NguJiq2YaKzh-fIXOct8qVw6LWD6wsee1PMcUDenM8DefXmpKT_JnO7WMrfwCUXMlA-aNCHYuzHVKYgMlAf69vydJVvlamE3akV6N3X1j21k2MXsKmXTcnbiqRFqKBmbzhay5SvxGfXJ-HI591z8pDej77LqxVR_lPG4T6kbbdZQSkjPWVp7jmYc5aeYrKTTeIu3FTzefJxUnq1FJBy9PtiwNWHOV2qxXtaIiwBIa1vJ20oSj-14vQzpGyQMPgz76fxgFq8oO0bNijH9quOqsLlRZbii9GuhH7O_b5QFTfktHSfAWyy0dx4NZsG0gtvYbXvcMz62Mz3tWswK61RfJshNO3EoFAERja5tTMk5dUCTiThAa-9b6VwIJZrtNZ9Hu_C3DC55j3wVA2Et5cmLOctJGyBcHGvH2WD4MKQH0QPsTWw62xHL71nfPlSzKyiD2DTwcbXrWS77p7V44rxB_i8aphkkZjKZmTQSyeHp6UB6yI9PMD6RgAhMgZ5sqTaL9IKWh2NFK-BCTGms6rmYecHbN6-pgw9ZATs490qc4zxu1al64Jo4dgYYEC8Ffy8T28C3OuxThJMdKG2TGIU5BwMJcmWbMy8iyXOOkUDau7wVrERx7d6pO0-CWNAg6EnzNaEnXY-4z1YAkNCzdSIkxiY4It__0B8upw_B1ZbG53JYTAjB5f4qn2BONQwp7am8euGCEALnvDuXv8Sh8a-EYZ8P8CEX5UgdhTOoDOktBGo4fPqxhAroaRrtm2zqHfcx8x1mUoAS0dUnEzFpRVlsNIC30jYiyD0IVAMZD2LzLDjxrYHkQ2GNscm7Qf_WhJ4HgEho4yoxy_-m0-iEd2V8W_YRbPFo6VlUfxYi8TSPc0FpE_9Z15CelHYIMLRVWhKZX0taxGOmI6INwJU4J3nZrNtG6-RS_0_KlYWCCOCKWjA-kFDhhPZd9OK3pHI3JeHlsYSEr9A4rauVdRdiX1qFDLHFEYBWFEAiRS118hyIFzVjo3zANTSpQcsabKxxQwQG_LLCGFrMpIanYlwZUpQPhho9JPmlZYxS3WmnGrQ9FAPqdMW1-m-hXijHdcZsffiHHc87sDFzIcSKslI6bLqu8mDNHAvN-DL47AIrZUlnY5WqJycN9RvnZ3sIl1acjcqSguOer788N0qFJ04LT1mkVhCqCaIdnxprOwwJD5hbbxULCJlr3X9OhmiE_pJHcPUPxbwtyXv0ElLaF07uIa89zzk8C_dkhBhtVntXjjSBQEavWiPae2iLvXrCXrSBUfJjGh-sb9adqqiN7YJT54i2qx2Q6TE7FWWP_KhzqZUzSl3s1ldY44nuhj8fJHnk2etcjpmh8gofpLU4zU8a_A2WUKlREJGSni4UdOTI6TSjx6kDvWyftfafxzB5u8BXXY6xY9tvGauFluDWAK9Datk6SyzR0hiKydIIIB5VBhC0vnXbL6EYb2cn-M-sP0d8tt5z_eCPddkAlY7TrYD3OQkNZF-hAkNktNwpIdbgEZWVI-5NyO3STH39d9hJs1xtvyZYHZy2sVEalxw8ccs5fyz_xbzDYJ0MYM_zRBCmCfjcFlgZlEQZFgmmUvHUUrbz4hlRCI3Zt3Cb7BtOVPb0VJz-U3WBltbexqyARhJX-hnc0miJP30Wpi-PuiGNhh0yVuPT8vhN7CUYr5Ppawy9j1b0IQO6o="
+          }
+        ]
+      }
+    }
+  ],
+  "usage": {
+    "prompt_tokens": 50,
+    "completion_tokens": 272,
+    "total_tokens": 322,
+    "cost": 0.0027825,
+    "is_byok": false,
+    "prompt_tokens_details": {
+      "cached_tokens": 0
+    },
+    "cost_details": {
+      "upstream_inference_cost": 0.0027825,
+      "upstream_inference_prompt_cost": 0.0000625,
+      "upstream_inference_completions_cost": 0.00272
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 256,
+      "image_tokens": 0
+    }
+  }
+}

@@ -1,0 +1,55 @@
+{
+  "id": "gen-1772160349-i3vaENbN2VkJDp3mu3BG",
+  "provider": "OpenAI",
+  "model": "openai/gpt-5.1-codex-mini",
+  "object": "chat.completion",
+  "created": 1772160349,
+  "choices": [
+    {
+      "logprobs": null,
+      "finish_reason": "stop",
+      "native_finish_reason": "completed",
+      "index": 0,
+      "message": {
+        "role": "assistant",
+        "content": "The current temperature in San Francisco is 16°C (60°F).",
+        "refusal": null,
+        "reasoning": "**Preparing final weather response**",
+        "reasoning_details": [
+          {
+            "format": "openai-responses-v1",
+            "index": 0,
+            "type": "reasoning.summary",
+            "summary": "**Preparing final weather response**"
+          },
+          {
+            "id": "rs_0d575498bd0211500169a1055e83008193838a592e6b25328e",
+            "format": "openai-responses-v1",
+            "index": 1,
+            "type": "reasoning.encrypted",
+            "data": "gAAAAABpoQVfoheIPICmKtyy_w8e18c4stD5ytO46OfwEh7ZS17YNC9GlEn0dsNrFkx3G2EkhIVX8fdGgoB3J_beoJiXoFly2iEk-NA4QVuQ0kpF0ZUPLVnY9p76bcrXd4VW3RluzJt54zMauDLUdXb-0ECdg__7gEf-JbeqGpK4xfBLONnrcObq8C69ult0dkP_RyI-ByDz6LOpq-b5gnw1pOzRllgcuHT421s5T-E16IZN43gQiKDWwhrpgM6smXjN6HdGkrF_J964CeuvXgSxf50xPqFr87d_izs3ENACkZRQxL67IYoyHkNZG1cgUlYxQSiJkqgHC21heHbJLDt1NorDSrjZ-SF5uBPOAxKvgeDlHTwL0kgrNUrimWXUPz3oLsp0JeUfQV2YSeCj9IcezA5sbo6Ff_GOCa5UoTeBLEo5akRzyrQqTWg51mBlimr-znLlZpiSLgP_nxT9e4o3yn02021MEhHXl26mtm6yQWDIdHZHo_9y0Q65v9nS5l7Dv9tkFtF_luOUwOndmFcuoRrEnY33yHP1Tk2EHCk-oIQSXBxqzatUSXKtKkh2-S3-7GcwrY72KEQiRdMvpoMidx7tDXAoFPNF-WrlwNMpDgKZQAzFqV08rN5IeM2hV05xhLZFFoFmLI8W5zww3dKqiY2Y4KwV8ujWJYv6nKNrYHcZgsF6Xj3JPI2nCuLhOJ1BHOILbXh72lD-xBiqqzJfnWtJ-1Necc9KYMJZkwicLPe8Gwc5ZfoWyV_5M-migyC192j3O12kqdYU7Zusm5K_7f4ehrQnjeJlgRkabCe1as-qIU00_IpoP6axkow5EoCC8FA85Bw9pDJycZhu37lG5EAp6haJjShNNUCup8B6EVQVnFScEBgBQ5SX0G0UulSr5x3VMi1r"
+          }
+        ]
+      }
+    }
+  ],
+  "usage": {
+    "prompt_tokens": 111,
+    "completion_tokens": 31,
+    "total_tokens": 142,
+    "cost": 0.00008975,
+    "is_byok": false,
+    "prompt_tokens_details": {
+      "cached_tokens": 0
+    },
+    "cost_details": {
+      "upstream_inference_cost": 0.00008975,
+      "upstream_inference_prompt_cost": 0.00002775,
+      "upstream_inference_completions_cost": 0.000062
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 9,
+      "image_tokens": 0
+    }
+  }
+}

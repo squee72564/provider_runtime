@@ -1,0 +1,55 @@
+{
+  "id": "gen-1772159823-rpsNYRMpTQZjGTZLK7Z5",
+  "provider": "OpenAI",
+  "model": "openai/gpt-5-pro",
+  "object": "chat.completion",
+  "created": 1772159823,
+  "choices": [
+    {
+      "logprobs": null,
+      "finish_reason": "stop",
+      "native_finish_reason": "completed",
+      "index": 0,
+      "message": {
+        "role": "assistant",
+        "content": "I am doing well today.",
+        "refusal": null,
+        "reasoning": "**Counting words for response**\n\nI need to respond with exactly five words for how I'm doing today. The user asked for this specifically. I realize I should stick to five words without extra punctuation. I thought of a few phrases, like \"I'm doing well, thank you,\" which counts as five words. But I’m double-checking my word count, ensuring I'm clear and accurate. It looks like I could go with something like \"Feeling good and ready today.\"**Refining the five-word response**\n\nAlright, I’m counting my words carefully to give a clear response to the user’s request. I need to make sure it’s exactly five words. Options like \"Feeling good and energized today\" work well. However, I realize I should focus on what the user specifically asked: \"how you are doing today.\" A safe and clear choice would be “I am doing well today.” This avoids punctuation issues and meets the five-word requirement perfectly!",
+        "reasoning_details": [
+          {
+            "format": "openai-responses-v1",
+            "index": 0,
+            "type": "reasoning.summary",
+            "summary": "**Counting words for response**\n\nI need to respond with exactly five words for how I'm doing today. The user asked for this specifically. I realize I should stick to five words without extra punctuation. I thought of a few phrases, like \"I'm doing well, thank you,\" which counts as five words. But I’m double-checking my word count, ensuring I'm clear and accurate. It looks like I could go with something like \"Feeling good and ready today.\"**Refining the five-word response**\n\nAlright, I’m counting my words carefully to give a clear response to the user’s request. I need to make sure it’s exactly five words. Options like \"Feeling good and energized today\" work well. However, I realize I should focus on what the user specifically asked: \"how you are doing today.\" A safe and clear choice would be “I am doing well today.” This avoids punctuation issues and meets the five-word requirement perfectly!"
+          },
+          {
+            "id": "rs_0c7a2b9c747b9d2d0169a103b281888193b1e2c96af9a841f1",
+            "format": "openai-responses-v1",
+            "index": 1,
+            "type": "reasoning.encrypted",
+            "data": "gAAAAABpoQO27dxp_C9WZCPNS3oTO9DJk2Tp5LZkIQ7evYxtiKno6dCTiVDaLHVeWuvPoL0GB4JTMCMDTxyNrVgheqtkwXanh6I9IWJFwAu4erofUl67WJvr9vC3E1cWtMYCKxsvb2pHbmcvvO21fG1hL9Fz4F3FQ3g0idgkP97Kzl0dwpOk-bANXN61QEQEqr5-NqrX61vDpyk95zAXRujeUOK41PazHQebE89KkabChne1JcvtBZlEs4Yo4og8Nh5ezwh150krAxh7BStor9k4wODCmvPl1uESjS7HKoN29nF2uvq3bT7Fde2D_UbXxyIq_E9PWG84cLsbyJFZTtUbsVl67Hj_lRNLSVpFjuTWe9dEB4I6PjN2TdDl-qcOOoFarJ8C3wN9Tko67EMqaI1vWwgqOv1L-QQLtrihkCtfkg0ToKdERsHGZF99B_Dp6Ex0Dh4E845w01oIzIgyo1g8xzY3ipYZ-XkiadFm_hZvr4mRD3ROoXw2Z8_7JDdjArZLKuFOdoDK-cdf0mqwyT-5nWsUmG4vXc68Gr7TnD4p027FOdoLAk9cnEIe0padCRbuA_lODR_ZYJ68jkjllaxO7rBq7xleJG-Avss_1gJgYQCssevwdPqtnW8ekIq5BpnrJbjJczVfFiKTESFgyPgGZZ7riZdivyxPuVKc-tTwLw4WVtJfmNwaxo9is5bTnSDU8LlXre8QkN3tvfyrPkNSSyK3-EtfSl2GRPkPyWWEGlQnCspqaQMHCV26g03I5iev_JND44ISTrwVCXgIk-56CLuWCOkKZD5aG3h5O5XnbG4uzd_Xz9ftiwcHq9V9V7cKNEwBMMU_dqOPLxirqL8v2qgXr6IKufVbeVbsIIXzbDBzwBpKcSXHCfFjFwOPeqzyBsOximS22ejSktRjtmqf_fNwieC6HNihsHUbiVbKMRq62gKnGrbnA90OYVizRGr4ursli4vrETyF9PirLcZhRoJ5-rzeHw0RbBO7QtI0M6KAnbckRUVllCwdQITYOqPpQa82jEat67sZTff3a0_mnDXvwbRA27u-m4IOtIay4zN1gBoRvSwMC3hqAhn6Wga7x0nz6LsjRuVs_ew1hdR2BwzVjjbDQHqDYkm6xiN_mY8ec3bFubynX1hrHXpWuXdbTYuiouXcweQ0D6jwe0j9aAE-JUwrCPv05BCw7IoCGIcHtI8vcp_GnHKCFjlxfgJl2GfoHQhyWifQ1osgEXXpHRiojcNnaTIglkcT639xsIl4AsdlAoTpLl3Vn1OrGc_k18FAcKIdCvnodpdA3oYpdyrjbdnKZEMiZQ-p5mU8UUlpcnb9MMsg4GUTrlR3V2q-ngo-tNWzYPxF6DCb8vFy1BXAO1hIRTBHGdNtXRXDNS8FOjHD0wzFHnxhB59JVj5MV6YxG7w9Xl1Wlsy4YI7Q0g8v23WTTZB9b_YFeDItjBuCA0U4gu6OpOAGIcvigb5oDWy25MoGwdx_dh3eOZd77KxFIRcp0jbujCjrv_uGaTD1D3wBA2M0FAOejkifc6npLPV1OHdIzpT8v4LD3rbl7OmPoh-H0WyJYZVVzpWyURjp86grKeQ10JQPfDzOoeL1T9QhhQm1qVE_WXqljR1xiqKTyJX7pjbQZt4KucLtMzx1ucf0MyKI3isvVbEt5y5KhC8dcbRIkkkbykNvRXWkISrleEq-I7rFngbGeW1-fiHPCotubkNN1cAO9_y9UTQqoR6C46NwW7ZayYi-1qxdsRUWHWLqARkJ2ICVvHZmhtAlBs4tPtaw5oknr8_WaMsCFZ8ywPIMyhXkKeLTkfGES0Ji-hGrxriq6dnSBAxI-DWyDtQUfDxbg0R7qh6cIQ5WRvOko2Fp9pWf_377T4gXYbkSsr31oaLZyszXHcH8jHA5Fop5AbZnsPf8lx4mncOTE3Eyew-DpXGwlnVOUPQdMmUSlToB45ddUzNlGkVADMv24sxHkTkuBiMLuWJN2zQPfV0GvTG_X3fLuI-kqeaRBJ_fCVqdNMHdRE0dpx1r12ZwTGSoagW74mWrETKfOlrIrQwNWEdpZy6wxlZlkN2f0pR9_HfTQ1gKfD75YGXjie6xpjDXaUIX-NhJUQKIfS4uWNAoIEQIGVY1jyByN6vexJ6i7NNMyufoMvb1LRJ8TU652aPrxpFOeeDT5Va031V6xAdXNrwQcGd3b5LmTsP93qGoJIgyygC--bPZJPmje_9ThSpzn46HThDs7s06vjjQ3_rr3-sm8Gi30ZAb4G59k3bCjniq5ggK3bzC8Tdohe5K__xbqHIm-2zRef_lFNb7zmwC9H5aL5KkH0XLh5JSeVAOKhuF4hwt92oy5dfj1PFe95mzd9ZusqM3IupXe2NXcAUbJXykgWUSoR1DTye_FxzwSYLoyHXgNKF5iz1O-ZwZ7_nhkSP7UCJ5FXuKwIYJBl4CbQkq9eHXTBxkUVigTVfPX6TPLennyFVfI-4c3TxwnFY9tgJcf1R-jHhD5QvCaESjTsvAF8sx3rCbVM1GGcUExgSrT-B9dBBcAN9Aq8EMwOzEB45qzoAGjXZfzDOeaMT4bWfDQNdcivB8rlBKzghFpkswuwGtq0LOI3Vi7y44IUg6XEv4pPk12yqA5onWe0B4Ez5zIH5RgNfPch9qxdWYQ00_E57CEYPNgzsq3zfr9z7Ni2naFzOLw1HZ9SVngc7oES26niel_TNr2GT8RdNMMlEl4mp2DWySKMV7ycWQ8XeWihTMEHtQ0KAv4JWZ5qC0Ye_69q-7ImSqaBCUjCI4o_IfF-XI_VG4s8POW02NFMOt466klA6SlMe9HALSOlddelnXTapdw_-ga_vF2ZQL7x9LfOwprKOh-QFIdU6j3F6mc2XTDt0qJA1eaN007xDK7nK9lG1u3dS7E5nTad3uoB_12hg4CxSrVd0UWn8GweJmkd3BWijCa93DuIEsLZvJCXLpJEg4Q7vnXpOXZJNGqGoqOrDaT-Klk5PNFLFUcwl11m2q6uwJlM_x5vJz2A_4DPStOUng6VyIAPQhaECeiHVMW0O7jOAtGew5UVtmtX36d8Gk7zeZRBfVpFvxe2-Kaizz6QBR9c8PwKy8g3Xj8-SPzWrJB6McJxGMXtIeqTDnJWGQAgrrfJDpJ8w8eAvy74vAFb5eY6ilpfla-I5RKhBRxErXI3_mG2Q6xOCSlAcRcYuBwvSzru537___zqGdiYX-ohPP5x2COHdZxk6D0q5PvH0Ut8ZfIKle9jC9mCFJKrI="
+          }
+        ]
+      }
+    }
+  ],
+  "usage": {
+    "prompt_tokens": 50,
+    "completion_tokens": 515,
+    "total_tokens": 565,
+    "cost": 0.06255,
+    "is_byok": false,
+    "prompt_tokens_details": {
+      "cached_tokens": 0
+    },
+    "cost_details": {
+      "upstream_inference_cost": 0.06255,
+      "upstream_inference_prompt_cost": 0.00075,
+      "upstream_inference_completions_cost": 0.0618
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 448,
+      "image_tokens": 0
+    }
+  }
+}

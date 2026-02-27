@@ -1,0 +1,47 @@
+{
+  "id": "gen-1772160492-MbAizNvs1PmSEBUUQ4XF",
+  "provider": "Seed",
+  "model": "bytedance-seed/seed-2.0-mini",
+  "object": "chat.completion",
+  "created": 1772160492,
+  "choices": [
+    {
+      "logprobs": null,
+      "finish_reason": "stop",
+      "native_finish_reason": "stop",
+      "index": 0,
+      "message": {
+        "role": "assistant",
+        "content": "The current weather in San Francisco has a temperature of 16°C (60°F).",
+        "refusal": null,
+        "reasoning": "Got it, let's see. The tool returned the weather for San Francisco: 16 degrees Celsius, which is 60 Fahrenheit. Now I need to present that clearly to the user. First, start by answering the question, mention the current temperature in both units since that's what the tool provided. Let me make it natural. Something like \"The current weather in San Francisco is 16°C (60°F).\" Wait, wait, the tool had a typo? Farhenheit should be Fahrenheit, but the response has that, but I can just correct that gently? No, just report the data as given clearly. Yeah, let's phrase it nicely: \"The current temperature in San Francisco is 16 degrees Celsius (equivalent to 60 degrees Fahrenheit).\" That's straightforward and covers the info from the tool call.",
+        "reasoning_details": [
+          {
+            "format": "unknown",
+            "index": 0,
+            "type": "reasoning.text",
+            "text": "Got it, let's see. The tool returned the weather for San Francisco: 16 degrees Celsius, which is 60 Fahrenheit. Now I need to present that clearly to the user. First, start by answering the question, mention the current temperature in both units since that's what the tool provided. Let me make it natural. Something like \"The current weather in San Francisco is 16°C (60°F).\" Wait, wait, the tool had a typo? Farhenheit should be Fahrenheit, but the response has that, but I can just correct that gently? No, just report the data as given clearly. Yeah, let's phrase it nicely: \"The current temperature in San Francisco is 16 degrees Celsius (equivalent to 60 degrees Fahrenheit).\" That's straightforward and covers the info from the tool call."
+          }
+        ]
+      }
+    }
+  ],
+  "usage": {
+    "prompt_tokens": 502,
+    "completion_tokens": 193,
+    "total_tokens": 695,
+    "cost": 0.0001274,
+    "is_byok": false,
+    "prompt_tokens_details": {
+      "cached_tokens": 0
+    },
+    "cost_details": {
+      "upstream_inference_cost": 0.0001274,
+      "upstream_inference_prompt_cost": 0.0000502,
+      "upstream_inference_completions_cost": 0.0000772
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 174
+    }
+  }
+}

@@ -1,0 +1,58 @@
+{
+  "id": "gen-1772159968-Ga1Dzf8CVVP0OzumUYJm",
+  "provider": "Google AI Studio",
+  "model": "google/gemini-3.1-pro-preview",
+  "object": "chat.completion",
+  "created": 1772159968,
+  "choices": [
+    {
+      "logprobs": null,
+      "finish_reason": "stop",
+      "native_finish_reason": "STOP",
+      "index": 0,
+      "message": {
+        "role": "assistant",
+        "content": "I am doing great today!",
+        "refusal": null,
+        "reasoning": "**Assessing The Task's Scope**\n\nI've scoped the request: the topic's \"How I am doing today,\" and I've noted the five-word limit. \"I am doing very well\" is my initial, straightforward phrase. I like how basic it is, but I can keep going.\n\n\n",
+        "reasoning_details": [
+          {
+            "format": "google-gemini-v1",
+            "index": 0,
+            "type": "reasoning.text",
+            "text": "**Assessing The Task's Scope**\n\nI've scoped the request: the topic's \"How I am doing today,\" and I've noted the five-word limit. \"I am doing very well\" is my initial, straightforward phrase. I like how basic it is, but I can keep going.\n\n\n"
+          },
+          {
+            "format": "google-gemini-v1",
+            "index": 1,
+            "type": "reasoning.encrypted",
+            "data": "Es4HCssHAb4+9vssdCQJyyk2lKEVxXit7zzNnYnmAyqvTIr+r7I7nLo3j7ADfYlWTl6ARsXEZUEjcKrKuovJx/K3ZZ0GZ2IqA4JeU2Sm+mLhh/6asOWCgVPAOTQBaCRdN7QAzajD8pbWu76bmt5oWKmmedwsRNoKOqLRQi45SuvfOmu5zfHbU8lPMtApFoKeAbj+Rlq0r3jzAoP5mQRK+tVTpynQy10eiRguex8CFVCG8IyBQPPOkk7INBqMBnqApn5t8NydUPiwgIDusb9maQnzKd4pscN2ZMXBrKL6jbD99+oJ7K8vC0INX1GX2NqTAKW0DUn68OSxpG+AS/XBr0BTNdiULbQ0mlqQ6ebeOqAvUxYnMkMlwtCgiv6O236j/lkmwGkHtztGbf2J1/EO/JUg9hz1A5/sARyKH4aED17z0D7OYVgtqPNDyCyzRsuq1TwMqgfMQOd1RAknF0fEKpXegbwMHy3W7+bv6HkO0eSkm0T8iLtabizas1demm3yaPBdGqW+qXZpV5iEJ/QDduX6UhSvtFAaqRdBjKUyEcb02NWkQttdCSPtl8TI29+iZyATF377GZKW8gomeyRlT+3yQtw5gDUywh4z6KWN5tsuinm/90Y42FXHIACbdBM2Xs1MCG7VqaBl7IDzMsv5OeofDJ+P7ngBrx9NDchKRgRNvGfnldyhIwRUtHEYszvSSJkb6QpbJQgSJ9Mqrgl2Y4BizdsLoqAxWPcKGtONUceoJlP8RN7OIQOGhI3tP310nRSCCLY/9LGzQ45KeXc68vEXRO2Re8v031Zt3HvDEZy7O73j7LR7TF4KQxyuyiB1ZE1/8Ncg0PnQL6K7cNpL+J281yOC2UXUkEqB0/GpEwFgB3Qs+wkn3IF8Kl+xLBw+bTg0kzLp5UhXhSRZkKWNFkip+9RISMhiYsD8osuKFxI3/38cIVf4XRf3WSQfQKWuHTXESNJpUo5shE7iA/IwDnTjhAB3/aoipTxWifqOYZva6pHAex1dup33JGE2NW83TuSo7NzofZn2ScmlKhRRAWR17UdMRSjexc2hJCibOH9+DwFfMF06yNze3IgjmwRInb8LubYZe4VDWIdn7q9Dj7Ix6Mba/VfFawkdyD4P/5dma4hKmShbw56Rqz14IqTL3zAzJpMNlc0Mc5u7aR6vUuf+0lGycPPwFQLNHYYbxu6VNsTCQTCQTUY/UW5oFP5m4aWR3qExHL4GD9i+AJBtAavPPhW51gxGD08DUQAV6ADRxI89kKvJXPQhaHnlWQQGvjrm+3+5bWtIh99c0sY2PVs="
+          }
+        ],
+        "annotations": []
+      }
+    }
+  ],
+  "usage": {
+    "prompt_tokens": 34,
+    "completion_tokens": 249,
+    "total_tokens": 283,
+    "cost": 0.003056,
+    "is_byok": false,
+    "prompt_tokens_details": {
+      "cached_tokens": 0,
+      "cache_write_tokens": 0,
+      "audio_tokens": 0,
+      "video_tokens": 0
+    },
+    "cost_details": {
+      "upstream_inference_cost": 0.003056,
+      "upstream_inference_prompt_cost": 0.000068,
+      "upstream_inference_completions_cost": 0.002988
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 243,
+      "image_tokens": 0
+    }
+  }
+}

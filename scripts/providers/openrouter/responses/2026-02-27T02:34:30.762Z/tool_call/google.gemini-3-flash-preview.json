@@ -1,0 +1,64 @@
+{
+  "id": "gen-1772160241-aFIMTQpk7qcvjrOv5qIh",
+  "provider": "Google AI Studio",
+  "model": "google/gemini-3-flash-preview",
+  "object": "chat.completion",
+  "created": 1772160241,
+  "choices": [
+    {
+      "logprobs": null,
+      "finish_reason": "tool_calls",
+      "native_finish_reason": "STOP",
+      "index": 0,
+      "message": {
+        "role": "assistant",
+        "content": "",
+        "refusal": null,
+        "reasoning": null,
+        "tool_calls": [
+          {
+            "type": "function",
+            "index": 0,
+            "id": "tool_get_weather_J2hE8dqmB6e8iL3vzP51",
+            "function": {
+              "name": "get_weather",
+              "arguments": "{\"city\":\"San Francisco\"}"
+            }
+          }
+        ],
+        "reasoning_details": [
+          {
+            "id": "tool_get_weather_J2hE8dqmB6e8iL3vzP51",
+            "format": "google-gemini-v1",
+            "index": 0,
+            "type": "reasoning.encrypted",
+            "data": "EjQKMgG+Pvb7qH8FrRGcoikRErOx/sDDwj2c0PXnlgGLpPUEVNaPQayf+7t5pZNOmlIVl4YK"
+          }
+        ],
+        "annotations": []
+      }
+    }
+  ],
+  "usage": {
+    "prompt_tokens": 58,
+    "completion_tokens": 17,
+    "total_tokens": 75,
+    "cost": 0.00008,
+    "is_byok": false,
+    "prompt_tokens_details": {
+      "cached_tokens": 0,
+      "cache_write_tokens": 0,
+      "audio_tokens": 0,
+      "video_tokens": 0
+    },
+    "cost_details": {
+      "upstream_inference_cost": 0.00008,
+      "upstream_inference_prompt_cost": 0.000029,
+      "upstream_inference_completions_cost": 0.000051
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 0,
+      "image_tokens": 0
+    }
+  }
+}

@@ -1,0 +1,55 @@
+{
+  "id": "gen-1772159940-RkzxeJuJwYHOz7cx5TUh",
+  "provider": "OpenAI",
+  "model": "openai/gpt-5-codex",
+  "object": "chat.completion",
+  "created": 1772159940,
+  "choices": [
+    {
+      "logprobs": null,
+      "finish_reason": "stop",
+      "native_finish_reason": "completed",
+      "index": 0,
+      "message": {
+        "role": "assistant",
+        "content": "Doing great, ready to help!",
+        "refusal": null,
+        "reasoning": "**Counting words for response**",
+        "reasoning_details": [
+          {
+            "format": "openai-responses-v1",
+            "index": 0,
+            "type": "reasoning.summary",
+            "summary": "**Counting words for response**"
+          },
+          {
+            "id": "rs_071598e19e9987450169a103c4e2e0819395c9e7f91d137e2f",
+            "format": "openai-responses-v1",
+            "index": 1,
+            "type": "reasoning.encrypted",
+            "data": "gAAAAABpoQPFBgf9Vrms_RRKoHHbL0umjTHParh4f2Y4yGN48wNj08nkcH9zyrr_L8PfjaUtleLdxXaGeNGTXu84bgFgBtsSIEWRWmyAS8NAxqdRpq6QGTUirbDoTmVULdX_gvTsUY1EnAK-eNY3m8Yboq1Mihjd4TyW5DLdcnM_Nfb30yPibEL4zUrGZWk127ByQgQ3Gbdxcb6aKoryZMhJ3TGXFvvVeH7X0RxlKV6hJy0LiJcpHxAanJr0jLQ_cYhjLw30dKHrbISF7vb-Y_cmWHOrUEOwJn3aIVRRTLYLmZNgxpdLq8r5eIj8ptm8nzOwW0KSECy_izvHRx0su2LN5zQJokXKAM3bVvmLZF0XPwJJ8gvA95DgsO3KEDvdQX8-Bs4ykpGb_XPy726J9teSGQ4YHwM4xVXWRPSflPdA3qAGSKC8GjPMW5FcXIjeRxAOfwgZ7xxlnOQmpqF8uXSBfPMp9nxvzaW_RbqyG8S7jkvvMLU9EyN6BKMbvJ-ESK2H8IUOd24lmSldWRHoSPRIQueP0jBmEum2TEIkpA3CpYYubpLi5Qt0c9d2Fu9Xsyh1695GmLQr4GhTGNG-5K8juhldyg83gJa6YAFw8XY4dJnCq48-lCqmKDApF_IJ3M6gn5Og-YATb3gLiBxKbUUCeCjT___e2sXOksebCeCDJuo3Ojlou5xKjZ4ATe5ipgSmxW-gcFkoLf14L67jTpnyVEEc4ISBb773halDUUNLFqUbuYzLbLQKHcPFHtrP6nsqko0rQO7qIDbeRYQ0IMl-x8lkn3CZghN2CrOjKbgU3VNkn0_uQFbOJdO89S3WIvLbF6tlcnTw0WbI95kPj-4jjx_AViYenWVwFj82_izDcsW8QHaMv2VPWtJ5e6d2FDIVq4Gtius5baEYIZZ6DRnjez3xSdGcfu8AIHsPDvPnT4IUb0e0O5Qphjreq2FO8wG7WmwCrOkPZ7746shHNhr635zhYLCLwofagrQcRPqPXiu2NLMJ6A01Dy7Hx0eolVFfZlyr0aPRyejU6dEBJjg9dU5WlV-L9nMyE1RO4UsJPBnoemSeB5RxnEp_AzTQrT7OY6fxnB7B"
+          }
+        ]
+      }
+    }
+  ],
+  "usage": {
+    "prompt_tokens": 50,
+    "completion_tokens": 69,
+    "total_tokens": 119,
+    "cost": 0.0007525,
+    "is_byok": false,
+    "prompt_tokens_details": {
+      "cached_tokens": 0
+    },
+    "cost_details": {
+      "upstream_inference_cost": 0.0007525,
+      "upstream_inference_prompt_cost": 0.0000625,
+      "upstream_inference_completions_cost": 0.00069
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 8,
+      "image_tokens": 0
+    }
+  }
+}

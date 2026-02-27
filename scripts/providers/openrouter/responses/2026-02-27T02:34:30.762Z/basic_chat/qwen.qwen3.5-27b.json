@@ -1,0 +1,48 @@
+{
+  "id": "gen-1772159710-pieoik294Tmplp700BhR",
+  "provider": "Alibaba",
+  "model": "qwen/qwen3.5-27b",
+  "object": "chat.completion",
+  "created": 1772159710,
+  "choices": [
+    {
+      "logprobs": null,
+      "finish_reason": "stop",
+      "native_finish_reason": "stop",
+      "index": 0,
+      "message": {
+        "role": "assistant",
+        "content": "I am doing great today.",
+        "refusal": null,
+        "reasoning": "Thinking Process:\n\n1.  **Analyze the Request:**\n    *   Input: \"tell me how you are doing today in 5 words.\"\n    *   Constraint: Exactly 5 words.\n    *   Topic: How I am doing (status/mood).\n\n2.  **Drafting Responses:**\n    *   *Draft 1:* I am doing very well today. (6 words) - Too long.\n    *   *Draft 2:* I am doing well today. (5 words) - Good.\n    *   *Draft 3:* Feeling great and ready to help. (6 words) - Too long.\n    *   *Draft 4:* I am functioning perfectly fine today. (6 words) - Too long.\n    *   *Draft 5:* Doing well, ready to assist you. (6 words) - Too long.\n    *   *Draft 6:* I am doing well today. (5 words) - Wait, let's count: I (1) am (2) doing (3) well (4) today (5). Yes.\n    *   *Draft 7:* Feeling good and ready to help. (6 words) - Too long.\n    *   *Draft 8:* I am happy to help. (5 words) - I (1) am (2) happy (3) to (4) help (5). Yes.\n    *   *Draft 9:* Everything is going very well. (5 words) - Everything (1) is (2) going (3) very (4) well (5). Yes.\n    *   *Draft 10:* I am doing great today. (5 words) - I (1) am (2) doing (3) great (4) today (5). Yes.\n\n3.  **Selecting the Best Option:**\n    *   \"I am doing great today.\" is friendly and fits the constraint perfectly.\n    *   \"I am doing well today.\" is also good.\n    *   Let's go with \"I am doing great today.\"\n\n4.  **Final Verification:**\n    *   Word count: I (1) am (2) doing (3) great (4) today (5).\n    *   Constraint met: Yes.\n\n5.  **Output Generation.**\n    *   \"I am doing great today.\"\n\n    *Wait, let me double check the count.*\n    1. I\n    2. am\n    3. doing\n    4. great\n    5. today\n\n    Perfect.\n\n    *Alternative:* \"Feeling good and ready to help.\" (6 words) - No.\n    *Alternative:* \"I am functioning well today.\" (5 words) - A bit robotic.\n    *Alternative:* \"I am doing well today.\" (5 words) - Safe.\n\n    Let's pick \"I am doing well today.\" or \"I am doing great today.\"\n    \"I am doing great today.\" sounds more positive.\n\n    Wait, I need to make sure I don't add any extra punctuation that might be counted as a word by some strict parsers, though usually punctuation isn't a word. But to be safe, I'll keep it simple.\n\n    Actually, \"I am doing well today.\" is 5 words.\n    \"I am doing great today.\" is 5 words.\n\n    Let's go with: \"I am doing great today.\"\n\n    Wait, is there a hidden trick? \"in 5 words\".\n    Okay, I will output exactly 5 words.\n\n    Selection: I am doing great today.\n    Count: 1, 2, 3, 4, 5.\n\n    Wait, I should check if the period counts. Usually, it doesn't. But to be absolutely safe on the \"5 words\" constraint, I can omit the period or include it as standard punctuation. Standard practice is punctuation doesn't count as a word.\n\n    Let's try: \"I am doing well today.\"\n    1. I\n    2. am\n    3. doing\n    4. well\n    5. today\n\n    Okay.\n\n    Another option: \"Everything is going very well.\"\n    1. Everything\n    2. is\n    3. going\n    4. very\n    5. well\n\n    Let's stick with the personal one. \"I am doing great today.\"\n\n    Wait, I need to make sure I don't write any intro text. Just the 5 words.\n\n    Final check:\n    I (1)\n    am (2)\n    doing (3)\n    great (4)\n    today (5)\n\n    Okay.cw",
+        "reasoning_details": [
+          {
+            "format": "unknown",
+            "index": 0,
+            "type": "reasoning.text",
+            "text": "Thinking Process:\n\n1.  **Analyze the Request:**\n    *   Input: \"tell me how you are doing today in 5 words.\"\n    *   Constraint: Exactly 5 words.\n    *   Topic: How I am doing (status/mood).\n\n2.  **Drafting Responses:**\n    *   *Draft 1:* I am doing very well today. (6 words) - Too long.\n    *   *Draft 2:* I am doing well today. (5 words) - Good.\n    *   *Draft 3:* Feeling great and ready to help. (6 words) - Too long.\n    *   *Draft 4:* I am functioning perfectly fine today. (6 words) - Too long.\n    *   *Draft 5:* Doing well, ready to assist you. (6 words) - Too long.\n    *   *Draft 6:* I am doing well today. (5 words) - Wait, let's count: I (1) am (2) doing (3) well (4) today (5). Yes.\n    *   *Draft 7:* Feeling good and ready to help. (6 words) - Too long.\n    *   *Draft 8:* I am happy to help. (5 words) - I (1) am (2) happy (3) to (4) help (5). Yes.\n    *   *Draft 9:* Everything is going very well. (5 words) - Everything (1) is (2) going (3) very (4) well (5). Yes.\n    *   *Draft 10:* I am doing great today. (5 words) - I (1) am (2) doing (3) great (4) today (5). Yes.\n\n3.  **Selecting the Best Option:**\n    *   \"I am doing great today.\" is friendly and fits the constraint perfectly.\n    *   \"I am doing well today.\" is also good.\n    *   Let's go with \"I am doing great today.\"\n\n4.  **Final Verification:**\n    *   Word count: I (1) am (2) doing (3) great (4) today (5).\n    *   Constraint met: Yes.\n\n5.  **Output Generation.**\n    *   \"I am doing great today.\"\n\n    *Wait, let me double check the count.*\n    1. I\n    2. am\n    3. doing\n    4. great\n    5. today\n\n    Perfect.\n\n    *Alternative:* \"Feeling good and ready to help.\" (6 words) - No.\n    *Alternative:* \"I am functioning well today.\" (5 words) - A bit robotic.\n    *Alternative:* \"I am doing well today.\" (5 words) - Safe.\n\n    Let's pick \"I am doing well today.\" or \"I am doing great today.\"\n    \"I am doing great today.\" sounds more positive.\n\n    Wait, I need to make sure I don't add any extra punctuation that might be counted as a word by some strict parsers, though usually punctuation isn't a word. But to be safe, I'll keep it simple.\n\n    Actually, \"I am doing well today.\" is 5 words.\n    \"I am doing great today.\" is 5 words.\n\n    Let's go with: \"I am doing great today.\"\n\n    Wait, is there a hidden trick? \"in 5 words\".\n    Okay, I will output exactly 5 words.\n\n    Selection: I am doing great today.\n    Count: 1, 2, 3, 4, 5.\n\n    Wait, I should check if the period counts. Usually, it doesn't. But to be absolutely safe on the \"5 words\" constraint, I can omit the period or include it as standard punctuation. Standard practice is punctuation doesn't count as a word.\n\n    Let's try: \"I am doing well today.\"\n    1. I\n    2. am\n    3. doing\n    4. well\n    5. today\n\n    Okay.\n\n    Another option: \"Everything is going very well.\"\n    1. Everything\n    2. is\n    3. going\n    4. very\n    5. well\n\n    Let's stick with the personal one. \"I am doing great today.\"\n\n    Wait, I need to make sure I don't write any intro text. Just the 5 words.\n\n    Final check:\n    I (1)\n    am (2)\n    doing (3)\n    great (4)\n    today (5)\n\n    Okay.cw"
+          }
+        ]
+      }
+    }
+  ],
+  "system_fingerprint": null,
+  "usage": {
+    "prompt_tokens": 55,
+    "completion_tokens": 1030,
+    "total_tokens": 1085,
+    "cost": 0.0024885,
+    "is_byok": false,
+    "prompt_tokens_details": {
+      "cached_tokens": 0
+    },
+    "cost_details": {
+      "upstream_inference_cost": 0.0024885,
+      "upstream_inference_prompt_cost": 0.0000165,
+      "upstream_inference_completions_cost": 0.002472
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 1019
+    }
+  }
+}

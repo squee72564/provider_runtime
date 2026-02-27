@@ -1,0 +1,57 @@
+{
+  "id": "gen-1772160294-PKRB3GJrSaNAbS7efg1j",
+  "provider": "xAI",
+  "model": "x-ai/grok-4.1-fast",
+  "object": "chat.completion",
+  "created": 1772160294,
+  "choices": [
+    {
+      "logprobs": null,
+      "finish_reason": "stop",
+      "native_finish_reason": "completed",
+      "index": 0,
+      "message": {
+        "role": "assistant",
+        "content": "The current weather in San Francisco is 16°C (60°F).",
+        "refusal": null,
+        "reasoning": "First, the user asked: \"What is the weather in San Francisco?\"\n\n\n## Checking weather data  \n- The user asked for the weather in San Francisco.",
+        "reasoning_details": [
+          {
+            "format": "xai-responses-v1",
+            "index": 0,
+            "type": "reasoning.summary",
+            "summary": "First, the user asked: \"What is the weather in San Francisco?\"\n\n\n## Checking weather data  \n- The user asked for the weather in San Francisco."
+          },
+          {
+            "id": "rs_1f9ce6c1-ed4d-f5f3-bf38-006245c8722b",
+            "format": "xai-responses-v1",
+            "index": 1,
+            "type": "reasoning.encrypted",
+            "data": "EsFLtuVHzDjqfBqKY/t8jXhlgoY7kyOVht74TRoAAKDhrT4DxuSyuo7OcrnqFs4cuID3zwqaOP9gR5kLroqYVCIPyzi5m+eCvt3RQeikXchxKLQAW50jNqwA+uiYoA2hvvTCP6Q32UOjwS0CRmfDAs9wwYawLxgDYa0CMc7QxR2ZrkpoqV5gpnqgW0x3k9s0hPfxw+crfTLslKcjjuWdMtlh5aIlgs/236HmN+zzscrh/KMiVvOKr6z3/9q7MyxwZYLlMDzSiDXw/IPvSNYu0TbH7YwznzxHCwZ1cXlGJ1ColQv3VOxbF8PNgp2eRkj+DrbgUip4RW0dueEoalFu0f45R7dQRgRHyp2z8wmbOPmNU42BpTgWZAZ8wlpj5KbblCY+ccg0Jih0o4Ga+PEFsnkh5/27OgJ9Qnbk7s0PBbxW4gGgVyAxquFv+d4wVucJGxI0vgJM5gg7t/osWizbCBHLUACbxA099Ih7ilNCCWEmMUuISGu0IZ38wtZzmmqFqlH4rYuhXtFIaIZfQOZEoK3UVfyi8LJWMEQnRncyt8YHXbwXGxmZ02EUk5Oc+UjH5EZ3RHn58mC9oqTWw/yjTR08mKLTaSI4Riw+A1TXd5GVBQ9uRsEX4wVieRQ2j0FWa91tVRQbAlSUMF5aVCA1/KzIr+9CwKdOZDxz/rxTxRV6Q1qHb6ESX7PlcbR/G9t6TM5s0V2v0rbC6c1cPGI5MAyfcN0atyWi5/GieXFcuiuY4q9VeoZTvB6V0X1WRUgoGm1iQjRhWYbzDIRxBLjc2BtOIJKaFDeMH70dqYhp4A8nOc4"
+          }
+        ]
+      }
+    }
+  ],
+  "usage": {
+    "prompt_tokens": 419,
+    "completion_tokens": 145,
+    "total_tokens": 564,
+    "cost": 0.0000981,
+    "is_byok": false,
+    "prompt_tokens_details": {
+      "cached_tokens": 512,
+      "audio_tokens": 0,
+      "video_tokens": 0
+    },
+    "cost_details": {
+      "upstream_inference_cost": null,
+      "upstream_inference_prompt_cost": 0.0000256,
+      "upstream_inference_completions_cost": 0.0000725
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 131,
+      "image_tokens": 0
+    }
+  }
+}

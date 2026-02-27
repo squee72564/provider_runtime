@@ -1,0 +1,70 @@
+{
+  "id": "gen-1772160215-K1KVbF1frV295KSBxeO6",
+  "provider": "Google AI Studio",
+  "model": "google/gemini-3.1-pro-preview-customtools",
+  "object": "chat.completion",
+  "created": 1772160215,
+  "choices": [
+    {
+      "logprobs": null,
+      "finish_reason": "tool_calls",
+      "native_finish_reason": "STOP",
+      "index": 0,
+      "message": {
+        "role": "assistant",
+        "content": "",
+        "refusal": null,
+        "reasoning": "**Initiating Further Analysis**\n\nI'm now focusing on deepening my analysis to ensure I'm advancing toward the next stage effectively. I'm carefully considering how to integrate the information I have obtained into a coherent framework.\n\n\n",
+        "tool_calls": [
+          {
+            "type": "function",
+            "index": 0,
+            "id": "tool_get_weather_9GSBKGT4GrCZ9hCXlZ8L",
+            "function": {
+              "name": "get_weather",
+              "arguments": "{\"city\":\"San Francisco\"}"
+            }
+          }
+        ],
+        "reasoning_details": [
+          {
+            "format": "google-gemini-v1",
+            "index": 0,
+            "type": "reasoning.text",
+            "text": "**Initiating Further Analysis**\n\nI'm now focusing on deepening my analysis to ensure I'm advancing toward the next stage effectively. I'm carefully considering how to integrate the information I have obtained into a coherent framework.\n\n\n"
+          },
+          {
+            "id": "tool_get_weather_9GSBKGT4GrCZ9hCXlZ8L",
+            "format": "google-gemini-v1",
+            "index": 1,
+            "type": "reasoning.encrypted",
+            "data": "EuIFCt8FAb4+9vt0G0tIjdXRxBSOtWlPO/hdP3CNzRhpZbtrmZXgtFt4S0gqtCCJZNcUQ8X118Q0wvUdZ2ynLScTyi5HmpLR+oNYeEKVJF1O/53PuzVN6EsHsGVwdV/8z3aDky21VDrfAqqbyDZ90EsFzQEXZfN4BP468Aa1IvJY7sMDp58fvmg1KV/uKIVG1uH+4lfIrCzIEKZZT2Oj8Rylgw01k5gtJD/2k0aE9bbsNUZMWP0eSEQsEXAJyqxMdrEjmtgmGnN/AidOSUOAJ6uFrGTJFdL3IvTyT0D8kIAMLgnF84TYem03Xw3bh3TW2A7058nHlBXfIE7SEXACNz/V2FPBM007fXXH2k0kTWIvgvzYFzsPdSbx4jd7yMOQ/LugAbAJLIYvLQpY2fSjTW8Fc2/CMihFBZCC2shlu2T1i6GotmUq2G5oCz6BVG9emcMWaBfk7TGvtMhUMqaqnjajbFFO7ZDy7+GZn9N5BmGn5YX+vzeQhHRlCgY6Yh995YI18QVNFddY/feJdsBdv5Sz0Q/LAyonGgMkZS6mNfyvWMgZL9zgnlWdWVzUuHXg4OC3gsmtx+dyYz4Xzeqe4C0R28B2CViEYsSF3S69xDPIKiOo4ROIdSzpFw0fNfB3lQ79noWK92c34K4Tveye3hyPeAqDHIvS/tWQ5DbKFxoneE7bVsdNSaz2opNMXlzl7LRxe/amy/nPcVQUIdvVG72tjvEMcEevCPSMugWkZGgIHDxmosajni/+GpVElb6k7Dtldy6mX6XyT8YDJX9Er7y77UZSZqxa/hymFIh6vYYrJRKNqStFogqCopa6bShAQqKWM8NWmXj3zgl4WuEl0qlnYzPvLstogN+fOfEjAbYv8bEMl/vJepM22sgwlq/vAtNG6r7idzGaegBRUytmO3/QnsbU7/mfdsqmBDhNZ9xrRQvyzdYedKjy9mVzU4P9XMOgEdOZwf1fKdBEzdP5wbzk8Gp8"
+          }
+        ],
+        "annotations": []
+      }
+    }
+  ],
+  "usage": {
+    "prompt_tokens": 58,
+    "completion_tokens": 154,
+    "total_tokens": 212,
+    "cost": 0.001964,
+    "is_byok": false,
+    "prompt_tokens_details": {
+      "cached_tokens": 0,
+      "cache_write_tokens": 0,
+      "audio_tokens": 0,
+      "video_tokens": 0
+    },
+    "cost_details": {
+      "upstream_inference_cost": 0.001964,
+      "upstream_inference_prompt_cost": 0.000116,
+      "upstream_inference_completions_cost": 0.001848
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 137,
+      "image_tokens": 0
+    }
+  }
+}

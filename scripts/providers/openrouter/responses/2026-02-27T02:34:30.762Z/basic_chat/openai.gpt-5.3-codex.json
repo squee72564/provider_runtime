@@ -1,0 +1,55 @@
+{
+  "id": "gen-1772159801-ypNfk2zUA9gzcON63DjV",
+  "provider": "OpenAI",
+  "model": "openai/gpt-5.3-codex",
+  "object": "chat.completion",
+  "created": 1772159801,
+  "choices": [
+    {
+      "logprobs": null,
+      "finish_reason": "stop",
+      "native_finish_reason": "completed",
+      "index": 0,
+      "message": {
+        "role": "assistant",
+        "content": "I'm doing well, thanks, friend.",
+        "refusal": null,
+        "reasoning": "**Correcting five-word response**",
+        "reasoning_details": [
+          {
+            "format": "openai-responses-v1",
+            "index": 0,
+            "type": "reasoning.summary",
+            "summary": "**Correcting five-word response**"
+          },
+          {
+            "id": "rs_0fb69ab47bab00e60169a1033a11b08194af267385065c82d7",
+            "format": "openai-responses-v1",
+            "index": 1,
+            "type": "reasoning.encrypted",
+            "data": "gAAAAABpoQM7pL3vPqSAqWNPuIMA0xaU7PaUi7H4vk1O9X4XPGyYQb13InRzX2myLJn5_i8i3LZdsdltXSnDJYC1dPY_Ka_fRvq-vv3g-KL2DDqj7nxy7h3wCKR81XfsTtQVIT33GVPLBIg0gKzMs_wjB2enhLhqBG0y06D4V4aoK3lu3ezw3Y1_PRoc7kCBBcxawvYoH8BOVhNvBcmiqCtsv5UPPgkdJyIKPwk-CNFS3v9a0zYJCkblYRCPD7GQDCyoxAPm7nR-Wo6A_cfnkvpz-laJeFdAjCqFQhEYTXTgUZmFA6uiHaCpI4ageAFdx7oKT1ZEwNO04lsU4Cgxi5aDqML1sFd2qjPhLAaDRHRF9nGDb0a2pwtar3BbuQeBc8J13gYegDc93h5Ou-MNmf5PzaFd5_ZyF8caS__FlcvirOSiABb-gFj3cNSEemKI5zd3_2wBbbNitFZ7mZzFJiJL-C4fejMA6vJXtsW3-4G56E8V-6_Vs1CatOfnn8LGbMdUJJPCjme9U6lEU_Z_-bHBJbv1WvoLmQMPCNy35sVK8M_zo4N2x8rX2KdIBurF9UxTDcOIe49NrlU-BSIBP9Rycdcr2HKVFwceSqLoLaFpt6o9WD2MTwsi9pSiz9sBsyhaYTeHYrjfkprl-p45i_g4fQjAP4vgbQOwUyiUS1i6-FLs1TpheW8YBQKQzggMtH2CUry1_qtt9sk20178GZk0fmpHDsYoWbMxRuDKm7W10SBOfiPEJLofQU1qrgu2yp8i0r4ngE3ET1ASsV7Fyl5PCOgsxph7gJ93zvNAoMrrA7MVBnI9FcPdbMrbW6IEhbdqvdTSqqFk8exZiffKsqpWh_5EFmFIUlKiBiq7Of8JWzzjbFSBl5bA6v3EwfyAmYZjhiIdRBRs68Knb1TPM2fHsu7Lr8i0aUZ1QAX2T0piElZ7Z83lrWmhvKorHlVxPn-Gjljr2mPgWvQA41e2LW7FVz69ExP8mXH-CGxWGSMcVXYp68hnoNABkhjq07cE1-qjzrv8JioFTu_7c4_dz85AuPvv6x1Yb43bjn3PG2zSb_6o8dMRyTKtlTTEEhSlHeDodw1euTX8-DCgwAOuzkxkV5XFO6enVU06OSwOYQsIIaHXvvciMGZ7dVEGRD_VSIrjqxDFOiAaQQKYcchEL0RLFqmv_O0lj5UxybNkrjCyujt_e_Pq77WC05hI8Nxdnjl99p9n0vL3D3CLuLYzx2dUFlfVI2XDew=="
+          }
+        ]
+      }
+    }
+  ],
+  "usage": {
+    "prompt_tokens": 50,
+    "completion_tokens": 102,
+    "total_tokens": 152,
+    "cost": 0.0015155,
+    "is_byok": false,
+    "prompt_tokens_details": {
+      "cached_tokens": 0
+    },
+    "cost_details": {
+      "upstream_inference_cost": 0.0015155,
+      "upstream_inference_prompt_cost": 0.0000875,
+      "upstream_inference_completions_cost": 0.001428
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 88,
+      "image_tokens": 0
+    }
+  }
+}

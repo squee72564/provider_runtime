@@ -1,0 +1,59 @@
+{
+  "id": "gen-1772160091-NO2FOt8b4kiSfkBLDmbe",
+  "provider": "xAI",
+  "model": "x-ai/grok-4",
+  "object": "chat.completion",
+  "created": 1772160091,
+  "choices": [
+    {
+      "logprobs": null,
+      "finish_reason": "tool_calls",
+      "native_finish_reason": "completed",
+      "index": 0,
+      "message": {
+        "role": "assistant",
+        "content": "",
+        "refusal": null,
+        "reasoning": null,
+        "tool_calls": [
+          {
+            "type": "function",
+            "index": 0,
+            "id": "call_22729720",
+            "function": {
+              "name": "get_weather",
+              "arguments": "{\"city\":\"San Francisco\"}"
+            }
+          }
+        ],
+        "reasoning_details": [
+          {
+            "id": "rs_e157348b-db0c-accf-5670-ff36a1470c09",
+            "format": "xai-responses-v1",
+            "index": 0,
+            "type": "reasoning.encrypted",
+            "data": "8jtCbvva+EC7Gs982glVmY1Vjd9pkniTfcBCKhKe/sU1AefwullCD8xE1fSL/oz4JyVDKf+l0SRwLM+4t7prI1nZ3C1k+LFa1EKDTkRZbO4bkYyZckFp2poVARNPQSIdfYyGc3NONU7bBfteAqzl/NamQA/EJwGOhue4YslqCm/mFmbS2oOrrCswAEYbEnJ/Q1jF+MjoW+pRKdiU1CAkm/P4xzOhjdUcaBX79rabDFkiPZlCtcv9dklOcopM3/qXcdK4bNNl9GFBW1mDTJRyKjuO5NjlwgNVrRGWP2Q6us2HJyYlNyVzs//2/fi+fg18j3wbVr9GQmg410/av2pJ0uwd/N4cDNNNDju/NWM536+GKoXqDZD0OBNcdXOnMRFvkMhgwxTYM+zqer7YVw135MPqYiqCWh5e3JXDl7RecQzXkHPZu2f3wAHTEeIk7ZqDpLoNtAd+z+vWle9ZX5SmK/ATg5U8rh+2UJ0fiSsHZ/vJbZ661RgMRUxgh97kfu4Qlm4hHeF4Q0lHtP9b11O/8PxZIsoWxuvcb191UQ3rmeI5Vu8z0QCg3cy/cVv7/dd/WilmkmDLV7jsUNFOazqSGkttbryqcnmg8HvsQTMbfesRb5bad0MMaxg"
+          }
+        ]
+      }
+    }
+  ],
+  "usage": {
+    "prompt_tokens": 890,
+    "completion_tokens": 123,
+    "total_tokens": 1013,
+    "cost": 0.002985,
+    "is_byok": false,
+    "prompt_tokens_details": {
+      "cached_tokens": 680
+    },
+    "cost_details": {
+      "upstream_inference_cost": 0.002985,
+      "upstream_inference_prompt_cost": 0.00114,
+      "upstream_inference_completions_cost": 0.001845
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 97
+    }
+  }
+}

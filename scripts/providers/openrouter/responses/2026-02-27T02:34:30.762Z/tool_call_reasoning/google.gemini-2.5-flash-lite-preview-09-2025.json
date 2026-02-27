@@ -1,0 +1,44 @@
+{
+  "id": "gen-1772160490-WFKwm505nYcLmJhhwwij",
+  "provider": "Google AI Studio",
+  "model": "google/gemini-2.5-flash-lite-preview-09-2025",
+  "object": "chat.completion",
+  "created": 1772160490,
+  "choices": [
+    {
+      "logprobs": null,
+      "finish_reason": "stop",
+      "native_finish_reason": "STOP",
+      "index": 0,
+      "message": {
+        "role": "assistant",
+        "content": "The weather in San Francisco is 16°C (60°F).",
+        "refusal": null,
+        "reasoning": null,
+        "annotations": []
+      }
+    }
+  ],
+  "usage": {
+    "prompt_tokens": 122,
+    "completion_tokens": 16,
+    "total_tokens": 138,
+    "cost": 0.0000186,
+    "is_byok": false,
+    "prompt_tokens_details": {
+      "cached_tokens": 0,
+      "cache_write_tokens": 0,
+      "audio_tokens": 0,
+      "video_tokens": 0
+    },
+    "cost_details": {
+      "upstream_inference_cost": 0.0000186,
+      "upstream_inference_prompt_cost": 0.0000122,
+      "upstream_inference_completions_cost": 0.0000064
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 0,
+      "image_tokens": 0
+    }
+  }
+}

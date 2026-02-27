@@ -1,0 +1,51 @@
+{
+  "id": "gen-1772160264-Hvuz6l73BDVnNC1a3dYP",
+  "provider": "Google",
+  "model": "anthropic/claude-opus-4.6",
+  "object": "chat.completion",
+  "created": 1772160264,
+  "choices": [
+    {
+      "logprobs": null,
+      "finish_reason": "tool_calls",
+      "native_finish_reason": "tool_calls",
+      "index": 0,
+      "message": {
+        "role": "assistant",
+        "content": "\n\nLet me check the current weather in San Francisco for you.",
+        "refusal": null,
+        "reasoning": null,
+        "tool_calls": [
+          {
+            "type": "function",
+            "index": 0,
+            "id": "toolu_vrtx_01DFdTdPTxmK5UoaE8HBweHU",
+            "function": {
+              "name": "get_weather",
+              "arguments": "{\"city\": \"San Francisco\"}"
+            }
+          }
+        ]
+      }
+    }
+  ],
+  "usage": {
+    "prompt_tokens": 579,
+    "completion_tokens": 68,
+    "total_tokens": 647,
+    "cost": 0.004595,
+    "is_byok": false,
+    "prompt_tokens_details": {
+      "cached_tokens": 0,
+      "cache_write_tokens": 0
+    },
+    "cost_details": {
+      "upstream_inference_cost": 0.004595,
+      "upstream_inference_prompt_cost": 0.002895,
+      "upstream_inference_completions_cost": 0.0017
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 0
+    }
+  }
+}

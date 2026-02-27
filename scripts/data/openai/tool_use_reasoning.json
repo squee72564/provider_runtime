@@ -1,0 +1,37 @@
+{
+  "model": "gpt-4o-mini",
+  "instructions": "You are a helpful assistant.",
+  "input": [
+    {"role": "user", "content": "What is the weather in San Francisco?"},
+    {
+      "type": "function_call",
+      "call_id": "call_kVt45WuZpYA2meaqiOfOJGxN",
+      "name": "get_weather",
+      "arguments": "{\"city\":\"San Francisco\"}"
+    },
+    {
+      "type": "function_call_output",
+      "call_id": "call_kVt45WuZpYA2meaqiOfOJGxN",
+      "output": "{ \"city\": \"San Francisco\", \"celcius\": 16, \"farhenheit\": 60}"
+    }
+  ],
+  "tools": [
+    {
+      "type": "function",
+      "name": "get_weather",
+      "description": "Get current weather by city",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "city": {"type": "string"}
+        },
+        "required": ["city"],
+        "additionalProperties": false
+      }
+    }
+  ],
+  "tool_choice": "auto",
+  "store": false,
+  "stream": false,
+  "max_output_tokens": 1024
+}

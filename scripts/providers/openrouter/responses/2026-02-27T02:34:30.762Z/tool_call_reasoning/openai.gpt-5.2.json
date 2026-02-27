@@ -1,0 +1,40 @@
+{
+  "id": "gen-1772160347-6q4b1PawAJp6MU1bUckh",
+  "provider": "OpenAI",
+  "model": "openai/gpt-5.2",
+  "object": "chat.completion",
+  "created": 1772160347,
+  "choices": [
+    {
+      "logprobs": null,
+      "finish_reason": "stop",
+      "native_finish_reason": "completed",
+      "index": 0,
+      "message": {
+        "role": "assistant",
+        "content": "The weather in San Francisco is **16°C (60°F)**.",
+        "refusal": null,
+        "reasoning": null
+      }
+    }
+  ],
+  "usage": {
+    "prompt_tokens": 111,
+    "completion_tokens": 18,
+    "total_tokens": 129,
+    "cost": 0.00044625,
+    "is_byok": false,
+    "prompt_tokens_details": {
+      "cached_tokens": 0
+    },
+    "cost_details": {
+      "upstream_inference_cost": 0.00044625,
+      "upstream_inference_prompt_cost": 0.00019425,
+      "upstream_inference_completions_cost": 0.000252
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 0,
+      "image_tokens": 0
+    }
+  }
+}

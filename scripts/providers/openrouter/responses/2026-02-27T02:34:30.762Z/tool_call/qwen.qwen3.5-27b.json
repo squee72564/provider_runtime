@@ -1,0 +1,59 @@
+{
+  "id": "gen-1772160099-SMrdHR5ioThJUVaKb8Nx",
+  "provider": "Alibaba",
+  "model": "qwen/qwen3.5-27b",
+  "object": "chat.completion",
+  "created": 1772160099,
+  "choices": [
+    {
+      "logprobs": null,
+      "finish_reason": "tool_calls",
+      "native_finish_reason": "tool_calls",
+      "index": 0,
+      "message": {
+        "role": "assistant",
+        "content": "",
+        "refusal": null,
+        "reasoning": "The user is asking about the weather in San Francisco. I have access to a get_weather function that can get current weather by city. I need to call this function with \"San Francisco\" as the city parameter.\n",
+        "tool_calls": [
+          {
+            "type": "function",
+            "index": 0,
+            "id": "call_231c9ed36f1d45cda322700a",
+            "function": {
+              "name": "get_weather",
+              "arguments": "{\"city\": \"San Francisco\"}"
+            }
+          }
+        ],
+        "reasoning_details": [
+          {
+            "format": "unknown",
+            "index": 0,
+            "type": "reasoning.text",
+            "text": "The user is asking about the weather in San Francisco. I have access to a get_weather function that can get current weather by city. I need to call this function with \"San Francisco\" as the city parameter.\n"
+          }
+        ]
+      }
+    }
+  ],
+  "system_fingerprint": null,
+  "usage": {
+    "prompt_tokens": 287,
+    "completion_tokens": 74,
+    "total_tokens": 361,
+    "cost": 0.0002637,
+    "is_byok": false,
+    "prompt_tokens_details": {
+      "cached_tokens": 0
+    },
+    "cost_details": {
+      "upstream_inference_cost": 0.0002637,
+      "upstream_inference_prompt_cost": 0.0000861,
+      "upstream_inference_completions_cost": 0.0001776
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 43
+    }
+  }
+}

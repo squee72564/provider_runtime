@@ -1,0 +1,58 @@
+{
+  "id": "gen-1772160482-BbXAVVKWO7SDvhhR7sZ6",
+  "provider": "Google AI Studio",
+  "model": "google/gemini-2.5-pro",
+  "object": "chat.completion",
+  "created": 1772160482,
+  "choices": [
+    {
+      "logprobs": null,
+      "finish_reason": "stop",
+      "native_finish_reason": "STOP",
+      "index": 0,
+      "message": {
+        "role": "assistant",
+        "content": "The weather in San Francisco is 60°F (16°C).",
+        "refusal": null,
+        "reasoning": "**Identifying Weather Tools**\n\nI've homed in on the `get_weather` function as a potentially useful tool, due to its description. I need to determine if it is the best fit for this weather-related query. I'm evaluating its capabilities to match the user's specific request.\n\n\n**Confirming Function Use**\n\nI've determined that `get_weather` is indeed the correct tool, and its utility is confirmed! I've confirmed I can pass \"San Francisco\" as the `city` parameter and the function call returned the desired weather information. Now, my task is to transform the output into a response I can give to the user, including both Fahrenheit and Celsius readings for clarity.\n\n\n",
+        "reasoning_details": [
+          {
+            "format": "google-gemini-v1",
+            "index": 0,
+            "type": "reasoning.text",
+            "text": "**Identifying Weather Tools**\n\nI've homed in on the `get_weather` function as a potentially useful tool, due to its description. I need to determine if it is the best fit for this weather-related query. I'm evaluating its capabilities to match the user's specific request.\n\n\n**Confirming Function Use**\n\nI've determined that `get_weather` is indeed the correct tool, and its utility is confirmed! I've confirmed I can pass \"San Francisco\" as the `city` parameter and the function call returned the desired weather information. Now, my task is to transform the output into a response I can give to the user, including both Fahrenheit and Celsius readings for clarity.\n\n\n"
+          },
+          {
+            "format": "google-gemini-v1",
+            "index": 1,
+            "type": "reasoning.encrypted",
+            "data": "CiIBvj72+8Vw5uBWkHzsHiWDkuyYOaLc9oUP04q5frSPoq9LCnMBvj72+2ZXL1x2ntOcZ2IdjRsOg+gX+jgCdfVCLPoowctGMwCiMAKL6CK3qZo43itE2Z0ihMt0b04AgGLjphZCbZAmTEtrojgRZnHEAZKp2JWS58nVfsGYxXUuf37DoR2DWA9SjoIDOZmaWLXXr+TrsEQdCqMBAb4+9vt9GHpA35/V7PyavO/7aM2SqTjchwVD/5r22I1BOuOxWG1rE8Cddc1zAghxLbXsUwFLltXzeW0T91fRXxQE2NuMzZyfczxsG1/DPeQYkmrMkqkg93++umUjKu5CLYZIApTfn92XIaMN2I9GcYaQVap1OdyoylKchrydQYh4F7EETtEwYle8FXEyb3gdALPkLCpNv0uUb+yre2E9kt1iDwqMAQG+Pvb7NCTL964K9r+3hW8UUagRA5epJAOcdJ8xTrnWB5VP5ItYqMLLawT0I2lMJ7JuDtRDWXeQH0Ki0ozWEfOUxRUyAXAtuvLF2h3f6VjuV8e3oh5UqFXPuDpiua/QyfmQ5eGxbxS4qh0REF1E/+cuWBbormeztVe7IBAg009MpelcgK3FRdgDIPRzCooBAb4+9vtNz9LgJkUvNMbqSDP84H25HLYcdM9UiCZ2zuzxNI/y0BuzZI2H00lu+vSJPr25s107Mhbxc862ar9YA55EtMxUO5QM55vCzTOWfv/fTF/8QTca7eTph/G14rAwh4NVdts8sh3RUa5MonhI6j8TTWvWdYhonwO6GSsse92JLXymTRqS7fuCCn8Bvj72+6uOzy/+04JYv20cj+PpIbm8DZBo0ieeHKbgNwA61vCEjghsVs9nq95NWOe0vfhgVT0HTSSr8c7lYWVD5YWAGuqci6jm/ShT+p3r917m1mLGpGWdLOqtOXxRMBn/shRIBr/oO/DG7ZHy6powTNODkDXXCKgwvIwKe62OCo8BAb4+9vuCbFRBb4fmcGFbDcElChyg/gCTr3rBomuLI0tITMCiNlLrHQJAPY9eSXJLpPg9wP2FOXQaGIVhHa0n1cpFwcRc61H6ITDF/bfTbXqDzE9Wc7kaqs3PPUpOywAkGyLZxbAtzDuccPSS4SCbc8W3pJRjVTZepH3N1h2Ibw1xhpr6+jYMNTMiqs0+b1IKgAEBvj72+/7sMngXR6Ot/LHt17PKckc0Mo1/qqK1C9MRdgvJ2PGQwL/aX0dYKvSNebSZV/EWS1MZIbLgDEd6jHpOiwMtj2SRw+o/UVKoRKHyuMji++gm8avJJRepaapBGOAIyJy6cBGVFZIBMagmDBSlrVLGXEbQHut3vUVXYz8xIApVAb4+9vuGQtXggTIJ2OYotWo3HJYYP5QrEFzkcLYl3Z27utzz925eECFdt1WYhIZip+Er0NA5yQ3sWOBI8t2DRjVs7W0dNqHnjrKh/iszyZ0hJwKwcg=="
+          }
+        ],
+        "annotations": []
+      }
+    }
+  ],
+  "usage": {
+    "prompt_tokens": 121,
+    "completion_tokens": 196,
+    "total_tokens": 317,
+    "cost": 0.00211125,
+    "is_byok": false,
+    "prompt_tokens_details": {
+      "cached_tokens": 0,
+      "cache_write_tokens": 0,
+      "audio_tokens": 0,
+      "video_tokens": 0
+    },
+    "cost_details": {
+      "upstream_inference_cost": 0.00211125,
+      "upstream_inference_prompt_cost": 0.00015125,
+      "upstream_inference_completions_cost": 0.00196
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 181,
+      "image_tokens": 0
+    }
+  }
+}

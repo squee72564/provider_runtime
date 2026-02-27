@@ -1,0 +1,58 @@
+{
+  "id": "gen-1772160252-9oo6Yl8K0K4vSgNV671d",
+  "provider": "Seed",
+  "model": "bytedance-seed/seed-2.0-mini",
+  "object": "chat.completion",
+  "created": 1772160252,
+  "choices": [
+    {
+      "logprobs": null,
+      "finish_reason": "tool_calls",
+      "native_finish_reason": "tool_calls",
+      "index": 0,
+      "message": {
+        "role": "assistant",
+        "content": "",
+        "refusal": null,
+        "reasoning": "Got it, let's see. The user is asking for the weather in San Francisco. The available function is get_weather which needs the city parameter. So I need to call that function with city set to \"San Francisco\". Let me make sure the format is correct. The function call should be wrapped in the <|FunctionCallBegin|> and <|FunctionCallEnd|> tags, with the right JSON structure. Yep, that's it. Alright, let's put that together.",
+        "tool_calls": [
+          {
+            "type": "function",
+            "index": 0,
+            "id": "call_u1bc6h2zta87za4xu2yxw1f9",
+            "function": {
+              "name": "get_weather",
+              "arguments": " {\"city\": \"San Francisco\"}"
+            }
+          }
+        ],
+        "reasoning_details": [
+          {
+            "format": "unknown",
+            "index": 0,
+            "type": "reasoning.text",
+            "text": "Got it, let's see. The user is asking for the weather in San Francisco. The available function is get_weather which needs the city parameter. So I need to call that function with city set to \"San Francisco\". Let me make sure the format is correct. The function call should be wrapped in the <|FunctionCallBegin|> and <|FunctionCallEnd|> tags, with the right JSON structure. Yep, that's it. Alright, let's put that together."
+          }
+        ]
+      }
+    }
+  ],
+  "usage": {
+    "prompt_tokens": 436,
+    "completion_tokens": 135,
+    "total_tokens": 571,
+    "cost": 0.0000976,
+    "is_byok": false,
+    "prompt_tokens_details": {
+      "cached_tokens": 0
+    },
+    "cost_details": {
+      "upstream_inference_cost": 0.0000976,
+      "upstream_inference_prompt_cost": 0.0000436,
+      "upstream_inference_completions_cost": 0.000054
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 102
+    }
+  }
+}

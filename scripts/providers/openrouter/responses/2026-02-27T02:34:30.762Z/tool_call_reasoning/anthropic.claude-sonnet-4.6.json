@@ -1,0 +1,40 @@
+{
+  "id": "gen-1772160505-ePU6U0QIVGYPYExJq63Q",
+  "provider": "Anthropic",
+  "model": "anthropic/claude-sonnet-4.6",
+  "object": "chat.completion",
+  "created": 1772160515,
+  "choices": [
+    {
+      "logprobs": null,
+      "finish_reason": "stop",
+      "native_finish_reason": "stop",
+      "index": 0,
+      "message": {
+        "role": "assistant",
+        "content": "The current weather in **San Francisco** is:\n\n- 🌡️ **Temperature:** 16°C / 60°F\n\nSan Francisco is living up to its reputation for mild, cool weather! You may want to bring a light jacket if you're heading out. 😊",
+        "refusal": null,
+        "reasoning": null
+      }
+    }
+  ],
+  "usage": {
+    "prompt_tokens": 668,
+    "completion_tokens": 65,
+    "total_tokens": 733,
+    "cost": 0.002979,
+    "is_byok": false,
+    "prompt_tokens_details": {
+      "cached_tokens": 0,
+      "cache_write_tokens": 0
+    },
+    "cost_details": {
+      "upstream_inference_cost": 0.002979,
+      "upstream_inference_prompt_cost": 0.002004,
+      "upstream_inference_completions_cost": 0.000975
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 0
+    }
+  }
+}

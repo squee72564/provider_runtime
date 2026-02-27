@@ -1,0 +1,48 @@
+{
+  "id": "gen-1772159698-IZQocNs3KpFR2mOn4N0g",
+  "provider": "Alibaba",
+  "model": "qwen/qwen3.5-397b-a17b",
+  "object": "chat.completion",
+  "created": 1772159698,
+  "choices": [
+    {
+      "logprobs": null,
+      "finish_reason": "stop",
+      "native_finish_reason": "stop",
+      "index": 0,
+      "message": {
+        "role": "assistant",
+        "content": "I am doing very well.",
+        "refusal": null,
+        "reasoning": "Thinking Process:\n\n1.  **Analyze the Request:**\n    *   Input: \"tell me how you are doing today in 5 words.\"\n    *   Constraint: Exactly 5 words (or as close as possible, but ideally exactly 5 to meet the constraint).\n    *   Content: Status update on how I am doing.\n\n2.  **Draft Potential Responses:**\n    *   I am doing very well. (5 words) - Good.\n    *   Doing great, thanks for asking. (5 words) - Good.\n    *   I am functioning perfectly well today. (5 words) - A bit robotic.\n    *   Everything is working just fine. (5 words) - Good.\n    *   I am ready to help. (5 words) - Good.\n    *   Doing well, how about you? (5 words) - Good.\n\n3.  **Select the Best Option:**\n    *   \"I am doing very well.\" is simple, direct, and meets the constraint.\n    *   \"Doing great, thanks for asking.\" is friendly.\n    *   \"I am ready to help.\" is service-oriented.\n\n    Let's go with a friendly, positive one.\n    \"I am doing very well.\" (1: I, 2: am, 3: doing, 4: very, 5: well)\n\n    Wait, let's double check word count.\n    \"I am doing very well.\" -> 1, 2, 3, 4, 5. Perfect.\n\n    Another option: \"Doing great, thanks for asking.\" -> 1: Doing, 2: great, 3: thanks, 4: for, 5: asking. Perfect.\n\n    Let's choose the first one for simplicity.\n\n4.  **Final Verification:**\n    *   Response: \"I am doing very well.\"\n    *   Word count: 5.\n    *   Meaning: Answers the question.\n\n5.  **Output Generation.**\n    I am doing very well.cw",
+        "reasoning_details": [
+          {
+            "format": "unknown",
+            "index": 0,
+            "type": "reasoning.text",
+            "text": "Thinking Process:\n\n1.  **Analyze the Request:**\n    *   Input: \"tell me how you are doing today in 5 words.\"\n    *   Constraint: Exactly 5 words (or as close as possible, but ideally exactly 5 to meet the constraint).\n    *   Content: Status update on how I am doing.\n\n2.  **Draft Potential Responses:**\n    *   I am doing very well. (5 words) - Good.\n    *   Doing great, thanks for asking. (5 words) - Good.\n    *   I am functioning perfectly well today. (5 words) - A bit robotic.\n    *   Everything is working just fine. (5 words) - Good.\n    *   I am ready to help. (5 words) - Good.\n    *   Doing well, how about you? (5 words) - Good.\n\n3.  **Select the Best Option:**\n    *   \"I am doing very well.\" is simple, direct, and meets the constraint.\n    *   \"Doing great, thanks for asking.\" is friendly.\n    *   \"I am ready to help.\" is service-oriented.\n\n    Let's go with a friendly, positive one.\n    \"I am doing very well.\" (1: I, 2: am, 3: doing, 4: very, 5: well)\n\n    Wait, let's double check word count.\n    \"I am doing very well.\" -> 1, 2, 3, 4, 5. Perfect.\n\n    Another option: \"Doing great, thanks for asking.\" -> 1: Doing, 2: great, 3: thanks, 4: for, 5: asking. Perfect.\n\n    Let's choose the first one for simplicity.\n\n4.  **Final Verification:**\n    *   Response: \"I am doing very well.\"\n    *   Word count: 5.\n    *   Meaning: Answers the question.\n\n5.  **Output Generation.**\n    I am doing very well.cw"
+          }
+        ]
+      }
+    }
+  ],
+  "system_fingerprint": null,
+  "usage": {
+    "prompt_tokens": 55,
+    "completion_tokens": 455,
+    "total_tokens": 510,
+    "cost": 0.001671,
+    "is_byok": false,
+    "prompt_tokens_details": {
+      "cached_tokens": 0
+    },
+    "cost_details": {
+      "upstream_inference_cost": 0.001671,
+      "upstream_inference_prompt_cost": 0.000033,
+      "upstream_inference_completions_cost": 0.001638
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 444
+    }
+  }
+}

@@ -1,0 +1,58 @@
+{
+  "id": "gen-1772160453-JmkSQi2hNV1IvBEpAaC7",
+  "provider": "Google AI Studio",
+  "model": "google/gemini-3.1-pro-preview-customtools",
+  "object": "chat.completion",
+  "created": 1772160453,
+  "choices": [
+    {
+      "logprobs": null,
+      "finish_reason": "stop",
+      "native_finish_reason": "STOP",
+      "index": 0,
+      "message": {
+        "role": "assistant",
+        "content": "The current weather in San Francisco is 16°C (60°F).",
+        "refusal": null,
+        "reasoning": "**Initiating Step-by-Step Execution**\n\nNow I am focusing intently on how to move forward. My strategy involves carefully breaking down the overall objective into manageable sub-tasks. I am carefully examining each step to ensure efficient and effective execution, to maintain a clear path towards completion.\n\n\n",
+        "reasoning_details": [
+          {
+            "format": "google-gemini-v1",
+            "index": 0,
+            "type": "reasoning.text",
+            "text": "**Initiating Step-by-Step Execution**\n\nNow I am focusing intently on how to move forward. My strategy involves carefully breaking down the overall objective into manageable sub-tasks. I am carefully examining each step to ensure efficient and effective execution, to maintain a clear path towards completion.\n\n\n"
+          },
+          {
+            "format": "google-gemini-v1",
+            "index": 1,
+            "type": "reasoning.encrypted",
+            "data": "Ep4GCpsGAb4+9vvmQ+K7neX/ybNhFbRLHJBLO9DLQ3IGXaB5bewOMnb6j6VMsGyrhwJEuZdjLVEvfJHTHi7BAAxrhDY38kYRml35DTEXaJcSmceOjgJVkeTRJ204/WG+gz3TRXBK35dG6U6GjI8ey9dTOtJ17JIB4tPQYNj8tUWI+6wQ5yVhqeqbvB5kqoHbbVDJ/wHRy951KGC4iwcm728YLBpzHNP532NJ2i+EGR8VKFXqzHSPVSnMz1FGIIdod/Djn2syJBYI6woz4kBysfQpPAaFf+R1MBRgTlq6xy2fE++QX9o2foggSYUAfxr0EO/WLXnMXgQFVS+W9+WIR0/yYeeE3JzrHy2VkM+7VBqzFiA6E11u+y4PzJ0JAy3j7ep6E44yqoje6+SJpOIUwTwhYuQVywg1th9FeVw6UcZI++DCRjfS+ftCWYrYcjP9qdXw4wrzuNFNh5qNtZiq+ZFeWl2oogLXiOHnAl2rTm9s+91mssyTNVRaj4DXyTzhIodhWOmn07t8T8cCMyS27eQIlC7WV9QMxx32t0E7GypugcEz0j77xFjyhgwiQhLMa7J9Wbbc4wjXlmbY/vVi077XrCWqlVx4wbbzln7N9sRA/P+PrLBVTI32zxK+T5sRxhksAAVfGNqSclPBXRbYUC6pADamsJ7W4xQUkcGgVRJRozV1uM6TTS2D0aqgLYP2Uj5rX3MQADKC0v6d47YKZFRq9r7KCdEHmiL/xL0Y1ggUF4KyDph19yZx1QiiMBCzhq6SacMfjf0Tac/jNztji6qeYkjFE3VYPLi0qRfJdppDTB8nF0lf45A0McdOYKAJbn478FcDJQL4dRS6mkWs6uFWdpwa2Ro87zBwq/5anraaYRyhkALM1RDzU12cp3wlJSAISotAkDBg7FlRB0MAYop6eNwOpQs9PAYaQXV5xT85cl7OTp2SoAqKFZEKRdNfX97FzMlqmtjUErRN2zW4FMzsYdaSiV/zw3Jpj0qH4gylUFPzZJnj0/k7VwV9D129aVc4PdQyVqURA9PfDTM86jziovFMFQZCcEsH/5K1iw82"
+          }
+        ],
+        "annotations": []
+      }
+    }
+  ],
+  "usage": {
+    "prompt_tokens": 122,
+    "completion_tokens": 163,
+    "total_tokens": 285,
+    "cost": 0.0022,
+    "is_byok": false,
+    "prompt_tokens_details": {
+      "cached_tokens": 0,
+      "cache_write_tokens": 0,
+      "audio_tokens": 0,
+      "video_tokens": 0
+    },
+    "cost_details": {
+      "upstream_inference_cost": 0.0022,
+      "upstream_inference_prompt_cost": 0.000244,
+      "upstream_inference_completions_cost": 0.001956
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 145,
+      "image_tokens": 0
+    }
+  }
+}

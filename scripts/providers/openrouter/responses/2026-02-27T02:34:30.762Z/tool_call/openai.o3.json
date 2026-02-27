@@ -1,0 +1,60 @@
+{
+  "id": "gen-1772160133-GS7tBHp6oSeNv2xRUSlW",
+  "provider": "OpenAI",
+  "model": "openai/o3",
+  "object": "chat.completion",
+  "created": 1772160133,
+  "choices": [
+    {
+      "logprobs": null,
+      "finish_reason": "tool_calls",
+      "native_finish_reason": "completed",
+      "index": 0,
+      "message": {
+        "role": "assistant",
+        "content": "",
+        "refusal": null,
+        "reasoning": null,
+        "tool_calls": [
+          {
+            "type": "function",
+            "index": 0,
+            "id": "call_vwz7kS8JO3Z252I82l33BiCg",
+            "function": {
+              "name": "get_weather",
+              "arguments": "{\"city\":\"San Francisco\"}"
+            }
+          }
+        ],
+        "reasoning_details": [
+          {
+            "id": "rs_0eed31946c4432550169a1048674148196a9a550bd2886b5c9",
+            "format": "openai-responses-v1",
+            "index": 0,
+            "type": "reasoning.encrypted",
+            "data": "gAAAAABpoQSHKcd8yWdyA1m4LSFpdyYpBdfdN2CyVNjLQPG7X8p3OQjQs6Ywn_N9P2Cus2CeG4pq0fr1apL_DtZuBT1orFJV_yvhY3N515gd-Vq5ePJjYEbq4-oyk-VrisMcp-DSPL2vnedx6FHwu3Abb9-ryiG3TspvXjhKeW5Y_bXPwtDQGD2YvYWzaTRuQ_3JCaCQnrU8qKyzoE-L06PFfX4kPnoe7Z_AUH0E8JjxYsSQAtk5PcUR2I0u-nhSP5WzgOnpZ_Vl7MSfHr9_saL2deQG2MGCQ-Q6tv0URLE3L5wFDjPPbuaDKAJaVrDt7FemLh1-mkqzHbigdMAyZYY9rvI4zzK0o9amVc5bivYcuAGVGNrUCHKNa8HB3-1957pNwt6j4Kvix1IaAziTOlrX1STucfvSbWrXGmgiorpkNBslkzMp-dUdfWa1MWgEh94BeCvt6FY-QQzyLkfA5IjiHUr8fdzdFUQ-E9ccMWLga8KTaJ2puVICrZKCt7aO6HwVixDiip097Bi4TcXC88uVXpL6oS_iadjjJwYtpgol25UF1fKZiT6aCUKU1stTapx1amiWtLEJpv4OUZb1Jhr9zN2duJBr-dLDkAN42vPJMUtgjx60anjLED7_pAITzlaVvdp59E08eEF4hNld9Q69QzCfxerKj325l1WiwsXR3pgSzSnehbORlj9KtNmdUHmxG39E_P8xtpkLN96f4x7fKNy2yJLj2twu0_maas5x7rcg44UXarVXKx16pURSrZqAdS-24LHpoIQfnCu0_mN_RZ2fPGVTLTU-YVHsb7oip8Y_q64Uz7fyVfdbjAzriS4GTynF9lLNdop5sGWgCXX494TdMkbdQ70cQVu-6UDC9jYXFEPYp6ankbh3aATw1U2W5V6XU2J4Tw_cROWME1EH9Tyr21EJyUvgf-0RQ6cqo_C-2H1nxwA1H-Bx8Y5lkRsXdvL2juWHd9fULEV5WKGcUWlqK7992QpijWL9nTFdpIluix8Bdx6cdw6UIQAoxTGrOmbsayK_"
+          }
+        ]
+      }
+    }
+  ],
+  "usage": {
+    "prompt_tokens": 57,
+    "completion_tokens": 51,
+    "total_tokens": 108,
+    "cost": 0.000522,
+    "is_byok": false,
+    "prompt_tokens_details": {
+      "cached_tokens": 0
+    },
+    "cost_details": {
+      "upstream_inference_cost": 0.000522,
+      "upstream_inference_prompt_cost": 0.000114,
+      "upstream_inference_completions_cost": 0.000408
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 0,
+      "image_tokens": 0
+    }
+  }
+}

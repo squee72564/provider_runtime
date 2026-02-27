@@ -1,0 +1,66 @@
+{
+  "id": "gen-1772160136-mkCQzfcgCH9G5jwpetPZ",
+  "provider": "OpenAI",
+  "model": "openai/gpt-5.3-codex",
+  "object": "chat.completion",
+  "created": 1772160136,
+  "choices": [
+    {
+      "logprobs": null,
+      "finish_reason": "tool_calls",
+      "native_finish_reason": "completed",
+      "index": 0,
+      "message": {
+        "role": "assistant",
+        "content": "",
+        "refusal": null,
+        "reasoning": "**Executing single weather request**",
+        "tool_calls": [
+          {
+            "type": "function",
+            "index": 0,
+            "id": "call_8GA2AMuWBqkXTRjGFhgFjBRb",
+            "function": {
+              "name": "get_weather",
+              "arguments": "{\"city\":\"San Francisco\"}"
+            }
+          }
+        ],
+        "reasoning_details": [
+          {
+            "format": "openai-responses-v1",
+            "index": 0,
+            "type": "reasoning.summary",
+            "summary": "**Executing single weather request**"
+          },
+          {
+            "id": "rs_0285d179637bdf8a0169a104886df48190be7fc8e0800caae4",
+            "format": "openai-responses-v1",
+            "index": 1,
+            "type": "reasoning.encrypted",
+            "data": "gAAAAABpoQSJHtSHtLLW2PFgkMW_HoZ7mxAfaWmgyPJnX_YmG0x2-Pex5IXDT9OOL22g7CiE79eBpo_N4D8HTo26BIocR5upfzNLWVxs_Y95dV3sbooSCGcNU6fhPAj6jD0BaHT5zS0-20sYY0epLRVvs8uxEfN1adqDKt-zwvaNeezAPvu5985m-uf8z1Qe5051yqppWhyMzfycPBab-1wvCauR_9RZJTqGL-M_C5Gpl7l-i1OBy7ZFa0jc2PhkKLDzeEn-uPHCEg_WqbcoWF_dZP5uOUtZp93CiHKrkzkh2ZTLV9dgcnLSYXoTB9zpCOXh6Jg2150gzTr7bhTKdD3iqRoMWVOx_v5Yzelr9sU7o5KdBnwe77vBhuy73-SEZ7VySwz5Mb_OJkS-sI-P4oOV8CObCL8-XjOlUfX7C57A3kGW7uBOB01sNtJiVJScZWZ_fH8KPIFrO6Ycu-e7rRj-Y_MxApOTSM58VSRpX4BNz97n0WXyOQ6tKM5aRV1tJwG3RT9FIyhrvGB4toTcW2PrL-hn8q9UXjVj8WbcN4QyTqVFwE_-IftoULSKXVVTYP6H0GuEIvivWdsbGRjZH7hIxxOsHRchRYy83DqWu1pYFG0pyphv8QUaLhDk0Ulc3xrnGqWgE6Am8gU9UU7LgXlFvctuidodDju9a3Tce53OEiOA-VOwTr8KT63DJ8EuIY_F2nnYUOwJmYY7PTntGwdVlv-mH8_-cTLz4oE4Atr1RGg25_mvAQxGd_KkdDD1Tp6_INE5UM7Yg9yRWC0yUlxQYnIkSd5lk0lR2TZO7tiHt-G_fhmNzO9iMV_HQS3brB4KOfyh5zdR5ch_vSjV8F_2riuTlHg3geVSFHE4ySOAVTDKmjQfVi02xIusUCCXIUDW3YKydPlDLYvV9KP4xfTfVYQXoRXNQeh-2aRS3mNlOy4paj8v_trvGYrKuQDUHf6riktHKy31dxxr4wV_WzK8WyOrKNYoI3mS7st3PnnARFsvG3y-JOttGQWiwgEjTkMycfnvLGsolu9Mnc6d-JjMDwvyufIusg=="
+          }
+        ]
+      }
+    }
+  ],
+  "usage": {
+    "prompt_tokens": 60,
+    "completion_tokens": 59,
+    "total_tokens": 119,
+    "cost": 0.000931,
+    "is_byok": false,
+    "prompt_tokens_details": {
+      "cached_tokens": 0
+    },
+    "cost_details": {
+      "upstream_inference_cost": 0.000931,
+      "upstream_inference_prompt_cost": 0.000105,
+      "upstream_inference_completions_cost": 0.000826
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 38,
+      "image_tokens": 0
+    }
+  }
+}

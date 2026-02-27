@@ -1,0 +1,59 @@
+{
+  "id": "gen-1772160101-mWn7z1YPNJ6sEOh0mtG9",
+  "provider": "Alibaba",
+  "model": "qwen/qwen3-vl-8b-thinking",
+  "object": "chat.completion",
+  "created": 1772160101,
+  "choices": [
+    {
+      "logprobs": null,
+      "finish_reason": "tool_calls",
+      "native_finish_reason": "tool_calls",
+      "index": 0,
+      "message": {
+        "role": "assistant",
+        "content": "",
+        "refusal": null,
+        "reasoning": "Okay, the user is asking for the weather in San Francisco. Let me check the tools available. There's a function called get_weather that requires the city name. I need to make sure the city parameter is provided. The user mentioned San Francisco, so I'll call the function with that city. No other parameters are needed. Just need to format the tool call correctly in JSON inside the tool_call tags.\n",
+        "tool_calls": [
+          {
+            "type": "function",
+            "index": 0,
+            "id": "call_494e2ae9cb1e42369e3621",
+            "function": {
+              "name": "get_weather",
+              "arguments": " {\"city\": \"San Francisco\"}"
+            }
+          }
+        ],
+        "reasoning_details": [
+          {
+            "format": "unknown",
+            "index": 0,
+            "type": "reasoning.text",
+            "text": "Okay, the user is asking for the weather in San Francisco. Let me check the tools available. There's a function called get_weather that requires the city name. I need to make sure the city parameter is provided. The user mentioned San Francisco, so I'll call the function with that city. No other parameters are needed. Just need to format the tool call correctly in JSON inside the tool_call tags.\n"
+          }
+        ]
+      }
+    }
+  ],
+  "system_fingerprint": null,
+  "usage": {
+    "prompt_tokens": 167,
+    "completion_tokens": 107,
+    "total_tokens": 274,
+    "cost": 0.000165594,
+    "is_byok": false,
+    "prompt_tokens_details": {
+      "cached_tokens": 0
+    },
+    "cost_details": {
+      "upstream_inference_cost": 0.00025476,
+      "upstream_inference_prompt_cost": 0.00003006,
+      "upstream_inference_completions_cost": 0.0002247
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 84
+    }
+  }
+}

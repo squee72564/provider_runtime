@@ -1,0 +1,55 @@
+{
+  "id": "gen-1772159811-T6WSi0TJrBmNQ22SvrPY",
+  "provider": "OpenAI",
+  "model": "openai/gpt-5.1-codex-mini",
+  "object": "chat.completion",
+  "created": 1772159811,
+  "choices": [
+    {
+      "logprobs": null,
+      "finish_reason": "stop",
+      "native_finish_reason": "completed",
+      "index": 0,
+      "message": {
+        "role": "assistant",
+        "content": "I'm functioning smoothly today, thanks.",
+        "refusal": null,
+        "reasoning": "**Confirming word count phrase**",
+        "reasoning_details": [
+          {
+            "format": "openai-responses-v1",
+            "index": 0,
+            "type": "reasoning.summary",
+            "summary": "**Confirming word count phrase**"
+          },
+          {
+            "id": "rs_06ffacec45ac316e0169a1034464548194a3fffda03b20d0da",
+            "format": "openai-responses-v1",
+            "index": 1,
+            "type": "reasoning.encrypted",
+            "data": "gAAAAABpoQNGbPsR4H-5IB752dcB4No0wwUFURSwX-aTWaa_WUHks6VEWUfzsMFz7jgECrD6I3XG2B78KEL_Em9fMS_I64N2bkYqjjVUn2n4UU3-6otUyBdQOo9lJ3FtfzugqsUZADTXsspXf89GAUqN4lTxjGO-MuCOX5cVlPxxG6Qd-sZJhIj-y8ZeZriI5IaNOBK8oJseJVNZMMjirzjwmbx1NKsDTP9NJQ58CaPuV5O0Zs5q7aX2gW87A-nHWRV3GqK3U7571t0biFH-zMgbse-u13FmZLwI6Sq4IpKt55BRUFo0toDiYC6bVzkke5DVZ7-OnQtQLigs3uWx3fqinZ6yF9OKNetoIt2elxeO-uryC3D0TWZPAfOJCYHcEJEqJ3PLQYZfaX4poD-cgiXRu7hzuVd1m0mBYLsXMaOfFqdxqkPSXiLlFvnZEunpUSwYpMo6RD4lBYdkPDqewi6s-EHIQS1uO8OBf-g5ESyvv3l1sQ-qd7hDWsWAjsDb--iBeykalh745qnEtW03ONtjONP78uX5MNE18q0hs_X3zI4POH7L8NSdC5waWpnXY-uLdfvRfElNj8VTglOMpQGdAPeVC5HRxtR31EgIs_gmrhCxvj8IMp-eaPa4Pd8TZEa5-Y1OjFEmNIIB3eQ2NHa1LK35ysglFNtrCtcLfHJKGoOiV3GUQhntr8ArRHTVRf1dDf7-klfop41psfPuVG82hBUjpOHFZqmKWGz2VKZxMTjqmnrI2S4pTk2ELpGh1JrVDC1ipjRIvPK8b79TO_nyK8MwOdodkpo87c1VG5mOvYlp70ecrQ4Ra8laZVmW0msfGXYYsAp84rGx07m10cWpqWPNpcCRBLobKGiq32qddryoeYUtIiEdxeFYanMoD_82WXAwpv9T0_Fbpd6WNyJtP-JeiOTU0K_h08dOnZaHY6FS3UZBXUTlvTqx5_T5PCFOYPvaBXZ3eW863Nn-VOS75NNNeJfgFA=="
+          }
+        ]
+      }
+    }
+  ],
+  "usage": {
+    "prompt_tokens": 50,
+    "completion_tokens": 46,
+    "total_tokens": 96,
+    "cost": 0.0001045,
+    "is_byok": false,
+    "prompt_tokens_details": {
+      "cached_tokens": 0
+    },
+    "cost_details": {
+      "upstream_inference_cost": 0.0001045,
+      "upstream_inference_prompt_cost": 0.0000125,
+      "upstream_inference_completions_cost": 0.000092
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 8,
+      "image_tokens": 0
+    }
+  }
+}

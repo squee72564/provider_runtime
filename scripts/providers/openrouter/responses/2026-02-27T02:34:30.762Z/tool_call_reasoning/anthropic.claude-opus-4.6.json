@@ -1,0 +1,40 @@
+{
+  "id": "gen-1772160518-HbAJIPSrU9BA17ZwwMNL",
+  "provider": "Amazon Bedrock",
+  "model": "anthropic/claude-opus-4.6",
+  "object": "chat.completion",
+  "created": 1772160518,
+  "choices": [
+    {
+      "logprobs": null,
+      "finish_reason": "stop",
+      "native_finish_reason": "stop",
+      "index": 0,
+      "message": {
+        "role": "assistant",
+        "content": "The current weather in San Francisco is **16°C (60°F)**. It's a mild and comfortable temperature! Let me know if you'd like to know anything else.",
+        "refusal": null,
+        "reasoning": null
+      }
+    }
+  ],
+  "usage": {
+    "prompt_tokens": 668,
+    "completion_tokens": 40,
+    "total_tokens": 708,
+    "cost": 0.00434,
+    "is_byok": false,
+    "prompt_tokens_details": {
+      "cached_tokens": 0,
+      "cache_write_tokens": 0
+    },
+    "cost_details": {
+      "upstream_inference_cost": 0.00434,
+      "upstream_inference_prompt_cost": 0.00334,
+      "upstream_inference_completions_cost": 0.001
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 0
+    }
+  }
+}

@@ -1,0 +1,50 @@
+{
+  "id": "gen-1772160274-Cacxd09QNqaptiXnkt0B",
+  "provider": "SiliconFlow",
+  "model": "z-ai/glm-4.6v",
+  "object": "chat.completion",
+  "created": 1772160284,
+  "choices": [
+    {
+      "logprobs": null,
+      "finish_reason": "stop",
+      "native_finish_reason": "stop",
+      "index": 0,
+      "message": {
+        "role": "assistant",
+        "content": "The weather in San Francisco is currently 16°C (60°F).",
+        "refusal": null,
+        "reasoning": "The user is asking for the weather in San Francisco. I have already called the get_weather function with \"San Francisco\" as the city parameter, and the function returned the weather information. Now I need to present this information to the user in a clear and helpful way.\n\nThe function returned:\n- City: San Francisco\n- Celsius: 16\n- Fahrenheit: 60\n\nI should present this information in a user-friendly format, perhaps mentioning both temperature scales since the data includes both.",
+        "reasoning_details": [
+          {
+            "format": "unknown",
+            "index": 0,
+            "type": "reasoning.text",
+            "text": "The user is asking for the weather in San Francisco. I have already called the get_weather function with \"San Francisco\" as the city parameter, and the function returned the weather information. Now I need to present this information to the user in a clear and helpful way.\n\nThe function returned:\n- City: San Francisco\n- Celsius: 16\n- Fahrenheit: 60\n\nI should present this information in a user-friendly format, perhaps mentioning both temperature scales since the data includes both."
+          }
+        ]
+      }
+    }
+  ],
+  "system_fingerprint": "",
+  "usage": {
+    "prompt_tokens": 236,
+    "completion_tokens": 115,
+    "total_tokens": 351,
+    "cost": 0.0001743,
+    "is_byok": false,
+    "prompt_tokens_details": {
+      "cached_tokens": 0,
+      "audio_tokens": 0
+    },
+    "cost_details": {
+      "upstream_inference_cost": 0.0001743,
+      "upstream_inference_prompt_cost": 0.0000708,
+      "upstream_inference_completions_cost": 0.0001035
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 127,
+      "audio_tokens": 0
+    }
+  }
+}

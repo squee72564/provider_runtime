@@ -1,0 +1,70 @@
+{
+  "id": "gen-1772160242-Ve9RBwtjFY74QfOios56",
+  "provider": "Google AI Studio",
+  "model": "google/gemini-2.5-pro",
+  "object": "chat.completion",
+  "created": 1772160242,
+  "choices": [
+    {
+      "logprobs": null,
+      "finish_reason": "tool_calls",
+      "native_finish_reason": "STOP",
+      "index": 0,
+      "message": {
+        "role": "assistant",
+        "content": "",
+        "refusal": null,
+        "reasoning": "**Identifying Relevant Tool**\n\nI've identified the `get_weather` tool as the most relevant for the user's request. It accepts a `city` parameter. \"San Francisco\" is the provided city, so I'm ready to proceed with using this tool and parameter.\n\n\n**Formulating The Function Call**\n\nI'm now formulating the function call. Given the identified tool and the user's input, the parameters are clear. I've constructed the call `get_weather(city='San Francisco')`. Now, I'm generating the `print` statement to display this to the user, for clarity and transparency. The final statement will be `print(get_weather(city='San Francisco'))`.\n\n\n",
+        "tool_calls": [
+          {
+            "type": "function",
+            "index": 0,
+            "id": "tool_get_weather_wBDxqEmLCIkTUiuriWJt",
+            "function": {
+              "name": "get_weather",
+              "arguments": "{\"city\":\"San Francisco\"}"
+            }
+          }
+        ],
+        "reasoning_details": [
+          {
+            "format": "google-gemini-v1",
+            "index": 0,
+            "type": "reasoning.text",
+            "text": "**Identifying Relevant Tool**\n\nI've identified the `get_weather` tool as the most relevant for the user's request. It accepts a `city` parameter. \"San Francisco\" is the provided city, so I'm ready to proceed with using this tool and parameter.\n\n\n**Formulating The Function Call**\n\nI'm now formulating the function call. Given the identified tool and the user's input, the parameters are clear. I've constructed the call `get_weather(city='San Francisco')`. Now, I'm generating the `print` statement to display this to the user, for clarity and transparency. The final statement will be `print(get_weather(city='San Francisco'))`.\n\n\n"
+          },
+          {
+            "id": "tool_get_weather_wBDxqEmLCIkTUiuriWJt",
+            "format": "google-gemini-v1",
+            "index": 1,
+            "type": "reasoning.encrypted",
+            "data": "CiIBvj72+5aT8tY1f/79T6IyCLWdIgnhbaHK+zPfLk0Ra5wPCnEBvj72+88S3RCEZV0Zr8/VnBdBWRodGkMxqOyATgDd2ceU8b+o9xdlANKqMuKdkOwvypjNuSUQgWPC0g0Pu35YmFt4qA/QhIIrVsEsubJeEm7TtwafS00Q0IqyNbfoU6erKh80CPKdek3LjGhnvBoy4wqOAQG+Pvb7weXkJwgN5qNZzRmmdFWsT6cYy8Hw+B89QfL0FShUl0lg3LuFY21t0oTLwgYw20T0/NUmeGkvccOUjpKGOsMhc+QvkRxoGMIiiAcyurQPaB/tzBigSJ42xRUe/o4O619XbcN4BtpgyHk4+6WQFsCDve8XCdygGBu2NfyRm7onzl7QwtW2pDL3JFAKiAEBvj72+3cXg9lGIkKbrmzkubgVT7uDevzHthXvJrdWW3KSYpVgEVwoW1YMxsT0AWWKDSm/vaDZ4wKR5Q8w4+iBYdcyicJGmOD0BgiODLQ2MFwlYuguwhJ+LZzJa2qz+Vi3jnHmZprvllZREIqXmWpEE4/HDW1DgmspaArlFArD6rHvrEhuHu4GCn4Bvj72+5Nbv5lXKNXDZfRDBPwhYhpBS8/ATAqxltkq/6v/tR9C3YfZOlpn4Xrhf59yd/UhMptytFkiFT9fN4t4fEgcbEcdhHndbZCjBCpvh38OT6J1AhgiX525Rd8iea1Lrg3nxMmkPdVFln1MdcI5VGpK7SPwybofSHpzXvUKhQEBvj72+/22ilXaUQNeZW5KW/yZvDZs8PlDzuZ3yKUbWz32cjjTVx1bY7/P8YJkl+TSToKDegL5j6m5AUmCVaO9jcpFjg9Z6bpRKQny4wcBKQY4BqaTPCk46MoYgsrn/C/Hxj208gY7keg+m10+6VYONCl03O+CjU5KBDsR9tIqQlcq0aOFCmUBvj72+4xumX+1jHjqQmUaSglRfSbC4VyzxE4GdLU2+CASN/ZdnyOoJ4TyYTLz6CunlgHvqQXPdJzrZVSG6ZQ1qYOGhPIcX0a+zrUCvAtM5XJLQY2YlyQg6DFT4STsul8LQYdN5w=="
+          }
+        ],
+        "annotations": []
+      }
+    }
+  ],
+  "usage": {
+    "prompt_tokens": 53,
+    "completion_tokens": 153,
+    "total_tokens": 206,
+    "cost": 0.00159625,
+    "is_byok": false,
+    "prompt_tokens_details": {
+      "cached_tokens": 0,
+      "cache_write_tokens": 0,
+      "audio_tokens": 0,
+      "video_tokens": 0
+    },
+    "cost_details": {
+      "upstream_inference_cost": 0.00159625,
+      "upstream_inference_prompt_cost": 0.00006625,
+      "upstream_inference_completions_cost": 0.00153
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 139,
+      "image_tokens": 0
+    }
+  }
+}

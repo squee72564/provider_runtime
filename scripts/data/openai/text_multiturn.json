@@ -1,0 +1,12 @@
+{
+  "model": "gpt-4o-mini",
+  "instructions": "You are a helpful assistant.",
+  "input": [
+    {"role": "user", "content": "Hello World!"},
+    {"role": "assistant", "content": "Hello! How can I assist you today?"},
+    {"role": "user", "content": "tell me how you are doing today in 5 words."}
+  ],
+  "store": false,
+  "stream": false,
+  "max_output_tokens": 1024
+}

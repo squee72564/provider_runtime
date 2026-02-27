@@ -1,0 +1,48 @@
+{
+  "id": "gen-1772159725-cobLmiih2LFoCLGFw6zG",
+  "provider": "Alibaba",
+  "model": "qwen/qwen3-vl-8b-thinking",
+  "object": "chat.completion",
+  "created": 1772159725,
+  "choices": [
+    {
+      "logprobs": null,
+      "finish_reason": "stop",
+      "native_finish_reason": "stop",
+      "index": 0,
+      "message": {
+        "role": "assistant",
+        "content": "Doing great, thanks for asking!",
+        "refusal": null,
+        "reasoning": "Okay, the user asked me to tell them how I'm doing today in 5 words. Let me think. First, I need to recall my role as an AI. I don't have feelings, so I should be honest but friendly.\n\nThey probably want a simple, positive response. Maybe they're testing if I can follow instructions precisely. I need exactly five words. Let me count: \"Doing great, thanks for asking!\" That's five words. Wait, \"Doing\" is one, \"great\" is two, \"thanks\" is three, \"for\" is four, \"asking\" is five. Yes, that works.\n\nAlso, the user said \"Hello World!\" earlier, which might mean they're in a playful mood. Keeping it light and cheerful would fit. I should avoid any technical jargon. Just make sure it's concise and meets the word count. Double-checking: \"Doing great, thanks for asking!\" Yep, five words. Perfect.\n",
+        "reasoning_details": [
+          {
+            "format": "unknown",
+            "index": 0,
+            "type": "reasoning.text",
+            "text": "Okay, the user asked me to tell them how I'm doing today in 5 words. Let me think. First, I need to recall my role as an AI. I don't have feelings, so I should be honest but friendly.\n\nThey probably want a simple, positive response. Maybe they're testing if I can follow instructions precisely. I need exactly five words. Let me count: \"Doing great, thanks for asking!\" That's five words. Wait, \"Doing\" is one, \"great\" is two, \"thanks\" is three, \"for\" is four, \"asking\" is five. Yes, that works.\n\nAlso, the user said \"Hello World!\" earlier, which might mean they're in a playful mood. Keeping it light and cheerful would fit. I should avoid any technical jargon. Just make sure it's concise and meets the word count. Double-checking: \"Doing great, thanks for asking!\" Yep, five words. Perfect.\n"
+          }
+        ]
+      }
+    }
+  ],
+  "system_fingerprint": null,
+  "usage": {
+    "prompt_tokens": 55,
+    "completion_tokens": 209,
+    "total_tokens": 264,
+    "cost": 0.00029172,
+    "is_byok": false,
+    "prompt_tokens_details": {
+      "cached_tokens": 0
+    },
+    "cost_details": {
+      "upstream_inference_cost": 0.0004488,
+      "upstream_inference_prompt_cost": 0.0000099,
+      "upstream_inference_completions_cost": 0.0004389
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 199
+    }
+  }
+}

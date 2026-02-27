@@ -1,0 +1,66 @@
+{
+  "id": "gen-1772160152-MzGVZ1WavmMvuF5jrKG4",
+  "provider": "OpenAI",
+  "model": "openai/gpt-5-pro",
+  "object": "chat.completion",
+  "created": 1772160152,
+  "choices": [
+    {
+      "logprobs": null,
+      "finish_reason": "tool_calls",
+      "native_finish_reason": "completed",
+      "index": 0,
+      "message": {
+        "role": "assistant",
+        "content": "",
+        "refusal": null,
+        "reasoning": "**Planning weather response**\n\nI need to provide a helpful answer to the user's question about the weather in San Francisco. The tool I should use is functions.get_weather to get the current weather for that city. Since we're only focused on one city, I won't need to use multi_tool_use.parallel. It's a straightforward call: I'll call functions.get_weather with the city set to \"San Francisco.\" Once I get the tool's output, I'll present the weather information clearly. Let's proceed with that!",
+        "tool_calls": [
+          {
+            "type": "function",
+            "index": 0,
+            "id": "call_OI1Nt1YBnKTQfPiVCtUwLNU6",
+            "function": {
+              "name": "get_weather",
+              "arguments": "{\"city\":\"San Francisco\"}"
+            }
+          }
+        ],
+        "reasoning_details": [
+          {
+            "format": "openai-responses-v1",
+            "index": 0,
+            "type": "reasoning.summary",
+            "summary": "**Planning weather response**\n\nI need to provide a helpful answer to the user's question about the weather in San Francisco. The tool I should use is functions.get_weather to get the current weather for that city. Since we're only focused on one city, I won't need to use multi_tool_use.parallel. It's a straightforward call: I'll call functions.get_weather with the city set to \"San Francisco.\" Once I get the tool's output, I'll present the weather information clearly. Let's proceed with that!"
+          },
+          {
+            "id": "rs_09c9b42855d2e02b0169a104b1df6881978398934ac916e63f",
+            "format": "openai-responses-v1",
+            "index": 1,
+            "type": "reasoning.encrypted",
+            "data": "gAAAAABpoQSzRKHJGZ-Ou68kcWRusR0dOa7OP5gu-sdAZtzDV9GNxdJlyoEAWIaf6perIUmckVDxm0TUM09bajqBlW4kxpSfYAW1GjRJwtdM1ulGVJf4Z42My--MkEMZ97DkvrdbNdbLSF1-QQMeRko8JF0uXXBO1BGIzxIgoL_8adCBv-MQlvwvhQMW-MA0xoH_xMehW9enni5h1Ono6OG9wx3_TyoGzxoYpaQZ69TtMneRLX6WDFMqwmrTabjeEwq1j4_3VnuZC4rtHDamGH0u_Oj0II8SfRNmvJPZkHMHE4lqdzUOF5CuRxLO_H1JVyHPdmily7U8xXUEFFqA_-xb_ZZWtcr9WIP6d9NOeCjYxP_Y63sYNso8X9FCGJjzqV7pnpdQNuxasP7ueIDD3Hc2d-oXG-0iC18IaMxB_UXun1DFUk_8-hIWxr-nJ9sfWL9Z319FApyr4J4a84BvXKwBiinIvXfs_ZBLY72FZmyZh1PisFFgm88G4XtIxl9ONu7EuE8Z71bIlbVWPj84iHDlyWmMMCNNNj3EcT8c4a0OuVkQ04xBFnjHQT9c6NBZnVslM58wCwj3cJZ8bUJqrcc6p638wKwd340aiZR3spCjlXyTbaOFmJYFMOjo9l1nDSOqkf5zU2hBpsM8UTCAXisJahem3EGFfqehpxmAewXzBwZQkAsSLGPRQjp9qc0U_ih4lziozzaSiNEcOykbttvM3srBS_fqZV3LQK57HA_OEyJ4BuIJ3F_EBll9HYhJcXl8vsmY3mu4W-OJETh5TUIDJ05ZnBU75IGvyvA5IB6Co8vERVwhSanOq059Z5DMujx9eXwdcMEdDSiHgruBOZAOgGn_-4cqRILg_dem2o_NisRzDEXYBKfHLvgqdds5wjfeLwtZmxARZLv69rwJ-HeDvKdEqg1J1nOl1aDHcklwlDQwi8hKfI5JEtC2wZz_b0zI9YMnINvnqyGZK07ks5ZxzzChY8LHMCPtBVnF0dWxG8AU2r2qU5FkWQGKk3XnLcTKsiXK8OzYXNAN7XOUvaZ5mAAydkD85FYXaSIN440f3UCBkUUxF-39zbrpdWR1CAwnjwy06GJ2ekP3tPPuZKWE9iSHibPIt5Mui5zu5ngCDUUbIQ_Br-aBS63rroD5muJGMTYVsPUhL-_II_jVyTteo0_-gHcIlGNw-mDI-FaAgIJjF7U62HaZwAW6SIhhIGlNqOWYVFUPjI5AxrjtPaIsZesafmAfz-nV7iU4VouSrEWHcdMaJnYejF85_hGEEAUw01lEDg7LU-AsFW9TUu7nze9JNwFhT0nO2eHPREfRf3hdX4SngdhL-c3l_kitHmqGOVvrLLdV-0dVQ7FsgOyJjOwjyG0dd43x2_3xqCIVuS41d6x1KJV05y481EQuWRFGMrEEdt9J_9fZUiaq3za_hoJ-GDK-nqVpwFkOok-VYa3cV_v2A9NW31BKP3vf9mE0-ANmWHnfjV2PukIcwuJGLAnh5a2Y1xdMGvtdKkm6ZNnD6dzyqjBwbsToq41-jjPH_fzam4xVWos-Fgi7-F_0NxpeHVYoGun2zn4mOU49y9GEwLW5dr7ZgekTwTz9Y44-xDkapUaSkWkZpuQ9pTq5wDUoWzOXYn1XF527zzSNz6-LUk2ixqDjR05WGDx_2VLMgkxotb4MrkaIaU6GKm289iP-FQ1ZQgWxn9VR_9a0b-V3zHfBGCV4yq4YP_5NTW7_6lLPB8T2RUlE0ErbRPQdnprYQm-pwM0BpjIDCzHJN6iJlyEDS-W69iNjtsvWhDzPyGhyXn-lyRoT1faUN6xYsCCiMwYkyQ=="
+          }
+        ]
+      }
+    }
+  ],
+  "usage": {
+    "prompt_tokens": 60,
+    "completion_tokens": 176,
+    "total_tokens": 236,
+    "cost": 0.02202,
+    "is_byok": false,
+    "prompt_tokens_details": {
+      "cached_tokens": 0
+    },
+    "cost_details": {
+      "upstream_inference_cost": 0.02202,
+      "upstream_inference_prompt_cost": 0.0009,
+      "upstream_inference_completions_cost": 0.02112
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 128,
+      "image_tokens": 0
+    }
+  }
+}

@@ -1,0 +1,47 @@
+{
+  "id": "gen-1772160054-twPMEahPF0l9sgIfheVo",
+  "provider": "Seed",
+  "model": "bytedance-seed/seed-1.6",
+  "object": "chat.completion",
+  "created": 1772160054,
+  "choices": [
+    {
+      "logprobs": null,
+      "finish_reason": "stop",
+      "native_finish_reason": "stop",
+      "index": 0,
+      "message": {
+        "role": "assistant",
+        "content": "Feeling eager to help you",
+        "refusal": null,
+        "reasoning": "\nGot it, let's see. The user wants me to say how I'm doing in 5 words. First, I need a clear statement. Let's start with the state. Maybe \"Feeling ready to help\" – wait, count: 1.Feeling 2.ready 3.to 4.help – no, that's 4. Need 5. Let's adjust. \"Feeling eager to assist\" – 1.Feeling 2.eager 3.to 4.assist – 4 again. Wait, maybe \"Prepared to support you\" – 1.Prepared 2.to 3.support 4.you – 4. Wait, let's think of a natural 5-word phrase. \"Glad to aid your needs\" – 1.Glad 2.to 3.aid 4.your 5.needs – yes! Wait, does that convey how I'm doing? Or maybe \"Feeling set to assist you\" – 1.Feeling 2.set 3.to 4.assist 5.you – that's good. Wait, let's check another option. \"Ready to support your day\" – 1.Ready 2.to 3.support 4.your 5.day – also good. But let's make it genuine. Let's go with something that clearly states my current state. \"Eager to help your tasks\" – 1.Eager 2.to 3.help 4.your 5.tasks – no, maybe more natural. \"Feeling eager to help you\" – count: 1.Feeling 2.eager 3.to 4.help 5.you – perfect! That's 5 words, conveys how I'm doing (feeling eager) and my purpose (to help you). Wait, let me confirm the word count again. 1. Feeling 2. eager 3. to 4. help 5. you. Yes, that's exactly 5. Is there a more concise one? Maybe, but that's natural. Let me go with that.",
+        "reasoning_details": [
+          {
+            "format": "unknown",
+            "index": 0,
+            "type": "reasoning.text",
+            "text": "\nGot it, let's see. The user wants me to say how I'm doing in 5 words. First, I need a clear statement. Let's start with the state. Maybe \"Feeling ready to help\" – wait, count: 1.Feeling 2.ready 3.to 4.help – no, that's 4. Need 5. Let's adjust. \"Feeling eager to assist\" – 1.Feeling 2.eager 3.to 4.assist – 4 again. Wait, maybe \"Prepared to support you\" – 1.Prepared 2.to 3.support 4.you – 4. Wait, let's think of a natural 5-word phrase. \"Glad to aid your needs\" – 1.Glad 2.to 3.aid 4.your 5.needs – yes! Wait, does that convey how I'm doing? Or maybe \"Feeling set to assist you\" – 1.Feeling 2.set 3.to 4.assist 5.you – that's good. Wait, let's check another option. \"Ready to support your day\" – 1.Ready 2.to 3.support 4.your 5.day – also good. But let's make it genuine. Let's go with something that clearly states my current state. \"Eager to help your tasks\" – 1.Eager 2.to 3.help 4.your 5.tasks – no, maybe more natural. \"Feeling eager to help you\" – count: 1.Feeling 2.eager 3.to 4.help 5.you – perfect! That's 5 words, conveys how I'm doing (feeling eager) and my purpose (to help you). Wait, let me confirm the word count again. 1. Feeling 2. eager 3. to 4. help 5. you. Yes, that's exactly 5. Is there a more concise one? Maybe, but that's natural. Let me go with that."
+          }
+        ]
+      }
+    }
+  ],
+  "usage": {
+    "prompt_tokens": 123,
+    "completion_tokens": 441,
+    "total_tokens": 564,
+    "cost": 0.00091275,
+    "is_byok": false,
+    "prompt_tokens_details": {
+      "cached_tokens": 0
+    },
+    "cost_details": {
+      "upstream_inference_cost": 0.00091275,
+      "upstream_inference_prompt_cost": 0.00003075,
+      "upstream_inference_completions_cost": 0.000882
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 435
+    }
+  }
+}

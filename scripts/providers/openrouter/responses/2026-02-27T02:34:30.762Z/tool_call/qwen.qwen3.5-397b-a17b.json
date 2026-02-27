@@ -1,0 +1,60 @@
+{
+  "id": "gen-1772160097-4UrPaZTWQ57UPxhlqisD",
+  "provider": "AtlasCloud",
+  "model": "qwen/qwen3.5-397b-a17b",
+  "object": "chat.completion",
+  "created": 1772160097,
+  "choices": [
+    {
+      "logprobs": null,
+      "finish_reason": "tool_calls",
+      "native_finish_reason": "tool_calls",
+      "index": 0,
+      "message": {
+        "role": "assistant",
+        "content": "",
+        "refusal": null,
+        "reasoning": "The user is asking about the weather in San Francisco. I have access to a get_weather function that can get current weather by city. I need to call this function with \"San Francisco\" as the city parameter.",
+        "tool_calls": [
+          {
+            "type": "function",
+            "index": 0,
+            "id": "call_654a34cabb1844e7b221dd16",
+            "function": {
+              "name": "get_weather",
+              "arguments": "{\"city\": \"San Francisco\"}"
+            }
+          }
+        ],
+        "reasoning_details": [
+          {
+            "format": "unknown",
+            "index": 0,
+            "type": "reasoning.text",
+            "text": "The user is asking about the weather in San Francisco. I have access to a get_weather function that can get current weather by city. I need to call this function with \"San Francisco\" as the city parameter."
+          }
+        ]
+      }
+    }
+  ],
+  "usage": {
+    "prompt_tokens": 287,
+    "completion_tokens": 74,
+    "total_tokens": 361,
+    "cost": 0.00041685,
+    "is_byok": false,
+    "prompt_tokens_details": {
+      "cached_tokens": 0,
+      "audio_tokens": 0
+    },
+    "cost_details": {
+      "upstream_inference_cost": 0.00041685,
+      "upstream_inference_prompt_cost": 0.00015785,
+      "upstream_inference_completions_cost": 0.000259
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 43,
+      "audio_tokens": 0
+    }
+  }
+}

@@ -1,0 +1,48 @@
+{
+  "id": "gen-1772159684-4oRZYSogiurISatXse7N",
+  "provider": "xAI",
+  "model": "x-ai/grok-4-fast",
+  "object": "chat.completion",
+  "created": 1772159684,
+  "choices": [
+    {
+      "logprobs": null,
+      "finish_reason": "stop",
+      "native_finish_reason": "completed",
+      "index": 0,
+      "message": {
+        "role": "assistant",
+        "content": "I'm doing great today, thanks!",
+        "refusal": null,
+        "reasoning": null,
+        "reasoning_details": [
+          {
+            "id": "rs_2eb06895-853a-e2a1-e1d0-647ecfc93d82",
+            "format": "xai-responses-v1",
+            "index": 0,
+            "type": "reasoning.encrypted",
+            "data": "S7aMDdsTQWhinMZlJpDfpZVoiiK+q8YstxMph9JinSUadhnHRIUn/4dlgm91QWJWQ4KNu23c2NbDZW6+1zLJ0A7mBcBbQXye3OJyFvt7CFza1ih401skNlq6MZ+zXgoU9SYi2KyB5SaoQrUu7elukNANa+7sijrdL5ghnhNJbykAAGLedE0dbXyAhqrjF0M8nWYibWsvPiuPYdQhyoEf+b8zYXKeYbIkjtTZf94FavS1+/N/sqg7mC9AIYeXelvy5U7voh6so4hW7Y5mrQI+55L24JbjLMGvHebFE7o/FPcdEr1cJ0pUxG9QHjWQMN25cZFzVgTTfX+CZTo63dWDWkfLwSLkCa38xmivEVtv1smy2eD8jw50GU2DUcww5e23moOZU7J68IvevlFaorkd8hy/XETQAXUEnTN+O+8YCu9gOGVhjCKAMdw12L4P0mVCoX5AYX00T9B8RgZKgMr5kCHPOJbSDtSmTdGg2xIbO2CNKuSKug3lGalBwPsf4AvyYSeaaQj/3xkxprTb4mMT8y+7yv2J3KuK6pUpZnyz/hD0PjSvLLuCV/Fefiqa5O5kRkn4ynkwDUrMvgj4qTBbvJD1JwRoFZUBLDTMLw3klJWnr5tuexARRY4yUQUkFm2kBLtW+mdVPGLBn8lnLPqOtq7kklR/wmtMyNA8zYIzz3PAXBJSiMVKyhEsqyY9RD4IxcgiujeGN5+v802DMJxYIYJI34kzSvK1+aYRMm2ohz014c60VspCl3zFFBdwPTLo6VEi2CLu4rl5sXO5fkgoKQUTTTGamI+gvaFGgcBkvxv6Utv1PVK9VWDu+nTuD/JdTWLKkUFFUO+r9v63mJzz5Zi/p8YyzWoIhaP8K1GS2b6rKvBjrjvLavzbCuf3p8TKeea6LHh34QtJapJ5dFyDW5qu"
+          }
+        ]
+      }
+    }
+  ],
+  "usage": {
+    "prompt_tokens": 194,
+    "completion_tokens": 177,
+    "total_tokens": 371,
+    "cost": 0.0001048,
+    "is_byok": false,
+    "prompt_tokens_details": {
+      "cached_tokens": 150
+    },
+    "cost_details": {
+      "upstream_inference_cost": 0.0001048,
+      "upstream_inference_prompt_cost": 0.0000163,
+      "upstream_inference_completions_cost": 0.0000885
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 170
+    }
+  }
+}

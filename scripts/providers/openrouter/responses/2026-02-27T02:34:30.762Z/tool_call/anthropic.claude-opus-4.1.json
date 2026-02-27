@@ -1,0 +1,51 @@
+{
+  "id": "gen-1772160268-uREzNBe7WsEJ6ZlpJAkS",
+  "provider": "Amazon Bedrock",
+  "model": "anthropic/claude-opus-4.1",
+  "object": "chat.completion",
+  "created": 1772160268,
+  "choices": [
+    {
+      "logprobs": null,
+      "finish_reason": "tool_calls",
+      "native_finish_reason": "tool_calls",
+      "index": 0,
+      "message": {
+        "role": "assistant",
+        "content": "",
+        "refusal": null,
+        "reasoning": null,
+        "tool_calls": [
+          {
+            "type": "function",
+            "index": 0,
+            "id": "toolu_bdrk_014iBvVM9v26nEHAPxBjV7YT",
+            "function": {
+              "name": "get_weather",
+              "arguments": "{\"city\": \"San Francisco\"}"
+            }
+          }
+        ]
+      }
+    }
+  ],
+  "usage": {
+    "prompt_tokens": 395,
+    "completion_tokens": 54,
+    "total_tokens": 449,
+    "cost": 0.009975,
+    "is_byok": false,
+    "prompt_tokens_details": {
+      "cached_tokens": 0,
+      "cache_write_tokens": 0
+    },
+    "cost_details": {
+      "upstream_inference_cost": 0.009975,
+      "upstream_inference_prompt_cost": 0.005925,
+      "upstream_inference_completions_cost": 0.00405
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 0
+    }
+  }
+}

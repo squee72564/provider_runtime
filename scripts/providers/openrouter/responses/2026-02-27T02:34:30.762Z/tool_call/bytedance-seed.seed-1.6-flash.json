@@ -1,0 +1,58 @@
+{
+  "id": "gen-1772160255-xYV99Oh1d8oXHz3Z9kc5",
+  "provider": "Seed",
+  "model": "bytedance-seed/seed-1.6-flash",
+  "object": "chat.completion",
+  "created": 1772160255,
+  "choices": [
+    {
+      "logprobs": null,
+      "finish_reason": "tool_calls",
+      "native_finish_reason": "tool_calls",
+      "index": 0,
+      "message": {
+        "role": "assistant",
+        "content": "",
+        "refusal": null,
+        "reasoning": "\n我现在需要回答用户的问题：“What is the weather in San Francisco?”。首先，用户想知道旧金山的天气，这是一个需要实时数据的问题，所以我应该调用天气工具。\n\n接下来，检查工具的参数。根据提供的信息，get_weather工具需要一个必填的city参数，类型是字符串。用户的问题中已经明确提到了San Francisco，所以参数应该是city: \"San Francisco\"。\n\n然后，确认是否需要其他参数。工具描述中提到additionalProperties是false，所以不能添加其他参数。因此，只需要传入city参数即可。\n\n最后，按照格式要求生成函数调用。使用<|FunctionCallBegin|>和<|FunctionCallEnd|>包裹，里面是一个包含name和parameters的JSON数组。确保JSON格式正确，没有语法错误。\n\n所以，正确的调用应该是：\n\n<|FunctionCallBegin|>[{\"name\":\"get_weather\",\"parameters\":{\"city\":\"San Francisco\"}}]<|FunctionCallEnd|>",
+        "tool_calls": [
+          {
+            "type": "function",
+            "index": 0,
+            "id": "call_l8610eeo5lb37zr4tsf7o4bu",
+            "function": {
+              "name": "get_weather",
+              "arguments": "{\"city\":\"San Francisco\"}"
+            }
+          }
+        ],
+        "reasoning_details": [
+          {
+            "format": "unknown",
+            "index": 0,
+            "type": "reasoning.text",
+            "text": "\n我现在需要回答用户的问题：“What is the weather in San Francisco?”。首先，用户想知道旧金山的天气，这是一个需要实时数据的问题，所以我应该调用天气工具。\n\n接下来，检查工具的参数。根据提供的信息，get_weather工具需要一个必填的city参数，类型是字符串。用户的问题中已经明确提到了San Francisco，所以参数应该是city: \"San Francisco\"。\n\n然后，确认是否需要其他参数。工具描述中提到additionalProperties是false，所以不能添加其他参数。因此，只需要传入city参数即可。\n\n最后，按照格式要求生成函数调用。使用<|FunctionCallBegin|>和<|FunctionCallEnd|>包裹，里面是一个包含name和parameters的JSON数组。确保JSON格式正确，没有语法错误。\n\n所以，正确的调用应该是：\n\n<|FunctionCallBegin|>[{\"name\":\"get_weather\",\"parameters\":{\"city\":\"San Francisco\"}}]<|FunctionCallEnd|>"
+          }
+        ]
+      }
+    }
+  ],
+  "usage": {
+    "prompt_tokens": 444,
+    "completion_tokens": 244,
+    "total_tokens": 688,
+    "cost": 0.0001065,
+    "is_byok": false,
+    "prompt_tokens_details": {
+      "cached_tokens": 0
+    },
+    "cost_details": {
+      "upstream_inference_cost": 0.0001065,
+      "upstream_inference_prompt_cost": 0.0000333,
+      "upstream_inference_completions_cost": 0.0000732
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 215
+    }
+  }
+}
