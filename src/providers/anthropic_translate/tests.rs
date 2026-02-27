@@ -10,6 +10,7 @@ use crate::core::error::ProviderError;
 use crate::core::types::{
     ContentPart, FinishReason, Message, MessageRole, ModelRef, ProviderCapabilities, ProviderId,
     ProviderRequest, ResponseFormat, ToolCall, ToolChoice, ToolDefinition, ToolResult,
+    ToolResultContent,
 };
 
 fn base_request() -> ProviderRequest {
@@ -72,9 +73,10 @@ fn test_encode_anthropic_translator_category_contract() {
             content: vec![ContentPart::ToolResult {
                 tool_result: ToolResult {
                     tool_call_id: "tool_1".to_string(),
-                    content: vec![ContentPart::Text {
+                    content: ToolResultContent::Text {
                         text: "{\"temp\":55}".to_string(),
-                    }],
+                    },
+                    raw_provider_content: None,
                 },
             }],
         },
@@ -416,9 +418,10 @@ fn test_encode_tool_call_arguments_must_be_object() {
             content: vec![ContentPart::ToolResult {
                 tool_result: ToolResult {
                     tool_call_id: "tool_1".to_string(),
-                    content: vec![ContentPart::Text {
+                    content: ToolResultContent::Text {
                         text: "{\"temp\":55}".to_string(),
-                    }],
+                    },
+                    raw_provider_content: None,
                 },
             }],
         },
@@ -447,9 +450,10 @@ fn test_encode_tool_result_without_matching_tool_call_is_rejected() {
             content: vec![ContentPart::ToolResult {
                 tool_result: ToolResult {
                     tool_call_id: "missing_call".to_string(),
-                    content: vec![ContentPart::Text {
+                    content: ToolResultContent::Text {
                         text: "tool output".to_string(),
-                    }],
+                    },
+                    raw_provider_content: None,
                 },
             }],
         },
@@ -524,13 +528,16 @@ fn test_encode_tool_result_content_non_text_is_rejected() {
             content: vec![ContentPart::ToolResult {
                 tool_result: ToolResult {
                     tool_call_id: "tool_1".to_string(),
-                    content: vec![ContentPart::ToolCall {
-                        tool_call: ToolCall {
-                            id: "nested".to_string(),
-                            name: "unsupported".to_string(),
-                            arguments_json: json!({"x": 1}),
-                        },
-                    }],
+                    content: ToolResultContent::Parts {
+                        parts: vec![ContentPart::ToolCall {
+                            tool_call: ToolCall {
+                                id: "nested".to_string(),
+                                name: "unsupported".to_string(),
+                                arguments_json: json!({"x": 1}),
+                            },
+                        }],
+                    },
+                    raw_provider_content: None,
                 },
             }],
         },
@@ -540,7 +547,102 @@ fn test_encode_tool_result_content_non_text_is_rejected() {
     assert!(matches!(err, ProviderError::Protocol { .. }));
     assert!(
         err.to_string()
-            .contains("tool_result content must contain only text parts")
+            .contains("tool_result parts content must contain only text parts")
+    );
+}
+
+#[test]
+fn test_encode_tool_result_json_coerces_to_text_block() {
+    let mut req = base_request();
+    req.messages = vec![
+        Message {
+            role: MessageRole::User,
+            content: vec![ContentPart::Text {
+                text: "call the tool".to_string(),
+            }],
+        },
+        Message {
+            role: MessageRole::Assistant,
+            content: vec![ContentPart::ToolCall {
+                tool_call: ToolCall {
+                    id: "tool_1".to_string(),
+                    name: "lookup_weather".to_string(),
+                    arguments_json: json!({"city":"SF"}),
+                },
+            }],
+        },
+        Message {
+            role: MessageRole::Tool,
+            content: vec![ContentPart::ToolResult {
+                tool_result: ToolResult {
+                    tool_call_id: "tool_1".to_string(),
+                    content: ToolResultContent::Json {
+                        value: json!({"b": 2, "a": 1}),
+                    },
+                    raw_provider_content: None,
+                },
+            }],
+        },
+    ];
+
+    let encoded = encode_anthropic_request(&req).expect("encode should succeed");
+    assert_eq!(
+        encoded.body.pointer("/messages/2/content/0/content/0/text"),
+        Some(&json!("{\"a\":1,\"b\":2}"))
+    );
+    assert!(
+        encoded
+            .warnings
+            .iter()
+            .any(|warning| warning.code == "tool_result_coerced")
+    );
+}
+
+#[test]
+fn test_encode_tool_result_uses_raw_provider_content_when_array() {
+    let mut req = base_request();
+    req.messages = vec![
+        Message {
+            role: MessageRole::User,
+            content: vec![ContentPart::Text {
+                text: "call the tool".to_string(),
+            }],
+        },
+        Message {
+            role: MessageRole::Assistant,
+            content: vec![ContentPart::ToolCall {
+                tool_call: ToolCall {
+                    id: "tool_1".to_string(),
+                    name: "lookup_weather".to_string(),
+                    arguments_json: json!({"city":"SF"}),
+                },
+            }],
+        },
+        Message {
+            role: MessageRole::Tool,
+            content: vec![ContentPart::ToolResult {
+                tool_result: ToolResult {
+                    tool_call_id: "tool_1".to_string(),
+                    content: ToolResultContent::Text {
+                        text: "fallback".to_string(),
+                    },
+                    raw_provider_content: Some(json!([
+                        {"type":"text","text":"from-raw"},
+                        {"type":"text","text":"second"}
+                    ])),
+                },
+            }],
+        },
+    ];
+
+    let encoded = encode_anthropic_request(&req).expect("encode should succeed");
+    assert_eq!(
+        encoded.body.pointer("/messages/2/content/0/content/0/text"),
+        Some(&json!("from-raw"))
+    );
+    assert_eq!(
+        encoded.body.pointer("/messages/2/content/0/content/1/text"),
+        Some(&json!("second"))
     );
 }
 

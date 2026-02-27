@@ -1,5 +1,5 @@
 use super::*;
-use crate::core::types::{ToolCall, ToolResult};
+use crate::core::types::{ToolCall, ToolResult, ToolResultContent};
 use serde_json::json;
 
 fn assistant(content: Vec<ContentPart>) -> Message {
@@ -78,9 +78,10 @@ fn test_tool_calls_and_results_preserved() {
     };
     let tool_result = ToolResult {
         tool_call_id: "call_1".to_string(),
-        content: vec![ContentPart::Text {
+        content: ToolResultContent::Text {
             text: "result payload".to_string(),
-        }],
+        },
+        raw_provider_content: None,
     };
 
     let messages = vec![assistant(vec![

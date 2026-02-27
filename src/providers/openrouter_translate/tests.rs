@@ -10,7 +10,7 @@ use super::{
 use crate::core::error::ProviderError;
 use crate::core::types::{
     ContentPart, FinishReason, Message, MessageRole, ModelRef, ProviderId, ProviderRequest,
-    ResponseFormat, ToolCall, ToolChoice, ToolDefinition, ToolResult,
+    ResponseFormat, ToolCall, ToolChoice, ToolDefinition, ToolResult, ToolResultContent,
 };
 
 fn base_request() -> ProviderRequest {
@@ -67,9 +67,10 @@ fn test_encode_openrouter_translator_category_contract() {
             content: vec![ContentPart::ToolResult {
                 tool_result: ToolResult {
                     tool_call_id: "call_1".to_string(),
-                    content: vec![ContentPart::Text {
+                    content: ToolResultContent::Text {
                         text: "{\"temp\":55}".to_string(),
-                    }],
+                    },
+                    raw_provider_content: None,
                 },
             }],
         },
@@ -344,6 +345,94 @@ fn test_encode_tool_role_content_validation() {
     let err = encode_openrouter_request(&req, &OpenRouterTranslateOptions::default())
         .expect_err("tool role text should fail");
     assert!(err.to_string().contains("tool_result"));
+}
+
+#[test]
+fn test_encode_tool_result_json_coerces_to_string() {
+    let mut req = base_request();
+    req.tools = vec![ToolDefinition {
+        name: "lookup_weather".to_string(),
+        description: None,
+        parameters_schema: json!({"type":"object"}),
+    }];
+    req.messages = vec![
+        Message {
+            role: MessageRole::Assistant,
+            content: vec![ContentPart::ToolCall {
+                tool_call: ToolCall {
+                    id: "call_1".to_string(),
+                    name: "lookup_weather".to_string(),
+                    arguments_json: json!({"city":"SF"}),
+                },
+            }],
+        },
+        Message {
+            role: MessageRole::Tool,
+            content: vec![ContentPart::ToolResult {
+                tool_result: ToolResult {
+                    tool_call_id: "call_1".to_string(),
+                    content: ToolResultContent::Json {
+                        value: json!({"b": 2, "a": 1}),
+                    },
+                    raw_provider_content: None,
+                },
+            }],
+        },
+    ];
+
+    let encoded = encode_openrouter_request(&req, &OpenRouterTranslateOptions::default())
+        .expect("encode should succeed");
+    assert_eq!(
+        encoded.body.pointer("/messages/1/content"),
+        Some(&json!("{\"a\":1,\"b\":2}"))
+    );
+    assert!(
+        encoded
+            .warnings
+            .iter()
+            .any(|warning| warning.code == "tool_result_coerced")
+    );
+}
+
+#[test]
+fn test_encode_tool_result_uses_raw_provider_content_when_string() {
+    let mut req = base_request();
+    req.tools = vec![ToolDefinition {
+        name: "lookup_weather".to_string(),
+        description: None,
+        parameters_schema: json!({"type":"object"}),
+    }];
+    req.messages = vec![
+        Message {
+            role: MessageRole::Assistant,
+            content: vec![ContentPart::ToolCall {
+                tool_call: ToolCall {
+                    id: "call_1".to_string(),
+                    name: "lookup_weather".to_string(),
+                    arguments_json: json!({"city":"SF"}),
+                },
+            }],
+        },
+        Message {
+            role: MessageRole::Tool,
+            content: vec![ContentPart::ToolResult {
+                tool_result: ToolResult {
+                    tool_call_id: "call_1".to_string(),
+                    content: ToolResultContent::Text {
+                        text: "fallback".to_string(),
+                    },
+                    raw_provider_content: Some(json!("raw-output")),
+                },
+            }],
+        },
+    ];
+
+    let encoded = encode_openrouter_request(&req, &OpenRouterTranslateOptions::default())
+        .expect("encode should succeed");
+    assert_eq!(
+        encoded.body.pointer("/messages/1/content"),
+        Some(&json!("raw-output"))
+    );
 }
 
 #[test]

@@ -105,7 +105,17 @@ pub struct ToolCall {
 #[serde(deny_unknown_fields)]
 pub struct ToolResult {
     pub tool_call_id: String,
-    pub content: Vec<ContentPart>,
+    pub content: ToolResultContent,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub raw_provider_content: Option<serde_json::Value>,
+}
+
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+#[serde(tag = "type", rename_all = "snake_case")]
+pub enum ToolResultContent {
+    Text { text: String },
+    Json { value: serde_json::Value },
+    Parts { parts: Vec<ContentPart> },
 }
 
 #[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]

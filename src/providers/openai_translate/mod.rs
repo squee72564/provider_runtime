@@ -4,7 +4,7 @@ use crate::core::error::ProviderError;
 use crate::core::types::{
     AssistantOutput, ContentPart, FinishReason, Message, MessageRole, ModelInfo,
     ProviderCapabilities, ProviderId, ProviderRequest, ProviderResponse, ResponseFormat,
-    RuntimeWarning, ToolCall, ToolChoice, ToolDefinition, Usage,
+    RuntimeWarning, ToolCall, ToolChoice, ToolDefinition, ToolResult, ToolResultContent, Usage,
 };
 use crate::providers::translator_contract::ProviderTranslator;
 
@@ -21,6 +21,9 @@ const WARN_OPENAI_INCOMPLETE_CONTENT_FILTER: &str = "openai_incomplete_content_f
 const WARN_OPENAI_INCOMPLETE_UNKNOWN_REASON: &str = "openai_incomplete_unknown_reason";
 const WARN_OPENAI_INCOMPLETE_MISSING_REASON: &str = "openai_incomplete_missing_reason";
 const WARN_EMPTY_OUTPUT: &str = "empty_output";
+const WARN_TOOL_RESULT_COERCED: &str = "tool_result_coerced";
+const WARN_TOOL_RESULT_RAW_PROVIDER_CONTENT_IGNORED: &str =
+    "tool_result_raw_provider_content_ignored";
 
 #[derive(Debug, Clone, PartialEq)]
 pub(crate) struct OpenAiEncodedRequest {
@@ -573,7 +576,7 @@ fn map_messages(
                         ));
                     }
 
-                    let output = serialize_tool_result_output(&tool_result.content, req)?;
+                    let output = serialize_tool_result_output(tool_result, req, warnings)?;
                     input_items.push(json!({
                         "type": "function_call_output",
                         "call_id": tool_result.tool_call_id,
@@ -623,24 +626,78 @@ fn flush_message_item(
 }
 
 fn serialize_tool_result_output(
-    content: &[ContentPart],
+    tool_result: &ToolResult,
     req: &ProviderRequest,
+    warnings: &mut Vec<RuntimeWarning>,
 ) -> Result<String, ProviderError> {
-    let mut lines = Vec::new();
-
-    for part in content {
-        match part {
-            ContentPart::Text { text } => lines.push(text.clone()),
-            _ => {
-                return Err(protocol_error(
-                    Some(&req.model.model_id),
-                    "tool_result content for OpenAI must contain only text parts",
-                ));
-            }
+    if let Some(raw_provider_content) = &tool_result.raw_provider_content {
+        if let Some(raw_text) = raw_provider_content.as_str() {
+            return Ok(raw_text.to_string());
         }
+
+        warnings.push(RuntimeWarning {
+            code: WARN_TOOL_RESULT_RAW_PROVIDER_CONTENT_IGNORED.to_string(),
+            message:
+                "tool_result raw_provider_content ignored for OpenAI because it is not a string"
+                    .to_string(),
+        });
     }
 
-    Ok(lines.join("\n"))
+    match &tool_result.content {
+        ToolResultContent::Text { text } => Ok(text.clone()),
+        ToolResultContent::Json { value } => {
+            warnings.push(RuntimeWarning {
+                code: WARN_TOOL_RESULT_COERCED.to_string(),
+                message:
+                    "tool_result JSON content coerced to string for OpenAI function_call_output"
+                        .to_string(),
+            });
+            Ok(stable_json_string(&canonicalize_json(value)))
+        }
+        ToolResultContent::Parts { parts } => {
+            warnings.push(RuntimeWarning {
+                code: WARN_TOOL_RESULT_COERCED.to_string(),
+                message: "tool_result parts content coerced to newline-delimited string for OpenAI function_call_output".to_string(),
+            });
+
+            let mut lines = Vec::new();
+            for part in parts {
+                match part {
+                    ContentPart::Text { text } => lines.push(text.clone()),
+                    _ => {
+                        return Err(protocol_error(
+                            Some(&req.model.model_id),
+                            "tool_result parts content for OpenAI must contain only text parts",
+                        ));
+                    }
+                }
+            }
+            Ok(lines.join("\n"))
+        }
+    }
+}
+
+fn canonicalize_json(value: &Value) -> Value {
+    match value {
+        Value::Object(map) => {
+            let mut keys = map.keys().cloned().collect::<Vec<_>>();
+            keys.sort();
+
+            let mut out = Map::new();
+            for key in keys {
+                let next = map.get(&key).expect("key collected from object must exist");
+                out.insert(key, canonicalize_json(next));
+            }
+
+            Value::Object(out)
+        }
+        Value::Array(items) => Value::Array(items.iter().map(canonicalize_json).collect()),
+        _ => value.clone(),
+    }
+}
+
+fn stable_json_string(value: &Value) -> String {
+    serde_json::to_string(value).unwrap_or_else(|_| "null".to_string())
 }
 
 fn is_strict_compatible_schema(schema: &Value) -> bool {

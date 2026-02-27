@@ -6,7 +6,7 @@ use crate::core::error::ProviderError;
 use crate::core::types::{
     AssistantOutput, ContentPart, FinishReason, MessageRole, ModelInfo, ProviderCapabilities,
     ProviderId, ProviderRequest, ProviderResponse, ResponseFormat, RuntimeWarning, ToolCall,
-    ToolChoice, ToolDefinition, Usage,
+    ToolChoice, ToolDefinition, ToolResult, ToolResultContent, Usage,
 };
 use crate::providers::translator_contract::ProviderTranslator;
 
@@ -36,6 +36,9 @@ const WARN_USAGE_MISSING: &str = "usage_missing";
 const WARN_USAGE_PARTIAL: &str = "usage_partial";
 const WARN_STRUCTURED_OUTPUT_PARSE_FAILED: &str = "structured_output_parse_failed";
 const WARN_EMPTY_OUTPUT: &str = "empty_output";
+const WARN_TOOL_RESULT_COERCED: &str = "tool_result_coerced";
+const WARN_TOOL_RESULT_RAW_PROVIDER_CONTENT_IGNORED: &str =
+    "tool_result_raw_provider_content_ignored";
 
 #[derive(Debug, Clone, PartialEq)]
 pub(crate) struct AnthropicEncodedRequest {
@@ -633,7 +636,7 @@ fn map_non_system_messages(
                     }
 
                     let content = tool_result_content_as_text_blocks(
-                        &tool_result.content,
+                        tool_result,
                         &req.model.model_id,
                         warnings,
                     )?;
@@ -664,30 +667,63 @@ fn map_non_system_messages(
 }
 
 fn tool_result_content_as_text_blocks(
-    parts: &[ContentPart],
+    tool_result: &ToolResult,
     model: &str,
     warnings: &mut Vec<RuntimeWarning>,
 ) -> Result<Vec<Value>, ProviderError> {
-    let mut blocks = Vec::new();
-
-    for part in parts {
-        match part {
-            ContentPart::Text { text } => blocks.push(json!({ "type": "text", "text": text })),
-            ContentPart::Thinking { .. } => warnings.push(RuntimeWarning {
-                code: WARN_DROPPED_THINKING_ON_ENCODE.to_string(),
-                message: "thinking content dropped while encoding Anthropic tool result"
-                    .to_string(),
-            }),
-            _ => {
-                return Err(protocol_error(
-                    Some(model),
-                    "tool_result content must contain only text parts",
-                ));
-            }
+    if let Some(raw_provider_content) = &tool_result.raw_provider_content {
+        if let Some(blocks) = raw_provider_content.as_array() {
+            return Ok(blocks.clone());
         }
+
+        warnings.push(RuntimeWarning {
+            code: WARN_TOOL_RESULT_RAW_PROVIDER_CONTENT_IGNORED.to_string(),
+            message:
+                "tool_result raw_provider_content ignored for Anthropic because it is not an array"
+                    .to_string(),
+        });
     }
 
-    Ok(blocks)
+    match &tool_result.content {
+        ToolResultContent::Text { text } => Ok(vec![json!({
+            "type": "text",
+            "text": text,
+        })]),
+        ToolResultContent::Json { value } => {
+            warnings.push(RuntimeWarning {
+                code: WARN_TOOL_RESULT_COERCED.to_string(),
+                message: "tool_result JSON content coerced to Anthropic text block".to_string(),
+            });
+            Ok(vec![json!({
+                "type": "text",
+                "text": stable_json_string(&canonicalize_json(value)),
+            })])
+        }
+        ToolResultContent::Parts { parts } => {
+            let mut blocks = Vec::new();
+
+            for part in parts {
+                match part {
+                    ContentPart::Text { text } => {
+                        blocks.push(json!({ "type": "text", "text": text }))
+                    }
+                    ContentPart::Thinking { .. } => warnings.push(RuntimeWarning {
+                        code: WARN_DROPPED_THINKING_ON_ENCODE.to_string(),
+                        message: "thinking content dropped while encoding Anthropic tool result"
+                            .to_string(),
+                    }),
+                    _ => {
+                        return Err(protocol_error(
+                            Some(model),
+                            "tool_result parts content must contain only text parts",
+                        ));
+                    }
+                }
+            }
+
+            Ok(blocks)
+        }
+    }
 }
 
 fn merge_consecutive_messages(messages: Vec<WireMessage>) -> Vec<WireMessage> {
@@ -1223,6 +1259,25 @@ fn extract_first_json_object(text: &str) -> Option<String> {
 
 fn stable_json_string(value: &Value) -> String {
     serde_json::to_string(value).unwrap_or_else(|_| "{}".to_string())
+}
+
+fn canonicalize_json(value: &Value) -> Value {
+    match value {
+        Value::Object(map) => {
+            let mut keys = map.keys().cloned().collect::<Vec<_>>();
+            keys.sort();
+
+            let mut out = Map::new();
+            for key in keys {
+                let next = map.get(&key).expect("key collected from object must exist");
+                out.insert(key, canonicalize_json(next));
+            }
+
+            Value::Object(out)
+        }
+        Value::Array(items) => Value::Array(items.iter().map(canonicalize_json).collect()),
+        _ => value.clone(),
+    }
 }
 
 fn protocol_error(model: Option<&str>, message: impl Into<String>) -> ProviderError {

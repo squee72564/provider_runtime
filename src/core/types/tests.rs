@@ -88,9 +88,10 @@ fn test_content_part_invariants() {
     let part = ContentPart::ToolResult {
         tool_result: ToolResult {
             tool_call_id: "call_1".to_string(),
-            content: vec![ContentPart::Text {
+            content: ToolResultContent::Text {
                 text: "done".to_string(),
-            }],
+            },
+            raw_provider_content: None,
         },
     };
 

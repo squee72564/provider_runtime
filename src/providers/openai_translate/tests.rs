@@ -9,7 +9,7 @@ use super::{
 use crate::core::error::ProviderError;
 use crate::core::types::{
     ContentPart, FinishReason, Message, MessageRole, ModelRef, ProviderCapabilities, ProviderId,
-    ProviderRequest, ResponseFormat, ToolChoice, ToolDefinition,
+    ProviderRequest, ResponseFormat, ToolChoice, ToolDefinition, ToolResultContent,
 };
 
 fn base_request() -> ProviderRequest {
@@ -72,9 +72,10 @@ fn test_encode_openai_translator_category_contract() {
             content: vec![ContentPart::ToolResult {
                 tool_result: crate::core::types::ToolResult {
                     tool_call_id: "call_1".to_string(),
-                    content: vec![ContentPart::Text {
+                    content: ToolResultContent::Text {
                         text: "{\"temp\":55}".to_string(),
-                    }],
+                    },
+                    raw_provider_content: None,
                 },
             }],
         },
@@ -438,9 +439,10 @@ fn test_encode_tool_result_role_validation() {
         content: vec![ContentPart::ToolResult {
             tool_result: crate::core::types::ToolResult {
                 tool_call_id: "call_1".to_string(),
-                content: vec![ContentPart::Text {
+                content: ToolResultContent::Text {
                     text: "result".to_string(),
-                }],
+                },
+                raw_provider_content: None,
             },
         }],
     }];
@@ -450,6 +452,88 @@ fn test_encode_tool_result_role_validation() {
     assert!(
         err.to_string()
             .contains("tool_result content is only valid for tool role")
+    );
+}
+
+#[test]
+fn test_encode_tool_result_json_coerces_to_string() {
+    let mut req = base_request();
+    req.messages = vec![
+        Message {
+            role: MessageRole::Assistant,
+            content: vec![ContentPart::ToolCall {
+                tool_call: crate::core::types::ToolCall {
+                    id: "call_1".to_string(),
+                    name: "lookup_weather".to_string(),
+                    arguments_json: json!({"city":"SF"}),
+                },
+            }],
+        },
+        Message {
+            role: MessageRole::Tool,
+            content: vec![ContentPart::ToolResult {
+                tool_result: crate::core::types::ToolResult {
+                    tool_call_id: "call_1".to_string(),
+                    content: ToolResultContent::Json {
+                        value: json!({"b": 2, "a": 1}),
+                    },
+                    raw_provider_content: None,
+                },
+            }],
+        },
+    ];
+
+    let encoded = encode_openai_request(&req).expect("encode should succeed");
+    assert_eq!(
+        encoded.body.pointer("/input/1/output"),
+        Some(&json!("{\"a\":1,\"b\":2}"))
+    );
+    assert!(
+        encoded
+            .warnings
+            .iter()
+            .any(|warning| warning.code == "tool_result_coerced")
+    );
+}
+
+#[test]
+fn test_encode_tool_result_uses_raw_provider_content_when_string() {
+    let mut req = base_request();
+    req.messages = vec![
+        Message {
+            role: MessageRole::Assistant,
+            content: vec![ContentPart::ToolCall {
+                tool_call: crate::core::types::ToolCall {
+                    id: "call_1".to_string(),
+                    name: "lookup_weather".to_string(),
+                    arguments_json: json!({"city":"SF"}),
+                },
+            }],
+        },
+        Message {
+            role: MessageRole::Tool,
+            content: vec![ContentPart::ToolResult {
+                tool_result: crate::core::types::ToolResult {
+                    tool_call_id: "call_1".to_string(),
+                    content: ToolResultContent::Json {
+                        value: json!({"a": 1}),
+                    },
+                    raw_provider_content: Some(json!("raw-output")),
+                },
+            }],
+        },
+    ];
+
+    let encoded = encode_openai_request(&req).expect("encode should succeed");
+    assert_eq!(
+        encoded.body.pointer("/input/1/output"),
+        Some(&json!("raw-output"))
+    );
+    assert!(
+        encoded
+            .warnings
+            .iter()
+            .all(|warning| warning.code != "tool_result_coerced")
     );
 }
 

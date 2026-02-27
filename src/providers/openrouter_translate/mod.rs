@@ -6,7 +6,7 @@ use crate::core::error::ProviderError;
 use crate::core::types::{
     AssistantOutput, ContentPart, FinishReason, Message, MessageRole, ModelInfo, ProviderId,
     ProviderRequest, ProviderResponse, ResponseFormat, RuntimeWarning, ToolCall, ToolChoice,
-    ToolDefinition, Usage,
+    ToolDefinition, ToolResult, ToolResultContent, Usage,
 };
 use crate::providers::translator_contract::ProviderTranslator;
 
@@ -18,6 +18,9 @@ const WARN_STRUCTURED_OUTPUT_PARSE_FAILED: &str = "structured_output_parse_faile
 const WARN_UNKNOWN_FINISH_REASON: &str = "unknown_finish_reason";
 const WARN_EMPTY_OUTPUT: &str = "empty_output";
 const WARN_REASONING_DETAILS_MAPPED_TO_JSON: &str = "reasoning_details_mapped_to_json";
+const WARN_TOOL_RESULT_COERCED: &str = "tool_result_coerced";
+const WARN_TOOL_RESULT_RAW_PROVIDER_CONTENT_IGNORED: &str =
+    "tool_result_raw_provider_content_ignored";
 
 #[derive(Debug, Clone, PartialEq, Default)]
 pub(crate) struct OpenRouterTranslateOptions {
@@ -109,7 +112,7 @@ pub(crate) fn encode_openrouter_request(
     validate_options(options, &req.model.model_id)?;
     let tools = map_tools(req)?;
     let tool_choice = map_tool_choice(req, !tools.is_empty())?;
-    let messages = map_messages(req, !tools.is_empty())?;
+    let messages = map_messages(req, !tools.is_empty(), &mut warnings)?;
     let response_format = map_response_format(req)?;
 
     if messages.is_empty() {
@@ -851,12 +854,16 @@ fn map_response_format(req: &ProviderRequest) -> Result<Option<Value>, ProviderE
     }
 }
 
-fn map_messages(req: &ProviderRequest, has_tools: bool) -> Result<Vec<Value>, ProviderError> {
+fn map_messages(
+    req: &ProviderRequest,
+    has_tools: bool,
+    warnings: &mut Vec<RuntimeWarning>,
+) -> Result<Vec<Value>, ProviderError> {
     let mut messages = Vec::new();
     let mut saw_tool_role = false;
 
     for message in &req.messages {
-        messages.push(map_message(message, &req.model.model_id)?);
+        messages.push(map_message(message, &req.model.model_id, warnings)?);
         if message.role == MessageRole::Tool {
             saw_tool_role = true;
         }
@@ -872,12 +879,16 @@ fn map_messages(req: &ProviderRequest, has_tools: bool) -> Result<Vec<Value>, Pr
     Ok(messages)
 }
 
-fn map_message(message: &Message, model_id: &str) -> Result<Value, ProviderError> {
+fn map_message(
+    message: &Message,
+    model_id: &str,
+    warnings: &mut Vec<RuntimeWarning>,
+) -> Result<Value, ProviderError> {
     match message.role {
         MessageRole::System => map_string_message("system", &message.content, model_id),
         MessageRole::User => map_string_message("user", &message.content, model_id),
         MessageRole::Assistant => map_assistant_message(&message.content, model_id),
-        MessageRole::Tool => map_tool_message(&message.content, model_id),
+        MessageRole::Tool => map_tool_message(&message.content, model_id, warnings),
     }
 }
 
@@ -971,7 +982,11 @@ fn map_assistant_message(content: &[ContentPart], model_id: &str) -> Result<Valu
     Ok(Value::Object(payload))
 }
 
-fn map_tool_message(content: &[ContentPart], model_id: &str) -> Result<Value, ProviderError> {
+fn map_tool_message(
+    content: &[ContentPart],
+    model_id: &str,
+    warnings: &mut Vec<RuntimeWarning>,
+) -> Result<Value, ProviderError> {
     if content.len() != 1 {
         return Err(protocol_error(
             Some(model_id),
@@ -1002,13 +1017,51 @@ fn map_tool_message(content: &[ContentPart], model_id: &str) -> Result<Value, Pr
         ));
     }
 
-    let output = join_text_parts(&tool_result.content, model_id, "tool_result", false)?;
+    let output = coerce_tool_result_output(tool_result, model_id, warnings)?;
 
     Ok(json!({
         "role": "tool",
         "tool_call_id": tool_result.tool_call_id,
         "content": output,
     }))
+}
+
+fn coerce_tool_result_output(
+    tool_result: &ToolResult,
+    model_id: &str,
+    warnings: &mut Vec<RuntimeWarning>,
+) -> Result<String, ProviderError> {
+    if let Some(raw_provider_content) = &tool_result.raw_provider_content {
+        if let Some(raw_text) = raw_provider_content.as_str() {
+            return Ok(raw_text.to_string());
+        }
+
+        warnings.push(RuntimeWarning {
+            code: WARN_TOOL_RESULT_RAW_PROVIDER_CONTENT_IGNORED.to_string(),
+            message:
+                "tool_result raw_provider_content ignored for OpenRouter because it is not a string"
+                    .to_string(),
+        });
+    }
+
+    match &tool_result.content {
+        ToolResultContent::Text { text } => Ok(text.clone()),
+        ToolResultContent::Json { value } => {
+            warnings.push(RuntimeWarning {
+                code: WARN_TOOL_RESULT_COERCED.to_string(),
+                message: "tool_result JSON content coerced to string for OpenRouter tool message"
+                    .to_string(),
+            });
+            Ok(stable_json_string(&canonicalize_json(value)))
+        }
+        ToolResultContent::Parts { parts } => {
+            warnings.push(RuntimeWarning {
+                code: WARN_TOOL_RESULT_COERCED.to_string(),
+                message: "tool_result parts content coerced to newline-delimited string for OpenRouter tool message".to_string(),
+            });
+            join_text_parts(parts, model_id, "tool_result", false)
+        }
+    }
 }
 
 fn join_text_parts(
