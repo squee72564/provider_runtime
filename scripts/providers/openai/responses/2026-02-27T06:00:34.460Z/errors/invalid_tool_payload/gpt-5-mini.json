@@ -1,0 +1,72 @@
+{
+  "provider": "openai",
+  "scenario": "invalid_tool_payload",
+  "captured_at": "2026-02-27T06:00:34.460Z",
+  "request": {
+    "url": "https://api.openai.com/v1/responses",
+    "method": "POST",
+    "model": "gpt-5-mini",
+    "headers": {
+      "Authorization": "<redacted>",
+      "Content-Type": "application/json"
+    },
+    "body": {
+      "instructions": "You are a helpful assistant.",
+      "input": [
+        {
+          "role": "user",
+          "content": "What is the weather in SF?"
+        }
+      ],
+      "tools": [
+        {
+          "type": "function",
+          "name": "get_weather",
+          "description": "Get weather",
+          "parameters": "invalid-parameters"
+        }
+      ],
+      "tool_choice": {
+        "type": "function",
+        "name": "missing_tool"
+      },
+      "store": false,
+      "max_output_tokens": 64,
+      "model": "gpt-5-mini"
+    }
+  },
+  "response": {
+    "status": 400,
+    "status_text": "Bad Request",
+    "headers": {
+      "alt-svc": "h3=\":443\"; ma=86400",
+      "cf-cache-status": "DYNAMIC",
+      "cf-ray": "9d457688ed687c7f-LAX",
+      "connection": "keep-alive",
+      "content-length": "224",
+      "content-type": "application/json",
+      "date": "Fri, 27 Feb 2026 06:00:38 GMT",
+      "openai-organization": "syncpad",
+      "openai-processing-ms": "14",
+      "openai-project": "proj_CH8MiiN5urddIzeIfKAaaG3k",
+      "openai-version": "2020-10-01",
+      "server": "cloudflare",
+      "set-cookie": "<redacted>",
+      "strict-transport-security": "max-age=31536000; includeSubDomains; preload",
+      "x-content-type-options": "nosniff",
+      "x-request-id": "req_f986d21dcc684500ae84103ad8117359"
+    },
+    "body": {
+      "error": {
+        "message": "Invalid type for 'tools[0].parameters': expected an object, but got a string instead.",
+        "type": "invalid_request_error",
+        "param": "tools[0].parameters",
+        "code": "invalid_type"
+      }
+    }
+  },
+  "normalized_error": {
+    "message": "OpenAI HTTP 400 Bad Request",
+    "error_class": "OpenAIHttpError"
+  }
+}

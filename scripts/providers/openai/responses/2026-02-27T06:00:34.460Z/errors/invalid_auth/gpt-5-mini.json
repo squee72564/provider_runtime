@@ -1,0 +1,59 @@
+{
+  "provider": "openai",
+  "scenario": "invalid_auth",
+  "captured_at": "2026-02-27T06:00:34.460Z",
+  "request": {
+    "url": "https://api.openai.com/v1/responses",
+    "method": "POST",
+    "model": "gpt-5-mini",
+    "headers": {
+      "Authorization": "<redacted>",
+      "Content-Type": "application/json"
+    },
+    "body": {
+      "instructions": "You are a helpful assistant.",
+      "input": [
+        {
+          "role": "user",
+          "content": "Ping"
+        }
+      ],
+      "store": false,
+      "max_output_tokens": 64,
+      "model": "gpt-5-mini"
+    }
+  },
+  "response": {
+    "status": 401,
+    "status_text": "Unauthorized",
+    "headers": {
+      "alt-svc": "h3=\":443\"; ma=86400",
+      "cf-cache-status": "DYNAMIC",
+      "cf-ray": "9d4576705a8b7c7f-LAX",
+      "connection": "keep-alive",
+      "content-length": "244",
+      "content-type": "application/json",
+      "date": "Fri, 27 Feb 2026 06:00:34 GMT",
+      "openai-processing-ms": "19",
+      "openai-version": "2020-10-01",
+      "server": "cloudflare",
+      "set-cookie": "<redacted>",
+      "strict-transport-security": "max-age=31536000; includeSubDomains; preload",
+      "www-authenticate": "Bearer realm=\"OpenAI API\"",
+      "x-content-type-options": "nosniff",
+      "x-request-id": "req_df122538f5d44ab49f1bdf9be12459a2"
+    },
+    "body": {
+      "error": {
+        "message": "Incorrect API key provided: invalid-***-key. You can find your API key at https://platform.openai.com/account/api-keys.",
+        "type": "invalid_request_error",
+        "param": null,
+        "code": "invalid_api_key"
+      }
+    }
+  },
+  "normalized_error": {
+    "message": "OpenAI HTTP 401 Unauthorized",
+    "error_class": "OpenAIHttpError"
+  }
+}

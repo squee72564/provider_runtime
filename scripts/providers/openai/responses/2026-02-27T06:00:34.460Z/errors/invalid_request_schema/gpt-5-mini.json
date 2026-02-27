@@ -1,0 +1,94 @@
+{
+  "provider": "openai",
+  "scenario": "invalid_request_schema",
+  "captured_at": "2026-02-27T06:00:34.460Z",
+  "request": {
+    "url": "https://api.openai.com/v1/responses",
+    "method": "POST",
+    "model": "gpt-5-mini",
+    "headers": {
+      "Authorization": "<redacted>",
+      "Content-Type": "application/json"
+    },
+    "body": {
+      "instructions": "You are a helpful assistant.",
+      "input": "this-should-be-an-array",
+      "store": false,
+      "max_output_tokens": 64,
+      "model": "gpt-5-mini"
+    }
+  },
+  "response": {
+    "status": 200,
+    "status_text": "OK",
+    "headers": {},
+    "body": {
+      "id": "resp_0e5ce3d658e599270169a13304d5b88195bc6b2ba6c66c18d1",
+      "object": "response",
+      "created_at": 1772172036,
+      "status": "incomplete",
+      "background": false,
+      "billing": {
+        "payer": "developer"
+      },
+      "completed_at": null,
+      "error": null,
+      "frequency_penalty": 0,
+      "incomplete_details": {
+        "reason": "max_output_tokens"
+      },
+      "instructions": "You are a helpful assistant.",
+      "max_output_tokens": 64,
+      "max_tool_calls": null,
+      "model": "gpt-5-mini-2025-08-07",
+      "output": [
+        {
+          "id": "rs_0e5ce3d658e599270169a13305a2288195bdf3a64d02e5a6be",
+          "type": "reasoning",
+          "summary": []
+        }
+      ],
+      "parallel_tool_calls": true,
+      "presence_penalty": 0,
+      "previous_response_id": null,
+      "prompt_cache_key": null,
+      "prompt_cache_retention": null,
+      "reasoning": {
+        "effort": "medium",
+        "summary": null
+      },
+      "safety_identifier": null,
+      "service_tier": "default",
+      "store": false,
+      "temperature": 1,
+      "text": {
+        "format": {
+          "type": "text"
+        },
+        "verbosity": "medium"
+      },
+      "tool_choice": "auto",
+      "tools": [],
+      "top_logprobs": 0,
+      "top_p": 1,
+      "truncation": "disabled",
+      "usage": {
+        "input_tokens": 22,
+        "input_tokens_details": {
+          "cached_tokens": 0
+        },
+        "output_tokens": 64,
+        "output_tokens_details": {
+          "reasoning_tokens": 64
+        },
+        "total_tokens": 86
+      },
+      "user": null,
+      "metadata": {}
+    }
+  },
+  "normalized_error": {
+    "message": "unexpected success: request did not fail",
+    "error_class": "UnexpectedSuccess"
+  }
+}

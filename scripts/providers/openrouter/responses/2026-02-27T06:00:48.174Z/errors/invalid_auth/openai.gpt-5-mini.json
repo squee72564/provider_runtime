@@ -1,0 +1,54 @@
+{
+  "provider": "openrouter",
+  "scenario": "invalid_auth",
+  "captured_at": "2026-02-27T06:00:48.174Z",
+  "request": {
+    "url": "https://openrouter.ai/api/v1/chat/completions",
+    "method": "POST",
+    "model": "openai/gpt-5-mini",
+    "headers": {
+      "Authorization": "<redacted>",
+      "Content-Type": "application/json"
+    },
+    "body": {
+      "messages": [
+        {
+          "role": "system",
+          "content": "You are a helpful assistant."
+        },
+        {
+          "role": "user",
+          "content": "Ping"
+        }
+      ],
+      "max_tokens": 64,
+      "model": "openai/gpt-5-mini"
+    }
+  },
+  "response": {
+    "status": 401,
+    "status_text": "Unauthorized",
+    "headers": {
+      "access-control-allow-origin": "*",
+      "cf-ray": "9d4576c5eb3908ee-LAX",
+      "connection": "keep-alive",
+      "content-type": "application/json",
+      "date": "Fri, 27 Feb 2026 06:00:48 GMT",
+      "permissions-policy": "payment=(self \"https://checkout.stripe.com\" \"https://connect-js.stripe.com\" \"https://js.stripe.com\" \"https://*.js.stripe.com\" \"https://hooks.stripe.com\")",
+      "referrer-policy": "no-referrer, strict-origin-when-cross-origin",
+      "server": "cloudflare",
+      "transfer-encoding": "chunked",
+      "x-content-type-options": "nosniff"
+    },
+    "body": {
+      "error": {
+        "message": "Missing Authentication header",
+        "code": 401
+      }
+    }
+  },
+  "normalized_error": {
+    "message": "OpenRouter HTTP 401 Unauthorized",
+    "error_class": "OpenRouterHttpError"
+  }
+}

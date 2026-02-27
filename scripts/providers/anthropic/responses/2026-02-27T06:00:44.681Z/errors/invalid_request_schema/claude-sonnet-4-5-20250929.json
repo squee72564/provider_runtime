@@ -1,0 +1,53 @@
+{
+  "provider": "anthropic",
+  "scenario": "invalid_request_schema",
+  "captured_at": "2026-02-27T06:00:44.681Z",
+  "request": {
+    "url": "https://api.anthropic.com/v1/messages",
+    "method": "POST",
+    "model": "claude-sonnet-4-5-20250929",
+    "headers": {
+      "anthropic-version": "2023-06-01",
+      "Content-Type": "application/json",
+      "X-Api-Key": "<redacted>"
+    },
+    "body": {
+      "system": "You are a helpful assistant.",
+      "messages": "this-should-be-an-array",
+      "max_tokens": 64,
+      "model": "claude-sonnet-4-5-20250929"
+    }
+  },
+  "response": {
+    "status": 400,
+    "status_text": "Bad Request",
+    "headers": {
+      "anthropic-organization-id": "10be5498-85f2-41b8-b3d3-34353a601571",
+      "cf-cache-status": "DYNAMIC",
+      "cf-ray": "9d4576b1dc1bf7a5-LAX",
+      "connection": "keep-alive",
+      "content-length": "152",
+      "content-security-policy": "default-src 'none'; frame-ancestors 'none'",
+      "content-type": "application/json",
+      "date": "Fri, 27 Feb 2026 06:00:45 GMT",
+      "request-id": "req_011CYY4ftumkok419bUwgcQ7",
+      "server": "cloudflare",
+      "strict-transport-security": "max-age=31536000; includeSubDomains; preload",
+      "x-envoy-upstream-service-time": "55",
+      "x-robots-tag": "none",
+      "x-should-retry": "false"
+    },
+    "body": {
+      "type": "error",
+      "error": {
+        "type": "invalid_request_error",
+        "message": "messages: Input should be a valid list"
+      },
+      "request_id": "req_011CYY4ftumkok419bUwgcQ7"
+    }
+  },
+  "normalized_error": {
+    "message": "Anthropic HTTP 400 Bad Request",
+    "error_class": "AnthropicRouterHttpError"
+  }
+}

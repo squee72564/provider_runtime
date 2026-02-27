@@ -1,0 +1,64 @@
+{
+  "provider": "anthropic",
+  "scenario": "invalid_model",
+  "captured_at": "2026-02-27T06:00:44.681Z",
+  "request": {
+    "url": "https://api.anthropic.com/v1/messages",
+    "method": "POST",
+    "model": "this-model-does-not-exist",
+    "headers": {
+      "anthropic-version": "2023-06-01",
+      "Content-Type": "application/json",
+      "X-Api-Key": "<redacted>"
+    },
+    "body": {
+      "system": "You are a helpful assistant.",
+      "messages": [
+        {
+          "role": "user",
+          "content": [
+            {
+              "type": "text",
+              "text": "Ping"
+            }
+          ]
+        }
+      ],
+      "max_tokens": 64,
+      "model": "this-model-does-not-exist"
+    }
+  },
+  "response": {
+    "status": 404,
+    "status_text": "Not Found",
+    "headers": {
+      "anthropic-organization-id": "10be5498-85f2-41b8-b3d3-34353a601571",
+      "cf-cache-status": "DYNAMIC",
+      "cf-ray": "9d4576b0d9f3f7a5-LAX",
+      "connection": "keep-alive",
+      "content-encoding": "gzip",
+      "content-security-policy": "default-src 'none'; frame-ancestors 'none'",
+      "content-type": "application/json",
+      "date": "Fri, 27 Feb 2026 06:00:45 GMT",
+      "request-id": "req_011CYY4ftCMjv6Q96YKCRVba",
+      "server": "cloudflare",
+      "strict-transport-security": "max-age=31536000; includeSubDomains; preload",
+      "transfer-encoding": "chunked",
+      "x-envoy-upstream-service-time": "80",
+      "x-robots-tag": "none",
+      "x-should-retry": "false"
+    },
+    "body": {
+      "type": "error",
+      "error": {
+        "type": "not_found_error",
+        "message": "model: this-model-does-not-exist"
+      },
+      "request_id": "req_011CYY4ftCMjv6Q96YKCRVba"
+    }
+  },
+  "normalized_error": {
+    "message": "Anthropic HTTP 404 Not Found",
+    "error_class": "AnthropicRouterHttpError"
+  }
+}

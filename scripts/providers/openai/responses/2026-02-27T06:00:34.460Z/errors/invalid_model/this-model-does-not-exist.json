@@ -1,0 +1,60 @@
+{
+  "provider": "openai",
+  "scenario": "invalid_model",
+  "captured_at": "2026-02-27T06:00:34.460Z",
+  "request": {
+    "url": "https://api.openai.com/v1/responses",
+    "method": "POST",
+    "model": "this-model-does-not-exist",
+    "headers": {
+      "Authorization": "<redacted>",
+      "Content-Type": "application/json"
+    },
+    "body": {
+      "instructions": "You are a helpful assistant.",
+      "input": [
+        {
+          "role": "user",
+          "content": "Ping"
+        }
+      ],
+      "store": false,
+      "max_output_tokens": 64,
+      "model": "this-model-does-not-exist"
+    }
+  },
+  "response": {
+    "status": 400,
+    "status_text": "Bad Request",
+    "headers": {
+      "alt-svc": "h3=\":443\"; ma=86400",
+      "cf-cache-status": "DYNAMIC",
+      "cf-ray": "9d457670fac77c7f-LAX",
+      "connection": "keep-alive",
+      "content-length": "191",
+      "content-type": "application/json",
+      "date": "Fri, 27 Feb 2026 06:00:36 GMT",
+      "openai-organization": "syncpad",
+      "openai-processing-ms": "1548",
+      "openai-project": "proj_CH8MiiN5urddIzeIfKAaaG3k",
+      "openai-version": "2020-10-01",
+      "server": "cloudflare",
+      "set-cookie": "<redacted>",
+      "strict-transport-security": "max-age=31536000; includeSubDomains; preload",
+      "x-content-type-options": "nosniff",
+      "x-request-id": "req_8c7c3d339f514503af6febea568098d7"
+    },
+    "body": {
+      "error": {
+        "message": "The requested model 'this-model-does-not-exist' does not exist.",
+        "type": "invalid_request_error",
+        "param": "model",
+        "code": "model_not_found"
+      }
+    }
+  },
+  "normalized_error": {
+    "message": "OpenAI HTTP 400 Bad Request",
+    "error_class": "OpenAIHttpError"
+  }
+}
