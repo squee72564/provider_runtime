@@ -518,7 +518,12 @@ fn map_messages(
                         ));
                     }
 
-                    message_parts.push(json!({ "type": "input_text", "text": text }));
+                    let part_type = if message.role == MessageRole::Assistant {
+                        "output_text"
+                    } else {
+                        "input_text"
+                    };
+                    message_parts.push(json!({ "type": part_type, "text": text }));
                 }
                 ContentPart::ToolCall { tool_call } => {
                     if message.role != MessageRole::Assistant {

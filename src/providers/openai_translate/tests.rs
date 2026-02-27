@@ -537,6 +537,46 @@ fn test_encode_tool_choice_specific_requires_declared_tool() {
 }
 
 #[test]
+fn test_encode_assistant_text_history_uses_output_text() {
+    let mut req = base_request();
+    req.messages = vec![
+        Message {
+            role: MessageRole::User,
+            content: vec![ContentPart::Text {
+                text: "hello".to_string(),
+            }],
+        },
+        Message {
+            role: MessageRole::Assistant,
+            content: vec![ContentPart::Text {
+                text: "hi there".to_string(),
+            }],
+        },
+        Message {
+            role: MessageRole::User,
+            content: vec![ContentPart::Text {
+                text: "what did I just say?".to_string(),
+            }],
+        },
+    ];
+
+    let encoded = encode_openai_request(&req).expect("encode should succeed");
+
+    assert_eq!(
+        encoded.body.pointer("/input/0/content/0/type"),
+        Some(&json!("input_text"))
+    );
+    assert_eq!(
+        encoded.body.pointer("/input/1/content/0/type"),
+        Some(&json!("output_text"))
+    );
+    assert_eq!(
+        encoded.body.pointer("/input/2/content/0/type"),
+        Some(&json!("input_text"))
+    );
+}
+
+#[test]
 fn test_parse_openai_error_envelope_and_format() {
     let envelope = parse_openai_error_envelope(
         r#"{
