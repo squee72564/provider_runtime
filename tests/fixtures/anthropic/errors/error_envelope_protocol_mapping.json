@@ -1,0 +1,8 @@
+{
+  "type": "error",
+  "error": {
+    "type": "invalid_request_error",
+    "message": "Invalid API key"
+  },
+  "request_id": "req_err_1"
+}

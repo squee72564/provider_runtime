@@ -1,16 +1,23 @@
 {
+  "id": "resp_finish_other_1",
+  "object": "response",
   "status": "incomplete",
+  "model": "gpt-5-mini-2025-08-07",
   "incomplete_details": {
     "reason": "other_reason"
   },
-  "model": "gpt-5-mini",
   "output": [
     {
       "type": "message",
-      "role": "assistant",
+      "status": "incomplete",
       "content": [
-        { "type": "output_text", "text": "other" }
-      ]
+        {
+          "type": "output_text",
+          "text": "other",
+          "annotations": []
+        }
+      ],
+      "role": "assistant"
     }
   ],
   "usage": {

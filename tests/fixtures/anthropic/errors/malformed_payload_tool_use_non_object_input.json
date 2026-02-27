@@ -1,0 +1,19 @@
+{
+  "model": "claude-sonnet-4-5-20250929",
+  "id": "msg_bad_tool_input",
+  "type": "message",
+  "role": "assistant",
+  "content": [
+    {
+      "type": "tool_use",
+      "id": "bad_call",
+      "name": "calculator",
+      "input": "not-an-object"
+    }
+  ],
+  "stop_reason": "tool_use",
+  "usage": {
+    "input_tokens": 1,
+    "output_tokens": 1
+  }
+}

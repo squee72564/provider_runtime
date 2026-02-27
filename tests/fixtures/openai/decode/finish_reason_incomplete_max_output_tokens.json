@@ -1,16 +1,23 @@
 {
+  "id": "resp_finish_length_1",
+  "object": "response",
   "status": "incomplete",
+  "model": "gpt-5-mini-2025-08-07",
   "incomplete_details": {
     "reason": "max_output_tokens"
   },
-  "model": "gpt-5-mini",
   "output": [
     {
       "type": "message",
-      "role": "assistant",
+      "status": "incomplete",
       "content": [
-        { "type": "output_text", "text": "truncated" }
-      ]
+        {
+          "type": "output_text",
+          "text": "truncated",
+          "annotations": []
+        }
+      ],
+      "role": "assistant"
     }
   ],
   "usage": {

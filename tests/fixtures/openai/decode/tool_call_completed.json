@@ -1,17 +1,28 @@
 {
+  "id": "resp_tool_1",
+  "object": "response",
   "status": "completed",
-  "model": "gpt-5-mini",
+  "model": "gpt-5-mini-2025-08-07",
   "output": [
     {
+      "type": "reasoning",
+      "summary": []
+    },
+    {
       "type": "function_call",
-      "call_id": "call_weather_1",
-      "name": "lookup_weather",
-      "arguments": "{\"city\":\"SF\"}"
+      "status": "completed",
+      "arguments": "{\"city\":\"San Francisco\"}",
+      "call_id": "call_CIN8rkKT0YIZO29uvAG5eTbc",
+      "name": "get_weather"
     }
   ],
+  "incomplete_details": null,
   "usage": {
-    "input_tokens": 8,
-    "output_tokens": 4,
-    "total_tokens": 12
+    "input_tokens": 60,
+    "output_tokens": 73,
+    "total_tokens": 133,
+    "input_tokens_details": {
+      "cached_tokens": 0
+    }
   }
 }

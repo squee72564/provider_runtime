@@ -1,19 +1,26 @@
 {
+  "id": "resp_usage_full_1",
+  "object": "response",
   "status": "completed",
-  "model": "gpt-5-mini",
+  "model": "gpt-5-mini-2025-08-07",
   "output": [
     {
       "type": "message",
-      "role": "assistant",
+      "status": "completed",
       "content": [
-        { "type": "output_text", "text": "usage full" }
-      ]
+        {
+          "type": "output_text",
+          "text": "usage full",
+          "annotations": []
+        }
+      ],
+      "role": "assistant"
     }
   ],
   "usage": {
-    "input_tokens": 11,
-    "output_tokens": 9,
-    "total_tokens": 20,
+    "input_tokens": 110,
+    "output_tokens": 97,
+    "total_tokens": 207,
     "input_tokens_details": {
       "cached_tokens": 3
     }

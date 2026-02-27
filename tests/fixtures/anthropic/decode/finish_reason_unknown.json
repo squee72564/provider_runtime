@@ -1,0 +1,22 @@
+{
+  "model": "claude-sonnet-4-5-20250929",
+  "id": "msg_finish_unknown",
+  "type": "message",
+  "role": "assistant",
+  "content": [
+    {
+      "type": "text",
+      "text": "other"
+    },
+    {
+      "type": "server_tool_use",
+      "name": "web_search"
+    }
+  ],
+  "stop_reason": "future_reason",
+  "stop_sequence": null,
+  "usage": {
+    "input_tokens": 2,
+    "output_tokens": 2
+  }
+}

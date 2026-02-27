@@ -1,0 +1,22 @@
+{
+  "model": "claude-sonnet-4-5-20250929",
+  "id": "msg_finish_tool",
+  "type": "message",
+  "role": "assistant",
+  "content": [
+    {
+      "type": "tool_use",
+      "id": "call_weather_1",
+      "name": "lookup_weather",
+      "input": {
+        "city": "SF"
+      }
+    }
+  ],
+  "stop_reason": "tool_use",
+  "stop_sequence": null,
+  "usage": {
+    "input_tokens": 8,
+    "output_tokens": 4
+  }
+}

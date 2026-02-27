@@ -1,0 +1,27 @@
+{
+  "model": "claude-sonnet-4-5-20250929",
+  "id": "msg_tool_1",
+  "type": "message",
+  "role": "assistant",
+  "content": [
+    {
+      "type": "tool_use",
+      "id": "toolu_018riaCe1uSpr2Mbo4Jib6mq",
+      "name": "calculator",
+      "input": {
+        "expression": "2 * 2 + sqrt(2)"
+      },
+      "caller": {
+        "type": "direct"
+      }
+    }
+  ],
+  "stop_reason": "tool_use",
+  "stop_sequence": null,
+  "usage": {
+    "input_tokens": 591,
+    "cache_creation_input_tokens": 0,
+    "cache_read_input_tokens": 0,
+    "output_tokens": 60
+  }
+}

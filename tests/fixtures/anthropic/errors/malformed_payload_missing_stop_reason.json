@@ -1,0 +1,16 @@
+{
+  "model": "claude-sonnet-4-5-20250929",
+  "id": "msg_missing_stop_reason",
+  "type": "message",
+  "role": "assistant",
+  "content": [
+    {
+      "type": "text",
+      "text": "missing stop_reason"
+    }
+  ],
+  "usage": {
+    "input_tokens": 1,
+    "output_tokens": 1
+  }
+}

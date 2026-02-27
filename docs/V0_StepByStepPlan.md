@@ -470,7 +470,7 @@ Stage Documentation: `docs/Stage21.md`
 Depends On:
 - Stage 20
 
-## [ ] Stage 22 - Anthropic Contract Fixtures
+## [x] Stage 22 - Anthropic Contract Fixtures
 Goal:
 Add canonical↔Anthropic golden fixture contract tests.
 

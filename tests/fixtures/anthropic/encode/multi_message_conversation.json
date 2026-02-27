@@ -1,0 +1,25 @@
+{
+  "model": {
+    "provider_hint": { "type": "anthropic" },
+    "model_id": "claude-sonnet-4-5-20250929"
+  },
+  "messages": [
+    {
+      "role": { "type": "system" },
+      "content": [
+        { "type": "text", "text": "You are concise." }
+      ]
+    },
+    {
+      "role": { "type": "user" },
+      "content": [
+        { "type": "text", "text": "Summarize this in one line." }
+      ]
+    }
+  ],
+  "tools": [],
+  "tool_choice": { "type": "auto" },
+  "response_format": { "type": "text" },
+  "stop": [],
+  "metadata": {}
+}

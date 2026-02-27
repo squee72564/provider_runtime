@@ -13,10 +13,10 @@ use provider_runtime::core::types::{
     AdapterContext, ContentPart, DiscoveryOptions, FinishReason, ProviderId, ProviderRequest,
     ProviderResponse,
 };
-use provider_runtime::providers::openai::OpenAiAdapter;
+use provider_runtime::providers::anthropic::AnthropicAdapter;
 use serde_json::{Value, json};
 
-const FIXTURE_ROOT: &str = "tests/fixtures/openai";
+const FIXTURE_ROOT: &str = "tests/fixtures/anthropic";
 
 const ENCODE_FIXTURES: &[&str] = &[
     "encode/minimal_text_request.json",
@@ -33,7 +33,7 @@ const ENCODE_FIXTURES: &[&str] = &[
     "encode/controls_present_top_p_only.json",
     "encode/controls_present_max_output_tokens.json",
     "encode/controls_present_metadata.json",
-    "encode/controls_present_stop_unsupported.json",
+    "encode/controls_present_stop_present.json",
 ];
 
 const DECODE_FIXTURES: &[&str] = &[
@@ -43,18 +43,18 @@ const DECODE_FIXTURES: &[&str] = &[
     "decode/usage_full.json",
     "decode/usage_partial.json",
     "decode/usage_absent.json",
-    "decode/finish_reason_completed.json",
-    "decode/finish_reason_incomplete_max_output_tokens.json",
-    "decode/finish_reason_incomplete_content_filter.json",
-    "decode/finish_reason_incomplete_unknown.json",
+    "decode/finish_reason_end_turn.json",
+    "decode/finish_reason_max_tokens.json",
+    "decode/finish_reason_tool_use.json",
+    "decode/finish_reason_unknown.json",
 ];
 
 const ERROR_FIXTURES: &[&str] = &[
     "errors/error_envelope_protocol_mapping.json",
-    "errors/unsupported_intent_stop_sequence.json",
+    "errors/unsupported_intent_json_prefill.json",
     "errors/malformed_payload_non_object.json",
-    "errors/malformed_payload_missing_status.json",
-    "errors/malformed_payload_invalid_output_shape.json",
+    "errors/malformed_payload_missing_stop_reason.json",
+    "errors/malformed_payload_tool_use_non_object_input.json",
 ];
 
 const DETERMINISM_FIXTURES: &[&str] = &[
@@ -203,21 +203,18 @@ fn request_fixture(path: &str) -> ProviderRequest {
 
 fn default_success_payload() -> &'static str {
     r#"{
-        "status":"completed",
-        "model":"gpt-5-mini",
-        "output":[
-            {
-                "type":"message",
-                "role":"assistant",
-                "content":[{"type":"output_text","text":"ok"}]
-            }
-        ],
-        "usage":{"input_tokens":1,"output_tokens":1,"total_tokens":2}
+        "model":"claude-sonnet-4-5-20250929",
+        "id":"msg_success_1",
+        "type":"message",
+        "role":"assistant",
+        "content":[{"type":"text","text":"ok"}],
+        "stop_reason":"end_turn",
+        "usage":{"input_tokens":1,"cache_creation_input_tokens":0,"cache_read_input_tokens":0,"output_tokens":1}
     }"#
 }
 
-fn openai_adapter(base_url: String) -> OpenAiAdapter {
-    OpenAiAdapter::with_base_url(Some("test-key".to_string()), base_url).expect("create adapter")
+fn anthropic_adapter(base_url: String) -> AnthropicAdapter {
+    AnthropicAdapter::with_base_url(Some("test-key".to_string()), base_url).expect("create adapter")
 }
 
 fn assert_warning_codes(response: &ProviderResponse, expected_codes: &[&str]) {
@@ -302,81 +299,86 @@ fn assert_error_fingerprint(err: &ProviderError) -> String {
 }
 
 #[tokio::test]
-async fn test_openai_encode_fixture_contract() {
+async fn test_anthropic_encode_fixture_contract() {
     let request_cases = vec![
         (
             "encode/minimal_text_request.json",
             json!({
-                "tool_choice": "auto",
-                "text_type": "text",
+                "tool_choice_type": "auto",
                 "input_len": 1,
-                "first_role": "user"
+                "first_role": "user",
+                "max_tokens": 1024
             }),
         ),
         (
             "encode/multi_message_conversation.json",
             json!({
-                "input_len": 2,
-                "first_role": "system",
-                "second_role": "user"
+                "input_len": 1,
+                "first_role": "user",
+                "system_len": 1,
+                "max_tokens": 1024
             }),
         ),
         (
             "encode/tools_choice_none.json",
-            json!({"tool_choice": "none", "tool_len": 1}),
+            json!({"tool_choice_type": "none", "tool_len": 1, "max_tokens": 1024}),
         ),
         (
             "encode/tools_choice_auto.json",
-            json!({"tool_choice": "auto", "tool_len": 1}),
+            json!({"tool_choice_type": "auto", "tool_len": 1, "max_tokens": 1024}),
         ),
         (
             "encode/tools_choice_required.json",
-            json!({"tool_choice": "required", "tool_len": 1}),
+            json!({"tool_choice_type": "any", "tool_len": 1, "max_tokens": 1024}),
         ),
         (
             "encode/tools_choice_specific.json",
-            json!({"tool_choice_type": "function", "tool_choice_name": "lookup_weather", "tool_len": 1}),
+            json!({"tool_choice_type": "tool", "tool_choice_name": "calculator", "tool_len": 1, "max_tokens": 1024}),
         ),
         (
             "encode/response_format_text.json",
-            json!({"text_type": "text"}),
+            json!({"output_config_absent": true, "max_tokens": 1024}),
         ),
         (
             "encode/response_format_json_object.json",
-            json!({"text_type": "json_object"}),
+            json!({"output_format_type": "json_schema", "output_schema_type": "object", "max_tokens": 1024}),
         ),
         (
             "encode/response_format_json_schema.json",
-            json!({"text_type": "json_schema", "schema_name": "weather_schema"}),
+            json!({"output_format_type": "json_schema", "output_schema_city_type": "string", "max_tokens": 1024}),
         ),
         (
             "encode/controls_absent.json",
-            json!({"temperature_absent": true, "top_p_absent": true, "max_output_tokens_absent": true, "metadata_absent": true}),
+            json!({"temperature_absent": true, "top_p_absent": true, "metadata_absent": true, "max_tokens": 1024}),
         ),
         (
             "encode/controls_present_temperature_only.json",
-            json!({"temperature": 0.2}),
+            json!({"temperature": 0.2, "max_tokens": 1024}),
         ),
         (
             "encode/controls_present_top_p_only.json",
-            json!({"top_p": 0.7}),
+            json!({"top_p": 0.7, "max_tokens": 1024}),
         ),
         (
             "encode/controls_present_max_output_tokens.json",
-            json!({"max_output_tokens": 64}),
+            json!({"max_tokens": 64}),
         ),
         (
             "encode/controls_present_metadata.json",
-            json!({"metadata_trace_id": "fixture-1", "metadata_tenant": "acme"}),
+            json!({"metadata_user_id": "user-123", "metadata_trace_absent": true, "max_tokens": 1024}),
+        ),
+        (
+            "encode/controls_present_stop_present.json",
+            json!({"stop_0": "DONE", "max_tokens": 1024}),
         ),
     ];
 
     for (fixture, expected) in request_cases {
         let mut server = MockServer::start(vec![MockResponse::json(default_success_payload())]);
-        let adapter = openai_adapter(server.url());
+        let adapter = anthropic_adapter(server.url());
         let request = request_fixture(fixture);
 
-        adapter
+        let response = adapter
             .run(&request, &AdapterContext::default())
             .await
             .expect("run should succeed");
@@ -386,16 +388,11 @@ async fn test_openai_encode_fixture_contract() {
         assert_eq!(bodies.len(), 1, "fixture {fixture}");
         let body = &bodies[0];
 
-        assert_eq!(body.pointer("/model"), Some(&json!("gpt-5-mini")));
-        assert_eq!(body.pointer("/store"), Some(&json!(false)));
+        assert_eq!(
+            body.pointer("/model"),
+            Some(&json!("claude-sonnet-4-5-20250929"))
+        );
 
-        if let Some(choice) = expected.get("tool_choice").and_then(Value::as_str) {
-            assert_eq!(
-                body.pointer("/tool_choice"),
-                Some(&json!(choice)),
-                "fixture {fixture}"
-            );
-        }
         if let Some(choice_type) = expected.get("tool_choice_type").and_then(Value::as_str) {
             assert_eq!(
                 body.pointer("/tool_choice/type"),
@@ -409,6 +406,11 @@ async fn test_openai_encode_fixture_contract() {
                 Some(&json!(choice_name)),
                 "fixture {fixture}"
             );
+            assert_eq!(
+                body.pointer("/tool_choice/disable_parallel_tool_use"),
+                Some(&json!(true)),
+                "fixture {fixture}"
+            );
         }
         if let Some(tool_len) = expected.get("tool_len").and_then(Value::as_u64) {
             let tools = body
@@ -417,40 +419,60 @@ async fn test_openai_encode_fixture_contract() {
                 .expect("tools should be array");
             assert_eq!(tools.len() as u64, tool_len, "fixture {fixture}");
         }
-        if let Some(text_type) = expected.get("text_type").and_then(Value::as_str) {
+        if let Some(output_format_type) = expected.get("output_format_type").and_then(Value::as_str)
+        {
             assert_eq!(
-                body.pointer("/text/format/type"),
-                Some(&json!(text_type)),
+                body.pointer("/output_config/format/type"),
+                Some(&json!(output_format_type)),
                 "fixture {fixture}"
             );
         }
-        if let Some(schema_name) = expected.get("schema_name").and_then(Value::as_str) {
+        if let Some(output_schema_type) = expected.get("output_schema_type").and_then(Value::as_str)
+        {
             assert_eq!(
-                body.pointer("/text/format/name"),
-                Some(&json!(schema_name)),
+                body.pointer("/output_config/format/schema/type"),
+                Some(&json!(output_schema_type)),
+                "fixture {fixture}"
+            );
+        }
+        if let Some(output_schema_city_type) = expected
+            .get("output_schema_city_type")
+            .and_then(Value::as_str)
+        {
+            assert_eq!(
+                body.pointer("/output_config/format/schema/properties/city/type"),
+                Some(&json!(output_schema_city_type)),
                 "fixture {fixture}"
             );
         }
         if let Some(input_len) = expected.get("input_len").and_then(Value::as_u64) {
             let input = body
-                .get("input")
+                .get("messages")
                 .and_then(Value::as_array)
-                .expect("input should be array");
+                .expect("messages should be array");
             assert_eq!(input.len() as u64, input_len, "fixture {fixture}");
         }
         if let Some(first_role) = expected.get("first_role").and_then(Value::as_str) {
             assert_eq!(
-                body.pointer("/input/0/role"),
+                body.pointer("/messages/0/role"),
                 Some(&json!(first_role)),
                 "fixture {fixture}"
             );
         }
-        if let Some(second_role) = expected.get("second_role").and_then(Value::as_str) {
-            assert_eq!(
-                body.pointer("/input/1/role"),
-                Some(&json!(second_role)),
-                "fixture {fixture}"
-            );
+        if let Some(system_len) = expected.get("system_len").and_then(Value::as_u64) {
+            let system = body
+                .get("system")
+                .and_then(Value::as_array)
+                .expect("system should be array");
+            assert_eq!(system.len() as u64, system_len, "fixture {fixture}");
+        }
+
+        if expected
+            .get("output_config_absent")
+            .and_then(Value::as_bool)
+            .unwrap_or(false)
+        {
+            assert!(body.get("output_config").is_none(), "fixture {fixture}");
         }
         if expected
             .get("temperature_absent")
@@ -465,13 +487,6 @@ async fn test_openai_encode_fixture_contract() {
             .unwrap_or(false)
         {
             assert!(body.get("top_p").is_none(), "fixture {fixture}");
-        }
-        if expected
-            .get("max_output_tokens_absent")
-            .and_then(Value::as_bool)
-            .unwrap_or(false)
-        {
-            assert!(body.get("max_output_tokens").is_none(), "fixture {fixture}");
         }
         if expected
             .get("metadata_absent")
@@ -500,57 +515,56 @@ async fn test_openai_encode_fixture_contract() {
                 "fixture {fixture}: expected top_p {top_p}, got {actual}"
             );
         }
-        if let Some(max_output_tokens) = expected.get("max_output_tokens").and_then(Value::as_u64) {
+        if let Some(max_tokens) = expected.get("max_tokens").and_then(Value::as_u64) {
             assert_eq!(
-                body.pointer("/max_output_tokens"),
-                Some(&json!(max_output_tokens)),
+                body.pointer("/max_tokens"),
+                Some(&json!(max_tokens)),
                 "fixture {fixture}"
             );
         }
-        if let Some(trace_id) = expected.get("metadata_trace_id").and_then(Value::as_str) {
+        if let Some(user_id) = expected.get("metadata_user_id").and_then(Value::as_str) {
             assert_eq!(
-                body.pointer("/metadata/trace_id"),
-                Some(&json!(trace_id)),
+                body.pointer("/metadata/user_id"),
+                Some(&json!(user_id)),
                 "fixture {fixture}"
             );
         }
-        if let Some(tenant) = expected.get("metadata_tenant").and_then(Value::as_str) {
-            assert_eq!(
-                body.pointer("/metadata/tenant"),
-                Some(&json!(tenant)),
+        if expected
+            .get("metadata_trace_absent")
+            .and_then(Value::as_bool)
+            .unwrap_or(false)
+        {
+            assert!(
+                body.pointer("/metadata/trace_id").is_none(),
                 "fixture {fixture}"
             );
         }
-    }
+        if let Some(stop_0) = expected.get("stop_0").and_then(Value::as_str) {
+            assert_eq!(
+                body.pointer("/stop_sequences/0"),
+                Some(&json!(stop_0)),
+                "fixture {fixture}"
+            );
+        }
 
-    let stop_request = request_fixture("encode/controls_present_stop_unsupported.json");
-    let adapter = OpenAiAdapter::with_base_url(Some("test-key".to_string()), "http://127.0.0.1:1")
-        .expect("create adapter");
-    let stop_err = adapter
-        .run(&stop_request, &AdapterContext::default())
-        .await
-        .expect_err("stop should be unsupported");
-
-    match stop_err {
-        ProviderError::Protocol {
-            provider, message, ..
-        } => {
-            assert_eq!(provider, ProviderId::Openai);
-            assert!(message.contains("stop sequences are unsupported"));
+        if fixture != "encode/controls_present_max_output_tokens.json" {
+            assert_warning_codes(&response, &["default_max_tokens_applied"]);
         }
-        other => panic!("expected protocol error, got {other:?}"),
+        if fixture == "encode/controls_present_metadata.json" {
+            assert_warning_codes(&response, &["dropped_unsupported_metadata_keys"]);
+        }
     }
 }
 
 #[tokio::test]
-async fn test_openai_decode_fixture_contract() {
+async fn test_anthropic_decode_fixture_contract() {
     let decode_cases = vec![
         (
             "decode/text_only_completed.json",
             "encode/minimal_text_request.json",
             FinishReason::Stop,
-            Some((Some(50), Some(222), Some(272), Some(0))),
-            Some("Doing great, ready to help."),
+            Some((Some(591), Some(10), Some(601), Some(0))),
+            Some("I'm ready to help you!"),
             None,
             None,
         ),
@@ -558,16 +572,16 @@ async fn test_openai_decode_fixture_contract() {
             "decode/tool_call_completed.json",
             "encode/tools_choice_specific.json",
             FinishReason::ToolCalls,
-            Some((Some(60), Some(73), Some(133), Some(0))),
+            Some((Some(591), Some(60), Some(651), Some(0))),
             None,
-            Some(("call_CIN8rkKT0YIZO29uvAG5eTbc", "get_weather")),
+            Some(("toolu_018riaCe1uSpr2Mbo4Jib6mq", "calculator")),
             None,
         ),
         (
             "decode/structured_output_completed.json",
             "encode/response_format_json_object.json",
             FinishReason::Stop,
-            Some((Some(110), Some(97), Some(207), Some(0))),
+            Some((Some(601), Some(18), Some(619), Some(0))),
             Some("{\"ok\":true,\"city\":\"SF\"}"),
             None,
             Some(json!({"ok": true, "city": "SF"})),
@@ -576,8 +590,8 @@ async fn test_openai_decode_fixture_contract() {
             "decode/usage_full.json",
             "encode/minimal_text_request.json",
             FinishReason::Stop,
-            Some((Some(110), Some(97), Some(207), Some(3))),
-            Some("usage full"),
+            Some((Some(694), Some(76), Some(770), Some(3))),
+            Some("The answer is 5.414213562"),
             None,
             None,
         ),
@@ -585,7 +599,7 @@ async fn test_openai_decode_fixture_contract() {
             "decode/usage_partial.json",
             "encode/minimal_text_request.json",
             FinishReason::Stop,
-            Some((Some(110), None, None, None)),
+            Some((Some(11), None, None, None)),
             Some("usage partial"),
             None,
             None,
@@ -600,7 +614,7 @@ async fn test_openai_decode_fixture_contract() {
             None,
         ),
         (
-            "decode/finish_reason_completed.json",
+            "decode/finish_reason_end_turn.json",
             "encode/minimal_text_request.json",
             FinishReason::Stop,
             Some((Some(1), Some(1), Some(2), None)),
@@ -609,7 +623,7 @@ async fn test_openai_decode_fixture_contract() {
             None,
         ),
         (
-            "decode/finish_reason_incomplete_max_output_tokens.json",
+            "decode/finish_reason_max_tokens.json",
             "encode/minimal_text_request.json",
             FinishReason::Length,
             Some((Some(3), Some(3), Some(6), None)),
@@ -618,16 +632,16 @@ async fn test_openai_decode_fixture_contract() {
             None,
         ),
         (
-            "decode/finish_reason_incomplete_content_filter.json",
+            "decode/finish_reason_tool_use.json",
             "encode/minimal_text_request.json",
-            FinishReason::ContentFilter,
-            Some((None, None, None, None)),
-            Some("blocked"),
+            FinishReason::ToolCalls,
+            Some((Some(8), Some(4), Some(12), None)),
             None,
+            Some(("call_weather_1", "lookup_weather")),
             None,
         ),
         (
-            "decode/finish_reason_incomplete_unknown.json",
+            "decode/finish_reason_unknown.json",
             "encode/minimal_text_request.json",
             FinishReason::Other,
             Some((Some(2), Some(2), Some(4), None)),
@@ -649,7 +663,7 @@ async fn test_openai_decode_fixture_contract() {
     {
         let payload = load_fixture_str(decode_fixture);
         let mut server = MockServer::start(vec![MockResponse::json(&payload)]);
-        let adapter = openai_adapter(server.url());
+        let adapter = anthropic_adapter(server.url());
         let request = request_fixture(request_fixture_path);
 
         let response = adapter
@@ -657,6 +671,7 @@ async fn test_openai_decode_fixture_contract() {
             .await
             .expect("run should succeed");
 
+        assert_eq!(response.provider, ProviderId::Anthropic);
         assert_finish_reason(&response, finish_reason);
         if let Some((input, output, total, cached)) = usage {
             assert_usage_fields(&response, input, output, total, cached);
@@ -673,11 +688,21 @@ async fn test_openai_decode_fixture_contract() {
         if let Some(expected_structured) = structured {
             assert_structured_output(&response, expected_structured);
         }
-        if decode_fixture.ends_with("finish_reason_incomplete_max_output_tokens.json") {
-            assert_warning_codes(&response, &["openai_incomplete_max_output_tokens"]);
+
+        if decode_fixture.ends_with("usage_partial.json") {
+            assert_warning_codes(&response, &["usage_partial"]);
         }
-        if decode_fixture.ends_with("finish_reason_incomplete_content_filter.json") {
-            assert_warning_codes(&response, &["openai_incomplete_content_filter"]);
+        if decode_fixture.ends_with("usage_absent.json") {
+            assert_warning_codes(&response, &["usage_missing"]);
+        }
+        if decode_fixture.ends_with("finish_reason_unknown.json") {
+            assert_warning_codes(
+                &response,
+                &[
+                    "unknown_stop_reason",
+                    "unknown_content_block_mapped_to_text",
+                ],
+            );
         }
 
         server.shutdown();
@@ -685,7 +710,7 @@ async fn test_openai_decode_fixture_contract() {
 }
 
 #[test]
-fn test_openai_fixture_category_matrix_coverage() {
+fn test_anthropic_fixture_category_matrix_coverage() {
     let canonical_request_categories: &[(&str, &[&str])] = &[
         (
             "minimal text request",
@@ -720,7 +745,7 @@ fn test_openai_fixture_category_matrix_coverage() {
                 "encode/controls_present_top_p_only.json",
                 "encode/controls_present_max_output_tokens.json",
                 "encode/controls_present_metadata.json",
-                "encode/controls_present_stop_unsupported.json",
+                "encode/controls_present_stop_present.json",
             ],
         ),
     ];
@@ -746,10 +771,10 @@ fn test_openai_fixture_category_matrix_coverage() {
         (
             "finish reason normalization",
             &[
-                "decode/finish_reason_completed.json",
-                "decode/finish_reason_incomplete_max_output_tokens.json",
-                "decode/finish_reason_incomplete_content_filter.json",
-                "decode/finish_reason_incomplete_unknown.json",
+                "decode/finish_reason_end_turn.json",
+                "decode/finish_reason_max_tokens.json",
+                "decode/finish_reason_tool_use.json",
+                "decode/finish_reason_unknown.json",
             ],
         ),
     ];
@@ -761,17 +786,14 @@ fn test_openai_fixture_category_matrix_coverage() {
         ),
         (
             "unsupported canonical intent",
-            &[
-                "errors/unsupported_intent_stop_sequence.json",
-                "encode/controls_present_stop_unsupported.json",
-            ],
+            &["errors/unsupported_intent_json_prefill.json"],
         ),
         (
             "malformed payload decode failures",
             &[
                 "errors/malformed_payload_non_object.json",
-                "errors/malformed_payload_missing_status.json",
-                "errors/malformed_payload_invalid_output_shape.json",
+                "errors/malformed_payload_missing_stop_reason.json",
+                "errors/malformed_payload_tool_use_non_object_input.json",
             ],
         ),
     ];
@@ -788,8 +810,8 @@ fn test_openai_fixture_category_matrix_coverage() {
         (
             "stable warning/error behavior",
             &[
-                "errors/malformed_payload_missing_status.json",
-                "errors/unsupported_intent_stop_sequence.json",
+                "errors/malformed_payload_missing_stop_reason.json",
+                "errors/unsupported_intent_json_prefill.json",
             ],
         ),
     ];
@@ -827,14 +849,14 @@ fn test_openai_fixture_category_matrix_coverage() {
 }
 
 #[tokio::test]
-async fn test_openai_contract_non_2xx_auth_maps_to_credentials_rejected() {
+async fn test_anthropic_contract_non_2xx_auth_maps_to_credentials_rejected() {
     let error_body = load_fixture_str("errors/error_envelope_protocol_mapping.json");
     let mut server = MockServer::start(vec![MockResponse::with_status(
         401,
-        vec![("x-request-id".to_string(), "req-contract-auth".to_string())],
+        vec![("request-id".to_string(), "req-contract-auth".to_string())],
         &error_body,
     )]);
-    let adapter = openai_adapter(server.url());
+    let adapter = anthropic_adapter(server.url());
 
     let request = request_fixture("encode/minimal_text_request.json");
     let err = adapter
@@ -848,10 +870,10 @@ async fn test_openai_contract_non_2xx_auth_maps_to_credentials_rejected() {
             request_id,
             message,
         } => {
-            assert_eq!(provider, ProviderId::Openai);
+            assert_eq!(provider, ProviderId::Anthropic);
             assert_eq!(request_id, Some("req-contract-auth".to_string()));
-            assert!(message.contains("openai error"));
-            assert!(message.contains("invalid_api_key"));
+            assert!(message.contains("anthropic error"));
+            assert!(message.contains("invalid_request_error"));
         }
         other => panic!("expected credentials rejected error, got {other:?}"),
     }
@@ -860,15 +882,15 @@ async fn test_openai_contract_non_2xx_auth_maps_to_credentials_rejected() {
 }
 
 #[tokio::test]
-async fn test_openai_contract_non_2xx_non_auth_maps_to_status() {
+async fn test_anthropic_contract_non_2xx_non_auth_maps_to_status() {
     let error_body = load_fixture_str("errors/error_envelope_protocol_mapping.json");
     let response = MockResponse::with_status(
         429,
-        vec![("x-request-id".to_string(), "req-contract-rate".to_string())],
+        vec![("request-id".to_string(), "req-contract-rate".to_string())],
         &error_body,
     );
     let mut server = MockServer::start(vec![response.clone(), response.clone(), response]);
-    let adapter = openai_adapter(server.url());
+    let adapter = anthropic_adapter(server.url());
 
     let request = request_fixture("encode/minimal_text_request.json");
     let err = adapter
@@ -884,12 +906,12 @@ async fn test_openai_contract_non_2xx_non_auth_maps_to_status() {
             request_id,
             message,
         } => {
-            assert_eq!(provider, ProviderId::Openai);
-            assert_eq!(model, Some("gpt-5-mini".to_string()));
+            assert_eq!(provider, ProviderId::Anthropic);
+            assert_eq!(model, Some("claude-sonnet-4-5-20250929".to_string()));
             assert_eq!(status_code, 429);
             assert_eq!(request_id, Some("req-contract-rate".to_string()));
             assert!(message.contains("Invalid API key"));
-            assert!(message.contains("invalid_api_key"));
+            assert!(message.contains("invalid_request_error"));
         }
         other => panic!("expected status error, got {other:?}"),
     }
@@ -898,18 +920,17 @@ async fn test_openai_contract_non_2xx_non_auth_maps_to_status() {
 }
 
 #[tokio::test]
-async fn test_openai_contract_discovery_models_mapping() {
+async fn test_anthropic_contract_discovery_models_mapping() {
     let mut server = MockServer::start(vec![MockResponse::json(
         r#"{
-            "object":"list",
             "data":[
-                {"id":"gpt-5-mini","object":"model"},
-                {"id":"gpt-4.1","object":"model"},
-                {"id":"gpt-5-mini","object":"model"}
+                {"id":"claude-sonnet-4-5-20250929","display_name":"Claude Sonnet 4.5"},
+                {"id":"claude-haiku-4-5-20251001"},
+                {"id":"claude-sonnet-4-5-20250929"}
             ]
         }"#,
     )]);
-    let adapter = openai_adapter(server.url());
+    let adapter = anthropic_adapter(server.url());
 
     let models = adapter
         .discover_models(
@@ -924,24 +945,27 @@ async fn test_openai_contract_discovery_models_mapping() {
         .expect("discover should succeed");
 
     assert_eq!(models.len(), 2);
-    assert_eq!(models[0].model_id, "gpt-5-mini");
-    assert_eq!(models[1].model_id, "gpt-4.1");
+    assert_eq!(models[0].model_id, "claude-sonnet-4-5-20250929");
+    assert_eq!(models[1].model_id, "claude-haiku-4-5-20251001");
     assert!(
         models
             .iter()
-            .all(|model| model.provider == ProviderId::Openai)
+            .all(|model| model.provider == ProviderId::Anthropic)
     );
-    assert!(models.iter().all(|model| model.display_name.is_none()));
+    assert_eq!(
+        models[0].display_name,
+        Some("Claude Sonnet 4.5".to_string())
+    );
 
     server.shutdown();
 }
 
 #[tokio::test]
-async fn test_openai_contract_malformed_payload_decode_failures_are_protocol() {
+async fn test_anthropic_contract_malformed_payload_decode_failures_are_protocol() {
     let malformed_fixtures = vec![
         "errors/malformed_payload_non_object.json",
-        "errors/malformed_payload_missing_status.json",
-        "errors/malformed_payload_invalid_output_shape.json",
+        "errors/malformed_payload_missing_stop_reason.json",
+        "errors/malformed_payload_tool_use_non_object_input.json",
     ];
 
     let parsed_non_object = load_fixture_json("errors/malformed_payload_non_object.json");
@@ -950,7 +974,7 @@ async fn test_openai_contract_malformed_payload_decode_failures_are_protocol() {
     for fixture in malformed_fixtures {
         let response_body = load_fixture_str(fixture);
         let mut server = MockServer::start(vec![MockResponse::json(&response_body)]);
-        let adapter = openai_adapter(server.url());
+        let adapter = anthropic_adapter(server.url());
 
         let request = request_fixture("encode/minimal_text_request.json");
         let err = adapter
@@ -960,7 +984,7 @@ async fn test_openai_contract_malformed_payload_decode_failures_are_protocol() {
 
         match err {
             ProviderError::Protocol { provider, .. } => {
-                assert_eq!(provider, ProviderId::Openai, "fixture {fixture}");
+                assert_eq!(provider, ProviderId::Anthropic, "fixture {fixture}");
             }
             other => panic!("expected protocol error for {fixture}, got {other:?}"),
         }
@@ -970,11 +994,12 @@ async fn test_openai_contract_malformed_payload_decode_failures_are_protocol() {
 }
 
 #[tokio::test]
-async fn test_openai_contract_unsupported_stop_sequence_is_deterministic() {
-    let request = request_fixture("errors/unsupported_intent_stop_sequence.json");
+async fn test_anthropic_contract_unsupported_json_prefill_is_deterministic() {
+    let request = request_fixture("errors/unsupported_intent_json_prefill.json");
 
-    let adapter = OpenAiAdapter::with_base_url(Some("test-key".to_string()), "http://127.0.0.1:1")
-        .expect("create adapter");
+    let adapter =
+        AnthropicAdapter::with_base_url(Some("test-key".to_string()), "http://127.0.0.1:1")
+            .expect("create adapter");
 
     let first = adapter
         .run(&request, &AdapterContext::default())
@@ -992,7 +1017,7 @@ async fn test_openai_contract_unsupported_stop_sequence_is_deterministic() {
 }
 
 #[tokio::test]
-async fn test_openai_contract_encode_is_deterministic_for_identical_input() {
+async fn test_anthropic_contract_encode_is_deterministic_for_identical_input() {
     let request = request_fixture("determinism/determinism_encode_input.json");
     let decode_payload = load_fixture_str("decode/text_only_completed.json");
 
@@ -1000,7 +1025,7 @@ async fn test_openai_contract_encode_is_deterministic_for_identical_input() {
         MockResponse::json(&decode_payload),
         MockResponse::json(&decode_payload),
     ]);
-    let adapter = openai_adapter(server.url());
+    let adapter = anthropic_adapter(server.url());
 
     let first = adapter
         .run(&request, &AdapterContext::default())
@@ -1020,7 +1045,7 @@ async fn test_openai_contract_encode_is_deterministic_for_identical_input() {
 }
 
 #[tokio::test]
-async fn test_openai_contract_decode_is_deterministic_for_identical_payload() {
+async fn test_anthropic_contract_decode_is_deterministic_for_identical_payload() {
     let request = request_fixture("encode/response_format_json_object.json");
     let payload = load_fixture_str("determinism/determinism_decode_payload.json");
 
@@ -1028,7 +1053,7 @@ async fn test_openai_contract_decode_is_deterministic_for_identical_payload() {
         MockResponse::json(&payload),
         MockResponse::json(&payload),
     ]);
-    let adapter = openai_adapter(server.url());
+    let adapter = anthropic_adapter(server.url());
 
     let first = adapter
         .run(&request, &AdapterContext::default())
@@ -1045,15 +1070,15 @@ async fn test_openai_contract_decode_is_deterministic_for_identical_payload() {
 }
 
 #[tokio::test]
-async fn test_openai_contract_malformed_failure_is_deterministic() {
+async fn test_anthropic_contract_malformed_failure_is_deterministic() {
     let request = request_fixture("encode/minimal_text_request.json");
-    let malformed = load_fixture_str("errors/malformed_payload_missing_status.json");
+    let malformed = load_fixture_str("errors/malformed_payload_missing_stop_reason.json");
 
     let mut server = MockServer::start(vec![
         MockResponse::json(&malformed),
         MockResponse::json(&malformed),
     ]);
-    let adapter = openai_adapter(server.url());
+    let adapter = anthropic_adapter(server.url());
 
     let first = adapter
         .run(&request, &AdapterContext::default())

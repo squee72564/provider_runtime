@@ -1,0 +1,31 @@
+{
+  "model": {
+    "provider_hint": { "type": "anthropic" },
+    "model_id": "claude-sonnet-4-5-20250929"
+  },
+  "messages": [
+    {
+      "role": { "type": "user" },
+      "content": [
+        { "type": "text", "text": "Must call a tool." }
+      ]
+    }
+  ],
+  "tools": [
+    {
+      "name": "calculator",
+      "description": "Compute expression",
+      "parameters_schema": {
+        "type": "object",
+        "properties": {
+          "expression": { "type": "string" }
+        },
+        "required": ["expression"]
+      }
+    }
+  ],
+  "tool_choice": { "type": "required" },
+  "response_format": { "type": "text" },
+  "stop": [],
+  "metadata": {}
+}

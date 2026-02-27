@@ -1,0 +1,19 @@
+{
+  "model": {
+    "provider_hint": { "type": "anthropic" },
+    "model_id": "claude-sonnet-4-5-20250929"
+  },
+  "messages": [
+    {
+      "role": { "type": "user" },
+      "content": [
+        { "type": "text", "text": "Use defaults." }
+      ]
+    }
+  ],
+  "tools": [],
+  "tool_choice": { "type": "auto" },
+  "response_format": { "type": "text" },
+  "stop": [],
+  "metadata": {}
+}

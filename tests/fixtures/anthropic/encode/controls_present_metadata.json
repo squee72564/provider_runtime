@@ -1,0 +1,22 @@
+{
+  "model": {
+    "provider_hint": { "type": "anthropic" },
+    "model_id": "claude-sonnet-4-5-20250929"
+  },
+  "messages": [
+    {
+      "role": { "type": "user" },
+      "content": [
+        { "type": "text", "text": "Metadata control." }
+      ]
+    }
+  ],
+  "tools": [],
+  "tool_choice": { "type": "auto" },
+  "response_format": { "type": "text" },
+  "stop": [],
+  "metadata": {
+    "user_id": "user-123",
+    "trace_id": "trace-1"
+  }
+}

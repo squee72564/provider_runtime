@@ -1,19 +1,31 @@
 {
+  "id": "resp_det_decode_1",
+  "object": "response",
   "status": "completed",
-  "model": "gpt-5-mini",
+  "model": "gpt-5-mini-2025-08-07",
   "output": [
     {
+      "type": "reasoning",
+      "summary": []
+    },
+    {
       "type": "message",
-      "role": "assistant",
+      "status": "completed",
       "content": [
-        { "type": "output_text", "text": "{\"ok\":true}" }
-      ]
+        {
+          "type": "output_text",
+          "text": "{\"ok\":true}",
+          "annotations": []
+        }
+      ],
+      "role": "assistant"
     },
     {
       "type": "function_call",
+      "status": "completed",
+      "arguments": "{\"city\":\"SF\"}",
       "call_id": "call_1",
-      "name": "lookup_weather",
-      "arguments": "{\"city\":\"SF\"}"
+      "name": "lookup_weather"
     }
   ],
   "usage": {
