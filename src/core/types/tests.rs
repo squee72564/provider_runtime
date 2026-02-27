@@ -58,7 +58,6 @@ fn test_usage_total_tokens_derivation() {
     let explicit = Usage {
         input_tokens: Some(2),
         output_tokens: Some(3),
-        reasoning_tokens: Some(5),
         cached_input_tokens: Some(7),
         total_tokens: Some(99),
     };
@@ -67,7 +66,6 @@ fn test_usage_total_tokens_derivation() {
     let derived = Usage {
         input_tokens: Some(2),
         output_tokens: Some(3),
-        reasoning_tokens: Some(100),
         cached_input_tokens: Some(100),
         total_tokens: None,
     };
@@ -76,7 +74,6 @@ fn test_usage_total_tokens_derivation() {
     let zero_based = Usage {
         input_tokens: None,
         output_tokens: Some(4),
-        reasoning_tokens: None,
         cached_input_tokens: None,
         total_tokens: None,
     };

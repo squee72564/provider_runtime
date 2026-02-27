@@ -253,10 +253,8 @@ async fn test_openai_adapter_propagates_encode_warnings() {
         OpenAiAdapter::with_transport(Some("test-key".to_string()), server.url(), transport);
 
     let mut req = base_request();
-    req.messages[0].content.push(ContentPart::Thinking {
-        text: "internal only".to_string(),
-        provider: Some(ProviderId::Openai),
-    });
+    req.temperature = Some(0.2);
+    req.top_p = Some(0.8);
 
     let response = adapter
         .run(&req, &AdapterContext::default())
@@ -267,7 +265,7 @@ async fn test_openai_adapter_propagates_encode_warnings() {
         response
             .warnings
             .iter()
-            .any(|warning| warning.code == "dropped_thinking_on_encode")
+            .any(|warning| warning.code == "both_temperature_and_top_p_set")
     );
 
     server.shutdown();

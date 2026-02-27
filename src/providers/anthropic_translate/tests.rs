@@ -48,15 +48,9 @@ fn test_encode_anthropic_translator_category_contract() {
         },
         Message {
             role: MessageRole::User,
-            content: vec![
-                ContentPart::Text {
-                    text: "Return weather as JSON".to_string(),
-                },
-                ContentPart::Thinking {
-                    text: "private".to_string(),
-                    provider: Some(ProviderId::Anthropic),
-                },
-            ],
+            content: vec![ContentPart::Text {
+                text: "Return weather as JSON".to_string(),
+            }],
         },
         Message {
             role: MessageRole::Assistant,
@@ -179,7 +173,6 @@ fn test_encode_anthropic_translator_category_contract() {
         .iter()
         .map(|warning| warning.code.as_str())
         .collect::<Vec<_>>();
-    assert!(warning_codes.contains(&"dropped_thinking_on_encode"));
     assert!(warning_codes.contains(&"both_temperature_and_top_p_set"));
     assert!(warning_codes.contains(&"default_max_tokens_applied"));
     assert!(warning_codes.contains(&"dropped_unsupported_metadata_keys"));
@@ -681,7 +674,7 @@ fn test_decode_anthropic_translator_category_contract() {
     assert_eq!(decoded.usage.cached_input_tokens, Some(3));
     assert_eq!(decoded.usage.output_tokens, Some(5));
     assert_eq!(decoded.usage.total_tokens, Some(20));
-    assert_eq!(decoded.output.content.len(), 5);
+    assert_eq!(decoded.output.content.len(), 3);
 
     assert!(matches!(
         &decoded.output.content[0],
@@ -691,16 +684,6 @@ fn test_decode_anthropic_translator_category_contract() {
         &decoded.output.content[1],
         ContentPart::ToolCall { tool_call } if tool_call.id == "call_1"
     ));
-    assert!(matches!(
-        &decoded.output.content[2],
-        ContentPart::Thinking { provider, .. } if provider == &Some(ProviderId::Anthropic)
-    ));
-    assert!(
-        decoded
-            .warnings
-            .iter()
-            .any(|warning| warning.code == "redacted_thinking_mapped")
-    );
     assert!(
         decoded
             .warnings

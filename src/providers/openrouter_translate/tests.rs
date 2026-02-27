@@ -211,8 +211,7 @@ fn test_decode_openrouter_translator_category_contract() {
                 "prompt_tokens": 12,
                 "completion_tokens": 7,
                 "total_tokens": 19,
-                "prompt_tokens_details": { "cached_tokens": 2 },
-                "completion_tokens_details": { "reasoning_tokens": 3 }
+                "prompt_tokens_details": { "cached_tokens": 2 }
             }
         }),
         requested_response_format: ResponseFormat::JsonObject,
@@ -227,18 +226,14 @@ fn test_decode_openrouter_translator_category_contract() {
     assert_eq!(decoded.usage.output_tokens, Some(7));
     assert_eq!(decoded.usage.total_tokens, Some(19));
     assert_eq!(decoded.usage.cached_input_tokens, Some(2));
-    assert_eq!(decoded.usage.reasoning_tokens, Some(3));
     assert_eq!(decoded.output.structured_output, Some(json!({"ok": true})));
 
-    assert_eq!(decoded.output.content.len(), 3);
+    assert_eq!(decoded.output.content.len(), 2);
     assert!(
         matches!(&decoded.output.content[0], ContentPart::Text { text } if text == "{\"ok\":true}")
     );
     assert!(
         matches!(&decoded.output.content[1], ContentPart::ToolCall { tool_call } if tool_call.id == "call_1")
-    );
-    assert!(
-        matches!(&decoded.output.content[2], ContentPart::Thinking { provider, .. } if provider == &Some(ProviderId::Openrouter))
     );
 }
 

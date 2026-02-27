@@ -14,22 +14,20 @@ use crate::providers::translator_contract::ProviderTranslator;
 Anthropic Messages coverage policy (Stage 16/17 strict):
 - Mapped fields: model, max_tokens, messages/system, tools, tool_choice, output_config, stop,
   temperature/top_p, metadata.user_id, content blocks, stop_reason, usage.
-- Warning-drop fields: request-side thinking parts, unsupported metadata keys, redacted_thinking,
-  unknown response content block types, parse failures for structured output.
+- Warning-drop fields: unsupported metadata keys, unknown response content block types, parse
+  failures for structured output.
 - Hard-error fields/states: provider_hint mismatch, empty/invalid model, invalid max_output_tokens,
   invalid sampling/stop/tool schemas and tool ordering, non-object tool_use input, non-prefix
   system messages, malformed payload types.
-- Known out-of-scope under frozen canonical model: tool strictness flag, request-side thinking
-  config, cache-creation token breakout, rich server-tool response block typing.
+- Known out-of-scope under frozen canonical model: tool strictness flag, cache-creation token
+  breakout, rich server-tool response block typing.
 */
 
 const DEFAULT_MAX_TOKENS: u64 = 1024;
 
-const WARN_DROPPED_THINKING_ON_ENCODE: &str = "dropped_thinking_on_encode";
 const WARN_BOTH_TEMPERATURE_AND_TOP_P_SET: &str = "both_temperature_and_top_p_set";
 const WARN_DROPPED_UNSUPPORTED_METADATA_KEYS: &str = "dropped_unsupported_metadata_keys";
 const WARN_DEFAULT_MAX_TOKENS_APPLIED: &str = "default_max_tokens_applied";
-const WARN_REDACTED_THINKING_MAPPED: &str = "redacted_thinking_mapped";
 const WARN_UNKNOWN_CONTENT_BLOCK_MAPPED: &str = "unknown_content_block_mapped_to_text";
 const WARN_UNKNOWN_STOP_REASON: &str = "unknown_stop_reason";
 const WARN_USAGE_MISSING: &str = "usage_missing";
@@ -95,7 +93,7 @@ pub(crate) fn encode_anthropic_request(
         });
     }
 
-    let (system, non_system_messages) = map_system_prefix(req, &mut warnings)?;
+    let (system, non_system_messages) = map_system_prefix(req)?;
     let mapped_messages = map_non_system_messages(req, &non_system_messages, &mut warnings)?;
     let merged_messages = merge_consecutive_messages(mapped_messages);
     validate_tool_ordering(req, &merged_messages)?;
@@ -263,27 +261,7 @@ pub(crate) fn decode_anthropic_response(
                     },
                 });
             }
-            "thinking" => {
-                let text = block_obj
-                    .get("thinking")
-                    .and_then(Value::as_str)
-                    .unwrap_or_default();
-                content.push(ContentPart::Thinking {
-                    text: text.to_string(),
-                    provider: Some(ProviderId::Anthropic),
-                });
-            }
-            "redacted_thinking" => {
-                content.push(ContentPart::Thinking {
-                    text: "<redacted>".to_string(),
-                    provider: Some(ProviderId::Anthropic),
-                });
-                warnings.push(RuntimeWarning {
-                    code: WARN_REDACTED_THINKING_MAPPED.to_string(),
-                    message: "anthropic redacted_thinking mapped to canonical thinking placeholder"
-                        .to_string(),
-                });
-            }
+            "thinking" | "redacted_thinking" => {}
             _ => {
                 warnings.push(RuntimeWarning {
                     code: WARN_UNKNOWN_CONTENT_BLOCK_MAPPED.to_string(),
@@ -507,10 +485,9 @@ fn validate_stop_sequences(req: &ProviderRequest) -> Result<(), ProviderError> {
     Ok(())
 }
 
-fn map_system_prefix<'a>(
-    req: &'a ProviderRequest,
-    warnings: &mut Vec<RuntimeWarning>,
-) -> Result<(Option<Vec<Value>>, Vec<&'a crate::core::types::Message>), ProviderError> {
+fn map_system_prefix(
+    req: &ProviderRequest,
+) -> Result<(Option<Vec<Value>>, Vec<&crate::core::types::Message>), ProviderError> {
     let mut index = 0;
     while index < req.messages.len() && req.messages[index].role == MessageRole::System {
         index += 1;
@@ -534,11 +511,6 @@ fn map_system_prefix<'a>(
                     "type": "text",
                     "text": text,
                 })),
-                ContentPart::Thinking { .. } => warnings.push(RuntimeWarning {
-                    code: WARN_DROPPED_THINKING_ON_ENCODE.to_string(),
-                    message: "thinking content dropped while encoding Anthropic system prompt"
-                        .to_string(),
-                }),
                 _ => {
                     return Err(protocol_error(
                         Some(&req.model.model_id),
@@ -588,11 +560,6 @@ fn map_non_system_messages(
                     }
                     _ => blocks.push(json!({ "type": "text", "text": text })),
                 },
-                ContentPart::Thinking { .. } => warnings.push(RuntimeWarning {
-                    code: WARN_DROPPED_THINKING_ON_ENCODE.to_string(),
-                    message: "thinking content dropped while encoding Anthropic request"
-                        .to_string(),
-                }),
                 ContentPart::ToolCall { tool_call } => {
                     if message.role != MessageRole::Assistant {
                         return Err(protocol_error(
@@ -707,11 +674,6 @@ fn tool_result_content_as_text_blocks(
                     ContentPart::Text { text } => {
                         blocks.push(json!({ "type": "text", "text": text }))
                     }
-                    ContentPart::Thinking { .. } => warnings.push(RuntimeWarning {
-                        code: WARN_DROPPED_THINKING_ON_ENCODE.to_string(),
-                        message: "thinking content dropped while encoding Anthropic tool result"
-                            .to_string(),
-                    }),
                     _ => {
                         return Err(protocol_error(
                             Some(model),
@@ -1109,7 +1071,6 @@ fn decode_usage(
     Ok(Usage {
         input_tokens: billed_input,
         output_tokens,
-        reasoning_tokens: None,
         cached_input_tokens: cache_read_input_tokens,
         total_tokens,
     })

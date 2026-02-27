@@ -11,12 +11,10 @@ fn test_estimate_cost_known_model() {
         model_pattern: "gpt-5-mini".to_string(),
         input_cost_per_token: 0.01,
         output_cost_per_token: 0.02,
-        reasoning_cost_per_token: Some(0.03),
     });
     let usage = Usage {
         input_tokens: Some(10),
         output_tokens: Some(20),
-        reasoning_tokens: Some(5),
         cached_input_tokens: Some(7),
         total_tokens: Some(35),
     };
@@ -28,8 +26,7 @@ fn test_estimate_cost_known_model() {
     assert_eq!(cost.currency, "USD");
     assert_eq!(cost.input_cost, 0.1);
     assert_eq!(cost.output_cost, 0.4);
-    assert_eq!(cost.reasoning_cost, Some(0.15));
-    assert_eq!(cost.total_cost, 0.65);
+    assert_eq!(cost.total_cost, 0.5);
     assert_eq!(cost.pricing_source, PricingSource::Configured);
 }
 
@@ -39,7 +36,6 @@ fn test_missing_price_returns_warning_not_error() {
     let usage = Usage {
         input_tokens: Some(1),
         output_tokens: Some(2),
-        reasoning_tokens: None,
         cached_input_tokens: None,
         total_tokens: None,
     };
@@ -59,12 +55,10 @@ fn test_partial_usage_handles_optional_fields() {
         model_pattern: "gpt-5-mini".to_string(),
         input_cost_per_token: 0.01,
         output_cost_per_token: 0.02,
-        reasoning_cost_per_token: Some(0.03),
     });
     let usage = Usage {
         input_tokens: Some(10),
         output_tokens: None,
-        reasoning_tokens: None,
         cached_input_tokens: None,
         total_tokens: None,
     };
@@ -74,7 +68,6 @@ fn test_partial_usage_handles_optional_fields() {
     let cost = cost.expect("cost should still be produced");
     assert_eq!(cost.input_cost, 0.1);
     assert_eq!(cost.output_cost, 0.0);
-    assert_eq!(cost.reasoning_cost, None);
     assert_eq!(cost.total_cost, 0.1);
     assert_eq!(warnings.len(), 1);
     assert_eq!(warnings[0].code, "pricing.partial_usage");
@@ -88,14 +81,12 @@ fn test_rule_resolution_prefers_exact_over_wildcard() {
             model_pattern: "gpt-*".to_string(),
             input_cost_per_token: 1.0,
             output_cost_per_token: 1.0,
-            reasoning_cost_per_token: None,
         },
         PriceRule {
             provider: ProviderId::Openai,
             model_pattern: "gpt-5-mini".to_string(),
             input_cost_per_token: 2.0,
             output_cost_per_token: 2.0,
-            reasoning_cost_per_token: None,
         },
     ]);
 
@@ -115,21 +106,18 @@ fn test_rule_resolution_uses_longest_wildcard_prefix() {
             model_pattern: "*".to_string(),
             input_cost_per_token: 1.0,
             output_cost_per_token: 1.0,
-            reasoning_cost_per_token: None,
         },
         PriceRule {
             provider: ProviderId::Openai,
             model_pattern: "gpt-*".to_string(),
             input_cost_per_token: 2.0,
             output_cost_per_token: 2.0,
-            reasoning_cost_per_token: None,
         },
         PriceRule {
             provider: ProviderId::Openai,
             model_pattern: "gpt-5-*".to_string(),
             input_cost_per_token: 3.0,
             output_cost_per_token: 3.0,
-            reasoning_cost_per_token: None,
         },
     ]);
 
@@ -142,18 +130,16 @@ fn test_rule_resolution_uses_longest_wildcard_prefix() {
 }
 
 #[test]
-fn test_reasoning_tokens_without_reasoning_rate_warns() {
+fn test_input_output_usage_without_optional_fields_estimates_cost() {
     let table = single_rule_table(PriceRule {
         provider: ProviderId::Anthropic,
         model_pattern: "claude-*".to_string(),
         input_cost_per_token: 0.1,
         output_cost_per_token: 0.2,
-        reasoning_cost_per_token: None,
     });
     let usage = Usage {
         input_tokens: Some(1),
         output_tokens: Some(2),
-        reasoning_tokens: Some(3),
         cached_input_tokens: None,
         total_tokens: None,
     };
@@ -162,10 +148,8 @@ fn test_reasoning_tokens_without_reasoning_rate_warns() {
         estimate_cost(&ProviderId::Anthropic, "claude-3-7-sonnet", &usage, &table);
 
     let cost = cost.expect("cost should still be produced");
-    assert_eq!(cost.reasoning_cost, None);
     assert_eq!(cost.total_cost, 0.5);
-    assert_eq!(warnings.len(), 1);
-    assert_eq!(warnings[0].code, "pricing.partial_reasoning_rate");
+    assert!(warnings.is_empty());
 }
 
 #[test]
@@ -175,12 +159,10 @@ fn test_invalid_rate_returns_warning_and_none_cost() {
         model_pattern: "openrouter/*".to_string(),
         input_cost_per_token: 0.1,
         output_cost_per_token: -0.2,
-        reasoning_cost_per_token: None,
     });
     let usage = Usage {
         input_tokens: Some(2),
         output_tokens: Some(3),
-        reasoning_tokens: None,
         cached_input_tokens: None,
         total_tokens: None,
     };
@@ -200,7 +182,6 @@ fn test_no_usage_tokens_returns_none_with_warning() {
         model_pattern: "gpt-*".to_string(),
         input_cost_per_token: 0.1,
         output_cost_per_token: 0.2,
-        reasoning_cost_per_token: Some(0.3),
     });
     let usage = Usage::default();
 

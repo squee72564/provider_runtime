@@ -68,20 +68,9 @@ pub enum MessageRole {
 #[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
 #[serde(tag = "type", rename_all = "snake_case")]
 pub enum ContentPart {
-    Text {
-        text: String,
-    },
-    Thinking {
-        text: String,
-        #[serde(skip_serializing_if = "Option::is_none")]
-        provider: Option<ProviderId>,
-    },
-    ToolCall {
-        tool_call: ToolCall,
-    },
-    ToolResult {
-        tool_result: ToolResult,
-    },
+    Text { text: String },
+    ToolCall { tool_call: ToolCall },
+    ToolResult { tool_result: ToolResult },
 }
 
 #[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
@@ -166,8 +155,6 @@ pub struct Usage {
     #[serde(skip_serializing_if = "Option::is_none")]
     pub output_tokens: Option<u64>,
     #[serde(skip_serializing_if = "Option::is_none")]
-    pub reasoning_tokens: Option<u64>,
-    #[serde(skip_serializing_if = "Option::is_none")]
     pub cached_input_tokens: Option<u64>,
     #[serde(skip_serializing_if = "Option::is_none")]
     pub total_tokens: Option<u64>,
@@ -186,8 +173,6 @@ pub struct CostBreakdown {
     pub currency: String,
     pub input_cost: f64,
     pub output_cost: f64,
-    #[serde(skip_serializing_if = "Option::is_none")]
-    pub reasoning_cost: Option<f64>,
     pub total_cost: f64,
     pub pricing_source: PricingSource,
 }

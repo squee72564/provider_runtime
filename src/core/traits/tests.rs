@@ -60,7 +60,6 @@ impl ProviderAdapter for MockAdapter {
             usage: Usage {
                 input_tokens: Some(1),
                 output_tokens: Some(1),
-                reasoning_tokens: None,
                 cached_input_tokens: None,
                 total_tokens: None,
             },

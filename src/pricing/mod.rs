@@ -6,14 +6,11 @@ pub struct PriceRule {
     pub model_pattern: String,
     pub input_cost_per_token: f64,
     pub output_cost_per_token: f64,
-    pub reasoning_cost_per_token: Option<f64>,
 }
 
 impl PriceRule {
     fn has_valid_rates(&self) -> bool {
-        is_valid_rate(self.input_cost_per_token)
-            && is_valid_rate(self.output_cost_per_token)
-            && self.reasoning_cost_per_token.is_none_or(is_valid_rate)
+        is_valid_rate(self.input_cost_per_token) && is_valid_rate(self.output_cost_per_token)
     }
 }
 
@@ -82,9 +79,7 @@ pub fn estimate_cost(
         return (None, warnings);
     }
 
-    let has_any_usage = usage.input_tokens.is_some()
-        || usage.output_tokens.is_some()
-        || usage.reasoning_tokens.is_some();
+    let has_any_usage = usage.input_tokens.is_some() || usage.output_tokens.is_some();
     if !has_any_usage {
         warnings.push(RuntimeWarning {
             code: "pricing.missing_usage".to_string(),
@@ -105,28 +100,13 @@ pub fn estimate_cost(
     let input_cost = usage.input_tokens.unwrap_or(0) as f64 * rule.input_cost_per_token;
     let output_cost = usage.output_tokens.unwrap_or(0) as f64 * rule.output_cost_per_token;
 
-    let reasoning_cost = match (usage.reasoning_tokens, rule.reasoning_cost_per_token) {
-        (Some(tokens), Some(rate)) => Some(tokens as f64 * rate),
-        (Some(_), None) => {
-            warnings.push(RuntimeWarning {
-                code: "pricing.partial_reasoning_rate".to_string(),
-                message: format!(
-                    "reasoning tokens provided but no reasoning rate configured for provider={provider:?}, model={model}"
-                ),
-            });
-            None
-        }
-        (None, _) => None,
-    };
-
-    let total_cost = input_cost + output_cost + reasoning_cost.unwrap_or(0.0);
+    let total_cost = input_cost + output_cost;
 
     (
         Some(CostBreakdown {
             currency: "USD".to_string(),
             input_cost,
             output_cost,
-            reasoning_cost,
             total_cost,
             pricing_source: PricingSource::Configured,
         }),

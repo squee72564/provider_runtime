@@ -144,15 +144,9 @@ fn request_for_contract() -> ProviderRequest {
             },
             Message {
                 role: MessageRole::User,
-                content: vec![
-                    ContentPart::Text {
-                        text: "Provide JSON with city weather".to_string(),
-                    },
-                    ContentPart::Thinking {
-                        text: "hidden".to_string(),
-                        provider: Some(ProviderId::Openai),
-                    },
-                ],
+                content: vec![ContentPart::Text {
+                    text: "Provide JSON with city weather".to_string(),
+                }],
             },
         ],
         tools: vec![ToolDefinition {
@@ -199,7 +193,7 @@ async fn test_openai_encode_fixture_contract() {
     let adapter = OpenAiAdapter::with_base_url(Some("test-key".to_string()), server.url())
         .expect("create adapter");
 
-    let response = adapter
+    let _response = adapter
         .run(&request_for_contract(), &AdapterContext::default())
         .await
         .expect("run should succeed");
@@ -229,13 +223,6 @@ async fn test_openai_encode_fixture_contract() {
     assert_eq!(input.len(), 2);
     assert_eq!(input[0].pointer("/role"), Some(&json!("system")));
     assert_eq!(input[1].pointer("/role"), Some(&json!("user")));
-
-    assert!(
-        response
-            .warnings
-            .iter()
-            .any(|warning| warning.code == "dropped_thinking_on_encode")
-    );
 }
 
 #[tokio::test]
@@ -257,8 +244,7 @@ async fn test_openai_decode_fixture_contract() {
                 "input_tokens":10,
                 "output_tokens":12,
                 "total_tokens":22,
-                "input_tokens_details":{"cached_tokens":2},
-                "output_tokens_details":{"reasoning_tokens":4}
+                "input_tokens_details":{"cached_tokens":2}
             }
         }"#,
     )]);
@@ -276,7 +262,6 @@ async fn test_openai_decode_fixture_contract() {
     assert_eq!(response.usage.output_tokens, Some(12));
     assert_eq!(response.usage.total_tokens, Some(22));
     assert_eq!(response.usage.cached_input_tokens, Some(2));
-    assert_eq!(response.usage.reasoning_tokens, Some(4));
     assert!(
         response
             .warnings

@@ -14,9 +14,8 @@ fn test_public_api_compiles() {
 
     let messages = vec![Message {
         role: MessageRole::Assistant,
-        content: vec![ContentPart::Thinking {
-            text: "reasoning".to_string(),
-            provider: None,
+        content: vec![ContentPart::Text {
+            text: "assistant text".to_string(),
         }],
     }];
 

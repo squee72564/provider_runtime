@@ -8,7 +8,6 @@ use crate::core::types::{
 };
 use crate::providers::translator_contract::ProviderTranslator;
 
-const WARN_DROPPED_THINKING_ON_ENCODE: &str = "dropped_thinking_on_encode";
 const WARN_BOTH_TEMPERATURE_AND_TOP_P_SET: &str = "both_temperature_and_top_p_set";
 const WARN_TOOL_SCHEMA_NOT_STRICT_COMPATIBLE: &str =
     "tool_schema_not_strict_compatible_strict_disabled";
@@ -504,7 +503,6 @@ fn map_messages(
     warnings: &mut Vec<RuntimeWarning>,
 ) -> Result<Vec<Value>, ProviderError> {
     let mut input_items = Vec::new();
-    let mut saw_thinking = false;
     let mut seen_tool_call_ids: Vec<String> = Vec::new();
 
     for message in &req.messages {
@@ -521,9 +519,6 @@ fn map_messages(
                     }
 
                     message_parts.push(json!({ "type": "input_text", "text": text }));
-                }
-                ContentPart::Thinking { .. } => {
-                    saw_thinking = true;
                 }
                 ContentPart::ToolCall { tool_call } => {
                     if message.role != MessageRole::Assistant {
@@ -587,15 +582,6 @@ fn map_messages(
         }
 
         flush_message_item(&mut input_items, &message.role, &mut message_parts);
-    }
-
-    if saw_thinking {
-        warnings.push(RuntimeWarning {
-            code: WARN_DROPPED_THINKING_ON_ENCODE.to_string(),
-            message:
-                "thinking content is dropped for OpenAI request encoding to avoid reasoning leakage"
-                    .to_string(),
-        });
     }
 
     Ok(input_items)
@@ -775,15 +761,7 @@ fn decode_output_item(
     match item_type {
         "message" => decode_output_message(item_obj, content, warnings),
         "function_call" => decode_output_tool_call(item_obj, content, warnings),
-        "reasoning" => {
-            if let Some(text) = extract_reasoning_text(item_obj) {
-                content.push(ContentPart::Thinking {
-                    text,
-                    provider: Some(ProviderId::Openai),
-                });
-            }
-            Ok(())
-        }
+        "reasoning" => Ok(()),
         "refusal" => {
             if let Some(text) = extract_refusal_text(item_obj) {
                 content.push(ContentPart::Text { text });
@@ -839,14 +817,7 @@ fn decode_output_message(
                     });
                 }
             }
-            "reasoning" => {
-                if let Some(text) = extract_reasoning_text(part_obj) {
-                    content.push(ContentPart::Thinking {
-                        text,
-                        provider: Some(ProviderId::Openai),
-                    });
-                }
-            }
+            "reasoning" => {}
             "refusal" => {
                 if let Some(text) = extract_refusal_text(part_obj) {
                     content.push(ContentPart::Text { text });
@@ -907,29 +878,6 @@ fn decode_output_tool_call(
     });
 
     Ok(())
-}
-
-fn extract_reasoning_text(obj: &Map<String, Value>) -> Option<String> {
-    if let Some(text) = obj.get("text").and_then(Value::as_str) {
-        if !text.is_empty() {
-            return Some(text.to_string());
-        }
-    }
-
-    if let Some(summary) = obj.get("summary").and_then(Value::as_array) {
-        let lines = summary
-            .iter()
-            .filter_map(|entry| entry.get("text").and_then(Value::as_str))
-            .filter(|text| !text.is_empty())
-            .map(str::to_string)
-            .collect::<Vec<_>>();
-
-        if !lines.is_empty() {
-            return Some(lines.join("\n"));
-        }
-    }
-
-    None
 }
 
 fn extract_refusal_text(obj: &Map<String, Value>) -> Option<String> {
@@ -1017,16 +965,10 @@ fn decode_usage(usage: Option<&Value>, warnings: &mut Vec<RuntimeWarning>) -> Us
         .and_then(Value::as_object)
         .and_then(|details| details.get("cached_tokens"))
         .and_then(Value::as_u64);
-    let reasoning_tokens = usage_obj
-        .get("output_tokens_details")
-        .and_then(Value::as_object)
-        .and_then(|details| details.get("reasoning_tokens"))
-        .and_then(Value::as_u64);
 
     Usage {
         input_tokens,
         output_tokens,
-        reasoning_tokens,
         cached_input_tokens,
         total_tokens,
     }

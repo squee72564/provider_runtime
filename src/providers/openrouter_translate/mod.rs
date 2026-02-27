@@ -17,7 +17,6 @@ const WARN_USAGE_PARTIAL: &str = "usage_partial";
 const WARN_STRUCTURED_OUTPUT_PARSE_FAILED: &str = "structured_output_parse_failed";
 const WARN_UNKNOWN_FINISH_REASON: &str = "unknown_finish_reason";
 const WARN_EMPTY_OUTPUT: &str = "empty_output";
-const WARN_REASONING_DETAILS_MAPPED_TO_JSON: &str = "reasoning_details_mapped_to_json";
 const WARN_TOOL_RESULT_COERCED: &str = "tool_result_coerced";
 const WARN_TOOL_RESULT_RAW_PROVIDER_CONTENT_IGNORED: &str =
     "tool_result_raw_provider_content_ignored";
@@ -340,7 +339,6 @@ pub(crate) fn decode_openrouter_response(
         &mut warnings,
         &model,
     )?;
-    decode_reasoning(message, &mut content, &mut warnings);
 
     if content.is_empty() {
         warnings.push(RuntimeWarning {
@@ -944,12 +942,6 @@ fn map_assistant_message(content: &[ContentPart], model_id: &str) -> Result<Valu
                     }
                 }));
             }
-            ContentPart::Thinking { .. } => {
-                return Err(protocol_error(
-                    Some(model_id),
-                    "thinking content is unsupported for OpenRouter encode",
-                ));
-            }
             ContentPart::ToolResult { .. } => {
                 return Err(protocol_error(
                     Some(model_id),
@@ -996,12 +988,6 @@ fn map_tool_message(
 
     let tool_result = match &content[0] {
         ContentPart::ToolResult { tool_result } => tool_result,
-        ContentPart::Thinking { .. } => {
-            return Err(protocol_error(
-                Some(model_id),
-                "thinking content is unsupported for OpenRouter encode",
-            ));
-        }
         _ => {
             return Err(protocol_error(
                 Some(model_id),
@@ -1075,12 +1061,6 @@ fn join_text_parts(
     for part in content {
         match part {
             ContentPart::Text { text } => parts.push(text.clone()),
-            ContentPart::Thinking { .. } => {
-                return Err(protocol_error(
-                    Some(model_id),
-                    "thinking content is unsupported for OpenRouter encode",
-                ));
-            }
             _ => {
                 return Err(protocol_error(
                     Some(model_id),
@@ -1268,42 +1248,6 @@ fn decode_tool_calls(
     Ok(())
 }
 
-fn decode_reasoning(
-    message: &Map<String, Value>,
-    content: &mut Vec<ContentPart>,
-    warnings: &mut Vec<RuntimeWarning>,
-) {
-    if let Some(reasoning) = message.get("reasoning").and_then(Value::as_str)
-        && !reasoning.is_empty()
-    {
-        content.push(ContentPart::Thinking {
-            text: reasoning.to_string(),
-            provider: Some(ProviderId::Openrouter),
-        });
-    }
-
-    if let Some(reasoning_details) = message.get("reasoning_details")
-        && !reasoning_details.is_null()
-    {
-        if let Some(reasoning) = message.get("reasoning").and_then(Value::as_str)
-            && stable_json_string(reasoning_details) == reasoning
-        {
-            return;
-        }
-
-        warnings.push(RuntimeWarning {
-            code: WARN_REASONING_DETAILS_MAPPED_TO_JSON.to_string(),
-            message: "openrouter reasoning_details mapped to canonical thinking as JSON"
-                .to_string(),
-        });
-
-        content.push(ContentPart::Thinking {
-            text: stable_json_string(reasoning_details),
-            provider: Some(ProviderId::Openrouter),
-        });
-    }
-}
-
 fn decode_usage(
     usage_value: Option<&Value>,
     model: &str,
@@ -1339,16 +1283,9 @@ fn decode_usage(
         .and_then(|details| details.get("cached_tokens"))
         .and_then(number_to_u64);
 
-    let reasoning_tokens = usage_obj
-        .get("completion_tokens_details")
-        .and_then(Value::as_object)
-        .and_then(|details| details.get("reasoning_tokens"))
-        .and_then(number_to_u64);
-
     let usage = Usage {
         input_tokens,
         output_tokens,
-        reasoning_tokens,
         cached_input_tokens,
         total_tokens,
     };

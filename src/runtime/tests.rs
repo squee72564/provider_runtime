@@ -202,7 +202,6 @@ async fn test_runtime_cost_attached_when_pricing_available() {
             Usage {
                 input_tokens: Some(10),
                 output_tokens: Some(20),
-                reasoning_tokens: None,
                 cached_input_tokens: None,
                 total_tokens: None,
             },
@@ -217,7 +216,6 @@ async fn test_runtime_cost_attached_when_pricing_available() {
         model_pattern: "gpt-5-mini".to_string(),
         input_cost_per_token: 0.01,
         output_cost_per_token: 0.02,
-        reasoning_cost_per_token: None,
     }]);
 
     let runtime = runtime_with_adapter(adapter, Some(pricing_table));
@@ -234,7 +232,6 @@ async fn test_runtime_cost_attached_when_pricing_available() {
     assert_eq!(cost.currency, "USD");
     assert_eq!(cost.input_cost, 0.1);
     assert_eq!(cost.output_cost, 0.4);
-    assert_eq!(cost.reasoning_cost, None);
     assert_eq!(cost.total_cost, 0.5);
     assert_eq!(cost.pricing_source, PricingSource::Configured);
     assert!(actual.warnings.is_empty());
@@ -400,7 +397,6 @@ async fn test_runtime_preserves_existing_provider_cost() {
         currency: "USD".to_string(),
         input_cost: 1.0,
         output_cost: 2.0,
-        reasoning_cost: None,
         total_cost: 3.0,
         pricing_source: PricingSource::ProviderReported,
     };
@@ -414,7 +410,6 @@ async fn test_runtime_preserves_existing_provider_cost() {
             Usage {
                 input_tokens: Some(10),
                 output_tokens: Some(20),
-                reasoning_tokens: None,
                 cached_input_tokens: None,
                 total_tokens: None,
             },
@@ -432,7 +427,6 @@ async fn test_runtime_preserves_existing_provider_cost() {
         model_pattern: "gpt-5-mini".to_string(),
         input_cost_per_token: 0.01,
         output_cost_per_token: 0.02,
-        reasoning_cost_per_token: None,
     }]);
 
     let runtime = runtime_with_adapter(adapter, Some(pricing_table));

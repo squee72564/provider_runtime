@@ -47,15 +47,9 @@ fn test_encode_openai_translator_category_contract() {
         },
         Message {
             role: MessageRole::User,
-            content: vec![
-                ContentPart::Text {
-                    text: "Respond in JSON with weather details".to_string(),
-                },
-                ContentPart::Thinking {
-                    text: "internal".to_string(),
-                    provider: Some(ProviderId::Openai),
-                },
-            ],
+            content: vec![ContentPart::Text {
+                text: "Respond in JSON with weather details".to_string(),
+            }],
         },
         Message {
             role: MessageRole::Assistant,
@@ -149,7 +143,6 @@ fn test_encode_openai_translator_category_contract() {
         .iter()
         .map(|warning| warning.code.as_str())
         .collect::<Vec<_>>();
-    assert!(warning_codes.contains(&"dropped_thinking_on_encode"));
     assert!(warning_codes.contains(&"both_temperature_and_top_p_set"));
     assert!(warning_codes.contains(&"tool_schema_not_strict_compatible_strict_disabled"));
 }
@@ -183,8 +176,7 @@ fn test_decode_openai_translator_category_contract() {
                 "input_tokens": 11,
                 "output_tokens": 7,
                 "total_tokens": 18,
-                "input_tokens_details": { "cached_tokens": 2 },
-                "output_tokens_details": { "reasoning_tokens": 3 }
+                "input_tokens_details": { "cached_tokens": 2 }
             }
         }),
         requested_response_format: ResponseFormat::JsonObject,
@@ -199,13 +191,12 @@ fn test_decode_openai_translator_category_contract() {
     assert_eq!(decoded.usage.output_tokens, Some(7));
     assert_eq!(decoded.usage.total_tokens, Some(18));
     assert_eq!(decoded.usage.cached_input_tokens, Some(2));
-    assert_eq!(decoded.usage.reasoning_tokens, Some(3));
     assert_eq!(
         decoded.output.structured_output,
         Some(json!({ "ok": true }))
     );
 
-    assert_eq!(decoded.output.content.len(), 3);
+    assert_eq!(decoded.output.content.len(), 2);
     assert!(matches!(
         &decoded.output.content[0],
         ContentPart::Text { text } if text == "{\"ok\":true}"
@@ -213,10 +204,6 @@ fn test_decode_openai_translator_category_contract() {
     assert!(matches!(
         &decoded.output.content[1],
         ContentPart::ToolCall { tool_call } if tool_call.id == "call_1" && tool_call.name == "lookup_weather"
-    ));
-    assert!(matches!(
-        &decoded.output.content[2],
-        ContentPart::Thinking { provider, .. } if provider == &Some(ProviderId::Openai)
     ));
 }
 
